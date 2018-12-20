@@ -1,0 +1,25 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["airbnb", "prettier", "prettier/flowtype"],
+  "plugins": ["react", "jsx-a11y", "import", "prettier", "flowtype"],
+  "env": {
+    "jest": true,
+    "node": true
+  },
+  "rules": {
+    "prettier/prettier": ["error"],
+    "import/prefer-default-export": 0,
+    "import/no-unresolved": 0,
+    "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+    "lines-between-class-members": [
+      "error",
+      "always",
+      { "exceptAfterSingleLine": true }
+    ],
+    "import/no-extraneous-dependencies": 0
+  },
+  "globals": {
+    "$Shape": true,
+    "$Keys": true
+  }
+}
