@@ -33,7 +33,9 @@ export default [
   // CLI
   {
     input: 'src/bin/index.js',
-    output: [{ file: pkg.bin.flowasm, format: 'cjs' }],
+    output: [
+      { file: pkg.bin.flowasm, format: 'cjs', banner: '#!/usr/bin/env node' },
+    ],
     plugins: [
       babel({
         exclude: ['node_modules/**'],
