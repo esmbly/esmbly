@@ -1,21 +1,9 @@
 {
-  "name": "flowasm",
-  "version": "1.0.0",
-  "browser": "dist/index.umd.js",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
-  "bin": {
-    "flowasm": "dist/bin/index.js"
-  },
-  "dependencies": {
-    "binaryen": "^61.0.0",
-    "flow-parser": "^0.89.0",
-    "yargs": "^12.0.5"
-  },
+  "name": "root",
+  "private": true,
   "devDependencies": {
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
-    "@babel/preset-flow": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
@@ -23,13 +11,12 @@
     "eslint": "^5.10.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.3.0",
-    "eslint-plugin-flowtype": "^3.2.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
-    "flow-bin": "^0.87.0",
     "jest": "^23.6.0",
+    "lerna": "^3.13.1",
     "prettier": "^1.15.3",
     "prettier-eslint": "^8.8.2",
     "rollup": "^0.67.4",
@@ -39,12 +26,13 @@
   },
   "scripts": {
     "build": "rollup -c",
+    "build-clean": "rm -rf ./packages/*/dist",
+    "clean-all": "rm -rf ./node_modules && rm -rf ./packages/*/node_modules && yarn build-clean",
     "dev": "rollup -c -w",
     "test": "jest",
-    "test:all": "yarn typecheck && yarn lint && yarn test",
-    "test:ci": "yarn typecheck && yarn lint && yarn coverage && yarn coveralls",
-    "typecheck": "flow check --include-warnings",
-    "lint": "eslint src test",
+    "test:all": "yarn lint && yarn test",
+    "test:ci": "yarn lint && yarn coverage && yarn coveralls",
+    "lint": "eslint . --ext js",
     "coverage": "jest --coverage",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
@@ -53,7 +41,7 @@
   ],
   "jest": {
     "collectCoverageFrom": [
-      "<rootDir>/src/**/*.js"
+      "<rootDir>/packages/**/src/**/*.js"
     ],
     "coverageDirectory": "<rootDir>/coverage"
   }

@@ -1,7 +1,7 @@
 {
   "parser": "babel-eslint",
-  "extends": ["airbnb", "prettier", "prettier/flowtype"],
-  "plugins": ["react", "jsx-a11y", "import", "prettier", "flowtype"],
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["react", "jsx-a11y", "import", "prettier"],
   "env": {
     "jest": true,
     "node": true
@@ -17,9 +17,5 @@
       { "exceptAfterSingleLine": true }
     ],
     "import/no-extraneous-dependencies": 0
-  },
-  "globals": {
-    "$Shape": true,
-    "$Keys": true
   }
 }
