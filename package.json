@@ -2,37 +2,25 @@
   "name": "root",
   "private": true,
   "devDependencies": {
-    "@babel/core": "^7.2.0",
-    "@babel/preset-env": "^7.2.0",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.6.0",
+    "@types/jest": "^24.0.9",
     "coveralls": "^3.0.2",
-    "eslint": "^5.10.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^3.3.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-prettier": "^3.0.0",
-    "eslint-plugin-react": "^7.11.1",
-    "jest": "^23.6.0",
+    "jest": "^24.1.0",
     "lerna": "^3.13.1",
     "prettier": "^1.15.3",
-    "prettier-eslint": "^8.8.2",
-    "rollup": "^0.67.4",
-    "rollup-plugin-babel": "^4.0.3",
-    "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-plugin-node-resolve": "^4.0.0"
+    "ts-jest": "^24.0.0",
+    "tslint": "^5.13.1",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.3.3333"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "lerna run build",
     "build-clean": "rm -rf ./packages/*/dist",
     "clean-all": "rm -rf ./node_modules && rm -rf ./packages/*/node_modules && yarn build-clean",
-    "dev": "rollup -c -w",
+    "dev": "lerna run --parallel watch",
     "test": "jest",
     "test:all": "yarn lint && yarn test",
     "test:ci": "yarn lint && yarn coverage && yarn coveralls",
-    "lint": "eslint . --ext js",
+    "lint": "tslint -p ./tsconfig.json -c tslint.json",
     "coverage": "jest --coverage",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
@@ -41,8 +29,11 @@
   ],
   "jest": {
     "collectCoverageFrom": [
-      "<rootDir>/packages/**/src/**/*.js"
+      "<rootDir>/packages/**/src/**/*.ts",
+      "!<rootDir>/packages/**/src/dist/**/*.ts"
     ],
-    "coverageDirectory": "<rootDir>/coverage"
+    "coverageDirectory": "<rootDir>/coverage",
+    "preset": "ts-jest",
+    "testEnvironment": "node"
   }
 }
