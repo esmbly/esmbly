@@ -1,7 +1,10 @@
-sudo: false
 language: node_js
 node_js:
-  - '8'
+  - '10'
+env:
+  - COMMAND=build
+  - COMMAND=test:ci
+  - COMMAND=lint
 branches:
   only:
     - master
@@ -10,6 +13,6 @@ cache:
   directories:
     - node_modules
 install:
-  - yarn
+  - yarn --frozen-lockfile
 script:
-  - yarn test:ci
+  - yarn run $COMMAND

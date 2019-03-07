@@ -24,7 +24,7 @@
     "dev": "lerna run build-watch --parallel",
     "test": "jest",
     "test:all": "yarn lint && yarn test",
-    "test:ci": "yarn lint && yarn coverage && yarn coveralls",
+    "test:ci": "yarn coverage && yarn coveralls",
     "lint": "eslint packages --ext ts --max-warnings 0",
     "coverage": "jest --coverage",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
