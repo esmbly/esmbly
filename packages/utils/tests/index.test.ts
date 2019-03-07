@@ -1,3 +1,3 @@
-describe('CLI', () => {
+describe('utils', () => {
   it.todo('add tests');
 });

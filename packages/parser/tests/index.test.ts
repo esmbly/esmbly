@@ -1,3 +1,3 @@
-describe('CLI', () => {
+describe('parser', () => {
   it.todo('add tests');
 });

@@ -1,4 +1,4 @@
-# `cli`
+# `parser`
 
 > TODO: description
 

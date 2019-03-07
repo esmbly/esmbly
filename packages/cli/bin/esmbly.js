@@ -1,3 +1,3 @@
 #!/usr/bin/env node
 
-require('../dist/index.cjs').run();
+require('../dist').runCLI();

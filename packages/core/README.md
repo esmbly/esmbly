@@ -1,4 +1,4 @@
-# `cli`
+# `core`
 
 > TODO: description
 

@@ -1,8 +1,10 @@
 {
   "name": "root",
   "private": true,
+  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^24.0.9",
+    "@types/node": "^11.10.5",
     "coveralls": "^3.0.2",
     "jest": "^24.1.0",
     "lerna": "^3.13.1",
@@ -16,7 +18,7 @@
     "build": "lerna run build",
     "build-clean": "rm -rf ./packages/*/dist",
     "clean-all": "rm -rf ./node_modules && rm -rf ./packages/*/node_modules && yarn build-clean",
-    "dev": "lerna run --parallel watch",
+    "dev": "lerna run build-watch --parallel",
     "test": "jest",
     "test:all": "yarn lint && yarn test",
     "test:ci": "yarn lint && yarn coverage && yarn coveralls",
@@ -24,9 +26,6 @@
     "coverage": "jest --coverage",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
-  "files": [
-    "dist"
-  ],
   "jest": {
     "collectCoverageFrom": [
       "<rootDir>/packages/**/src/**/*.ts",

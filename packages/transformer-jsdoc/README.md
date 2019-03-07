@@ -1,4 +1,4 @@
-# `cli`
+# `transformer-jsdoc`
 
 > TODO: description
 

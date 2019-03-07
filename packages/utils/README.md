@@ -1,4 +1,4 @@
-# `cli`
+# `utils`
 
 > TODO: description
 

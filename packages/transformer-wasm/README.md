@@ -1,4 +1,4 @@
-# `cli`
+# `transformer-wasm`
 
 > TODO: description
 

@@ -1,12 +1,11 @@
 {
-  "name": "@esmbly/cli",
+  "name": "@esmbly/transformer-wasm",
   "version": "0.0.1",
   "description": "TBD",
   "author": "Olle Lauri Boström <ollebostr@gmail.com> (https://github.com/ollelauribostrom)",
   "homepage": "https://github.com/esmbly/esmbly",
   "license": "MIT",
   "main": "dist/index.js",
-  "bin": "bin/esmbly.js",
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
