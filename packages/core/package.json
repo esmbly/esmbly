@@ -17,5 +17,9 @@
   "scripts": {
     "build": "tsc",
     "build-watch": "tsc -w"
+  },
+  "dependencies": {
+    "@esmbly/parser": "^0.0.1",
+    "@esmbly/types": "^0.0.1"
   }
 }
