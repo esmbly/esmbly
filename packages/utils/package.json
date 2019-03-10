@@ -16,5 +16,8 @@
   },
   "scripts": {
     "build": "tsc"
+  },
+  "dependencies": {
+    "@esmbly/types": "^0.0.1"
   }
 }
