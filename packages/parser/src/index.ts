@@ -1,1 +1,3 @@
-// TODO: Implement parser
+import parse from './parse';
+
+export default { parse };

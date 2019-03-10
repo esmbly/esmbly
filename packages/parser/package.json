@@ -17,5 +17,10 @@
   "scripts": {
     "build": "tsc",
     "build-watch": "tsc -w"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.3.4",
+    "@esmbly/types": "^0.0.1",
+    "recast": "^0.17.3"
   }
 }
