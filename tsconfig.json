@@ -18,5 +18,8 @@
     "esModuleInterop": true,
     "resolveJsonModule": true
   },
-  "exclude": ["**/dist/**", "**/tests/**"]
+  "exclude": ["**/dist/**", "**/tests/**"],
+  "references": [
+    {"path": "./packages/types"}
+  ]
 }

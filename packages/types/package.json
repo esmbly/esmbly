@@ -5,14 +5,18 @@
   "author": "Olle Lauri Boström <ollebostr@gmail.com> (https://github.com/ollelauribostrom)",
   "homepage": "https://github.com/esmbly/esmbly",
   "license": "MIT",
-  "main": "index.ts",
-  "types": "index.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/esmbly/esmbly.git"
   },
   "bugs": {
     "url": "https://github.com/esmbly/esmbly/issues"
+  },
+  "scripts": {
+    "build": "tsc",
+    "build-watch": "tsc -w"
   },
   "dependencies": {
     "@babel/parser": "^7.3.4",
