@@ -1,0 +1,21 @@
+{
+  "name": "@esmbly/types",
+  "version": "0.0.1",
+  "description": "TBD",
+  "author": "Olle Lauri Boström <ollebostr@gmail.com> (https://github.com/ollelauribostrom)",
+  "homepage": "https://github.com/esmbly/esmbly",
+  "license": "MIT",
+  "main": "index.ts",
+  "types": "index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/esmbly/esmbly.git"
+  },
+  "bugs": {
+    "url": "https://github.com/esmbly/esmbly/issues"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.3.4",
+    "recast": "^0.17.3"
+  }
+}
