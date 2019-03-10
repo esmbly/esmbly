@@ -18,6 +18,7 @@
     "typescript": "^3.3.3333"
   },
   "scripts": {
+    "postinstall": "lerna bootstrap",
     "build": "lerna run build",
     "build-clean": "rm -rf ./packages/*/dist",
     "clean-all": "rm -rf ./node_modules && rm -rf ./packages/*/node_modules && yarn build-clean",
