@@ -1,5 +1,7 @@
 import { AST } from '@esmbly/types';
 
+export const output = ['TypeScript'];
+
 interface TransformerJSDocOptions {}
 
 export default function(

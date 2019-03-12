@@ -1,5 +1,7 @@
 import { AST } from '@esmbly/types';
 
+export const output = ['WebAssembly'];
+
 interface TransformerWasmOptions {}
 
 export default function(
