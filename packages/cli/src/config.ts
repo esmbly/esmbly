@@ -9,6 +9,7 @@ import {
   getOutputForTransformers,
 } from '@esmbly/utils';
 import inquirer from 'inquirer';
+import stringify from 'stringify-object';
 
 export enum DefaultFiles {
   js = '.esmblyrc.js',
@@ -21,22 +22,8 @@ export interface Config {
   output: string[];
 }
 
-export function toStringArrayItem(item: string | [string, object]): string {
-  if (typeof item === 'string') {
-    return `'${item}'`;
-  }
-  const [name] = item;
-  return `['${name}']`;
-}
-
-export function toString({ files, transformers, output }: Config): string {
-  return (
-    `module.exports = {` +
-    `  files: [${files.map(toStringArrayItem).join(', ')}],` +
-    `  transformers: [${transformers.map(toStringArrayItem).join(', ')}],` +
-    `  output: [${output.map(toStringArrayItem).join(', ')}]` +
-    `}`
-  );
+export function toString(config: Config): string {
+  return `module.exports = ${stringify(config)}\n`;
 }
 
 export function getFileName(useJs: boolean): string {
