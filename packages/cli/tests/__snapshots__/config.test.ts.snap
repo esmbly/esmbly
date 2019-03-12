@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`promptForConfig asks the correct questions 1`] = `
+Array [
+  Array [
+    Array [
+      Object {
+        "message": "Files",
+        "name": "files",
+        "type": "input",
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "choices": Array [
+          "flow",
+          "wasm",
+        ],
+        "message": "Transformers",
+        "name": "transformers",
+        "type": "checkbox",
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "choices": Array [
+          "TypeScript",
+          "WebAssembly",
+        ],
+        "message": "Output",
+        "name": "output",
+        "type": "checkbox",
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "default": false,
+        "message": "Use .js extension for config file",
+        "name": "useJs",
+        "type": "confirm",
+      },
+    ],
+  ],
+]
+`;

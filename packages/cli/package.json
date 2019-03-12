@@ -20,6 +20,12 @@
     "build-watch": "tsc -w"
   },
   "dependencies": {
-    "@esmbly/types": "^0.0.1"
+    "@esmbly/core": "^0.0.1",
+    "@esmbly/types": "^0.0.1",
+    "@esmbly/utils": "^0.0.1",
+    "@types/inquirer": "^0.0.44",
+    "@types/yargs": "^12.0.9",
+    "inquirer": "^6.2.2",
+    "yargs": "^13.2.2"
   }
 }

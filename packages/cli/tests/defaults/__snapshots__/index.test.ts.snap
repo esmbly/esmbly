@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Default configuration js 1`] = `
+"module.exports = {
+  files: [],
+  transformers: [],
+  output: []
+}
+"
+`;
+
+exports[`Default configuration rc 1`] = `
+"{
+  \\"files\\": [],
+  \\"transformers\\": [],
+  \\"output\\": []
+}
+"
+`;

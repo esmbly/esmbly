@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Init exposes the correct help information 1`] = `
+"processChild.js init
+
+Create an esmbly configuration file
+
+Options:
+  --js       Use .js extension for configuration file [boolean] [default: false]
+  --default  Use default configuration                [boolean] [default: false]
+  --help     Show help                                                 [boolean]"
+`;
