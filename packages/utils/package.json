@@ -15,9 +15,11 @@
     "url": "https://github.com/esmbly/esmbly/issues"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "build-watch": "tsc -w"
   },
   "dependencies": {
-    "@esmbly/types": "^0.0.1"
+    "@esmbly/types": "^0.0.1",
+    "globby": "^9.1.0"
   }
 }
