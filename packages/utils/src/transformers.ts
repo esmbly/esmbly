@@ -14,14 +14,15 @@ export async function getTransformers(): Promise<string[]> {
 
 export async function getOutputFormats(
   transformers: string[],
+  requirer: (requirePath: string) => unknown = require,
 ): Promise<string[]> {
   // TODO: Search in more places?
   let outputFormats: Set<string> = new Set();
   transformers.forEach((transformer: string) => {
     try {
       const transformerPath = path.resolve(__dirname, '../../', transformer);
-      const transformerClass = require(transformerPath).default; // eslint-disable-line
-      const transformerFormats = transformerClass.outputFormats;
+      const transformerClass = requirer(transformerPath) as any;
+      const transformerFormats = transformerClass.default.outputFormats;
       transformerFormats.forEach((format: FileType) =>
         outputFormats.add(format.toString()),
       );
@@ -34,6 +35,7 @@ export async function getOutputFormats(
 
 export function transformerFactory(
   transformer: string | Transformer,
+  requirer: (requirePath: string) => unknown = require,
 ): Transformer {
   if (typeof transformer === 'string') {
     let name = transformer;
@@ -41,8 +43,8 @@ export function transformerFactory(
       name = `transformer-${name}`;
     }
     const transformerPath = path.resolve(__dirname, '../../', name);
-    const TransformerClass = require(transformerPath).default; // eslint-disable-line
-    return new TransformerClass();
+    const TransformerClass = requirer(transformerPath) as any;
+    return new TransformerClass.default();
   }
   return transformer;
 }
