@@ -1,6 +1,6 @@
 import path from 'path';
 import stringify from 'stringify-object';
-import { Config } from '@esmbly/types';
+import { Config, InitOptions } from '@esmbly/types';
 import {
   writeFile,
   readFile,
@@ -40,19 +40,19 @@ export async function readConfig(customPath?: string): Promise<Config[]> {
 }
 
 export async function createConfig(
-  useDefault: boolean,
+  options: InitOptions,
 ): Promise<{
   root: string;
   fileName: string;
 }> {
   const root = await getRoot();
   const defaultConfigPath = await getDefaultConfigPath();
-  if (await exists(defaultConfigPath)) {
+  if ((await exists(defaultConfigPath)) && !options.force) {
     const relativeConfigPath = await getRelativePathTo(defaultConfigPath);
     throw new Error(
       `Config ${relativeConfigPath} already exists. Remove that file first.`,
     );
-  } else if (useDefault) {
+  } else if (options.default) {
     const template = await getTemplateConfig();
     await writeFile(defaultConfigPath, template);
   } else {

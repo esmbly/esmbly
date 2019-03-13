@@ -6,7 +6,7 @@ jest.mock('../../src/config');
 
 const command = new CommandRunner(init);
 
-const mockcreateConfig = (): void => {
+const mockCreateConfig = (): void => {
   (config as any).createConfig = jest.fn();
   (config as any).createConfig.mockResolvedValue({
     fileName: 'file',
@@ -26,17 +26,25 @@ describe('Init', () => {
     expect(output).toMatchSnapshot();
   });
   it('calls createConfig to create a config file', async () => {
-    mockcreateConfig();
+    mockCreateConfig();
     await command.run('init');
-    const [useDefault] = (config.createConfig as any).mock.calls[0];
-    expect(useDefault).toEqual(false);
+    const [options] = (config.createConfig as any).mock.calls[0];
+    expect(options.default).toEqual(false);
+    expect(options.force).toEqual(false);
     expect(config.createConfig).toHaveBeenCalledTimes(1);
   });
   it('uses default values when passing the --default flag', async () => {
-    mockcreateConfig();
+    mockCreateConfig();
     await command.run('init --default');
-    const [useDefault] = (config.createConfig as any).mock.calls[0];
-    expect(useDefault).toEqual(true);
+    const [options] = (config.createConfig as any).mock.calls[0];
+    expect(options.default).toEqual(true);
+    expect(config.createConfig).toHaveBeenCalledTimes(1);
+  });
+  it('overwrites any existing config when passing the --force flag', async () => {
+    mockCreateConfig();
+    await command.run('init --force');
+    const [options] = (config.createConfig as any).mock.calls[0];
+    expect(options.force).toEqual(true);
     expect(config.createConfig).toHaveBeenCalledTimes(1);
   });
   it.todo('test output by mocking @esmbly/output');

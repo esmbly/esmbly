@@ -5,3 +5,4 @@ export * from './RunConfig';
 export * from './Transformer';
 export * from './Config';
 export * from './Output';
+export * from './InitOptions';

@@ -7,5 +7,6 @@ Create an esmbly configuration file
 
 Options:
   --default  Use default configuration                [boolean] [default: false]
+  --force    Overwrite any existing config file       [boolean] [default: false]
   --help     Show help                                                 [boolean]"
 `;
