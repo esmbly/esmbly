@@ -10,6 +10,6 @@ Options:
   --silent            Silence output to the console   [boolean] [default: false]
   --input, -i         The files you want to transform                    [array]
   --transformers, -t  The transformer you want to use                    [array]
-  --output, -t        The output formats you want to use                 [array]
+  --output, -o        The output formats you want to use                 [array]
   --help              Show help                                        [boolean]"
 `;
