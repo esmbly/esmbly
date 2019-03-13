@@ -21,7 +21,7 @@ export const NoOutput = (): string => {
 };
 
 export const InvalidTransformer = (transformer: unknown): string => {
-  return `${String(transformer)}.transform() is not a function.`;
+  return `${String(transformer)}.run() is not a function.`;
 };
 
 export const InvalidOutput = (out: unknown): string => {

@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import { Transformer, FileType } from '@esmbly/types';
+import { OutputFormat, Transformer } from '@esmbly/types';
 
 export async function getTransformers(): Promise<string[]> {
   // TODO: Get this from npm instead / search in more places
@@ -22,8 +22,9 @@ export async function getOutputFormats(
     try {
       const transformerPath = path.resolve(__dirname, '../../', transformer);
       const transformerClass = requirer(transformerPath) as any;
-      const transformerFormats = transformerClass.default.outputFormats;
-      transformerFormats.forEach((format: FileType) =>
+      const transformerInstance = new transformerClass.default();
+      const transformerFormats = transformerInstance.outputFormats;
+      transformerFormats.forEach((format: OutputFormat) =>
         outputFormats.add(format.toString()),
       );
     } catch {

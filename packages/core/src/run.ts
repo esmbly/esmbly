@@ -11,9 +11,9 @@ export default async function run({
   const outputFiles = [];
   let astArray = parser.parse(input);
   for (const transformer of transformers) {
-    astArray = await transformer.transform(astArray);
+    astArray = await transformer.run(astArray);
     for (const ast of astArray) {
-      if (output.includes(ast.type)) {
+      if (transformer.hasOutputFormat(output)) {
         outputFiles.push(ast.toFile());
       }
     }

@@ -5,3 +5,4 @@ export {
   getOutputFormats,
   transformerFactory,
 } from './transformers';
+export { toOutputFormat } from './format';

@@ -1,22 +1,24 @@
-import { AST, FileType, Transformer } from '@esmbly/types';
+import { AST, OutputFormat } from '@esmbly/types';
+import { Transformer } from '@esmbly/core';
 
 interface TransformerOptions {
   example: number;
 }
 
-class Flow implements Transformer {
-  public static outputFormats: FileType[] = [FileType.TypeScript];
+class FlowTransformer extends Transformer {
+  public outputFormats: OutputFormat[] = [OutputFormat.TypeScript];
 
   public constructor(options: TransformerOptions) {
+    super();
     console.log(options);
     // Set the config here
     // Use default config as fallback
   }
 
-  public transform(astArray: AST[]): AST[] {
+  public run(astArray: AST[]): AST[] {
     console.log('..flow transformer');
     return astArray;
   }
 }
 
-export default Flow;
+export default FlowTransformer;

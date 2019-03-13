@@ -8,7 +8,7 @@ describe('parse', () => {
     const [ast] = parse([jsfile]);
     expect(ast.name).toEqual('leftPad.js');
     expect(ast.path).toEqual('leftPad.js');
-    expect(ast.type).toEqual('JavaScript');
+    expect(ast.type).toEqual('.js');
     expect(ast.tree).toMatchSnapshot();
     expect(ast.toFile()).toMatchSnapshot();
   });
@@ -16,7 +16,7 @@ describe('parse', () => {
     const [ast] = parse([flowfile]);
     expect(ast.name).toEqual('leftPad.js');
     expect(ast.path).toEqual('leftPad.js');
-    expect(ast.type).toEqual('Flow');
+    expect(ast.type).toEqual('.js');
     expect(ast.tree).toMatchSnapshot();
     expect(ast.toFile()).toMatchSnapshot();
   });
@@ -24,7 +24,7 @@ describe('parse', () => {
     const [ast] = parse([tsfile]);
     expect(ast.name).toEqual('leftPad.ts');
     expect(ast.path).toEqual('leftPad.ts');
-    expect(ast.type).toEqual('TypeScript');
+    expect(ast.type).toEqual('.ts');
     expect(ast.tree).toMatchSnapshot();
     expect(ast.toFile()).toMatchSnapshot();
   });

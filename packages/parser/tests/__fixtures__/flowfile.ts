@@ -15,7 +15,7 @@ function padLeft(str: string, maxLength: number): string {
 const file: File = {
   name: 'leftPad.js',
   path: 'leftPad.js',
-  type: FileType.Flow,
+  type: FileType.JavaScript,
   content,
 };
 

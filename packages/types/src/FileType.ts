@@ -1,6 +1,5 @@
 export enum FileType {
-  JavaScript = 'JavaScript',
-  Flow = 'Flow',
-  TypeScript = 'TypeScript',
-  WebAssembly = 'WebAssembly',
+  JavaScript = '.js',
+  TypeScript = '.ts',
+  WebAssembly = '.wasm',
 }

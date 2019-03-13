@@ -2,12 +2,8 @@ import { FileType } from '@esmbly/types';
 import { getPluginsForFileType } from '../src/plugins';
 
 describe('getPluginsForFileType', () => {
-  it('returns the correct plugins for JavaScript files', () => {
-    const plugins = getPluginsForFileType(FileType.JavaScript);
-    expect(plugins).toEqual([]);
-  });
   it('returns the correct plugins for Flow files', () => {
-    const plugins = getPluginsForFileType(FileType.Flow);
+    const plugins = getPluginsForFileType(FileType.JavaScript);
     expect(plugins).toEqual(['flow', 'flowComments']);
   });
   it('returns the correct plugins for TypeScript files', () => {

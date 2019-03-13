@@ -3,6 +3,7 @@ import parser from '@esmbly/parser';
 import mockAst from './__fixtures__/ast';
 import * as mockConfig from './__fixtures__/config';
 import * as config from '../src/config';
+import { OutputFormat } from '@esmbly/types';
 
 jest.mock('../src/config');
 jest.mock('@esmbly/parser');
@@ -33,25 +34,36 @@ describe('run', () => {
     parser.parse = jest.fn(() => mockAst);
     // @ts-ignore
     config.validateRunConfig = jest.fn();
-    const transformerA = { transform: jest.fn(ast => Promise.resolve(ast)) };
-    const transformerB = { transform: jest.fn(ast => Promise.resolve(ast)) };
+    const transformerA = {
+      run: jest.fn(ast => Promise.resolve(ast)),
+      hasOutputFormat: jest.fn(),
+    };
+    const transformerB = {
+      run: jest.fn(ast => Promise.resolve(ast)),
+      hasOutputFormat: jest.fn(),
+    };
     const runConfig = {
       ...mockConfig,
       transformers: [transformerA, transformerB],
     };
     // @ts-ignore
     await run(runConfig);
-    expect(transformerA.transform).toHaveBeenCalledTimes(1);
-    expect(transformerA.transform).toHaveBeenCalledWith(mockAst);
-    expect(transformerB.transform).toHaveBeenCalledTimes(1);
-    expect(transformerB.transform).toHaveBeenCalledWith(mockAst);
+    expect(transformerA.run).toHaveBeenCalledTimes(1);
+    expect(transformerA.run).toHaveBeenCalledWith(mockAst);
+    expect(transformerB.run).toHaveBeenCalledTimes(1);
+    expect(transformerB.run).toHaveBeenCalledWith(mockAst);
   });
   it('returns an array of files to be outputted', async () => {
     // @ts-ignore
     parser.parse = jest.fn(() => mockAst);
     // @ts-ignore
     config.validateRunConfig = jest.fn();
-    const transformer = { transform: jest.fn(ast => Promise.resolve(ast)) };
+    const transformer = {
+      run: jest.fn(ast => Promise.resolve(ast)),
+      hasOutputFormat: (types: OutputFormat[]): boolean => {
+        return types[0] === OutputFormat.TypeScript;
+      },
+    };
     const runConfig = {
       files: ['fileA.js'],
       output: ['TypeScript'],
@@ -59,6 +71,6 @@ describe('run', () => {
     };
     // @ts-ignore
     const output = await run(runConfig);
-    expect(output).toEqual(['mock-ts-file']);
+    expect(output).toEqual(['mock-js-file-a', 'mock-js-file-b']);
   });
 });

@@ -1,4 +1,6 @@
+import { FileType } from '@esmbly/types';
+
 export default [
-  { type: 'TypeScript', toFile: () => 'mock-ts-file' },
-  { type: 'JavaScript', toFile: () => 'mock-js-file' },
+  { type: FileType.JavaScript, toFile: () => 'mock-js-file-a' },
+  { type: FileType.JavaScript, toFile: () => 'mock-js-file-b' },
 ];

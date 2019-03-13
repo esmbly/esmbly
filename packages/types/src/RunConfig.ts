@@ -1,6 +1,6 @@
 import { File } from './File';
-import { Transformer } from './Transformer';
 import { Output } from './Output';
+import { Transformer } from './Transformer';
 
 export interface RunConfig {
   input: File[];

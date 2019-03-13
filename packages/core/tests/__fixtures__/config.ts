@@ -1,8 +1,11 @@
-export const output = ['WebAssembly'];
+import { OutputFormat } from '@esmbly/types';
+
+export const output = [OutputFormat.WebAssembly];
 
 export const transformers = [
   {
-    transform: () => Promise.resolve([{}, {}]),
+    run: () => Promise.resolve([{}, {}]),
+    hasOutputFormat: jest.fn(),
   },
 ];
 

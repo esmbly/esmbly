@@ -22791,7 +22791,7 @@ function padLeft(str: string, maxLength: number): string {
 ",
   "name": "leftPad.js",
   "path": "leftPad.js",
-  "type": "Flow",
+  "type": ".js",
 }
 `;
 
@@ -37725,7 +37725,7 @@ function padLeft(str, maxLength) {
 ",
   "name": "leftPad.js",
   "path": "leftPad.js",
-  "type": "JavaScript",
+  "type": ".js",
 }
 `;
 
@@ -58755,6 +58755,6 @@ function padLeft(str: string, maxLength: number): string {
 ",
   "name": "leftPad.ts",
   "path": "leftPad.ts",
-  "type": "TypeScript",
+  "type": ".ts",
 }
 `;

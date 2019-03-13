@@ -4,9 +4,7 @@ import { FileType } from '@esmbly/types';
 export function getPluginsForFileType(fileType: FileType): ParserPlugin[] {
   switch (fileType) {
     case FileType.JavaScript:
-      return [];
-    case FileType.Flow:
-      return ['flow', 'flowComments'];
+      return ['flow', 'flowComments']; // TODO: Only add flow plugins for actual flow files
     case FileType.TypeScript:
       return ['typescript'];
     default:

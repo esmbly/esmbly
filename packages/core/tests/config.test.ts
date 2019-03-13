@@ -1,6 +1,5 @@
 import { validateRunConfig } from '../src/config';
 import * as mockConfig from './__fixtures__/config';
-import { FileType } from '@esmbly/types';
 
 describe('validateRunConfigRunConfig', () => {
   it('throws an error if config object is missing', () => {
@@ -50,7 +49,7 @@ describe('validateRunConfigRunConfig', () => {
       // @ts-ignore
       validateRunConfig({
         ...mockConfig,
-        output: ['Unknown type' as FileType],
+        output: ['Unknown type'],
       });
     }).toThrowErrorMatchingSnapshot();
   });

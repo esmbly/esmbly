@@ -1,7 +1,9 @@
+import { OutputFormat } from './OutputFormat';
+
 export interface OutputObject {
   dir?: string;
   file?: string;
-  format: string; // TODO: maybe use FileType here?
+  format: string | OutputFormat;
 }
 
-export type Output = string | OutputObject;
+export type Output = string | OutputFormat | OutputObject;
