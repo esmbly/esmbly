@@ -14,7 +14,7 @@ describe('validateRunConfigRunConfig', () => {
       // @ts-ignore
       validateRunConfig({
         ...mockConfig,
-        files: [],
+        input: [],
       });
     }).toThrowErrorMatchingSnapshot();
   });

@@ -1,12 +1,12 @@
-import { RunConfig, FileType } from '@esmbly/types';
+import { RunConfig, Transformer, FileType, Output } from '@esmbly/types';
 import * as errors from './errors';
 
 export function validateRunConfig(config: RunConfig): void {
-  if (!config || !config.files || !config.transformers || !config.output) {
+  if (!config || !config.input || !config.transformers || !config.output) {
     throw new Error(errors.MissingConfig());
   }
-  if (config.files.length < 1) {
-    throw new Error(errors.NoFiles());
+  if (config.input.length < 1) {
+    throw new Error(errors.NoInput());
   }
   if (config.transformers.length < 1) {
     throw new Error(errors.NoTransformers());
@@ -14,14 +14,15 @@ export function validateRunConfig(config: RunConfig): void {
   if (config.output.length < 1) {
     throw new Error(errors.NoOutput());
   }
-  config.transformers.forEach((transformer: unknown) => {
-    if (typeof transformer !== 'function') {
+  config.transformers.forEach((transformer: Transformer) => {
+    if (typeof transformer.transform !== 'function') {
       throw new Error(errors.InvalidTransformer(transformer));
     }
   });
-  config.output.forEach((out: unknown) => {
-    if ((out as string) in FileType === false) {
-      throw new Error(errors.InvalidOutput(out));
+  config.output.forEach((out: Output) => {
+    let format = typeof out === 'string' ? out : out.format;
+    if (format in FileType === false) {
+      throw new Error(errors.InvalidOutput(format));
     }
   });
 }

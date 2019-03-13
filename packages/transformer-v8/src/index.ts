@@ -1,11 +1,22 @@
-import { AST } from '@esmbly/types';
+import { AST, FileType, Transformer } from '@esmbly/types';
 
-export const output = ['TypeScript'];
-
-interface TransformerV8Options {}
-
-export default function(astArray: AST[], options: TransformerV8Options): AST[] {
-  console.log('Running V8 transformer');
-  console.log(options);
-  return astArray;
+interface TransformerOptions {
+  example: number;
 }
+
+class V8 implements Transformer {
+  public static outputFormats: FileType[] = [FileType.TypeScript];
+
+  public constructor(options: TransformerOptions) {
+    console.log(options);
+    // Set the config here
+    // Use default config as fallback
+  }
+
+  public transform(astArray: AST[]): AST[] {
+    console.log('..v8 transformer');
+    return astArray;
+  }
+}
+
+export default V8;

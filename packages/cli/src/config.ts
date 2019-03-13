@@ -1,137 +1,64 @@
 import path from 'path';
+import stringify from 'stringify-object';
+import { Config } from '@esmbly/types';
 import {
   writeFile,
   readFile,
   exists,
   getRoot,
   getRelativePathTo,
-  getTransformers,
-  getOutputForTransformers,
 } from '@esmbly/utils';
-import inquirer from 'inquirer';
-import stringify from 'stringify-object';
+import { promptForConfig } from './prompt';
 
-export enum DefaultFiles {
-  js = '.esmblyrc.js',
-  rc = '.esmblyrc',
+export const DEFAULT_FILE = '.esmblyrc.js';
+
+export async function getTemplateConfig(): Promise<string> {
+  const templatePath = path.resolve(__dirname, `../defaults/${DEFAULT_FILE}`);
+  const template = await readFile(templatePath);
+  return template.toString();
 }
 
-export interface Config {
-  files: string[];
-  transformers: (string | [string, object])[];
-  output: string[];
-}
-
-export function toString(config: Config): string {
-  return `module.exports = ${stringify(config)}\n`;
-}
-
-export function getFileName(useJs: boolean): string {
-  if (useJs) {
-    return DefaultFiles.js;
-  }
-  return DefaultFiles.rc;
-}
-
-export async function getDefaultConfig(
-  useJs: boolean,
-): Promise<string | Buffer> {
-  const fileName = getFileName(useJs);
-  const filePath = path.resolve(__dirname, `../defaults/${fileName}`);
-  return readFile(filePath);
-}
-
-export async function readConfig(): Promise<Config> {
+export async function getDefaultConfigPath(): Promise<string> {
   const root = await getRoot();
-  const rcPath = path.join(root, DefaultFiles.rc);
-  const jsPath = path.join(root, DefaultFiles.js);
-  if (await exists(rcPath)) {
-    const config = await readFile(rcPath);
-    return JSON.parse(config.toString());
+  return path.join(root, DEFAULT_FILE);
+}
+
+export async function readConfig(customPath?: string): Promise<Config[]> {
+  const configPath = customPath || (await getDefaultConfigPath());
+  const config = require(configPath) // eslint-disable-line
+  const toArray = (maybeArrayConfig: Config | Config[]): Config[] => {
+    if (Array.isArray(maybeArrayConfig)) {
+      return maybeArrayConfig;
+    }
+    return [maybeArrayConfig];
+  };
+  if (typeof config === 'function') {
+    const configFnResult = await config();
+    return toArray(configFnResult);
   }
-  return require(jsPath);
+  return toArray(config);
 }
 
-export async function getConfigPath(): Promise<string | void> {
-  const root = await getRoot();
-  const rcPath = path.join(root, DefaultFiles.rc);
-  const jsPath = path.join(root, DefaultFiles.js);
-  if (await exists(rcPath)) {
-    return getRelativePathTo(rcPath);
-  } else if (await exists(jsPath)) {
-    return getRelativePathTo(jsPath);
-  }
-  return;
-}
-
-export async function promptForConfig(): Promise<{
-  config: Config;
-  useJs: boolean;
-}> {
-  const { files } = await inquirer.prompt([
-    {
-      name: 'files',
-      message: 'Files',
-      type: 'input',
-    },
-  ]);
-  const { transformers } = await inquirer.prompt([
-    {
-      name: 'transformers',
-      message: 'Transformers',
-      type: 'checkbox',
-      choices: await getTransformers(),
-    },
-  ]);
-
-  // TODO: Install any missing packages here?
-
-  const { output } = await inquirer.prompt([
-    {
-      name: 'output',
-      message: 'Output',
-      type: 'checkbox',
-      choices: await getOutputForTransformers(transformers),
-    },
-  ]);
-  const { useJs } = await inquirer.prompt([
-    {
-      name: 'useJs',
-      message: 'Use .js extension for config file',
-      type: 'confirm',
-      default: false,
-    },
-  ]);
-  return { config: { files: [files], transformers, output }, useJs };
-}
-
-export async function writeConfig(
-  useJs: boolean,
+export async function createConfig(
   useDefault: boolean,
 ): Promise<{
   root: string;
   fileName: string;
 }> {
   const root = await getRoot();
-  const existingConfig = await getConfigPath();
-  if (existingConfig) {
+  const defaultConfigPath = await getDefaultConfigPath();
+  if (await exists(defaultConfigPath)) {
+    const relativeConfigPath = await getRelativePathTo(defaultConfigPath);
     throw new Error(
-      `Config ${existingConfig} already exists. Remove that file first.`,
+      `Config ${relativeConfigPath} already exists. Remove that file first.`,
     );
   } else if (useDefault) {
-    const fileName = getFileName(useJs);
-    const rcPath = path.join(root, fileName);
-    const defaultConfig = await getDefaultConfig(useJs);
-    await writeFile(rcPath, defaultConfig);
-    return { root, fileName };
+    const template = await getTemplateConfig();
+    await writeFile(defaultConfigPath, template);
   } else {
     const config = await promptForConfig();
-    const fileName = getFileName(config.useJs);
-    const rcPath = path.join(root, fileName);
-    const content = config.useJs
-      ? toString(config.config)
-      : JSON.stringify(config.config, null, 2);
-    await writeFile(rcPath, content);
-    return { root, fileName };
+    const content = `module.exports = ${stringify(config)}\n`;
+    await writeFile(defaultConfigPath, content);
   }
+  return { root, fileName: DEFAULT_FILE };
 }

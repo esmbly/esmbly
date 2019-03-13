@@ -6,7 +6,6 @@ exports[`Init exposes the correct help information 1`] = `
 Create an esmbly configuration file
 
 Options:
-  --js       Use .js extension for configuration file [boolean] [default: false]
   --default  Use default configuration                [boolean] [default: false]
   --help     Show help                                                 [boolean]"
 `;

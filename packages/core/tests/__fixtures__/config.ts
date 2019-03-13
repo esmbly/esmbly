@@ -1,8 +1,12 @@
 export const output = ['WebAssembly'];
 
-export const transformers = [() => Promise.resolve([{}, {}])];
+export const transformers = [
+  {
+    transform: () => Promise.resolve([{}, {}]),
+  },
+];
 
-export const files = [
+export const input = [
   {
     name: 'file.js',
     path: 'path/file.js',

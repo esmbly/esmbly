@@ -1,44 +1,48 @@
 import { promises as fs } from 'fs';
 import path from 'path';
-import { Transformer } from '@esmbly/types';
+import { Transformer, FileType } from '@esmbly/types';
 
 export async function getTransformers(): Promise<string[]> {
   // TODO: Get this from npm instead / search in more places
-  const packagesPath = path.resolve(__dirname, '../../');
-  const packages = await fs.readdir(packagesPath);
-  return packages.filter((pkg: string) => pkg.includes('transformer'));
+  const searchPaths = [path.resolve(__dirname, '../../')];
+  const searchResults = await Promise.all(
+    searchPaths.map((searchPath: string) => fs.readdir(searchPath)),
+  );
+  const packages = ([] as string[]).concat(...searchResults);
+  return packages.filter((pkg: string) => pkg.includes('transformer-'));
 }
 
-export async function getOutputForTransformers(
+export async function getOutputFormats(
   transformers: string[],
 ): Promise<string[]> {
-  // TODO: Search in more places / handle errors
-  let output: Set<string> = new Set();
+  // TODO: Search in more places?
+  let outputFormats: Set<string> = new Set();
   transformers.forEach((transformer: string) => {
-    const packagePath = path.resolve(__dirname, '../../', transformer);
-    const out = require(packagePath).output;
-    out.forEach((o: string) => output.add(o));
+    try {
+      const transformerPath = path.resolve(__dirname, '../../', transformer);
+      const transformerClass = require(transformerPath).default; // eslint-disable-line
+      const transformerFormats = transformerClass.outputFormats;
+      transformerFormats.forEach((format: FileType) =>
+        outputFormats.add(format.toString()),
+      );
+    } catch {
+      // Do nothing if some transformer can't be required / doesn't specify any output formats
+    }
   });
-  return [...output];
+  return [...outputFormats];
 }
 
-export type TransformerConfig = string | [string, object];
-
-export function requireTransformer(
-  transformer: TransformerConfig,
+export function transformerFactory(
+  transformer: string | Transformer,
 ): Transformer {
-  let name;
-  let config = {};
-  if (Array.isArray(transformer)) {
-    name = transformer[0];
-    config = transformer[1];
-  } else {
-    name = transformer;
+  if (typeof transformer === 'string') {
+    let name = transformer;
+    if (!name.includes('transformer-')) {
+      name = `transformer-${name}`;
+    }
+    const transformerPath = path.resolve(__dirname, '../../', name);
+    const TransformerClass = require(transformerPath).default; // eslint-disable-line
+    return new TransformerClass();
   }
-  if (!name.includes('transformer-')) {
-    name = 'transformer-' + name;
-  }
-  const packagePath = path.resolve(__dirname, '../../', name);
-  const mod = require(packagePath); // eslint-disable-line
-  return (...args) => mod.default(...args, config);
+  return transformer;
 }

@@ -6,9 +6,9 @@ jest.mock('../../src/config');
 
 const command = new CommandRunner(init);
 
-const mockWriteConfig = (): void => {
-  (config as any).writeConfig = jest.fn();
-  (config as any).writeConfig.mockResolvedValue({
+const mockcreateConfig = (): void => {
+  (config as any).createConfig = jest.fn();
+  (config as any).createConfig.mockResolvedValue({
     fileName: 'file',
     root: 'root',
   });
@@ -25,29 +25,19 @@ describe('Init', () => {
     const output = await command.run('init --help');
     expect(output).toMatchSnapshot();
   });
-  it('calls writeConfig to create a config file', async () => {
-    mockWriteConfig();
+  it('calls createConfig to create a config file', async () => {
+    mockcreateConfig();
     await command.run('init');
-    const [useJs, useDefault] = (config.writeConfig as any).mock.calls[0];
-    expect(useJs).toEqual(false);
+    const [useDefault] = (config.createConfig as any).mock.calls[0];
     expect(useDefault).toEqual(false);
-    expect(config.writeConfig).toHaveBeenCalledTimes(1);
-  });
-  it('uses .js extension when passing the --js flag', async () => {
-    mockWriteConfig();
-    await command.run('init --js');
-    const [useJs, useDefault] = (config.writeConfig as any).mock.calls[0];
-    expect(useJs).toEqual(true);
-    expect(useDefault).toEqual(false);
-    expect(config.writeConfig).toHaveBeenCalledTimes(1);
+    expect(config.createConfig).toHaveBeenCalledTimes(1);
   });
   it('uses default values when passing the --default flag', async () => {
-    mockWriteConfig();
+    mockcreateConfig();
     await command.run('init --default');
-    const [useJs, useDefault] = (config.writeConfig as any).mock.calls[0];
-    expect(useJs).toEqual(false);
+    const [useDefault] = (config.createConfig as any).mock.calls[0];
     expect(useDefault).toEqual(true);
-    expect(config.writeConfig).toHaveBeenCalledTimes(1);
+    expect(config.createConfig).toHaveBeenCalledTimes(1);
   });
   it.todo('test output by mocking @esmbly/output');
   it.todo('test error output by mocking @esmbly/output');

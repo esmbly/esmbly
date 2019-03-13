@@ -1,3 +1,5 @@
 import { AST } from './AST';
 
-export type Transformer = (ast: AST[]) => AST[];
+export interface Transformer {
+  transform(astArray: AST[]): AST[];
+}

@@ -1,14 +1,14 @@
 export const MissingConfig = (): string => {
-  return `Please provide a configuration object.
+  return `Please provide a valid configuration object.
     {
-      files: File[];
+      input: File[];
       transformers: Transformer[];
-      output: FileType[];
+      output: Output[];
     }
   `;
 };
 
-export const NoFiles = (): string => {
+export const NoInput = (): string => {
   return 'Please specify at least one file to transform.';
 };
 
@@ -21,7 +21,7 @@ export const NoOutput = (): string => {
 };
 
 export const InvalidTransformer = (transformer: unknown): string => {
-  return `Transformer: ${String(transformer)} is not a function.`;
+  return `${String(transformer)}.transform() is not a function.`;
 };
 
 export const InvalidOutput = (out: unknown): string => {

@@ -5,8 +5,8 @@ Array [
   Array [
     Array [
       Object {
-        "message": "Files",
-        "name": "files",
+        "message": "Which files do you want to transform?",
+        "name": "input",
         "type": "input",
       },
     ],
@@ -18,7 +18,7 @@ Array [
           "flow",
           "wasm",
         ],
-        "message": "Transformers",
+        "message": "Which transformer do you want to use?",
         "name": "transformers",
         "type": "checkbox",
       },
@@ -31,19 +31,9 @@ Array [
           "TypeScript",
           "WebAssembly",
         ],
-        "message": "Output",
+        "message": "Which output formats to you want to use?",
         "name": "output",
         "type": "checkbox",
-      },
-    ],
-  ],
-  Array [
-    Array [
-      Object {
-        "default": false,
-        "message": "Use .js extension for config file",
-        "name": "useJs",
-        "type": "confirm",
       },
     ],
   ],

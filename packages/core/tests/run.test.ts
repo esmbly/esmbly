@@ -26,32 +26,32 @@ describe('run', () => {
     // @ts-ignore
     await run(mockConfig);
     expect(parser.parse).toHaveBeenCalledTimes(1);
-    expect(parser.parse).toHaveBeenCalledWith(mockConfig.files);
+    expect(parser.parse).toHaveBeenCalledWith(mockConfig.input);
   });
   it('passes the ast to each transformer', async () => {
     // @ts-ignore
     parser.parse = jest.fn(() => mockAst);
     // @ts-ignore
     config.validateRunConfig = jest.fn();
-    const transformerA = jest.fn(ast => Promise.resolve(ast));
-    const transformerB = jest.fn(ast => Promise.resolve(ast));
+    const transformerA = { transform: jest.fn(ast => Promise.resolve(ast)) };
+    const transformerB = { transform: jest.fn(ast => Promise.resolve(ast)) };
     const runConfig = {
       ...mockConfig,
       transformers: [transformerA, transformerB],
     };
     // @ts-ignore
     await run(runConfig);
-    expect(transformerA).toHaveBeenCalledTimes(1);
-    expect(transformerA).toHaveBeenCalledWith(mockAst);
-    expect(transformerB).toHaveBeenCalledTimes(1);
-    expect(transformerB).toHaveBeenCalledWith(mockAst);
+    expect(transformerA.transform).toHaveBeenCalledTimes(1);
+    expect(transformerA.transform).toHaveBeenCalledWith(mockAst);
+    expect(transformerB.transform).toHaveBeenCalledTimes(1);
+    expect(transformerB.transform).toHaveBeenCalledWith(mockAst);
   });
   it('returns an array of files to be outputted', async () => {
     // @ts-ignore
     parser.parse = jest.fn(() => mockAst);
     // @ts-ignore
     config.validateRunConfig = jest.fn();
-    const transformer = jest.fn(ast => Promise.resolve(ast));
+    const transformer = { transform: jest.fn(ast => Promise.resolve(ast)) };
     const runConfig = {
       files: ['fileA.js'],
       output: ['TypeScript'],

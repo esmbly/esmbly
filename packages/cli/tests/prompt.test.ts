@@ -1,4 +1,4 @@
-import * as config from '../src/config';
+import { promptForConfig } from '../src/prompt';
 import * as utils from '@esmbly/utils';
 import inquirer from 'inquirer';
 
@@ -12,15 +12,13 @@ describe('promptForConfig', () => {
     (utils as any).getTransformers = jest.fn();
     (utils.getTransformers as jest.Mock).mockResolvedValue(['flow', 'wasm']);
     (utils as any).getOutputForTransformers = jest.fn();
-    (utils.getOutputForTransformers as jest.Mock).mockResolvedValue([
+    (utils.getOutputFormats as jest.Mock).mockResolvedValue([
       'TypeScript',
       'WebAssembly',
     ]);
-    await config.promptForConfig();
+    await promptForConfig();
     expect((inquirer.prompt as jest.Mock).mock.calls).toMatchSnapshot();
     expect(utils.getTransformers as jest.Mock).toHaveBeenCalledTimes(1);
-    expect(utils.getOutputForTransformers as jest.Mock).toHaveBeenCalledTimes(
-      1,
-    );
+    expect(utils.getOutputFormats as jest.Mock).toHaveBeenCalledTimes(1);
   });
 });

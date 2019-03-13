@@ -6,5 +6,10 @@ exports[`Run exposes the correct help information 1`] = `
 Run esmbly
 
 Options:
-  --help  Show help                                                    [boolean]"
+  --config, -c        Configuration file path                           [string]
+  --silent            Silence output to the console   [boolean] [default: false]
+  --input, -i         The files you want to transform                    [array]
+  --transformers, -t  The transformer you want to use                    [array]
+  --output, -t        The output formats you want to use                 [array]
+  --help              Show help                                        [boolean]"
 `;

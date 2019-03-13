@@ -14,15 +14,17 @@ const setup = (): void => {
   (esmbly as any).run = jest.fn();
   (esmbly as any).run.mockResolvedValue(true);
   (config as any).readConfig = jest.fn();
-  (config as any).readConfig.mockResolvedValue({
-    files: ['**/*.ts'],
-    transformers: ['flow', 'wasm'],
-    output: ['WebAssembly'],
-  });
+  (config as any).readConfig.mockResolvedValue([
+    {
+      input: ['**/*.ts'],
+      transformers: ['flow', 'wasm'],
+      output: ['WebAssembly'],
+    },
+  ]);
   (utils as any).readFiles = jest.fn();
   (utils as any).readFiles.mockResolvedValue(['fileA.ts', 'fileB.ts']);
-  (utils as any).requireTransformer = jest.fn();
-  (utils as any).requireTransformer.mockReturnValue('transformer');
+  (utils as any).transformerFactory = jest.fn();
+  (utils as any).transformerFactory.mockReturnValue('transformer');
 };
 
 describe('Run', () => {
@@ -50,9 +52,9 @@ describe('Run', () => {
   it.skip('requires all transformers', async () => {
     setup();
     await command.run('run');
-    expect(utils.requireTransformer).toHaveBeenCalledTimes(2);
-    expect(utils.requireTransformer).toHaveBeenCalledWith('flow');
-    expect(utils.requireTransformer).toHaveBeenCalledWith('wasm');
+    expect(utils.transformerFactory).toHaveBeenCalledTimes(2);
+    expect(utils.transformerFactory).toHaveBeenCalledWith('flow');
+    expect(utils.transformerFactory).toHaveBeenCalledWith('wasm');
   });
   it.skip('runs esmbly', async () => {
     setup();

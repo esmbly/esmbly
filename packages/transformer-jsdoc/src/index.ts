@@ -1,14 +1,22 @@
-import { AST } from '@esmbly/types';
+import { AST, FileType, Transformer } from '@esmbly/types';
 
-export const output = ['TypeScript'];
-
-interface TransformerJSDocOptions {}
-
-export default function(
-  astArray: AST[],
-  options: TransformerJSDocOptions,
-): AST[] {
-  console.log('Running JSDoc transformer');
-  console.log(options);
-  return astArray;
+interface TransformerOptions {
+  example: number;
 }
+
+class JSDoc implements Transformer {
+  public static outputFormats: FileType[] = [FileType.TypeScript];
+
+  public constructor(options: TransformerOptions) {
+    console.log(options);
+    // Set the config here
+    // Use default config as fallback
+  }
+
+  public transform(astArray: AST[]): AST[] {
+    console.log('..jsdoc transformer');
+    return astArray;
+  }
+}
+
+export default JSDoc;

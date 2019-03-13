@@ -1,9 +1,9 @@
 import { File } from './File';
-import { FileType } from './FileType';
 import { Transformer } from './Transformer';
+import { Output } from './Output';
 
 export interface RunConfig {
-  files: File[];
+  input: File[];
   transformers: Transformer[];
-  output: FileType[];
+  output: Output[];
 }
