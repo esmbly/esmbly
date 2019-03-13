@@ -1,5 +1,5 @@
 import esmbly from '@esmbly/core';
-import { Output } from '@esmbly/types';
+import { Output, Transformer } from '@esmbly/types';
 import { transformerFactory, readFiles } from '@esmbly/utils';
 import { readConfig } from '../config';
 import { Argv, Arguments } from 'yargs';
@@ -56,7 +56,7 @@ export const handler = async (argv: Arguments & RunOptions): Promise<void> => {
     for (const c of config) {
       const input = await readFiles(argv.input || c.input);
       const transformers = (argv.transformers || c.transformers).map(
-        transformerFactory,
+        (transformer: string | Transformer) => transformerFactory(transformer),
       );
       if (input.length < 1) {
         throw new Error(`Found 0 files matching pattern: ${c.input}`);

@@ -54,11 +54,11 @@ export async function createConfig(
     );
   } else if (options.default) {
     const template = await getTemplateConfig();
-    await writeFile(defaultConfigPath, template);
+    await writeFile(defaultConfigPath, template, { overwrite: options.force });
   } else {
     const config = await promptForConfig();
     const content = `module.exports = ${stringify(config)}\n`;
-    await writeFile(defaultConfigPath, content);
+    await writeFile(defaultConfigPath, content, { overwrite: options.force });
   }
   return { root, fileName: DEFAULT_FILE };
 }
