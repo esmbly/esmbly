@@ -47,8 +47,7 @@ export async function readFile(
   return fs.readFile(file, options);
 }
 
-export function fileTypeOf(file: string): FileType {
-  const extension = path.extname(file);
+export function fileTypeForExtension(extension: string): FileType {
   switch (extension) {
     case '.js':
       return FileType.JavaScript;
@@ -77,11 +76,12 @@ export async function readFiles(patterns: string[]): Promise<File[]> {
   return Promise.all(
     matches.map(async match => {
       const content = await readFile(match);
+      const { name, ext } = path.parse(match);
       return {
-        name: path.basename(match),
+        name,
         content: content.toString(),
-        path: match,
-        type: fileTypeOf(match),
+        dir: path.dirname(match),
+        type: fileTypeForExtension(ext),
       };
     }),
   );
