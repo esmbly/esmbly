@@ -14,12 +14,11 @@ export abstract class Transformer implements TransformerInterface {
     const files: File[] = [];
     trees.forEach((tree: SyntaxTree) => {
       output.forEach((output: Output) => {
-        const format = typeof output === 'string' ? output : output.format;
-        if ((this.constructor as any).outputFormats.includes(format)) {
+        if ((this.constructor as any).outputFormats.includes(output.format)) {
           files.push({
             ...tree.represents,
             content: tree.toCode(),
-            type: fileTypeForOutputFormat(format as OutputFormat),
+            type: fileTypeForOutputFormat(output.format),
           });
         }
       });

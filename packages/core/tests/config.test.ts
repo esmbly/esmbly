@@ -49,7 +49,7 @@ describe('validateRunConfigRunConfig', () => {
       // @ts-ignore
       validateRunConfig({
         ...mockConfig,
-        output: ['Unknown type'],
+        output: [{ format: 'Unknown type' as any }],
       });
     }).toThrowErrorMatchingSnapshot();
   });

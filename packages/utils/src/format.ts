@@ -18,9 +18,11 @@ export function outputFormatForString(format: string): OutputFormat {
   }
 }
 
-export function toOutputFormat(output: Output): Output {
+export function toOutputFormat(output: string | Output): Output {
   if (typeof output === 'string') {
-    return outputFormatForString(output);
+    return {
+      format: outputFormatForString(output),
+    };
   }
   output.format = outputFormatForString(output.format);
   return output;

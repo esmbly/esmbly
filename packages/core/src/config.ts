@@ -19,10 +19,9 @@ export function validateRunConfig(config: RunConfig): void {
       throw new Error(errors.InvalidTransformer(transformer));
     }
   });
-  config.output.forEach((out: Output) => {
-    let format = typeof out === 'string' ? out : out.format;
-    if (format in OutputFormat === false) {
-      throw new Error(errors.InvalidOutput(format));
+  config.output.forEach((output: Output) => {
+    if (output.format in OutputFormat === false) {
+      throw new Error(errors.InvalidOutput(output.format));
     }
   });
 }

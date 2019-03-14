@@ -1,9 +1,7 @@
 import { OutputFormat } from './OutputFormat';
 
-export interface OutputObject {
+export interface Output {
   dir?: string;
   file?: string;
-  format: string | OutputFormat;
+  format: OutputFormat;
 }
-
-export type Output = string | OutputFormat | OutputObject;
