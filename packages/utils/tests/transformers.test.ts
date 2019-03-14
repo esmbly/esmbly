@@ -1,16 +1,15 @@
-import fs from 'fs';
+import fs from '../src/fs';
 import {
   getTransformers,
   getOutputFormats,
   transformerFactory,
 } from '../src/transformers';
 
-jest.mock('fs');
+jest.mock('../src/fs');
 
 describe('getTransformers', () => {
   it('resolves to an array of transformer names', async () => {
-    (fs as any).promises = { readdir: jest.fn() };
-    (fs.promises.readdir as any).mockReturnValue([
+    (fs.readdir as any).mockResolvedValue([
       'package-a',
       'package-b',
       'transformer-c',
