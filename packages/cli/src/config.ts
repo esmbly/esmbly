@@ -18,8 +18,8 @@ export async function getTemplateConfig(): Promise<string> {
   return template.toString();
 }
 
-export async function getDefaultConfigPath(): Promise<string> {
-  const root = await getRoot();
+export function getDefaultConfigPath(): string {
+  const root = getRoot();
   return path.join(root, DEFAULT_FILE);
 }
 
@@ -45,10 +45,10 @@ export async function createConfig(
   root: string;
   fileName: string;
 }> {
-  const root = await getRoot();
-  const defaultConfigPath = await getDefaultConfigPath();
+  const root = getRoot();
+  const defaultConfigPath = getDefaultConfigPath();
   if ((await exists(defaultConfigPath)) && !options.force) {
-    const relativeConfigPath = await getRelativePathTo(defaultConfigPath);
+    const relativeConfigPath = getRelativePathTo(defaultConfigPath);
     throw new Error(
       `Config ${relativeConfigPath} already exists. Remove that file first.`,
     );

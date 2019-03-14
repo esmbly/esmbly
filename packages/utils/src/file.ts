@@ -34,7 +34,7 @@ export async function writeFile(
   options: WriteOptions = { overwrite: false },
 ): Promise<void> {
   if (!options.overwrite && (await exists(file))) {
-    const relativePath = await getRelativePathTo(file);
+    const relativePath = getRelativePathTo(file);
     throw new Error(`${relativePath} already exists`);
   }
   return fs.writeFile(file, data, options);
