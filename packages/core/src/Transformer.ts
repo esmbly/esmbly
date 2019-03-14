@@ -17,6 +17,7 @@ export abstract class Transformer implements TransformerInterface {
         if ((this.constructor as any).outputFormats.includes(output.format)) {
           files.push({
             ...tree.represents,
+            dir: output.dir || tree.represents.dir,
             content: tree.toCode(),
             type: fileTypeForOutputFormat(output.format),
           });
