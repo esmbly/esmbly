@@ -20,6 +20,8 @@
   },
   "dependencies": {
     "@esmbly/parser": "^0.0.1",
-    "@esmbly/types": "^0.0.1"
+    "@esmbly/types": "^0.0.1",
+    "@esmbly/utils": "^0.0.1",
+    "recast": "^0.17.3"
   }
 }

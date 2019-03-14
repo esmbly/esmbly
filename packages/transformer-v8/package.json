@@ -19,6 +19,7 @@
     "build-watch": "tsc -w"
   },
   "dependencies": {
+    "@babel/traverse": "^7.3.4",
     "@esmbly/core": "^0.0.1",
     "@esmbly/types": "^0.0.1"
   }

@@ -23,12 +23,11 @@ describe('getTransformers', () => {
 describe('getOutputFormats', () => {
   it('resolves to an array of supported output formats', async () => {
     const requirer = jest.fn();
-    const mockInstance = {
-      outputFormats: ['TypeScript', 'WebAssembly'],
-      transform: jest.fn(),
-    };
     requirer.mockReturnValue({
-      default: jest.fn(() => mockInstance),
+      default: {
+        outputFormats: ['TypeScript', 'WebAssembly'],
+        transform: jest.fn(),
+      },
     });
     const formats = await getOutputFormats(
       ['transformer-flow', 'transformer-wasm'],

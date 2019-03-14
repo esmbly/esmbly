@@ -66,6 +66,6 @@ export const handler = async (argv: Arguments & RunOptions): Promise<void> => {
       console.log(results); // TODO: use @esmbly/output
     }
   } catch (err) {
-    console.log(err.message || err); // TODO: use @esmbly/output
+    console.log(err); // TODO: use @esmbly/output
   }
 };

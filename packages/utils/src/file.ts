@@ -2,7 +2,7 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import glob from 'globby';
 import { getRelativePathTo } from './package';
-import { File, FileType } from '@esmbly/types';
+import { File, FileType, OutputFormat } from '@esmbly/types';
 
 interface WriteOptions {
   encoding?: string;
@@ -56,6 +56,19 @@ export function fileTypeOf(file: string): FileType {
       return FileType.TypeScript;
     default:
       throw new Error(`Filetype ${extension} is not supported`);
+  }
+}
+
+export function fileTypeForOutputFormat(format: OutputFormat): FileType {
+  switch (format) {
+    case OutputFormat.Flow:
+      return FileType.JavaScript;
+    case OutputFormat.TypeScript:
+      return FileType.TypeScript;
+    case OutputFormat.WebAssembly:
+      return FileType.WebAssembly;
+    default:
+      throw new Error(`Output format: ${format} is not supported`);
   }
 }
 

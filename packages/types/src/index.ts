@@ -1,4 +1,4 @@
-export * from './AST';
+export * from './SyntaxTree';
 export * from './File';
 export * from './FileType';
 export * from './RunConfig';

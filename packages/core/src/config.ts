@@ -15,7 +15,7 @@ export function validateRunConfig(config: RunConfig): void {
     throw new Error(errors.NoOutput());
   }
   config.transformers.forEach((transformer: Transformer) => {
-    if (typeof transformer.run !== 'function') {
+    if (typeof transformer.transform !== 'function') {
       throw new Error(errors.InvalidTransformer(transformer));
     }
   });

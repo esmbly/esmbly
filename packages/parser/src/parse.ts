@@ -1,11 +1,11 @@
-import * as parser from '@babel/parser';
 import recast from 'recast';
-import { AST, File } from '@esmbly/types';
+import * as parser from '@babel/parser';
+import { SyntaxTree, File } from '@esmbly/types';
 import { getPluginsForFileType } from './plugins';
 
-export default function parse(files: File[]): AST[] {
+export default function parse(files: File[]): SyntaxTree[] {
   return files.map((file: File) => {
-    const tree = recast.parse(file.content, {
+    const tree = recast.parse(file.content.toString(), {
       parser: {
         parse(source: string) {
           return parser.parse(source, {
@@ -15,16 +15,10 @@ export default function parse(files: File[]): AST[] {
         },
       },
     });
-    const ast: AST = {
-      name: file.name,
-      path: file.path,
-      type: file.type,
-      tree: tree,
-      toFile: () => ({
-        ...file,
-        content: recast.print(tree).code,
-      }),
+    return {
+      represents: file,
+      toCode: (): string => recast.print(tree).code,
+      tree,
     };
-    return ast;
   });
 }

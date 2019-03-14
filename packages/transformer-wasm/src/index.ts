@@ -1,4 +1,4 @@
-import { AST, OutputFormat } from '@esmbly/types';
+import { SyntaxTree, OutputFormat, Output, File } from '@esmbly/types';
 import { Transformer } from '@esmbly/core';
 
 interface TransformerOptions {
@@ -6,7 +6,7 @@ interface TransformerOptions {
 }
 
 class WasmTransformer extends Transformer {
-  public outputFormats: OutputFormat[] = [OutputFormat.WebAssembly];
+  public static outputFormats: OutputFormat[] = [OutputFormat.WebAssembly];
 
   public constructor(options: TransformerOptions) {
     super();
@@ -15,9 +15,17 @@ class WasmTransformer extends Transformer {
     // Use default config as fallback
   }
 
-  public run(astArray: AST[]): AST[] {
+  public transform(trees: SyntaxTree[]): void {
+    // Run AssemblyScript compiler here
+    console.log(trees.length);
     console.log('..wasm transformer');
-    return astArray;
+  }
+
+  public createFiles(trees: SyntaxTree[], output: Output[]): File[] {
+    // Override createFiles derived from abstract Transformer class
+    console.log(trees.length);
+    console.log(output.length);
+    return [];
   }
 }
 

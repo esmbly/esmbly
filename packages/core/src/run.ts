@@ -8,15 +8,11 @@ export default async function run({
   output,
 }: RunConfig): Promise<File[]> {
   validateRunConfig({ input, transformers, output });
-  const outputFiles = [];
-  let astArray = parser.parse(input);
+  let files: File[] = [];
+  const trees = parser.parse(input);
   for (const transformer of transformers) {
-    astArray = await transformer.run(astArray);
-    for (const ast of astArray) {
-      if (transformer.hasOutputFormat(output)) {
-        outputFiles.push(ast.toFile());
-      }
-    }
+    transformer.transform(trees);
+    files = [...files, ...transformer.createFiles(trees, output)];
   }
-  return outputFiles;
+  return files;
 }

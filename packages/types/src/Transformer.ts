@@ -1,9 +1,10 @@
-import { OutputFormat } from './OutputFormat';
-import { AST } from './AST';
-import { Output } from './Output';
+import { OutputFormat, Output, File, SyntaxTree } from '.';
 
-export interface Transformer {
-  readonly outputFormats: OutputFormat[];
-  run(astArray: AST[]): AST[];
-  hasOutputFormat(output: Output[]): boolean;
+export interface ITransformer {
+  transform(syntaxTrees: SyntaxTree[]): void;
+  createFiles(syntaxTrees: SyntaxTree[], output: Output[]): File[];
+}
+
+export interface Transformer extends ITransformer {
+  outputFormats: OutputFormat[];
 }

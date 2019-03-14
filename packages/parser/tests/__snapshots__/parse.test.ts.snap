@@ -22777,8 +22777,7 @@ Node {
 `;
 
 exports[`parse correctly parses a Flow file 2`] = `
-Object {
-  "content": "
+"
 // @flow
 
 function padLeft(str: string, maxLength: number): string {
@@ -22788,11 +22787,7 @@ function padLeft(str: string, maxLength: number): string {
   }
   return s;
 }
-",
-  "name": "leftPad.js",
-  "path": "leftPad.js",
-  "type": ".js",
-}
+"
 `;
 
 exports[`parse correctly parses a JavaScript file 1`] = `
@@ -37713,8 +37708,7 @@ Node {
 `;
 
 exports[`parse correctly parses a JavaScript file 2`] = `
-Object {
-  "content": "
+"
 function padLeft(str, maxLength) {
   let s = str;
   while(s.length < maxLength) {
@@ -37722,11 +37716,7 @@ function padLeft(str, maxLength) {
   }
   return s;
 }
-",
-  "name": "leftPad.js",
-  "path": "leftPad.js",
-  "type": ".js",
-}
+"
 `;
 
 exports[`parse correctly parses a TypeSCript file 1`] = `
@@ -58743,8 +58733,7 @@ Node {
 `;
 
 exports[`parse correctly parses a TypeSCript file 2`] = `
-Object {
-  "content": "
+"
 function padLeft(str: string, maxLength: number): string {
   let s = str;
   while(s.length < maxLength) {
@@ -58752,9 +58741,5 @@ function padLeft(str: string, maxLength: number): string {
   }
   return s;
 }
-",
-  "name": "leftPad.ts",
-  "path": "leftPad.ts",
-  "type": ".ts",
-}
+"
 `;

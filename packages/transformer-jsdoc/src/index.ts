@@ -1,12 +1,13 @@
-import { AST, OutputFormat } from '@esmbly/types';
+import { SyntaxTree, OutputFormat } from '@esmbly/types';
 import { Transformer } from '@esmbly/core';
+import traverse from './traverse';
 
 interface TransformerOptions {
   example: number;
 }
 
 class JSDocTransformer extends Transformer {
-  public outputFormats: OutputFormat[] = [OutputFormat.TypeScript];
+  public static outputFormats: OutputFormat[] = [OutputFormat.TypeScript];
 
   public constructor(options: TransformerOptions) {
     super();
@@ -15,9 +16,9 @@ class JSDocTransformer extends Transformer {
     // Use default config as fallback
   }
 
-  public run(astArray: AST[]): AST[] {
+  public transform(trees: SyntaxTree[]): void {
     console.log('..jsdoc transformer');
-    return astArray;
+    trees.forEach(traverse);
   }
 }
 

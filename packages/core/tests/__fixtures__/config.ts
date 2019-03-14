@@ -4,8 +4,8 @@ export const output = [OutputFormat.WebAssembly];
 
 export const transformers = [
   {
-    run: () => Promise.resolve([{}, {}]),
-    hasOutputFormat: jest.fn(),
+    transform: () => Promise.resolve([{}, {}]),
+    createFiles: jest.fn(() => []),
   },
 ];
 

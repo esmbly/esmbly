@@ -3,7 +3,6 @@ import parser from '@esmbly/parser';
 import mockAst from './__fixtures__/ast';
 import * as mockConfig from './__fixtures__/config';
 import * as config from '../src/config';
-import { OutputFormat } from '@esmbly/types';
 
 jest.mock('../src/config');
 jest.mock('@esmbly/parser');
@@ -35,12 +34,12 @@ describe('run', () => {
     // @ts-ignore
     config.validateRunConfig = jest.fn();
     const transformerA = {
-      run: jest.fn(ast => Promise.resolve(ast)),
-      hasOutputFormat: jest.fn(),
+      transform: jest.fn(ast => Promise.resolve(ast)),
+      createFiles: jest.fn(() => []),
     };
     const transformerB = {
-      run: jest.fn(ast => Promise.resolve(ast)),
-      hasOutputFormat: jest.fn(),
+      transform: jest.fn(ast => Promise.resolve(ast)),
+      createFiles: jest.fn(() => []),
     };
     const runConfig = {
       ...mockConfig,
@@ -48,10 +47,10 @@ describe('run', () => {
     };
     // @ts-ignore
     await run(runConfig);
-    expect(transformerA.run).toHaveBeenCalledTimes(1);
-    expect(transformerA.run).toHaveBeenCalledWith(mockAst);
-    expect(transformerB.run).toHaveBeenCalledTimes(1);
-    expect(transformerB.run).toHaveBeenCalledWith(mockAst);
+    expect(transformerA.transform).toHaveBeenCalledTimes(1);
+    expect(transformerA.transform).toHaveBeenCalledWith(mockAst);
+    expect(transformerB.transform).toHaveBeenCalledTimes(1);
+    expect(transformerB.transform).toHaveBeenCalledWith(mockAst);
   });
   it('returns an array of files to be outputted', async () => {
     // @ts-ignore
@@ -59,10 +58,8 @@ describe('run', () => {
     // @ts-ignore
     config.validateRunConfig = jest.fn();
     const transformer = {
-      run: jest.fn(ast => Promise.resolve(ast)),
-      hasOutputFormat: (types: OutputFormat[]): boolean => {
-        return types[0] === OutputFormat.TypeScript;
-      },
+      transform: jest.fn(ast => Promise.resolve(ast)),
+      createFiles: jest.fn(() => ['mock-js-file-a', 'mock-js-file-b']),
     };
     const runConfig = {
       files: ['fileA.js'],

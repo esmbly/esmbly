@@ -1,4 +1,10 @@
-export { exists, readFile, writeFile, readFiles } from './file';
+export {
+  exists,
+  readFile,
+  writeFile,
+  readFiles,
+  fileTypeForOutputFormat,
+} from './file';
 export { getRoot, getRelativePathTo } from './package';
 export {
   getTransformers,

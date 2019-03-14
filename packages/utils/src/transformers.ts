@@ -22,8 +22,7 @@ export async function getOutputFormats(
     try {
       const transformerPath = path.resolve(__dirname, '../../', transformer);
       const transformerClass = requirer(transformerPath) as any;
-      const transformerInstance = new transformerClass.default();
-      const transformerFormats = transformerInstance.outputFormats;
+      const transformerFormats = transformerClass.default.outputFormats;
       transformerFormats.forEach((format: OutputFormat) =>
         outputFormats.add(format.toString()),
       );
