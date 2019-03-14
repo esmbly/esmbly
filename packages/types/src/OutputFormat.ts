@@ -3,4 +3,5 @@ export enum OutputFormat {
   TypeScript = 'TypeScript',
   WebAssembly = 'WebAssembly',
   Wat = 'Wat',
+  Asm = 'Asm',
 }

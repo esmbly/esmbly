@@ -68,6 +68,8 @@ export function fileTypeForOutputFormat(format: OutputFormat): FileType {
       return FileType.WebAssembly;
     case OutputFormat.Wat:
       return FileType.Wat;
+    case OutputFormat.Asm:
+      return FileType.Asm;
     default:
       throw new Error(`Output format: ${format} is not supported`);
   }

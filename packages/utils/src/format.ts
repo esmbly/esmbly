@@ -9,6 +9,11 @@ export function outputFormatForString(format: string): OutputFormat {
     case 'wat':
     case '.wat':
       return OutputFormat.Wat;
+    case 'asm':
+    case 'asm.js':
+    case '.asm':
+    case '.asm.js':
+      return OutputFormat.Asm;
     case 'flow':
     case '.flow':
       return OutputFormat.Flow;

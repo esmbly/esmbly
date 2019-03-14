@@ -2,5 +2,6 @@ export enum FileType {
   JavaScript = '.js',
   TypeScript = '.ts',
   WebAssembly = '.wasm',
-  Wat = '.wat'
+  Wat = '.wat',
+  Asm = '.asm.js'
 }

@@ -9,6 +9,7 @@ class WasmTransformer extends Transformer {
   public static outputFormats: OutputFormat[] = [
     OutputFormat.WebAssembly,
     OutputFormat.Wat,
+    OutputFormat.Asm,
   ];
 
   public constructor(options: TransformerOptions) {
