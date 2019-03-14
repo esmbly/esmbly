@@ -76,7 +76,7 @@ export function fileTypeForOutputFormat(format: OutputFormat): FileType {
 }
 
 export async function readFiles(patterns: string[]): Promise<File[]> {
-  const matches = await glob(patterns, { gitignore: true, onlyFiles: true });
+  const matches = await glob(patterns, { onlyFiles: true });
   return Promise.all(
     matches.map(async match => {
       const content = await readFile(match);
