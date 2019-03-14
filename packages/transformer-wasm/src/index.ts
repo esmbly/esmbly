@@ -6,7 +6,10 @@ interface TransformerOptions {
 }
 
 class WasmTransformer extends Transformer {
-  public static outputFormats: OutputFormat[] = [OutputFormat.WebAssembly];
+  public static outputFormats: OutputFormat[] = [
+    OutputFormat.WebAssembly,
+    OutputFormat.Wat,
+  ];
 
   public constructor(options: TransformerOptions) {
     super();

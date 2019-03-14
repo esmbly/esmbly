@@ -66,6 +66,8 @@ export function fileTypeForOutputFormat(format: OutputFormat): FileType {
       return FileType.TypeScript;
     case OutputFormat.WebAssembly:
       return FileType.WebAssembly;
+    case OutputFormat.Wat:
+      return FileType.Wat;
     default:
       throw new Error(`Output format: ${format} is not supported`);
   }

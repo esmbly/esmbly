@@ -6,6 +6,9 @@ export function outputFormatForString(format: string): OutputFormat {
     case 'webassembly':
     case '.wasm':
       return OutputFormat.WebAssembly;
+    case 'wat':
+    case '.wat':
+      return OutputFormat.Wat;
     case 'flow':
     case '.flow':
       return OutputFormat.Flow;
