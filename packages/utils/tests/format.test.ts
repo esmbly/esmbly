@@ -18,7 +18,7 @@ describe('outputFactory', () => {
   });
 
   it('throws an error when there is no matching output type', () => {
-    expect(() => outputFactory('coffee')).toThrowError(
+    expect(() => outputFactory('coffee')).toThrow(
       'Output format: coffee is not supported',
     );
   });
@@ -69,7 +69,7 @@ describe('toOutputFormat', () => {
   });
 
   it('throws an error when no matching output format is found', () => {
-    expect(() => toOutputFormat('coffee')).toThrowError(
+    expect(() => toOutputFormat('coffee')).toThrow(
       'Output format: coffee is not supported',
     );
   });

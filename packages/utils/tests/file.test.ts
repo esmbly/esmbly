@@ -38,7 +38,7 @@ describe('exists', () => {
 
   it('rejects the promise if anything goes wrong', async () => {
     setup(false, 'EPERM');
-    await expect(exists('someFile')).rejects.toThrowError();
+    await expect(exists('someFile')).rejects.toThrow();
   });
 });
 
@@ -62,9 +62,9 @@ describe('fileTypeForOutputFormat', () => {
   });
 
   it('throws an error for output formats that are not supported', () => {
-    expect(() =>
-      fileTypeForOutputFormat('.coffee' as OutputFormat),
-    ).toThrowError('Output format: .coffee is not supported');
+    expect(() => fileTypeForOutputFormat('.coffee' as OutputFormat)).toThrow(
+      'Output format: .coffee is not supported',
+    );
   });
 });
 
@@ -129,7 +129,7 @@ describe('toFileType', () => {
   });
 
   it('throws an error for extensions that are not supported', () => {
-    expect(() => toFileType('.coffee')).toThrowError(
+    expect(() => toFileType('.coffee')).toThrow(
       'Filetype: .coffee is not supported',
     );
   });
@@ -162,7 +162,7 @@ describe('writeFile', () => {
     setup(true);
     const filePath = 'file.js';
     const data = 'content';
-    await expect(writeFile(filePath, data)).rejects.toThrowError(
+    await expect(writeFile(filePath, data)).rejects.toThrow(
       'file.js already exists',
     );
   });
