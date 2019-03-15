@@ -1,6 +1,6 @@
 import { OutputFormat, SyntaxTree } from '@esmbly/types';
 import { Transformer } from '@esmbly/core';
-import output from '@esmbly/output';
+import printer from '@esmbly/printer';
 import traverse from './traverse';
 
 export interface JSDocTransformerOptions {
@@ -17,7 +17,7 @@ class JSDocTransformer extends Transformer {
   }
 
   public transform(trees: SyntaxTree[]): void {
-    output.out('..jsdoc transformer\n');
+    printer.print('..jsdoc transformer\n');
     trees.forEach(traverse);
   }
 }

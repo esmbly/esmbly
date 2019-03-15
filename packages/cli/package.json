@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@esmbly/core": "^0.0.1",
-    "@esmbly/output": "^0.0.1",
+    "@esmbly/printer": "^0.0.1",
     "@esmbly/types": "^0.0.1",
     "@esmbly/utils": "^0.0.1",
     "@types/inquirer": "^0.0.44",

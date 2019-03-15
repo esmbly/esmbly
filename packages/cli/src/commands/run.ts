@@ -3,7 +3,7 @@ import esmbly from '@esmbly/core';
 import { Config, Transformer } from '@esmbly/types';
 import { outputFactory, readFiles, transformerFactory } from '@esmbly/utils';
 import stringify from 'stringify-object';
-import output from '@esmbly/output';
+import printer from '@esmbly/printer';
 import { readConfig } from '../config';
 
 export interface RunOptions {
@@ -61,14 +61,14 @@ export const builder = (yargs: Argv): Argv<any> => {
 export const handler = async (argv: Arguments & RunOptions): Promise<void> => {
   try {
     if (argv.silent) {
-      output.setErrorStream(null);
-      output.setOutStream(null);
+      printer.setErrorStream(null);
+      printer.setOutStream(null);
     }
 
     const config = await readConfig(argv.config);
 
     if (argv.printConfig) {
-      output.out(`${stringify(config, { indent: ' ' })}\n`);
+      printer.print(`${stringify(config, { indent: ' ' })}\n`);
       return;
     }
 
@@ -88,11 +88,11 @@ export const handler = async (argv: Arguments & RunOptions): Promise<void> => {
     );
 
     if (argv.dryRun) {
-      output.out(`${stringify(results, { indent: ' ' })}\n`);
+      printer.print(`${stringify(results, { indent: ' ' })}\n`);
     } else {
       // TODO: write files here
     }
   } catch (err) {
-    output.out(`${err.message}\n` || err);
+    printer.error(`${err.message}\n` || err);
   }
 };

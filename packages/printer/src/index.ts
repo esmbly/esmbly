@@ -6,7 +6,7 @@ type WriteFn = (
   callback?: Callback,
 ) => boolean;
 
-class Output {
+class Printer {
   private stdout: NodeJS.WriteStream | null;
 
   private stderr: NodeJS.WriteStream | null;
@@ -23,14 +23,22 @@ class Output {
     return false;
   }
 
-  public err(chunk: string, encoding?: Encoding, callback?: Callback): boolean {
+  public error(
+    chunk: string,
+    encoding?: Encoding,
+    callback?: Callback,
+  ): boolean {
     if (this.stderr) {
       return this.stderr.write(chunk, encoding, callback);
     }
     return false;
   }
 
-  public out(chunk: string, encoding?: Encoding, callback?: Callback): boolean {
+  public print(
+    chunk: string,
+    encoding?: Encoding,
+    callback?: Callback,
+  ): boolean {
     if (this.stdout) {
       return this.stdout.write(chunk, encoding, callback);
     }
@@ -56,4 +64,4 @@ class Output {
   }
 }
 
-export default new Output();
+export default new Printer();

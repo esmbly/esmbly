@@ -1,4 +1,4 @@
-# `output`
+# `printer`
 
 > TODO: description
 

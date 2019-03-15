@@ -9,7 +9,7 @@ import MockTransformer from '../__fixtures__/FooTransformer';
 import MockFiles from '../__fixtures__/files';
 import MockConfig from '../__fixtures__/config';
 
-jest.mock('@esmbly/output');
+jest.mock('@esmbly/printer');
 
 const command = new CommandRunner(run);
 
