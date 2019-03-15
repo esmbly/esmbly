@@ -1,5 +1,5 @@
-import { ParserPlugin } from '@babel/parser';
 import { FileType } from '@esmbly/types';
+import { ParserPlugin } from '@babel/parser';
 
 export function getPluginsForFileType(fileType: FileType): ParserPlugin[] {
   switch (fileType) {
