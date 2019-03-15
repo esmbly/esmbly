@@ -69,7 +69,7 @@ describe('transformerFactory', () => {
     expect(requirer).not.toHaveBeenCalled();
   });
 
-  it('automatically prepends the transform- prefix if not present', async () => {
+  it('automatically prepends the transformer- prefix if not present', async () => {
     const mockInstance = {};
     const requirer = jest.fn();
     requirer.mockReturnValue({ default: jest.fn(() => mockInstance) });
