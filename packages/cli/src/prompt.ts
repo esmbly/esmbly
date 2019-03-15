@@ -8,18 +8,18 @@ import {
 export async function promptForConfig(): Promise<Config> {
   const { input } = await inquirer.prompt([
     {
-      name: 'input',
       message: 'Which files do you want to transform?',
+      name: 'input',
       type: 'input',
     },
   ]);
 
   const { transformers } = await inquirer.prompt([
     {
-      name: 'transformers',
-      message: 'Which transformer do you want to use?',
-      type: 'checkbox',
       choices: await getAvailableTransformers(),
+      message: 'Which transformer do you want to use?',
+      name: 'transformers',
+      type: 'checkbox',
     },
   ]);
 
@@ -27,12 +27,12 @@ export async function promptForConfig(): Promise<Config> {
 
   const { output } = await inquirer.prompt([
     {
-      name: 'output',
-      message: 'Which output formats to you want to use?',
-      type: 'checkbox',
       choices: await getAvailableOutputFormats(transformers),
+      message: 'Which output formats to you want to use?',
+      name: 'output',
+      type: 'checkbox',
     },
   ]);
 
-  return { input: [input], transformers, output };
+  return { input: [input], output, transformers };
 }

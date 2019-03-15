@@ -1,6 +1,6 @@
 import { Arguments, Argv } from 'yargs';
 import esmbly from '@esmbly/core';
-import { Transformer } from '@esmbly/types';
+import { Config, Transformer } from '@esmbly/types';
 import { outputFactory, readFiles, transformerFactory } from '@esmbly/utils';
 import { readConfig } from '../config';
 
@@ -16,6 +16,7 @@ export const command = 'run';
 
 export const describe = 'Run esmbly';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const builder = (yargs: Argv): Argv<any> => {
   return yargs
     .version(false)
@@ -50,21 +51,24 @@ export const builder = (yargs: Argv): Argv<any> => {
 export const handler = async (argv: Arguments & RunOptions): Promise<void> => {
   try {
     if (argv.silent) {
-      // TODO: silent @esmbly/output
+      // TODO: silence @esmbly/output
     }
     const config = await readConfig(argv.config);
-    for (const c of config) {
-      const input = await readFiles(argv.input || c.input);
-      const transformers = (argv.transformers || c.transformers).map(
-        (transformer: string | Transformer) => transformerFactory(transformer),
-      );
-      if (input.length < 1) {
-        throw new Error(`Found 0 files matching pattern: ${c.input}`);
-      }
-      const output = (argv.output || c.output).map(outputFactory);
-      const results = await esmbly.run({ input, transformers, output }); // TODO: Write results to file
-      console.log(results); // TODO: use @esmbly/output
-    }
+    const results = await Promise.all(
+      config.map(async (c: Config) => {
+        const input = await readFiles(argv.input || c.input);
+        const transformers = (argv.transformers || c.transformers).map(
+          (transformer: string | Transformer) =>
+            transformerFactory(transformer),
+        );
+        if (input.length < 1) {
+          throw new Error(`Found 0 files matching pattern: ${c.input}`);
+        }
+        const output = (argv.output || c.output).map(outputFactory);
+        return esmbly.run({ input, output, transformers });
+      }),
+    );
+    console.log(results); // TODO: use @esmbly/output
   } catch (err) {
     console.log(err); // TODO: use @esmbly/output
   }

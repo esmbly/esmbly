@@ -2,11 +2,11 @@ import path from 'path';
 import stringify from 'stringify-object';
 import { Config, InitOptions } from '@esmbly/types';
 import {
-  writeFile,
-  readFile,
   exists,
-  getRoot,
   getRelativePathTo,
+  getRoot,
+  readFile,
+  writeFile,
 } from '@esmbly/utils';
 import { promptForConfig } from './prompt';
 
@@ -60,5 +60,5 @@ export async function createConfig(
     const content = `module.exports = ${stringify(config)}\n`;
     await writeFile(defaultConfigPath, content, { overwrite: options.force });
   }
-  return { root, fileName: DEFAULT_FILE };
+  return { fileName: DEFAULT_FILE, root };
 }

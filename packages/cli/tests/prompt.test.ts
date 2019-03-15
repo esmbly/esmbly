@@ -1,24 +1,27 @@
-import { promptForConfig } from '../src/prompt';
 import * as utils from '@esmbly/utils';
 import inquirer from 'inquirer';
-
-jest.mock('inquirer');
-jest.mock('@esmbly/utils');
+import { promptForConfig } from '../src/prompt';
 
 describe('promptForConfig', () => {
   it('asks the correct questions', async () => {
-    inquirer.prompt = jest.fn();
-    (inquirer.prompt as jest.Mock).mockReturnValue({});
-    (utils as any).getTransformers = jest.fn();
-    (utils.getTransformers as jest.Mock).mockResolvedValue(['flow', 'wasm']);
-    (utils as any).getOutputForTransformers = jest.fn();
-    (utils.getOutputFormats as jest.Mock).mockResolvedValue([
+    const promptSpy = jest.spyOn(inquirer, 'prompt');
+    promptSpy.mockResolvedValue({});
+    const getAvailableTransformersSpy = jest.spyOn(
+      utils,
+      'getAvailableTransformers',
+    );
+    getAvailableTransformersSpy.mockResolvedValue(['flow', 'wasm']);
+    const getAvailableOutputFormatsSpy = jest.spyOn(
+      utils,
+      'getAvailableOutputFormats',
+    );
+    getAvailableOutputFormatsSpy.mockResolvedValue([
       'TypeScript',
       'WebAssembly',
     ]);
     await promptForConfig();
-    expect((inquirer.prompt as jest.Mock).mock.calls).toMatchSnapshot();
-    expect(utils.getTransformers as jest.Mock).toHaveBeenCalledTimes(1);
-    expect(utils.getOutputFormats as jest.Mock).toHaveBeenCalledTimes(1);
+    expect(promptSpy.mock.calls).toMatchSnapshot();
+    expect(getAvailableTransformersSpy).toHaveBeenCalledTimes(1);
+    expect(getAvailableOutputFormatsSpy).toHaveBeenCalledTimes(1);
   });
 });

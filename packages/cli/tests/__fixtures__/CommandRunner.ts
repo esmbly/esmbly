@@ -4,6 +4,7 @@ export default class CommandRunner {
   private parser: yargs.Argv;
 
   public constructor(commandModule: unknown) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.parser = yargs.command(commandModule as any);
   }
 

@@ -1,4 +1,4 @@
-import { Argv, Arguments } from 'yargs';
+import { Arguments, Argv } from 'yargs';
 import { InitOptions } from '@esmbly/types';
 import { createConfig } from '../config';
 
@@ -6,6 +6,7 @@ export const command = 'init';
 
 export const describe = 'Create an esmbly configuration file';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const builder = (yargs: Argv): Argv<any> => {
   return yargs
     .version(false)
