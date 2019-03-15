@@ -14,6 +14,10 @@
     "jest": true,
     "node": true
   },
-  "rules": {},
+  "rules": {
+    "sort-imports": "error",
+    "sort-keys": "error",
+    "no-console": "error"
+  },
   "globals": {}
 }
