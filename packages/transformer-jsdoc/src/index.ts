@@ -10,6 +10,9 @@ export interface JSDocTransformerOptions {
 class JSDocTransformer extends Transformer {
   public static outputFormats: OutputFormat[] = [OutputFormat.TypeScript];
 
+  // TODO: Remove this once implemented
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public constructor(options: JSDocTransformerOptions) {
     super();
     // Set the config here

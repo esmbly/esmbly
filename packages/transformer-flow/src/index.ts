@@ -10,6 +10,9 @@ export interface FlowTransformerOptions {
 class FlowTransformer extends Transformer {
   public static outputFormats: OutputFormat[] = [OutputFormat.TypeScript];
 
+  // TODO: Remove this once implemented
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public constructor(options: FlowTransformerOptions) {
     super();
     // Set the config here
