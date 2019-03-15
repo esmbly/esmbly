@@ -3,5 +3,5 @@ export enum FileType {
   TypeScript = '.ts',
   WebAssembly = '.wasm',
   Wat = '.wat',
-  Asm = '.asm.js'
+  Asm = '.asm.js',
 }
