@@ -17,7 +17,8 @@
   },
   "rules": {
     "sort-imports": "error",
-    "sort-keys": "error"
+    "sort-keys": "error",
+    "import/no-unresolved": "off"
   },
   "globals": {}
 }
