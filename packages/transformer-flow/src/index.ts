@@ -1,17 +1,16 @@
-import { SyntaxTree, OutputFormat } from '@esmbly/types';
+import { OutputFormat, SyntaxTree } from '@esmbly/types';
 import { Transformer } from '@esmbly/core';
 import traverse from './traverse';
 
-interface TransformerOptions {
+export interface FlowTransformerOptions {
   example: number;
 }
 
 class FlowTransformer extends Transformer {
   public static outputFormats: OutputFormat[] = [OutputFormat.TypeScript];
 
-  public constructor(options: TransformerOptions) {
+  public constructor(options: FlowTransformerOptions) {
     super();
-    console.log(options);
     // Set the config here
     // Use default config as fallback
   }

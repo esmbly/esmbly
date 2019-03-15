@@ -1,17 +1,16 @@
-import { SyntaxTree, OutputFormat } from '@esmbly/types';
+import { OutputFormat, SyntaxTree } from '@esmbly/types';
 import { Transformer } from '@esmbly/core';
 import traverse from './traverse';
 
-interface TransformerOptions {
+export interface V8TransformerOptions {
   example: number;
 }
 
 class V8Transformer extends Transformer {
   public static outputFormats: OutputFormat[] = [OutputFormat.TypeScript];
 
-  public constructor(options: TransformerOptions) {
+  public constructor(options: V8TransformerOptions) {
     super();
-    console.log(options);
     // Set the config here
     // Use default config as fallback
   }

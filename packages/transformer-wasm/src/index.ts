@@ -1,7 +1,7 @@
-import { SyntaxTree, OutputFormat, Output, File } from '@esmbly/types';
+import { File, Output, OutputFormat, SyntaxTree } from '@esmbly/types';
 import { Transformer } from '@esmbly/core';
 
-interface TransformerOptions {
+export interface WasmTransformerOptions {
   example: number;
 }
 
@@ -12,23 +12,19 @@ class WasmTransformer extends Transformer {
     OutputFormat.Asm,
   ];
 
-  public constructor(options: TransformerOptions) {
+  public constructor(options: WasmTransformerOptions) {
     super();
-    console.log(options);
     // Set the config here
     // Use default config as fallback
   }
 
   public transform(trees: SyntaxTree[]): void {
     // Run AssemblyScript compiler here
-    console.log(trees.length);
     console.log('..wasm transformer');
   }
 
   public createFiles(trees: SyntaxTree[], output: Output[]): File[] {
     // Override createFiles derived from abstract Transformer class
-    console.log(trees.length);
-    console.log(output.length);
     return [];
   }
 }

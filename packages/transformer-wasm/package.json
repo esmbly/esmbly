@@ -19,7 +19,12 @@
     "build-watch": "tsc -w"
   },
   "dependencies": {
-    "@esmbly/core": "^0.0.1",
     "@esmbly/types": "^0.0.1"
+  },
+  "devDependencies": {
+    "@esmbly/core": "^0.0.1"
+  },
+  "peerDependencies": {
+    "@esmbly/core": "^0.0.1"
   }
 }
