@@ -22776,20 +22776,6 @@ Node {
 }
 `;
 
-exports[`parse correctly parses a Flow file 2`] = `
-"
-// @flow
-
-function padLeft(str: string, maxLength: number): string {
-  let s = str;
-  while(s.length < maxLength) {
-    s = fill + s;
-  }
-  return s;
-}
-"
-`;
-
 exports[`parse correctly parses a JavaScript file 1`] = `
 Node {
   "end": 119,
@@ -37705,18 +37691,6 @@ Node {
   ],
   "type": "File",
 }
-`;
-
-exports[`parse correctly parses a JavaScript file 2`] = `
-"
-function padLeft(str, maxLength) {
-  let s = str;
-  while(s.length < maxLength) {
-    s = fill + s;
-  }
-  return s;
-}
-"
 `;
 
 exports[`parse correctly parses a TypeSCript file 1`] = `
@@ -58730,16 +58704,4 @@ Node {
   ],
   "type": "File",
 }
-`;
-
-exports[`parse correctly parses a TypeSCript file 2`] = `
-"
-function padLeft(str: string, maxLength: number): string {
-  let s = str;
-  while(s.length < maxLength) {
-    s = fill + s;
-  }
-  return s;
-}
-"
 `;

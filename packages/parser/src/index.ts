@@ -1,7 +1,7 @@
 import * as parser from '@babel/parser';
 import { File, SyntaxTree } from '@esmbly/types';
-import { getPluginsForFileType } from './plugins';
 import recast from 'recast';
+import { getPluginsForFileType } from './plugins';
 
 export default function parse(files: File[]): SyntaxTree[] {
   return files.map((file: File) => {

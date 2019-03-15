@@ -11,10 +11,10 @@ function padLeft(str: string, maxLength: number): string {
 `;
 
 const file: File = {
-  name: 'leftPad.ts',
-  path: 'leftPad.ts',
-  type: FileType.TypeScript,
   content,
+  dir: '/src',
+  name: 'leftPad',
+  type: FileType.TypeScript,
 };
 
 export default file;

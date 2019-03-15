@@ -13,10 +13,10 @@ function padLeft(str: string, maxLength: number): string {
 `;
 
 const file: File = {
-  name: 'leftPad.js',
-  path: 'leftPad.js',
-  type: FileType.JavaScript,
   content,
+  dir: '/src',
+  name: 'leftPad',
+  type: FileType.JavaScript,
 };
 
 export default file;
