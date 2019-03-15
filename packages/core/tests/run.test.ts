@@ -1,30 +1,28 @@
 import * as parser from '@esmbly/parser';
 import { RunConfig } from '@esmbly/types';
 import run from '../src/run';
-import mockAst from './__fixtures__/trees';
-import mockConfig, { MockTransformer } from './__fixtures__/config';
+import mockConfig from './__fixtures__/config';
+import FooTransformer from './__fixtures__/FooTransformer';
 import * as config from '../src/config';
 
-jest.mock('../src/config');
-
 describe('run', () => {
-  it('validates the provided config', async () => {
+  const setup = (): { configSpy: jest.SpyInstance } => {
     const configSpy = jest.spyOn(config, 'validateRunConfig');
-    const parserSpy = jest.spyOn(parser, 'default');
-    parserSpy.mockReturnValue(mockAst);
     configSpy.mockReturnValue();
+    return { configSpy };
+  };
+
+  it('validates the provided config', async () => {
+    const { configSpy } = setup();
     await run(mockConfig);
     expect(configSpy).toHaveBeenCalledTimes(1);
     expect(configSpy).toHaveBeenCalledWith(mockConfig);
     configSpy.mockRestore();
-    parserSpy.mockRestore();
   });
 
   it('parses the provided files', async () => {
-    const configSpy = jest.spyOn(config, 'validateRunConfig');
+    const { configSpy } = setup();
     const parserSpy = jest.spyOn(parser, 'default');
-    parserSpy.mockReturnValue(mockAst);
-    configSpy.mockReturnValue();
     await run(mockConfig);
     expect(parserSpy).toHaveBeenCalledTimes(1);
     expect(parserSpy).toHaveBeenCalledWith(mockConfig.input);
@@ -33,12 +31,9 @@ describe('run', () => {
   });
 
   it('passes the ast to each transformer', async () => {
-    const configSpy = jest.spyOn(config, 'validateRunConfig');
-    const parserSpy = jest.spyOn(parser, 'default');
-    parserSpy.mockReturnValue(mockAst);
-    configSpy.mockReturnValue();
-    const transformerA = new MockTransformer();
-    const transformerB = new MockTransformer();
+    const { configSpy } = setup();
+    const transformerA = new FooTransformer();
+    const transformerB = new FooTransformer();
     const transformSpyA = jest.spyOn(transformerA, 'transform');
     const transformSpyB = jest.spyOn(transformerB, 'transform');
     const runConfig: RunConfig = {
@@ -47,21 +42,16 @@ describe('run', () => {
     };
     await run(runConfig);
     expect(transformSpyA).toHaveBeenCalledTimes(1);
-    expect(transformSpyB).toHaveBeenCalledWith(mockAst);
-    expect(transformSpyA).toHaveBeenCalledTimes(1);
-    expect(transformSpyB).toHaveBeenCalledWith(mockAst);
+    const trees = transformSpyA.mock.calls[0][0];
+    expect(transformSpyB).toHaveBeenCalledTimes(1);
+    expect(transformSpyB).toHaveBeenCalledWith(trees);
     configSpy.mockRestore();
-    parserSpy.mockRestore();
   });
 
   it('returns an array of files to be outputted', async () => {
-    const configSpy = jest.spyOn(config, 'validateRunConfig');
-    const parserSpy = jest.spyOn(parser, 'default');
-    parserSpy.mockReturnValue(mockAst);
-    configSpy.mockReturnValue();
+    const { configSpy } = setup();
     const output = await run(mockConfig);
     expect(output).toMatchSnapshot();
     configSpy.mockRestore();
-    parserSpy.mockRestore();
   });
 });

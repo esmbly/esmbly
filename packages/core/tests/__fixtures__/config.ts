@@ -1,19 +1,11 @@
-import { OutputFormat, RunConfig, SyntaxTree } from '@esmbly/types';
-import { Transformer } from '../../src';
+import { OutputFormat, RunConfig } from '@esmbly/types';
 import files from './files';
-
-export class MockTransformer extends Transformer {
-  public static outputFormats: OutputFormat[] = [OutputFormat.WebAssembly];
-
-  // @ts-ignore
-  // eslint-disable-next-line
-  public transform(trees: SyntaxTree[]): void {}
-}
+import FooTransformer from './FooTransformer';
 
 const config: RunConfig = {
   input: [...files],
-  output: [{ format: OutputFormat.WebAssembly }],
-  transformers: [new MockTransformer()],
+  output: [{ format: OutputFormat.Flow }],
+  transformers: [new FooTransformer()],
 };
 
 export default config;

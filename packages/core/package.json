@@ -23,5 +23,9 @@
     "@esmbly/types": "^0.0.1",
     "@esmbly/utils": "^0.0.1",
     "recast": "^0.17.3"
+  },
+  "devDependencies": {
+    "@babel/traverse": "^7.3.4",
+    "@babel/types": "^7.3.4"
   }
 }

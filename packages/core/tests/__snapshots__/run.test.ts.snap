@@ -3,16 +3,16 @@
 exports[`run returns an array of files to be outputted 1`] = `
 Array [
   Object {
-    "content": "//content-a",
+    "content": "function bar() { return 1; }",
     "dir": "/",
     "name": "fileA",
-    "type": ".wasm",
+    "type": ".js",
   },
   Object {
-    "content": "//content-b",
+    "content": "function test() { return 2; }",
     "dir": "/dir",
     "name": "fileB",
-    "type": ".wasm",
+    "type": ".js",
   },
 ]
 `;
