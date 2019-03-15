@@ -1,4 +1,4 @@
 export * from './file';
 export * from './package';
 export * from './transformers';
-export * from './format';
+export * from './output';
