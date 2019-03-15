@@ -1,18 +1,18 @@
+import { File, RunConfig, Transformer } from '@esmbly/types';
+import parse from '@esmbly/parser';
 import { validateRunConfig } from './config';
-import parser from '@esmbly/parser';
-import { RunConfig, File } from '@esmbly/types';
 
 export default async function run({
   input,
   transformers,
   output,
 }: RunConfig): Promise<File[]> {
-  validateRunConfig({ input, transformers, output });
+  validateRunConfig({ input, output, transformers });
   let files: File[] = [];
-  const trees = parser.parse(input);
-  for (const transformer of transformers) {
+  const trees = parse(input);
+  transformers.forEach((transformer: Transformer) => {
     transformer.transform(trees);
     files = [...files, ...transformer.createFiles(trees, output)];
-  }
+  });
   return files;
 }

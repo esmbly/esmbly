@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`run returns an array of files to be outputted 1`] = `
+Array [
+  Object {
+    "content": "//content-a",
+    "dir": "/",
+    "name": "fileA",
+    "type": ".wasm",
+  },
+  Object {
+    "content": "//content-b",
+    "dir": "/dir",
+    "name": "fileB",
+    "type": ".wasm",
+  },
+]
+`;

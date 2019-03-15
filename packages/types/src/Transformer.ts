@@ -1,4 +1,4 @@
-import { Output, OutputFormat, SyntaxTree } from '.';
+import { File, Output, OutputFormat, SyntaxTree } from '.';
 
 export interface TransformerInterface {
   transform(syntaxTrees: SyntaxTree[]): void;

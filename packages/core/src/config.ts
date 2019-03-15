@@ -1,7 +1,7 @@
-import { RunConfig, Transformer, OutputFormat, Output } from '@esmbly/types';
+import { Output, OutputFormat, RunConfig, Transformer } from '@esmbly/types';
 import * as errors from './errors';
 
-export function validateRunConfig(config: RunConfig): void {
+export function validateRunConfig(config?: RunConfig): void {
   if (!config || !config.input || !config.transformers || !config.output) {
     throw new Error(errors.MissingConfig());
   }

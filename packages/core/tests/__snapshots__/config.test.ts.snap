@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`validateRunConfigRunConfig throws an error if a output format is not supported 1`] = `"Output format: \\"Unknown type\\" is not supported."`;
+exports[`validateRunConfigRunConfig throws an error if a transformer.transform is not a function 1`] = `"[object Object].run() is not a function."`;
 
-exports[`validateRunConfigRunConfig throws an error if a transformer is not a function 1`] = `"[object Object].run() is not a function."`;
+exports[`validateRunConfigRunConfig throws an error if an output format is not supported 1`] = `"Output format: \\"Unknown type\\" is not supported."`;
 
 exports[`validateRunConfigRunConfig throws an error if config object is missing 1`] = `
 "Please provide a valid configuration object.

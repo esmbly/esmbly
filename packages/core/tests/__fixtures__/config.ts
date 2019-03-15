@@ -1,19 +1,21 @@
-import { OutputFormat } from '@esmbly/types';
+import { OutputFormat, RunConfig, SyntaxTree } from '@esmbly/types';
+import { Transformer } from '../../src';
+import files from './files';
 
-export const output = [OutputFormat.WebAssembly];
+export class MockTransformer extends Transformer {
+  public outputFormats: OutputFormat[] = [OutputFormat.WebAssembly];
 
-export const transformers = [
-  {
-    transform: () => Promise.resolve([{}, {}]),
-    createFiles: jest.fn(() => []),
-  },
-];
+  public static outputFormats: OutputFormat[] = [OutputFormat.WebAssembly];
 
-export const input = [
-  {
-    name: 'file.js',
-    path: 'path/file.js',
-    content: 'console.log("Hello World!")',
-    type: 'JavaScript',
-  },
-];
+  // @ts-ignore
+  // eslint-disable-next-line
+  public transform(trees: SyntaxTree[]): void {}
+}
+
+const config: RunConfig = {
+  input: [...files],
+  output: [{ format: OutputFormat.WebAssembly }],
+  transformers: [new MockTransformer()],
+};
+
+export default config;

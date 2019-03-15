@@ -1,73 +1,67 @@
+import * as parser from '@esmbly/parser';
+import { RunConfig } from '@esmbly/types';
 import run from '../src/run';
-import parser from '@esmbly/parser';
-import mockAst from './__fixtures__/ast';
-import * as mockConfig from './__fixtures__/config';
+import mockAst from './__fixtures__/trees';
+import mockConfig, { MockTransformer } from './__fixtures__/config';
 import * as config from '../src/config';
 
 jest.mock('../src/config');
-jest.mock('@esmbly/parser');
 
 describe('run', () => {
   it('validates the provided config', async () => {
-    // @ts-ignore
-    parser.parse = jest.fn(() => mockAst);
-    // @ts-ignore
-    config.validateRunConfig = jest.fn();
-    // @ts-ignore
+    const configSpy = jest.spyOn(config, 'validateRunConfig');
+    const parserSpy = jest.spyOn(parser, 'default');
+    parserSpy.mockReturnValue(mockAst);
+    configSpy.mockReturnValue();
     await run(mockConfig);
-    expect(config.validateRunConfig).toHaveBeenCalledTimes(1);
-    expect(config.validateRunConfig).toHaveBeenCalledWith(mockConfig);
+    expect(configSpy).toHaveBeenCalledTimes(1);
+    expect(configSpy).toHaveBeenCalledWith(mockConfig);
+    configSpy.mockRestore();
+    parserSpy.mockRestore();
   });
+
   it('parses the provided files', async () => {
-    // @ts-ignore
-    parser.parse = jest.fn(() => mockAst);
-    // @ts-ignore
-    config.validateRunConfig = jest.fn();
-    // @ts-ignore
+    const configSpy = jest.spyOn(config, 'validateRunConfig');
+    const parserSpy = jest.spyOn(parser, 'default');
+    parserSpy.mockReturnValue(mockAst);
+    configSpy.mockReturnValue();
     await run(mockConfig);
-    expect(parser.parse).toHaveBeenCalledTimes(1);
-    expect(parser.parse).toHaveBeenCalledWith(mockConfig.input);
+    expect(parserSpy).toHaveBeenCalledTimes(1);
+    expect(parserSpy).toHaveBeenCalledWith(mockConfig.input);
+    configSpy.mockRestore();
+    parserSpy.mockRestore();
   });
+
   it('passes the ast to each transformer', async () => {
-    // @ts-ignore
-    parser.parse = jest.fn(() => mockAst);
-    // @ts-ignore
-    config.validateRunConfig = jest.fn();
-    const transformerA = {
-      transform: jest.fn(ast => Promise.resolve(ast)),
-      createFiles: jest.fn(() => []),
-    };
-    const transformerB = {
-      transform: jest.fn(ast => Promise.resolve(ast)),
-      createFiles: jest.fn(() => []),
-    };
-    const runConfig = {
+    const configSpy = jest.spyOn(config, 'validateRunConfig');
+    const parserSpy = jest.spyOn(parser, 'default');
+    parserSpy.mockReturnValue(mockAst);
+    configSpy.mockReturnValue();
+    const transformerA = new MockTransformer();
+    const transformerB = new MockTransformer();
+    const transformSpyA = jest.spyOn(transformerA, 'transform');
+    const transformSpyB = jest.spyOn(transformerB, 'transform');
+    const runConfig: RunConfig = {
       ...mockConfig,
       transformers: [transformerA, transformerB],
     };
-    // @ts-ignore
     await run(runConfig);
-    expect(transformerA.transform).toHaveBeenCalledTimes(1);
-    expect(transformerA.transform).toHaveBeenCalledWith(mockAst);
-    expect(transformerB.transform).toHaveBeenCalledTimes(1);
-    expect(transformerB.transform).toHaveBeenCalledWith(mockAst);
+    expect(transformSpyA).toHaveBeenCalledTimes(1);
+    expect(transformSpyB).toHaveBeenCalledWith(mockAst);
+    expect(transformSpyA).toHaveBeenCalledTimes(1);
+    expect(transformSpyB).toHaveBeenCalledWith(mockAst);
+    configSpy.mockRestore();
+    parserSpy.mockRestore();
   });
+
   it('returns an array of files to be outputted', async () => {
-    // @ts-ignore
-    parser.parse = jest.fn(() => mockAst);
-    // @ts-ignore
-    config.validateRunConfig = jest.fn();
-    const transformer = {
-      transform: jest.fn(ast => Promise.resolve(ast)),
-      createFiles: jest.fn(() => ['mock-js-file-a', 'mock-js-file-b']),
-    };
-    const runConfig = {
-      files: ['fileA.js'],
-      output: ['TypeScript'],
-      transformers: [transformer],
-    };
-    // @ts-ignore
-    const output = await run(runConfig);
-    expect(output).toEqual(['mock-js-file-a', 'mock-js-file-b']);
+    const configSpy = jest.spyOn(config, 'validateRunConfig');
+    const parserSpy = jest.spyOn(parser, 'default');
+    parserSpy.mockReturnValue(mockAst);
+    configSpy.mockReturnValue();
+    const output = await run(mockConfig);
+    expect(output).toMatchSnapshot();
+    configSpy.mockRestore();
+    parserSpy.mockRestore();
   });
 });
