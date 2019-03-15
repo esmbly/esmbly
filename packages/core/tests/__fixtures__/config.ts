@@ -3,8 +3,6 @@ import { Transformer } from '../../src';
 import files from './files';
 
 export class MockTransformer extends Transformer {
-  public outputFormats: OutputFormat[] = [OutputFormat.WebAssembly];
-
   public static outputFormats: OutputFormat[] = [OutputFormat.WebAssembly];
 
   // @ts-ignore
