@@ -1,7 +1,7 @@
-import { Argv, Arguments } from 'yargs';
+import { Arguments, Argv } from 'yargs';
 import esmbly from '@esmbly/core';
 import { Transformer } from '@esmbly/types';
-import { transformerFactory, readFiles, toOutputFormat } from '@esmbly/utils';
+import { outputFactory, readFiles, transformerFactory } from '@esmbly/utils';
 import { readConfig } from '../config';
 
 export interface RunOptions {
@@ -61,7 +61,7 @@ export const handler = async (argv: Arguments & RunOptions): Promise<void> => {
       if (input.length < 1) {
         throw new Error(`Found 0 files matching pattern: ${c.input}`);
       }
-      const output = (argv.output || c.output).map(toOutputFormat);
+      const output = (argv.output || c.output).map(outputFactory);
       const results = await esmbly.run({ input, transformers, output }); // TODO: Write results to file
       console.log(results); // TODO: use @esmbly/output
     }

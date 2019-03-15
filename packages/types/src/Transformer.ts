@@ -1,10 +1,10 @@
-import { OutputFormat, Output, File, SyntaxTree } from '.';
+import { Output, OutputFormat, SyntaxTree } from '.';
 
-export interface ITransformer {
+export interface TransformerInterface {
   transform(syntaxTrees: SyntaxTree[]): void;
-  createFiles(syntaxTrees: SyntaxTree[], output: Output[]): File[];
+  createFiles(trees: SyntaxTree[], output: Output[]): File[];
 }
 
-export interface Transformer extends ITransformer {
+export interface Transformer extends TransformerInterface {
   outputFormats: OutputFormat[];
 }

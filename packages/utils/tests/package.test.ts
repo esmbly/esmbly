@@ -1,24 +1,26 @@
-import { getRoot, getRelativePathTo } from '../src/package';
+import { getRelativePathTo, getRoot } from '../src';
+
+const setup = (path: string): { path: string; spy: jest.SpyInstance } => {
+  const spy = jest.spyOn(process, 'cwd');
+  spy.mockReturnValue(path);
+  return { path, spy };
+};
 
 describe('getRoot', () => {
-  it('resolves to the root path', () => {
-    const spy = jest.spyOn(process, 'cwd');
-    spy.mockReturnValue('/some/path/');
-    expect(getRoot()).toEqual('/some/path/');
+  it('returns the root path', () => {
+    const { path, spy } = setup('/some/path');
+    expect(getRoot()).toEqual(path);
     spy.mockRestore();
   });
 });
 
 describe('getRelativePathTo', () => {
-  it('resolves to the relative path from the package root to the given file', () => {
-    const spy = jest.spyOn(process, 'cwd');
-    spy.mockReturnValue('/some/path/');
-    expect(getRelativePathTo('/some/path/.esmblyrc.js')).toEqual(
-      '.esmblyrc.js',
-    );
-    expect(getRelativePathTo('/some/path/dir/.esmblyrc.js')).toEqual(
-      'dir/.esmblyrc.js',
-    );
+  it('returns the relative path from the package root to the given file', () => {
+    const { spy } = setup('/some/path/');
+    const pathA = '/some/path/.esmblyrc.js';
+    const pathB = '/some/path/dir/.esmblyrc.js';
+    expect(getRelativePathTo(pathA)).toEqual('.esmblyrc.js');
+    expect(getRelativePathTo(pathB)).toEqual('dir/.esmblyrc.js');
     spy.mockRestore();
   });
 });

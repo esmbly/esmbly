@@ -1,6 +1,9 @@
 import inquirer from 'inquirer';
 import { Config } from '@esmbly/types';
-import { getTransformers, getOutputFormats } from '@esmbly/utils';
+import {
+  getAvailableOutputFormats,
+  getAvailableTransformers,
+} from '@esmbly/utils';
 
 export async function promptForConfig(): Promise<Config> {
   const { input } = await inquirer.prompt([
@@ -16,7 +19,7 @@ export async function promptForConfig(): Promise<Config> {
       name: 'transformers',
       message: 'Which transformer do you want to use?',
       type: 'checkbox',
-      choices: await getTransformers(),
+      choices: await getAvailableTransformers(),
     },
   ]);
 
@@ -27,7 +30,7 @@ export async function promptForConfig(): Promise<Config> {
       name: 'output',
       message: 'Which output formats to you want to use?',
       type: 'checkbox',
-      choices: await getOutputFormats(transformers),
+      choices: await getAvailableOutputFormats(transformers),
     },
   ]);
 

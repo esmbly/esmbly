@@ -1,8 +1,8 @@
-import fs from './fs';
-import path from 'path';
-import glob from 'globby';
-import { getRelativePathTo } from './package';
 import { File, FileType, OutputFormat } from '@esmbly/types';
+import fs from './fs';
+import { getRelativePathTo } from './package';
+import glob from 'globby';
+import path from 'path';
 
 interface WriteOptions {
   encoding?: string;
@@ -37,6 +37,7 @@ export async function writeFile(
     const relativePath = getRelativePathTo(file);
     throw new Error(`${relativePath} already exists`);
   }
+  delete options.overwrite;
   return fs.writeFile(file, data, options);
 }
 
@@ -47,45 +48,49 @@ export async function readFile(
   return fs.readFile(file, options);
 }
 
-export function fileTypeForExtension(extension: string): FileType {
+export function toFileType(extension: string): FileType {
   switch (extension) {
     case '.js':
       return FileType.JavaScript;
     case '.ts':
       return FileType.TypeScript;
+    case '.wasm':
+      return FileType.WebAssembly;
+    case '.wat':
+      return FileType.Wat;
     default:
-      throw new Error(`Filetype ${extension} is not supported`);
+      throw new Error(`Filetype: ${extension} is not supported`);
   }
 }
 
 export function fileTypeForOutputFormat(format: OutputFormat): FileType {
   switch (format) {
+    case OutputFormat.Asm:
+      return FileType.Asm;
     case OutputFormat.Flow:
       return FileType.JavaScript;
     case OutputFormat.TypeScript:
       return FileType.TypeScript;
-    case OutputFormat.WebAssembly:
-      return FileType.WebAssembly;
     case OutputFormat.Wat:
       return FileType.Wat;
-    case OutputFormat.Asm:
-      return FileType.Asm;
+    case OutputFormat.WebAssembly:
+      return FileType.WebAssembly;
     default:
       throw new Error(`Output format: ${format} is not supported`);
   }
 }
 
 export async function readFiles(patterns: string[]): Promise<File[]> {
-  const matches = await glob(patterns, { onlyFiles: true });
+  const files = await glob(patterns, { onlyFiles: true });
   return Promise.all(
-    matches.map(async match => {
-      const content = await readFile(match);
-      const { name, ext } = path.parse(match);
+    files.map(async file => {
+      const content = await readFile(file);
+      const { name, ext, dir } = path.parse(file);
       return {
-        name,
         content: content.toString(),
-        dir: path.dirname(match),
-        type: fileTypeForExtension(ext),
+        dir,
+        name,
+        type: toFileType(ext),
       };
     }),
   );

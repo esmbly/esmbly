@@ -1,14 +1,7 @@
 import { Output, OutputFormat } from '@esmbly/types';
 
-export function outputFormatForString(format: string): OutputFormat {
+export function toOutputFormat(format: string): OutputFormat {
   switch (format.toLowerCase()) {
-    case 'wasm':
-    case 'webassembly':
-    case '.wasm':
-      return OutputFormat.WebAssembly;
-    case 'wat':
-    case '.wat':
-      return OutputFormat.Wat;
     case 'asm':
     case 'asm.js':
     case '.asm':
@@ -21,17 +14,26 @@ export function outputFormatForString(format: string): OutputFormat {
     case 'typescript':
     case '.ts':
       return OutputFormat.TypeScript;
+    case 'wasm':
+    case 'webassembly':
+    case '.wasm':
+      return OutputFormat.WebAssembly;
+    case 'wat':
+    case '.wat':
+      return OutputFormat.Wat;
     default:
       throw new Error(`Output format: ${format} is not supported`);
   }
 }
 
-export function toOutputFormat(output: string | Output): Output {
+export function outputFactory(output: string | Output): Output {
   if (typeof output === 'string') {
     return {
-      format: outputFormatForString(output),
+      format: toOutputFormat(output),
     };
   }
-  output.format = outputFormatForString(output.format);
-  return output;
+  return {
+    ...output,
+    format: toOutputFormat(output.format),
+  };
 }

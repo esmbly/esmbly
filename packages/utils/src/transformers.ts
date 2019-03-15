@@ -1,9 +1,17 @@
+import { OutputFormat, Transformer } from '@esmbly/types';
 import fs from './fs';
 import path from 'path';
-import { OutputFormat, Transformer } from '@esmbly/types';
 
-export async function getTransformers(): Promise<string[]> {
-  // TODO: Get this from npm instead / search in more places
+interface ExportedTransformer extends Transformer {
+  new (): Transformer;
+}
+
+interface TransformerModule extends NodeJS.Module {
+  default: ExportedTransformer;
+}
+
+export async function getAvailableTransformers(): Promise<string[]> {
+  // TODO: Search in more places or fetch from npm
   const searchPaths = [path.resolve(__dirname, '../../')];
   const searchResults = await Promise.all(
     searchPaths.map((searchPath: string) => fs.readdir(searchPath)),
@@ -12,22 +20,22 @@ export async function getTransformers(): Promise<string[]> {
   return packages.filter((pkg: string) => pkg.includes('transformer-'));
 }
 
-export async function getOutputFormats(
+export async function getAvailableOutputFormats(
   transformers: string[],
   requirer: (requirePath: string) => unknown = require,
 ): Promise<string[]> {
-  // TODO: Search in more places?
+  // TODO: Search in more places
   let outputFormats: Set<string> = new Set();
   transformers.forEach((transformer: string) => {
     try {
       const transformerPath = path.resolve(__dirname, '../../', transformer);
-      const transformerClass = requirer(transformerPath) as any;
-      const transformerFormats = transformerClass.default.outputFormats;
+      const transformerModule = requirer(transformerPath) as TransformerModule;
+      const transformerFormats = transformerModule.default.outputFormats;
       transformerFormats.forEach((format: OutputFormat) =>
-        outputFormats.add(format.toString()),
+        outputFormats.add(format),
       );
     } catch {
-      // Do nothing if some transformer can't be required / doesn't specify any output formats
+      // Do nothing if a transformer can't be required or doesn't specify any output formats
     }
   });
   return [...outputFormats];
@@ -43,8 +51,8 @@ export function transformerFactory(
       name = `transformer-${name}`;
     }
     const transformerPath = path.resolve(__dirname, '../../', name);
-    const TransformerClass = requirer(transformerPath) as any;
-    return new TransformerClass.default();
+    const transformerModule = requirer(transformerPath) as TransformerModule;
+    return new transformerModule.default();
   }
   return transformer;
 }

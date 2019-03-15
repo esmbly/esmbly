@@ -1,9 +1,9 @@
 import {
-  SyntaxTree,
-  OutputFormat,
-  Output,
-  ITransformer as TransformerInterface,
   File,
+  Output,
+  OutputFormat,
+  SyntaxTree,
+  TransformerInterface,
 } from '@esmbly/types';
 import { fileTypeForOutputFormat } from '@esmbly/utils';
 
