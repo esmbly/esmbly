@@ -27,7 +27,8 @@
     "import/newline-after-import": "off",
     "class-methods-use-this": "off",
     "no-console": "error",
-    "no-unused-vars": "error"
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "error"
   },
   "globals": {}
 }
