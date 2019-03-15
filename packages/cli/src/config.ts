@@ -23,9 +23,16 @@ export function getDefaultConfigPath(): string {
   return path.join(root, DEFAULT_FILE);
 }
 
-export async function readConfig(customPath?: string): Promise<Config[]> {
+type ConfigFnA = () => Config;
+type ConfigFnB = () => Config[];
+type ConfigFn = ConfigFnA | ConfigFnB;
+
+export async function readConfig(
+  customPath?: string,
+  requirer: (requirePath: string) => unknown = require,
+): Promise<Config[]> {
   const configPath = customPath || (await getDefaultConfigPath());
-  const config = require(configPath) // eslint-disable-line
+  const config = requirer(configPath) as Config | Config[] | ConfigFn // eslint-disable-line
   const toArray = (maybeArrayConfig: Config | Config[]): Config[] => {
     if (Array.isArray(maybeArrayConfig)) {
       return maybeArrayConfig;

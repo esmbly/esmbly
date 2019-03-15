@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createConfig creates a new config file 1`] = `
+Array [
+  Array [
+    "root-path/.esmblyrc.js",
+    "module.exports = {
+	input: [
+		'**/*.js'
+	],
+	output: [
+		'wasm'
+	],
+	transformers: [
+		{}
+	]
+}
+",
+    Object {
+      "overwrite": false,
+    },
+  ],
+]
+`;
+
+exports[`createConfig creates a new config file with default values when passing the default option 1`] = `
+Array [
+  Array [
+    "root-path/.esmblyrc.js",
+    "module.exports = {
+  files: [],
+  transformers: [],
+  output: []
+}
+",
+    Object {
+      "overwrite": false,
+    },
+  ],
+]
+`;
+
+exports[`createConfig throws an error if there already is a config file 1`] = `"Config root-path/.esmblyrc.js already exists. Remove that file first."`;
+
+exports[`getTemplateConfig resolves to the correct template config 1`] = `Promise {}`;
