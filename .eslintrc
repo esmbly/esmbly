@@ -24,7 +24,10 @@
     "import/no-unresolved": "off",
     "import/prefer-default-export": "off",
     "no-param-reassign": "off",
-    "import/newline-after-import": "off"
+    "import/newline-after-import": "off",
+    "class-methods-use-this": "off",
+    "no-console": "error",
+    "no-unused-vars": "error"
   },
   "globals": {}
 }
