@@ -1,5 +1,6 @@
 import { OutputFormat, SyntaxTree } from '@esmbly/types';
 import { Transformer } from '@esmbly/core';
+import output from '@esmbly/output';
 import traverse from './traverse';
 
 export interface FlowTransformerOptions {
@@ -16,7 +17,7 @@ class FlowTransformer extends Transformer {
   }
 
   public transform(trees: SyntaxTree[]): void {
-    console.log('..flow transformer');
+    output.out('..flow transformer\n');
     trees.forEach(traverse);
   }
 }

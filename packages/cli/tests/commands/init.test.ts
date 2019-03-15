@@ -3,6 +3,8 @@ import * as init from '../../src/commands/init';
 import * as config from '../../src/config';
 import CommandRunner from '../__fixtures__/CommandRunner';
 
+jest.mock('@esmbly/output');
+
 const command = new CommandRunner(init);
 
 describe('Init', () => {

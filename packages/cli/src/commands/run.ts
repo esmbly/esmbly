@@ -3,6 +3,7 @@ import esmbly from '@esmbly/core';
 import { Config, Transformer } from '@esmbly/types';
 import { outputFactory, readFiles, transformerFactory } from '@esmbly/utils';
 import stringify from 'stringify-object';
+import output from '@esmbly/output';
 import { readConfig } from '../config';
 
 export interface RunOptions {
@@ -60,13 +61,14 @@ export const builder = (yargs: Argv): Argv<any> => {
 export const handler = async (argv: Arguments & RunOptions): Promise<void> => {
   try {
     if (argv.silent) {
-      // TODO: silence @esmbly/output
+      output.setErrorStream(null);
+      output.setOutStream(null);
     }
 
     const config = await readConfig(argv.config);
 
     if (argv.printConfig) {
-      console.log(stringify(config, { indent: ' ' })); // TODO: use @esmbly/output
+      output.out(`${stringify(config, { indent: ' ' })}\n`);
       return;
     }
 
@@ -86,11 +88,11 @@ export const handler = async (argv: Arguments & RunOptions): Promise<void> => {
     );
 
     if (argv.dryRun) {
-      console.log(stringify(results, { indent: ' ' })); // TODO: use @esmbly/output
+      output.out(`${stringify(results, { indent: ' ' })}\n`);
     } else {
-      // write files here
+      // TODO: write files here
     }
   } catch (err) {
-    console.log(err); // TODO: use @esmbly/output
+    output.out(`${err.message}\n` || err);
   }
 };

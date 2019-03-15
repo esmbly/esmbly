@@ -1,5 +1,6 @@
 import { OutputFormat, SyntaxTree } from '@esmbly/types';
 import { Transformer } from '@esmbly/core';
+import output from '@esmbly/output';
 import traverse from './traverse';
 
 export interface V8TransformerOptions {
@@ -16,7 +17,7 @@ class V8Transformer extends Transformer {
   }
 
   public transform(trees: SyntaxTree[]): void {
-    console.log('..v8 transformer');
+    output.out('..v8 transformer\n');
     trees.forEach(traverse);
   }
 }

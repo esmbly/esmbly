@@ -1,5 +1,6 @@
 import { File, Output, OutputFormat, SyntaxTree } from '@esmbly/types';
 import { Transformer } from '@esmbly/core';
+import output from '@esmbly/output';
 
 export interface WasmTransformerOptions {
   example: number;
@@ -20,7 +21,7 @@ class WasmTransformer extends Transformer {
 
   public transform(trees: SyntaxTree[]): void {
     // Run AssemblyScript compiler here
-    console.log('..wasm transformer');
+    output.out('..wasm transformer\n');
   }
 
   public createFiles(trees: SyntaxTree[], output: Output[]): File[] {

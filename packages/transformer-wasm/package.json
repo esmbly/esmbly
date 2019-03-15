@@ -19,6 +19,7 @@
     "build-watch": "tsc -w"
   },
   "dependencies": {
+    "@esmbly/output": "^0.0.1",
     "@esmbly/types": "^0.0.1"
   },
   "devDependencies": {
