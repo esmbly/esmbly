@@ -16,9 +16,14 @@
     "node": true
   },
   "rules": {
-    "sort-imports": "error",
+    "sort-imports": ["error", {
+      "ignoreDeclarationSort": true,
+      "ignoreMemberSort": false
+    }],
     "sort-keys": "error",
-    "import/no-unresolved": "off"
+    "import/no-unresolved": "off",
+    "import/prefer-default-export": "off",
+    "no-param-reassign": "off"
   },
   "globals": {}
 }
