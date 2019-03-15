@@ -2,6 +2,7 @@ import { Arguments, Argv } from 'yargs';
 import esmbly from '@esmbly/core';
 import { Config, Transformer } from '@esmbly/types';
 import { outputFactory, readFiles, transformerFactory } from '@esmbly/utils';
+import stringify from 'stringify-object';
 import { readConfig } from '../config';
 
 export interface RunOptions {
@@ -45,6 +46,14 @@ export const builder = (yargs: Argv): Argv<any> => {
       describe: 'The output formats you want to use',
       type: 'array',
     })
+    .option('dry-run', {
+      describe: 'Run transformations without outputting any files',
+      type: 'boolean',
+    })
+    .option('print-config', {
+      describe: 'Print configuration and then abort',
+      type: 'boolean',
+    })
     .help();
 };
 
@@ -53,7 +62,14 @@ export const handler = async (argv: Arguments & RunOptions): Promise<void> => {
     if (argv.silent) {
       // TODO: silence @esmbly/output
     }
+
     const config = await readConfig(argv.config);
+
+    if (argv.printConfig) {
+      console.log(stringify(config, { indent: ' ' })); // TODO: use @esmbly/output
+      return;
+    }
+
     const results = await Promise.all(
       config.map(async (c: Config) => {
         const input = await readFiles(argv.input || c.input);
@@ -68,7 +84,12 @@ export const handler = async (argv: Arguments & RunOptions): Promise<void> => {
         return esmbly.run({ input, output, transformers });
       }),
     );
-    console.log(results); // TODO: use @esmbly/output
+
+    if (argv.dryRun) {
+      console.log(stringify(results, { indent: ' ' })); // TODO: use @esmbly/output
+    } else {
+      // write files here
+    }
   } catch (err) {
     console.log(err); // TODO: use @esmbly/output
   }
