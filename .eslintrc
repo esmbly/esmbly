@@ -23,7 +23,8 @@
     "sort-keys": "error",
     "import/no-unresolved": "off",
     "import/prefer-default-export": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "import/newline-after-import": "off"
   },
   "globals": {}
 }
