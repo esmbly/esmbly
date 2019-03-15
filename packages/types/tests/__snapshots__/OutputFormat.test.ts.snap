@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OutputFormat exposes the correct enum 1`] = `
+Object {
+  "Asm": "Asm",
+  "Flow": "Flow",
+  "TypeScript": "TypeScript",
+  "Wat": "Wat",
+  "WebAssembly": "WebAssembly",
+}
+`;
