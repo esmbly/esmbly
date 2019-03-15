@@ -1,5 +1,5 @@
-import { outputFactory, toOutputFormat } from '../src';
 import { OutputFormat } from '@esmbly/types';
+import { outputFactory, toOutputFormat } from '../src';
 
 describe('outputFactory', () => {
   it('returns an output object when called with a string', () => {

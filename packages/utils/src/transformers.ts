@@ -1,6 +1,6 @@
 import { OutputFormat, Transformer } from '@esmbly/types';
-import fs from './fs';
 import path from 'path';
+import fs from './fs';
 
 interface ExportedTransformer extends Transformer {
   new (): Transformer;
@@ -25,7 +25,7 @@ export async function getAvailableOutputFormats(
   requirer: (requirePath: string) => unknown = require,
 ): Promise<string[]> {
   // TODO: Search in more places
-  let outputFormats: Set<string> = new Set();
+  const outputFormats: Set<string> = new Set();
   transformers.forEach((transformer: string) => {
     try {
       const transformerPath = path.resolve(__dirname, '../../', transformer);
@@ -52,7 +52,8 @@ export function transformerFactory(
     }
     const transformerPath = path.resolve(__dirname, '../../', name);
     const transformerModule = requirer(transformerPath) as TransformerModule;
-    return new transformerModule.default();
+    const TransformerClass = transformerModule.default;
+    return new TransformerClass();
   }
   return transformer;
 }

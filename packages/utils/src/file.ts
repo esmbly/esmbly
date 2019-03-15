@@ -1,8 +1,8 @@
 import { File, FileType, OutputFormat } from '@esmbly/types';
-import fs from './fs';
-import { getRelativePathTo } from './package';
 import glob from 'globby';
 import path from 'path';
+import fs from './fs';
+import { getRelativePathTo } from './package';
 
 interface WriteOptions {
   encoding?: string;

@@ -1,9 +1,9 @@
+import { Transformer } from '@esmbly/types';
 import {
   getAvailableOutputFormats,
   getAvailableTransformers,
   transformerFactory,
 } from '../src';
-import { Transformer } from '@esmbly/types';
 import fs from '../src/fs';
 
 jest.mock('../src/fs');
