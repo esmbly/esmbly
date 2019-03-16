@@ -2,7 +2,7 @@ import { File, FileType, OutputFormat } from '@esmbly/types';
 import glob from 'globby';
 import path from 'path';
 import fs from './fs';
-import { getRelativePathTo } from './package';
+import { getRelativePathTo, mkdirp } from '.';
 
 interface WriteOptions {
   encoding?: string;
@@ -92,6 +92,16 @@ export async function readFiles(patterns: string[]): Promise<File[]> {
         name,
         type: toFileType(ext),
       };
+    }),
+  );
+}
+
+export async function writeFiles(files: File[]): Promise<void> {
+  await Promise.all(
+    files.map(async (file: File) => {
+      const outputPath = path.join(file.dir, `${file.name}${file.type}`);
+      await mkdirp(file.dir);
+      return writeFile(outputPath, file.content, { overwrite: true });
     }),
   );
 }

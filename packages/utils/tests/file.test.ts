@@ -1,5 +1,6 @@
 import * as glob from 'globby';
 import { FileType, OutputFormat } from '@esmbly/types';
+import path from 'path';
 import {
   exists,
   fileTypeForOutputFormat,
@@ -7,6 +8,7 @@ import {
   readFiles,
   toFileType,
   writeFile,
+  writeFiles,
 } from '../src';
 import fs from '../src/fs';
 
@@ -174,5 +176,37 @@ describe('writeFile', () => {
     await writeFile(filePath, data, { overwrite: true });
     expect(fs.writeFile).toHaveBeenCalledTimes(1);
     expect(fs.writeFile).toHaveBeenCalledWith(filePath, data, {});
+  });
+});
+
+describe('writeFiles', () => {
+  it('writes all provided file objects to files', async () => {
+    const files = [
+      {
+        content: 'function foo() { return 1; }',
+        dir: 'dist',
+        name: 'fileA',
+        type: FileType.JavaScript,
+      },
+      {
+        content: 'function test() { return 2; }',
+        dir: 'dist/b',
+        name: 'fileB',
+        type: FileType.JavaScript,
+      },
+    ];
+    fs.mkdir = jest.fn();
+    (fs.mkdir as jest.Mock).mockResolvedValue(true);
+    fs.writeFile = jest.fn();
+    (fs.writeFile as jest.Mock).mockResolvedValue(true);
+    await writeFiles(files);
+    expect(fs.mkdir).toHaveBeenCalledTimes(2);
+    expect(fs.mkdir).toHaveBeenCalledWith('dist', { recursive: true });
+    expect(fs.mkdir).toHaveBeenCalledWith('dist/b', { recursive: true });
+    expect(fs.writeFile).toHaveBeenCalledTimes(2);
+    expect((fs.writeFile as jest.Mock).mock.calls).toEqual([
+      [path.join('dist', `fileA.js`), files[0].content, {}],
+      [path.join('dist', 'b', `fileB.js`), files[1].content, {}],
+    ]);
   });
 });

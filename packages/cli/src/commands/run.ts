@@ -1,7 +1,12 @@
 import { Arguments, Argv } from 'yargs';
 import esmbly from '@esmbly/core';
-import { Config, Transformer } from '@esmbly/types';
-import { outputFactory, readFiles, transformerFactory } from '@esmbly/utils';
+import { Config, File, Transformer } from '@esmbly/types';
+import {
+  outputFactory,
+  readFiles,
+  transformerFactory,
+  writeFiles,
+} from '@esmbly/utils';
 import stringify from 'stringify-object';
 import printer from '@esmbly/printer';
 import { readConfig } from '../config';
@@ -90,7 +95,7 @@ export const handler = async (argv: Arguments & RunOptions): Promise<void> => {
     if (argv.dryRun) {
       printer.print(`${stringify(results, { indent: ' ' })}\n`);
     } else {
-      // TODO: write files here
+      await writeFiles(([] as File[]).concat(...results));
     }
   } catch (err) {
     printer.error(`${err.message}\n` || err);
