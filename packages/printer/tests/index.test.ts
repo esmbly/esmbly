@@ -49,8 +49,7 @@ describe('printer', () => {
   });
 
   describe('isTTY', () => {
-    it('returns isTTY based on the current log stream', () => {
-      expect(printer.isTTY).toEqual(process.stdout.isTTY);
+    it('returns false if the current log stream is not TTY', () => {
       const customStream = new Writable();
       printer.setOutStream(customStream);
       expect(printer.isTTY).toEqual(false);
@@ -69,6 +68,7 @@ describe('printer', () => {
       printer.error('error-message');
       expect(spy).not.toHaveBeenCalled();
       expect(data).toEqual('error-message');
+      spy.mockRestore();
     });
 
     it('can be silenced by setting the stream to null', () => {
@@ -77,6 +77,7 @@ describe('printer', () => {
       printer.setErrorStream(null);
       printer.error('error-message');
       expect(spy).not.toHaveBeenCalled();
+      spy.mockRestore();
     });
   });
 
@@ -92,6 +93,7 @@ describe('printer', () => {
       printer.print('info-message');
       expect(spy).not.toHaveBeenCalled();
       expect(data).toEqual('info-message');
+      spy.mockRestore();
     });
 
     it('can be silenced by setting the stream to null', () => {
@@ -100,6 +102,7 @@ describe('printer', () => {
       printer.setOutStream(null);
       printer.print('info-message');
       expect(spy).not.toHaveBeenCalled();
+      spy.mockRestore();
     });
   });
 });
