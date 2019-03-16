@@ -83,7 +83,7 @@ export function fileTypeForOutputFormat(format: OutputFormat): FileType {
 export async function readFiles(patterns: string[]): Promise<File[]> {
   const files = await glob(patterns, { onlyFiles: true });
   return Promise.all(
-    files.map(async file => {
+    files.map(async (file: string) => {
       const content = await readFile(file);
       const { name, ext, dir } = path.parse(file);
       return {
@@ -99,7 +99,10 @@ export async function readFiles(patterns: string[]): Promise<File[]> {
 export async function writeFiles(files: File[]): Promise<void> {
   await Promise.all(
     files.map(async (file: File) => {
-      const outputPath = path.join(file.dir, `${file.name}${file.type}`);
+      const name = file.filename
+        ? file.filename.replace('[name]', file.name)
+        : `${file.name}${file.type}`;
+      const outputPath = path.join(file.dir, name);
       await mkdirp(file.dir);
       return writeFile(outputPath, file.content, { overwrite: true });
     }),

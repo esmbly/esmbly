@@ -21,14 +21,16 @@ export abstract class Transformer implements TransformerInterface {
   public createFiles(trees: SyntaxTree[], output: Output[]): File[] {
     const files: File[] = [];
     trees.forEach((tree: SyntaxTree) => {
-      output.forEach(({ flatten, dir, format }: Output) => {
+      output.forEach(({ flatten, dir, format, filename }: Output) => {
+        // TODO: Move some of this logic to utils?
         const file = tree.represents;
         const fullPath = dir ? path.join(dir, file.dir) : file.dir;
         if (this.outputFormats.includes(format)) {
           files.push({
-            ...tree.represents,
+            ...file,
             content: tree.toCode(),
             dir: flatten && dir ? dir : fullPath,
+            filename,
             type: fileTypeForOutputFormat(format),
           });
         }

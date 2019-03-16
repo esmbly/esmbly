@@ -5,12 +5,14 @@ Array [
   Object {
     "content": "function bar() { return 1; }",
     "dir": "/",
+    "filename": undefined,
     "name": "fileA",
     "type": ".js",
   },
   Object {
     "content": "function test() { return 2; }",
     "dir": "/dir",
+    "filename": undefined,
     "name": "fileB",
     "type": ".js",
   },
