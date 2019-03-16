@@ -6,6 +6,7 @@ import {
   Transformer as TransformerInterface,
 } from '@esmbly/types';
 import { fileTypeForOutputFormat } from '@esmbly/utils';
+import path from 'path';
 
 export abstract class Transformer implements TransformerInterface {
   public static outputFormats: OutputFormat[];
@@ -20,12 +21,14 @@ export abstract class Transformer implements TransformerInterface {
   public createFiles(trees: SyntaxTree[], output: Output[]): File[] {
     const files: File[] = [];
     trees.forEach((tree: SyntaxTree) => {
-      output.forEach(({ dir, format }: Output) => {
+      output.forEach(({ flatten, dir, format }: Output) => {
+        const file = tree.represents;
+        const fullPath = dir ? path.join(dir, file.dir) : file.dir;
         if (this.outputFormats.includes(format)) {
           files.push({
             ...tree.represents,
             content: tree.toCode(),
-            dir: dir || tree.represents.dir,
+            dir: flatten && dir ? dir : fullPath,
             type: fileTypeForOutputFormat(format),
           });
         }
