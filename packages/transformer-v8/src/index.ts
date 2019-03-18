@@ -19,7 +19,7 @@ class V8Transformer extends Transformer {
     // Use default config as fallback
   }
 
-  public transform(trees: SyntaxTree[]): void {
+  public async transform(trees: SyntaxTree[]): Promise<void> {
     printer.print('..v8 transformer\n');
     trees.forEach(traverse);
   }

@@ -1,4 +1,4 @@
-import { File, RunConfig, Transformer } from '@esmbly/types';
+import { File, RunConfig } from '@esmbly/types';
 import parse from '@esmbly/parser';
 import { validateRunConfig } from './config';
 
@@ -10,9 +10,12 @@ export default async function run({
   validateRunConfig({ input, output, transformers });
   let files: File[] = [];
   const trees = parse(input);
-  transformers.forEach((transformer: Transformer) => {
-    transformer.transform(trees);
+  // TODO: Maybe use array iterations instead?
+  // eslint-disable-next-line
+  for (const transformer of transformers) {
+    // eslint-disable-next-line
+    await transformer.transform(trees);
     files = [...files, ...transformer.createFiles(trees, output)];
-  });
+  }
   return files;
 }

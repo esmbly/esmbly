@@ -25,7 +25,7 @@ class WasmTransformer extends Transformer {
   // TODO: Remove this once implemented
   // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public transform(trees: SyntaxTree[]): void {
+  public async transform(trees: SyntaxTree[]): Promise<void> {
     // Run AssemblyScript compiler here
     printer.print('..wasm transformer\n');
   }
