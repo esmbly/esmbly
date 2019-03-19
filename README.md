@@ -23,4 +23,4 @@
   <br>
 </p>
 
-_TODO_
+This project is under development. Check out the high level design and motivation [here](https://github.com/esmbly/design).
