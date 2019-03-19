@@ -6,7 +6,7 @@ class MockTransformer extends Transformer {
 
   // @ts-ignore
   // eslint-disable-next-line
-  public transform(trees: SyntaxTree[]): void {}
+  public async transform(trees: SyntaxTree[]): Promise<void> {}
 }
 
 export default MockTransformer;

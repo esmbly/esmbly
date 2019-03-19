@@ -6,7 +6,7 @@ import { Transformer } from '../../src';
 class FooTransformer extends Transformer {
   public static outputFormats: OutputFormat[] = [OutputFormat.Flow];
 
-  public transform(trees: SyntaxTree[]): void {
+  public async transform(trees: SyntaxTree[]): Promise<void> {
     trees.forEach((tree: SyntaxTree) => {
       traverse(tree.tree, {
         FunctionDeclaration: (path: NodePath<FunctionDeclaration>): void => {
