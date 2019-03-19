@@ -10,7 +10,6 @@ import path from 'path';
 
 export abstract class Transformer implements TransformerInterface {
   public static outputFormats: OutputFormat[];
-
   public abstract async transform(syntaxTrees: SyntaxTree[]): Promise<void>;
 
   public get outputFormats(): OutputFormat[] {
