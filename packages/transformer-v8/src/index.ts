@@ -1,27 +1,54 @@
-import { OutputFormat, SyntaxTree } from '@esmbly/types';
+import {
+  CoverageReport,
+  OutputFormat,
+  SyntaxTree,
+  TypeProfile,
+} from '@esmbly/types';
 import { Transformer } from '@esmbly/core';
-import printer from '@esmbly/printer';
+// @ts-ignore
+import sw from 'spawn-wrap';
+import path from 'path';
+import { execSync } from 'child_process';
+import { createTmpDir, readFile } from '@esmbly/utils';
 import traverse from './traverse';
 
 export interface V8TransformerOptions {
-  example: number;
+  testCommand: string;
 }
 
 class V8Transformer extends Transformer {
   public static outputFormats: OutputFormat[] = [OutputFormat.TypeScript];
 
-  // TODO: Remove this once implemented
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  private testCommand: string;
+
   public constructor(options: V8TransformerOptions) {
     super();
-    // Set the config here
-    // Use default config as fallback
+    this.testCommand = options.testCommand;
   }
 
   public async transform(trees: SyntaxTree[]): Promise<void> {
-    printer.print('..v8 transformer\n');
-    trees.forEach(traverse);
+    const tmpDir = await createTmpDir('transformer-v8-');
+    const tmpName = 'temp.json';
+    const tmpPath = path.join(tmpDir, tmpName);
+    sw([require.resolve('./utils/launcher.js')], {
+      TMP_PATH: tmpPath,
+    });
+    execSync(this.testCommand, { stdio: 'ignore' });
+    const data = await readFile(tmpPath);
+    const { typeProfile, coverageReport } = JSON.parse(data.toString());
+    trees.forEach((tree: SyntaxTree) => {
+      const typeProfileForTree = typeProfile.find((profile: TypeProfile) => {
+        const { dir, name, type } = tree.represents;
+        const m = path.join(dir, `${name}${type}`);
+        return profile.url === `file://${m}`;
+      });
+      const coverageReportForTree = coverageReport.find(
+        (report: CoverageReport) => {
+          return report.scriptId === typeProfileForTree.scriptId;
+        },
+      );
+      traverse(tree, typeProfileForTree, coverageReportForTree);
+    });
   }
 }
 

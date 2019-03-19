@@ -1,6 +1,7 @@
 import { File, FileType, OutputFormat } from '@esmbly/types';
 import glob from 'globby';
 import path from 'path';
+import os from 'os';
 import fs from './fs';
 import { getRelativePathTo, mkdirp } from '.';
 
@@ -107,4 +108,9 @@ export async function writeFiles(files: File[]): Promise<void> {
       return writeFile(outputPath, file.content, { overwrite: true });
     }),
   );
+}
+
+export async function createTmpDir(prefix: string): Promise<string> {
+  const tmpPrefix = path.join(os.tmpdir(), prefix);
+  return fs.mkdtemp(tmpPrefix);
 }
