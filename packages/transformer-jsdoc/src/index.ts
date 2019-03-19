@@ -1,27 +1,22 @@
 import { OutputFormat, SyntaxTree } from '@esmbly/types';
 import { Transformer } from '@esmbly/core';
-import printer from '@esmbly/printer';
 import traverse from './traverse';
 
 export interface JSDocTransformerOptions {
-  example: number;
+  stripComments?: boolean;
 }
 
 class JSDocTransformer extends Transformer {
   public static outputFormats: OutputFormat[] = [OutputFormat.TypeScript];
+  private stripComments: boolean;
 
-  // TODO: Remove this once implemented
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public constructor(options: JSDocTransformerOptions) {
+  public constructor(options: JSDocTransformerOptions = {}) {
     super();
-    // Set the config here
-    // Use default config as fallback
+    this.stripComments = options.stripComments || false;
   }
 
   public async transform(trees: SyntaxTree[]): Promise<void> {
-    printer.print('..jsdoc transformer\n');
-    trees.forEach(traverse);
+    trees.forEach(tree => traverse(tree, this.stripComments));
   }
 }
 
