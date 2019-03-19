@@ -6,6 +6,8 @@ import {
   tsNumberKeyword,
   tsStringKeyword,
   tsVoidKeyword,
+  tsTypeReference
+  identifier
 } from '@babel/types';
 
 export function toKeyword(str: string): TSType {
@@ -24,6 +26,6 @@ export function toKeyword(str: string): TSType {
     case 'AllLiteral':
       return tsAnyKeyword();
     default:
-      return tsAnyKeyword();
+      return tsTypeReference(identifier(str))
   }
 }
