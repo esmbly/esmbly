@@ -41,8 +41,8 @@ export class Profiler {
               coverageReport: coverageReport.result,
               typeProfile: typeProfile.result,
             };
-            this.session.disconnect();
             fs.writeFileSync(this.tmpPath, JSON.stringify(result, null, 2));
+            this.session.disconnect();
           },
         );
       },

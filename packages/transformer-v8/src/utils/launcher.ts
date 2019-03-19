@@ -1,6 +1,4 @@
-// @ts-ignore
 import sw from 'spawn-wrap';
-// @ts-ignore
 import onExit from 'signal-exit';
 import { Profiler } from '.';
 

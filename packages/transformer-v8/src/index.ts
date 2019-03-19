@@ -5,7 +5,6 @@ import {
   TypeProfile,
 } from '@esmbly/types';
 import { Transformer } from '@esmbly/core';
-// @ts-ignore
 import sw from 'spawn-wrap';
 import path from 'path';
 import { execSync } from 'child_process';
@@ -30,10 +29,16 @@ class V8Transformer extends Transformer {
     const tmpDir = await createTmpDir('transformer-v8-');
     const tmpName = 'temp.json';
     const tmpPath = path.join(tmpDir, tmpName);
+
+    // Wrap spawned child processes
     sw([require.resolve('./utils/launcher.js')], {
       TMP_PATH: tmpPath,
     });
+
+    // Run the test command
     execSync(this.testCommand, { stdio: 'ignore' });
+
+    // Read the typeProfile and coverageReport
     const data = await readFile(tmpPath);
     const { typeProfile, coverageReport } = JSON.parse(data.toString());
     trees.forEach((tree: SyntaxTree) => {
