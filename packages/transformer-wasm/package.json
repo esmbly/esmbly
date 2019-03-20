@@ -20,7 +20,8 @@
   },
   "dependencies": {
     "@esmbly/printer": "^0.0.1",
-    "@esmbly/types": "^0.0.1"
+    "@esmbly/types": "^0.0.1",
+    "assemblyscript": "git://github.com/AssemblyScript/assemblyscript.git"
   },
   "devDependencies": {
     "@esmbly/core": "^0.0.1"
