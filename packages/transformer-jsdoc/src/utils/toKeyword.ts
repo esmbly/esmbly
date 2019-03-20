@@ -1,13 +1,13 @@
 import {
   TSType,
+  identifier,
   tsAnyKeyword,
   tsBooleanKeyword,
   tsNullKeyword,
   tsNumberKeyword,
   tsStringKeyword,
+  tsTypeReference,
   tsVoidKeyword,
-  tsTypeReference
-  identifier
 } from '@babel/types';
 
 export function toKeyword(str: string): TSType {
@@ -26,6 +26,6 @@ export function toKeyword(str: string): TSType {
     case 'AllLiteral':
       return tsAnyKeyword();
     default:
-      return tsTypeReference(identifier(str))
+      return tsTypeReference(identifier(str));
   }
 }
