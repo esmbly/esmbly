@@ -1,2 +1,1 @@
-// Export all rules from here
-export { example } from './example';
+export { functionDeclaration } from './functionDeclaration';
