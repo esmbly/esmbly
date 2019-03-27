@@ -1,5 +1,4 @@
 import { FunctionDeclaration } from '@babel/types';
-// @ts-ignore
 import doctrine from 'doctrine';
 import { isParam, isReturn, toTypeAnnotation } from '../utils';
 import { Tag } from '../types/Tag';
