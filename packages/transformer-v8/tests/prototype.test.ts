@@ -41,6 +41,7 @@ describe('transformer-v8: prototype', () => {
     const [results] = await esmbly.run(runConfig);
     expect(results.content).toEqual(expected);
   });
+
   it('runs with jest', async () => {
     const testPath = `${testDir}/jest.test.js`;
     const testCommand = `jest ${testPath} --config ${testDir}/jest.config.js --no-cache`;
@@ -48,6 +49,7 @@ describe('transformer-v8: prototype', () => {
     const [results] = await esmbly.run(runConfig);
     expect(results.content).toEqual(expected);
   });
+
   it('runs with mocha', async () => {
     const testPath = `${testDir}/mocha.test.js`;
     const testCommand = `${nodeModules}/mocha ${testPath}`;
@@ -55,6 +57,7 @@ describe('transformer-v8: prototype', () => {
     const [results] = await esmbly.run(runConfig);
     expect(results.content).toEqual(expected);
   });
+
   it('runs with tape', async () => {
     const testPath = `${testDir}/tape.test.js`;
     const testCommand = `${nodeModules}/tape ${testPath}`;
@@ -62,6 +65,7 @@ describe('transformer-v8: prototype', () => {
     const [results] = await esmbly.run(runConfig);
     expect(results.content).toEqual(expected);
   });
+
   it('runs with node asserts', async () => {
     const testPath = `${testDir}/assert.test.js`;
     const testCommand = `node ${testPath}`;
@@ -69,7 +73,9 @@ describe('transformer-v8: prototype', () => {
     const [results] = await esmbly.run(runConfig);
     expect(results.content).toEqual(expected);
   });
+
   it('logs output when in debug mode', async () => {
+    // TODO: Move this to separate test
     printer.print = jest.fn();
     const testPath = `${testDir}/jest.test.js`;
     const testCommand = `jest ${testPath} --config ${testDir}/jest.config.js --no-cache`;
@@ -82,7 +88,9 @@ describe('transformer-v8: prototype', () => {
     expect(callB[0]).toEqual(expect.stringContaining('stdout: '));
     expect(callC[0]).toEqual(expect.stringContaining('stderr: PASS'));
   });
+
   it('handles failing tests', async () => {
+    // TODO: Move this to separate test
     const testPath = `${testDir}/failing.test.js`;
     const testCommand = `jest ${testPath} --config ${testDir}/jest.config.js --no-cache`;
     const runConfig = setup(testCommand);
