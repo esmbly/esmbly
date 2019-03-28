@@ -52,7 +52,7 @@ class V8Transformer extends Transformer {
     } catch (err) {
       const message = `Test command: ${
         this.testCommand
-      } failed with error code ${err.code} \n\n ${err.stderr}`;
+      } failed with error code ${err.code} \n\n ${err.stderr || err.stdout}`;
       throw new Error(message);
     } finally {
       // Unwrap spawned child processes
