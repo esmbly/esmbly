@@ -16,8 +16,10 @@ export class Profiler {
       this.session.connect();
       this.session.post('Profiler.enable', () => {
         this.session.post('Profiler.start', () => {
-          this.session.post('Profiler.startTypeProfile', () => {
-            resolve();
+          this.session.post('Profiler.stopTypeProfile', () => {
+            this.session.post('Profiler.startTypeProfile', () => {
+              resolve();
+            });
           });
         });
       });

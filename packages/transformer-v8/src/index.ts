@@ -63,11 +63,15 @@ class V8Transformer extends Transformer {
     const data = await readFile(tmpPath);
     const { typeProfile, coverageReport } = JSON.parse(data.toString());
     trees.forEach((tree: SyntaxTree) => {
+      const { dir, name, type } = tree.represents;
+      const filePath = path.join(dir, `${name}${type}`);
       const typeProfileForTree = typeProfile.find((profile: TypeProfile) => {
-        const { dir, name, type } = tree.represents;
-        const m = path.join(dir, `${name}${type}`);
-        return profile.url === `file://${m}`;
+        return profile.url === `file://${filePath}`;
       });
+      if (!typeProfileForTree) {
+        const message = `Could not collect a type profile for: ${filePath}`;
+        throw new Error(message);
+      }
       const coverageReportForTree = coverageReport.find(
         (report: CoverageReport) => {
           return report.scriptId === typeProfileForTree.scriptId;
