@@ -22,10 +22,16 @@
     "@babel/traverse": "^7.3.4",
     "@babel/types": "^7.3.4",
     "@esmbly/printer": "^0.0.1",
-    "@esmbly/types": "^0.0.1"
+    "@esmbly/types": "^0.0.1",
+    "@esmbly/utils": "^0.0.1",
+    "signal-exit": "^3.0.2",
+    "spawn-wrap": "^1.4.2"
   },
   "devDependencies": {
-    "@esmbly/core": "^0.0.1"
+    "@esmbly/core": "^0.0.1",
+    "jasmine": "^3.3.1",
+    "mocha": "^6.0.2",
+    "tape": "^4.10.1"
   },
   "peerDependencies": {
     "@esmbly/core": "^0.0.1"

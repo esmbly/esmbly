@@ -1,27 +1,84 @@
-import { OutputFormat, SyntaxTree } from '@esmbly/types';
+import {
+  CoverageReport,
+  OutputFormat,
+  SyntaxTree,
+  TypeProfile,
+} from '@esmbly/types';
 import { Transformer } from '@esmbly/core';
+import sw from 'spawn-wrap';
+import path from 'path';
+import { exec } from 'child_process';
+import { createTmpDir, readFile } from '@esmbly/utils';
+import { promisify } from 'util';
 import printer from '@esmbly/printer';
 import traverse from './traverse';
 
 export interface V8TransformerOptions {
-  example: number;
+  testCommand: string;
+  debug?: boolean;
 }
 
 class V8Transformer extends Transformer {
   public static outputFormats: OutputFormat[] = [OutputFormat.TypeScript];
+  private testCommand: string;
+  private debug: boolean;
 
-  // TODO: Remove this once implemented
-  // @ts-ignore
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public constructor(options: V8TransformerOptions) {
     super();
-    // Set the config here
-    // Use default config as fallback
+    this.testCommand = options.testCommand;
+    this.debug = options.debug || false;
   }
 
   public async transform(trees: SyntaxTree[]): Promise<void> {
-    printer.print('..v8 transformer\n');
-    trees.forEach(traverse);
+    const tmpDir = await createTmpDir('transformer-v8-');
+    const tmpName = 'temp.json';
+    const tmpPath = path.join(tmpDir, tmpName);
+
+    // Wrap spawned child processes
+    const unwrap = sw([require.resolve('./utils/launcher.js')], {
+      TMP_PATH: tmpPath,
+    });
+
+    try {
+      // Run the test command
+      const { stdout, stderr } = await promisify(exec)(this.testCommand);
+
+      // Log output when in debug mode
+      if (this.debug) {
+        printer.print(`command: ${this.testCommand}\n\n`);
+        printer.print(`stdout: ${stdout}\n\n`);
+        printer.print(`stderr: ${stderr}\n`);
+      }
+    } catch (err) {
+      const message = `Test command: ${
+        this.testCommand
+      } failed with error code ${err.code} \n\n ${err.stderr || err.stdout}`;
+      throw new Error(message);
+    } finally {
+      // Unwrap spawned child processes
+      unwrap();
+    }
+
+    // Read the typeProfile and coverageReport
+    const data = await readFile(tmpPath);
+    const { typeProfile, coverageReport } = JSON.parse(data.toString());
+    trees.forEach((tree: SyntaxTree) => {
+      const { dir, name, type } = tree.represents;
+      const filePath = path.join(dir, `${name}${type}`);
+      const typeProfileForTree = typeProfile.find((profile: TypeProfile) => {
+        return profile.url === `file://${filePath}`;
+      });
+      if (!typeProfileForTree) {
+        const message = `Could not collect a type profile for: ${filePath}`;
+        throw new Error(message);
+      }
+      const coverageReportForTree = coverageReport.find(
+        (report: CoverageReport) => {
+          return report.scriptId === typeProfileForTree.scriptId;
+        },
+      );
+      traverse(tree, typeProfileForTree, coverageReportForTree);
+    });
   }
 }
 

@@ -39,6 +39,10 @@
       "<rootDir>/packages/**/src/**/*.ts",
       "!<rootDir>/packages/**/src/dist/**/*.ts"
     ],
+    "testMatch": [
+      "**/tests/**/**/**.test.(ts)",
+      "!**/__fixtures__/**"
+    ],
     "coverageDirectory": "<rootDir>/coverage",
     "preset": "ts-jest",
     "testEnvironment": "node"

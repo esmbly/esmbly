@@ -7,3 +7,5 @@ export * from './Output';
 export * from './InitOptions';
 export * from './OutputFormat';
 export * from './Transformer';
+export * from './TypeProfile';
+export * from './CoverageReport';
