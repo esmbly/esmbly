@@ -75,12 +75,23 @@ describe('transformer-v8: prototype', () => {
     const testCommand = `jest ${testPath} --config ${testDir}/jest.config.js --no-cache`;
     const runConfig = setup(testCommand, true);
     await esmbly.run(runConfig);
-    expect((printer.print as jest.Mock).mock.calls).toMatchSnapshot();
+    const [callA, callB, callC] = (printer.print as jest.Mock).mock.calls;
+    expect(callA[0]).toEqual(
+      expect.stringContaining(`command: ${testCommand}`),
+    );
+    expect(callB[0]).toEqual(expect.stringContaining('stdout: '));
+    expect(callC[0]).toEqual(expect.stringContaining('stderr: PASS'));
   });
   it('handles failing tests', async () => {
     const testPath = `${testDir}/failing.test.js`;
     const testCommand = `jest ${testPath} --config ${testDir}/jest.config.js --no-cache`;
     const runConfig = setup(testCommand);
-    await expect(esmbly.run(runConfig)).rejects.toThrowErrorMatchingSnapshot();
+    await expect(esmbly.run(runConfig)).rejects.toThrow(
+      expect.objectContaining({
+        message: expect.stringContaining(
+          `Test command: ${testCommand} failed with error code 1`,
+        ),
+      }),
+    );
   });
 });
