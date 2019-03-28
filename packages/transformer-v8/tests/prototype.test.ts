@@ -90,7 +90,7 @@ describe('transformer-v8: prototype', () => {
       expect.stringContaining(`command: ${testCommand}`),
     );
     expect(callB[0]).toEqual(expect.stringContaining('stdout: '));
-    expect(callC[0]).toEqual(expect.stringContaining('stderr: PASS'));
+    expect(callC[0]).toEqual(expect.stringContaining('stderr: '));
   });
 
   it('handles failing tests', async () => {
