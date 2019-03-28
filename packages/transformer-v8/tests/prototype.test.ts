@@ -6,7 +6,7 @@ import printer from '@esmbly/printer';
 import V8Transformer from '../dist';
 
 jest.setTimeout(10000);
-// jest.mock('@esmbly/printer');
+jest.mock('@esmbly/printer');
 
 const file = path.join(__dirname, '__fixtures__/prototype/index.js');
 const content = fs.readFileSync(file, 'utf8');
