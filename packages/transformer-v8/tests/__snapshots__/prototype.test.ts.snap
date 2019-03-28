@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`transformer-v8: prototype handles failing tests 1`] = `
+"Test command: jest /Users/ollelauribostrom/Desktop/esmbly/packages/transformer-v8/tests/__fixtures__/prototype/failing.test.js --config /Users/ollelauribostrom/Desktop/esmbly/packages/transformer-v8/tests/__fixtures__/prototype/jest.config.js --no-cache failed with error code 1 
+
+ FAIL packages/transformer-v8/tests/__fixtures__/prototype/failing.test.js
+  String utils
+    padRight
+      ✕ pads the string to the right (8ms)
+
+  ● String utils › padRight › pads the string to the right
+
+    expect(received).toEqual(expected)
+
+    Difference:
+
+    - Expected
+    + Received
+
+    - test
+    + test  
+
+       5 |     it('pads the string to the right', () => {
+       6 |       // This test will fail
+    >  7 |       expect(utils.padRight('test', 6)).toEqual('test');
+         |                                         ^
+       8 |     });
+       9 |   });
+      10 | });
+
+      at Object.toEqual (failing.test.js:7:41)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 total
+Snapshots:   0 total
+Time:        1.447s
+Ran all test suites matching /\\\\/Users\\\\/ollelauribostrom\\\\/Desktop\\\\/esmbly\\\\/packages\\\\/transformer-v8\\\\/tests\\\\/__fixtures__\\\\/prototype\\\\/failing.test.js/i.
+"
+`;
+
+exports[`transformer-v8: prototype logs output when in debug mode 1`] = `
+Array [
+  Array [
+    "command: jest /Users/ollelauribostrom/Desktop/esmbly/packages/transformer-v8/tests/__fixtures__/prototype/jest.test.js --config /Users/ollelauribostrom/Desktop/esmbly/packages/transformer-v8/tests/__fixtures__/prototype/jest.config.js --no-cache
+
+",
+  ],
+  Array [
+    "stdout: 
+
+",
+  ],
+  Array [
+    "stderr: PASS packages/transformer-v8/tests/__fixtures__/prototype/jest.test.js
+  String utils
+    padRight
+      ✓ pads the string to the right (6ms)
+    padLeft
+      ✓ pads the string to the left (1ms)
+    isPadded
+      ✓ returns true if the string is padded (1ms)
+      ✓ returns false if the string is not padded (1ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       4 passed, 4 total
+Snapshots:   0 total
+Time:        1.44s
+Ran all test suites matching /\\\\/Users\\\\/ollelauribostrom\\\\/Desktop\\\\/esmbly\\\\/packages\\\\/transformer-v8\\\\/tests\\\\/__fixtures__\\\\/prototype\\\\/jest.test.js/i.
+
+",
+  ],
+]
+`;

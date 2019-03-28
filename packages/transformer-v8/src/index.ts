@@ -7,22 +7,26 @@ import {
 import { Transformer } from '@esmbly/core';
 import sw from 'spawn-wrap';
 import path from 'path';
-import { execSync } from 'child_process';
+import { exec } from 'child_process';
 import { createTmpDir, readFile } from '@esmbly/utils';
+import { promisify } from 'util';
+import printer from '@esmbly/printer';
 import traverse from './traverse';
 
 export interface V8TransformerOptions {
   testCommand: string;
+  debug?: boolean;
 }
 
 class V8Transformer extends Transformer {
   public static outputFormats: OutputFormat[] = [OutputFormat.TypeScript];
-
   private testCommand: string;
+  private debug: boolean;
 
   public constructor(options: V8TransformerOptions) {
     super();
     this.testCommand = options.testCommand;
+    this.debug = options.debug || false;
   }
 
   public async transform(trees: SyntaxTree[]): Promise<void> {
@@ -31,12 +35,29 @@ class V8Transformer extends Transformer {
     const tmpPath = path.join(tmpDir, tmpName);
 
     // Wrap spawned child processes
-    sw([require.resolve('./utils/launcher.js')], {
+    const unwrap = sw([require.resolve('./utils/launcher.js')], {
       TMP_PATH: tmpPath,
     });
 
-    // Run the test command
-    execSync(this.testCommand, { stdio: 'ignore' });
+    try {
+      // Run the test command
+      const { stdout, stderr } = await promisify(exec)(this.testCommand);
+
+      // Log output when in debug mode
+      if (this.debug) {
+        printer.print(`command: ${this.testCommand}\n\n`);
+        printer.print(`stdout: ${stdout}\n\n`);
+        printer.print(`stderr: ${stderr}\n`);
+      }
+    } catch (err) {
+      const message = `Test command: ${
+        this.testCommand
+      } failed with error code ${err.code} \n\n ${err.stderr}`;
+      throw new Error(message);
+    } finally {
+      // Unwrap spawned child processes
+      unwrap();
+    }
 
     // Read the typeProfile and coverageReport
     const data = await readFile(tmpPath);
