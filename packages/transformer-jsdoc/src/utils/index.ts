@@ -2,3 +2,8 @@ export * from './toKeyword';
 export * from './toTypeAnnotation';
 export * from './isParam';
 export * from './isReturn';
+export * from './isVariable';
+export * from './isLeadingComment';
+export * from './getLeadingComments';
+export * from './stripAllComments';
+export * from './getTypes';

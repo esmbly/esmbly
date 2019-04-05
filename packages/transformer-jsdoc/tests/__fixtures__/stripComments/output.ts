@@ -1,5 +1,14 @@
+/**
+ * US-Proto 2
+ * As a package maintainer, I want to take a simple JavaScript
+ * program with JSDoc comments and transform it to TypeScript using
+ * the JSDoc transformer.
+ */
+
+// Some comment
+
 function padLeft(str: string, maxLength: number): string {
-  let s = str;
+  let s = str; // Inline comment
   while (s.length < maxLength) {
     s = ` ${s}`;
   }
@@ -8,6 +17,7 @@ function padLeft(str: string, maxLength: number): string {
 
 function padRight(str: string, maxLength: number): string {
   let s = str;
+  // Inline comment
   while (s.length < maxLength) {
     s = `${s} `;
   }

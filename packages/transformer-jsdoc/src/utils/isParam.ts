@@ -1,4 +1,4 @@
-import { Tag } from '../types/Tag';
+import { Tag } from 'doctrine';
 
 export function isParam(tag: Tag): boolean {
   return (

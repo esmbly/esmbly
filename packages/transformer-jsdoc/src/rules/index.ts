@@ -1,1 +1,0 @@
-export { functionDeclaration } from './functionDeclaration';
