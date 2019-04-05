@@ -35,7 +35,7 @@ module.exports.d = d;
  * @param {number} n
  * @returns {number}
  */
-module.exports.e = function(n) {
+module.exports.e = function(n) { // eslint-disable-line
   return n;
 };
 
@@ -49,7 +49,7 @@ exports.f = n => n;
  * @param {number} n
  * @returns {number}
  */
-export const g = function(n) {
+export const g = function(n) { // eslint-disable-line
   /**
    * @param {number} f
    * @returns {number}
