@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { FileType, OutputFormat, RunConfig } from '@esmbly/types';
 import printer from '@esmbly/printer';
-import V8Transformer from '../dist';
+import V8Transformer from '../src';
 
 jest.setTimeout(10000);
 jest.mock('@esmbly/printer');

@@ -35,7 +35,7 @@ class V8Transformer extends Transformer {
     const tmpPath = path.join(tmpDir, tmpName);
 
     // Wrap spawned child processes
-    const unwrap = sw([require.resolve('./utils/launcher.js')], {
+    const unwrap = sw([require.resolve('../dist/utils/launcher.js')], {
       TMP_PATH: tmpPath,
     });
 
