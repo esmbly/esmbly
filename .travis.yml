@@ -10,7 +10,7 @@ cache:
   directories:
     - node_modules
 install:
-  - yarn --frozen-lockfile
+  - yarn install --frozen-lockfile --ignore-engines
 script:
   - yarn run build
   - yarn run lint

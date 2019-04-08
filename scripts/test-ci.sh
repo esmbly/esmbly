@@ -2,9 +2,9 @@
 
 node_version=$(node -v);
 
-if  [ ${node_version:1:1} -gt 10 ];
+if  [ ${node_version:1:1} = 8 ];
   then
-    $(yarn test:ci)
+    exec yarn test:node8
   else
-    $(yarn test:node8)
+    exec yarn test:ci
 fi
