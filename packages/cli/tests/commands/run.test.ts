@@ -62,6 +62,8 @@ describe('Run', () => {
   it('reads all files', async () => {
     const { readFilesSpy, tearDown } = setup();
     await command.run('run');
+    // TODO: remove this workaround (issue: https://github.com/yargs/yargs/issues/1069)
+    await new Promise(resolve => setTimeout(resolve, 100));
     expect(readFilesSpy).toHaveBeenCalledTimes(1);
     expect(readFilesSpy).toHaveBeenCalledWith(['**/*.js']);
     tearDown();
