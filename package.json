@@ -30,6 +30,7 @@
     "test": "jest",
     "test:all": "yarn lint && yarn test",
     "test:ci": "yarn coverage && yarn coveralls",
+    "test:node8": "yarn test --testPathIgnorePatterns ./packages/transformer-v8/**/*.ts ",
     "lint": "eslint packages --ext ts --max-warnings 0",
     "coverage": "jest --coverage",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
