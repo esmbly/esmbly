@@ -30,5 +30,8 @@
     "inquirer": "^6.2.2",
     "stringify-object": "^3.3.0",
     "yargs": "^13.2.2"
+  },
+  "engines": {
+    "node": ">= 8"
   }
 }
