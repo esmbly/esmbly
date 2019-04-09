@@ -2,20 +2,16 @@ import { File, RunConfig } from '@esmbly/types';
 import parse from '@esmbly/parser';
 import { validateRunConfig } from './config';
 
-export default async function run({
-  input,
-  transformers,
-  output,
-}: RunConfig): Promise<File[]> {
-  validateRunConfig({ input, output, transformers });
+export default async function run(config: RunConfig): Promise<File[]> {
+  validateRunConfig(config);
+
   let files: File[] = [];
-  const trees = parse(input);
-  // TODO: Maybe use array iterations instead?
-  // eslint-disable-next-line
-  for (const transformer of transformers) {
-    // eslint-disable-next-line
+  const trees = parse(config.input);
+
+  for (const transformer of config.transformers) {
     await transformer.transform(trees);
-    files = [...files, ...transformer.createFiles(trees, output)];
+    files = [...files, ...transformer.createFiles(trees, config.output)];
   }
+
   return files;
 }
