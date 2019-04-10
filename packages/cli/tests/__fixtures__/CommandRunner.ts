@@ -3,8 +3,8 @@ import yargs from 'yargs';
 export default class CommandRunner {
   private parser: yargs.Argv;
 
-  public constructor(commandModule: yargs.CommandModule) {
-    this.parser = yargs.command(commandModule);
+  public constructor(commandModule: unknown) {
+    this.parser = yargs.command(commandModule as yargs.CommandModule);
   }
 
   public run(command: string): Promise<string> {
