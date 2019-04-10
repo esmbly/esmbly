@@ -1,26 +1,26 @@
-import { Output, OutputFormat } from '@esmbly/types';
+import { Format, Output } from '@esmbly/types';
 
-export function toOutputFormat(format: string): OutputFormat {
+export function toOutputFormat(format: string): Format {
   switch (format.toLowerCase()) {
     case 'asm':
     case 'asm.js':
     case '.asm':
     case '.asm.js':
-      return OutputFormat.Asm;
+      return Format.Asm;
     case 'flow':
     case '.flow':
-      return OutputFormat.Flow;
+      return Format.Flow;
     case 'ts':
     case 'typescript':
     case '.ts':
-      return OutputFormat.TypeScript;
+      return Format.TypeScript;
     case 'wasm':
     case 'webassembly':
     case '.wasm':
-      return OutputFormat.WebAssembly;
+      return Format.WebAssembly;
     case 'wat':
     case '.wat':
-      return OutputFormat.Wat;
+      return Format.Wat;
     default:
       throw new Error(`Output format: ${format} is not supported`);
   }

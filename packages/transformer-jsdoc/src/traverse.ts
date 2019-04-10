@@ -12,14 +12,9 @@ import {
   isVariableDeclaration,
 } from '@babel/types';
 import traverse from '@babel/traverse';
-import {
-  getLeadingComments,
-  getTypes,
-  stripAllComments,
-  toTypeAnnotation,
-} from './utils';
+import { getLeadingComments, getTypes, toTypeAnnotation } from './utils';
 
-export default function(ast: SyntaxTree, stripComments: boolean): void {
+export default function(ast: SyntaxTree): void {
   traverse(ast.tree, {
     enter({ node, parentPath }) {
       if (!node || !parentPath) {
@@ -84,7 +79,4 @@ export default function(ast: SyntaxTree, stripComments: boolean): void {
       }
     },
   });
-  if (stripComments) {
-    stripAllComments(ast);
-  }
 }

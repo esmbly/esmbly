@@ -12,7 +12,26 @@ Array [
 		'wasm'
 	],
 	transformers: [
-		{}
+		{
+			inputFormat: 'Any',
+			outputFormats: [
+				'Flow'
+			],
+			transform: transform(trees) {
+            trees.forEach((tree) => {
+                traverse_1.default(tree.tree, {
+                    FunctionDeclaration: (path) => {
+                        if (!path.node.id) {
+                            return;
+                        }
+                        if (path.node.id.name === 'foo') {
+                            path.node.id.name = 'bar';
+                        }
+                    },
+                });
+            });
+        }
+		}
 	]
 }
 ",

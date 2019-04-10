@@ -1,4 +1,4 @@
-import { File, FileType, OutputFormat } from '@esmbly/types';
+import { File, FileType, Format } from '@esmbly/types';
 import glob from 'globby';
 import path from 'path';
 import os from 'os';
@@ -64,17 +64,17 @@ export function toFileType(extension: string): FileType {
   }
 }
 
-export function fileTypeForOutputFormat(format: OutputFormat): FileType {
+export function fileTypeForOutputFormat(format: Format): FileType {
   switch (format) {
-    case OutputFormat.Asm:
+    case Format.Asm:
       return FileType.Asm;
-    case OutputFormat.Flow:
+    case Format.Flow:
       return FileType.JavaScript;
-    case OutputFormat.TypeScript:
+    case Format.TypeScript:
       return FileType.TypeScript;
-    case OutputFormat.Wat:
+    case Format.Wat:
       return FileType.Wat;
-    case OutputFormat.WebAssembly:
+    case Format.WebAssembly:
       return FileType.WebAssembly;
     default:
       throw new Error(`Output format: ${format} is not supported`);

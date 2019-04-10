@@ -1,25 +1,47 @@
-import { OutputFormat, SyntaxTree } from '@esmbly/types';
+import { File, Format, Output, SyntaxTree, Transformer } from '@esmbly/types';
 import traverse, { NodePath } from '@babel/traverse'; // eslint-disable-line
 import { FunctionDeclaration } from '@babel/types'; // eslint-disable-line
-import { Transformer } from '../../src';
+import path from 'path';
+import { fileTypeForOutputFormat } from '@esmbly/utils';
 
-class FooTransformer extends Transformer {
-  public static outputFormats: OutputFormat[] = [OutputFormat.Flow];
-
-  public async transform(trees: SyntaxTree[]): Promise<void> {
-    trees.forEach((tree: SyntaxTree) => {
-      traverse(tree.tree, {
-        FunctionDeclaration: (path: NodePath<FunctionDeclaration>): void => {
-          if (!path.node.id) {
-            return;
+export default (): Transformer => {
+  return {
+    createFiles(trees: SyntaxTree[], output: Output[]): File[] {
+      const files: File[] = [];
+      trees.forEach((tree: SyntaxTree) => {
+        output.forEach(({ flatten, dir, format, filename }: Output) => {
+          const file = tree.represents;
+          const fullPath = dir ? path.join(dir, file.dir) : file.dir;
+          if (this.outputFormats.includes(format)) {
+            files.push({
+              ...file,
+              content: tree.toCode(),
+              dir: flatten && dir ? dir : fullPath,
+              filename,
+              type: fileTypeForOutputFormat(format),
+            });
           }
-          if (path.node.id.name === 'foo') {
-            path.node.id.name = 'bar';
-          }
-        },
+        });
       });
-    });
-  }
-}
-
-export default FooTransformer;
+      return files;
+    },
+    inputFormat: Format.Any,
+    outputFormats: [Format.Flow],
+    transform(trees: SyntaxTree[]): void {
+      trees.forEach((tree: SyntaxTree) => {
+        traverse(tree.tree, {
+          FunctionDeclaration: ({
+            node,
+          }: NodePath<FunctionDeclaration>): void => {
+            if (!node.id) {
+              return;
+            }
+            if (node.id.name === 'foo') {
+              node.id.name = 'bar';
+            }
+          },
+        });
+      });
+    },
+  };
+};

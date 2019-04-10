@@ -23,6 +23,7 @@
     "@babel/types": "^7.3.4",
     "@esmbly/printer": "^0.0.1",
     "@esmbly/types": "^0.0.1",
+    "@esmbly/utils": "^0.0.1",
     "@types/doctrine": "^0.0.3",
     "doctrine": "^3.0.0"
   },

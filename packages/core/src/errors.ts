@@ -19,11 +19,3 @@ export const NoTransformers = (): string => {
 export const NoOutput = (): string => {
   return 'Please specify at least one output format.';
 };
-
-export const InvalidTransformer = (transformer: unknown): string => {
-  return `${String(transformer)}.run() is not a function.`;
-};
-
-export const InvalidOutput = (out: unknown): string => {
-  return `Output format: ${JSON.stringify(out)} is not supported.`;
-};

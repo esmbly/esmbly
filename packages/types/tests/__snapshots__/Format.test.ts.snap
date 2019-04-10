@@ -1,9 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OutputFormat exposes the correct enum 1`] = `
+exports[`Format exposes the correct enum 1`] = `
 Object {
+  "Any": "Any",
   "Asm": "Asm",
   "Flow": "Flow",
+  "JSDoc": "JSDoc",
   "TypeScript": "TypeScript",
   "Wat": "Wat",
   "WebAssembly": "WebAssembly",

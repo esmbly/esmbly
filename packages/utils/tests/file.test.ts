@@ -1,5 +1,5 @@
 import * as glob from 'globby';
-import { FileType, OutputFormat } from '@esmbly/types';
+import { FileType, Format } from '@esmbly/types';
 import path from 'path';
 import {
   exists,
@@ -48,11 +48,11 @@ describe('fileTypeForOutputFormat', () => {
   it('returns the correct file types', () => {
     expect(
       [
-        OutputFormat.Asm,
-        OutputFormat.Flow,
-        OutputFormat.TypeScript,
-        OutputFormat.Wat,
-        OutputFormat.WebAssembly,
+        Format.Asm,
+        Format.Flow,
+        Format.TypeScript,
+        Format.Wat,
+        Format.WebAssembly,
       ].map(fileTypeForOutputFormat),
     ).toEqual([
       FileType.Asm,
@@ -64,7 +64,7 @@ describe('fileTypeForOutputFormat', () => {
   });
 
   it('throws an error for output formats that are not supported', () => {
-    expect(() => fileTypeForOutputFormat('.coffee' as OutputFormat)).toThrow(
+    expect(() => fileTypeForOutputFormat('.coffee' as Format)).toThrow(
       'Output format: .coffee is not supported',
     );
   });

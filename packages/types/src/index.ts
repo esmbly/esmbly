@@ -5,7 +5,7 @@ export * from './RunConfig';
 export * from './Config';
 export * from './Output';
 export * from './InitOptions';
-export * from './OutputFormat';
+export * from './Format';
 export * from './Transformer';
 export * from './TypeProfile';
 export * from './CoverageReport';
