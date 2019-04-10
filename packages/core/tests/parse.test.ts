@@ -74,4 +74,28 @@ describe('parse', () => {
     expect(ast.toCode()).toEqual(jsfile.content);
     expect(parseSpy).toHaveBeenCalled();
   });
+
+  it('adds utilities for handling format', () => {
+    const FlowTransformer: Transformer = {
+      inputFormat: Format.Flow,
+      outputFormats: [Format.TypeScript],
+      parserPlugins: ['flow', 'flowComments'],
+    };
+    const [ast] = parse([flowfile], FlowTransformer);
+    expect(ast.format).toEqual(Format.Flow);
+    ast.setFormat(Format.TypeScript);
+    expect(ast.format).toEqual(Format.TypeScript);
+  });
+
+  it('adds utilities for converting the ast back into a file', () => {
+    const FlowTransformer: Transformer = {
+      inputFormat: Format.Flow,
+      outputFormats: [Format.TypeScript],
+      parserPlugins: ['flow', 'flowComments'],
+    };
+    const [ast] = parse([flowfile], FlowTransformer);
+    const output = { format: Format.TypeScript };
+    const file = ast.toFile(output);
+    expect(file).toMatchSnapshot();
+  });
 });

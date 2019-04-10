@@ -1,5 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`parse adds utilities for converting the ast back into a file 1`] = `
+Object {
+  "content": "
+// @flow
+
+function padLeft(str: string, maxLength: number): string {
+  let s = str;
+  while(s.length < maxLength) {
+    s = fill + s;
+  }
+  return s;
+}
+",
+  "dir": "/src",
+  "filename": undefined,
+  "name": "leftPad",
+  "type": ".ts",
+}
+`;
+
 exports[`parse correctly parses a Flow file 1`] = `
 Node {
   "end": 153,

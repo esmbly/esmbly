@@ -15,3 +15,5 @@ exports[`validateConfig throws an error if no files are provided 1`] = `"Please 
 exports[`validateConfig throws an error if no output formats are provided 1`] = `"Please specify at least one output format."`;
 
 exports[`validateConfig throws an error if no transformers are provided 1`] = `"Please specify at least one transformer."`;
+
+exports[`validateInputFormat throws an error if any tree is in the wrong format 1`] = `"Transformer: undefined does not support input format Flow"`;

@@ -1,4 +1,5 @@
-import { validateConfig } from '../src/validate';
+import { Format, SyntaxTree, Transformer } from '@esmbly/types';
+import { validateConfig, validateInputFormat } from '../src/validate';
 import mockConfig from './__fixtures__/config';
 
 describe('validateConfig', () => {
@@ -39,5 +40,45 @@ describe('validateConfig', () => {
     expect(() => {
       validateConfig(mockConfig);
     }).not.toThrow();
+  });
+});
+
+describe('validateInputFormat', () => {
+  it('throws an error if any tree is in the wrong format', () => {
+    const transformer: Transformer = {
+      inputFormat: Format.TypeScript,
+      outputFormats: [Format.WebAssembly],
+    };
+    const trees = [
+      { format: Format.TypeScript },
+      { format: Format.Flow },
+    ] as SyntaxTree[];
+    expect(() =>
+      validateInputFormat(trees, transformer),
+    ).toThrowErrorMatchingSnapshot();
+  });
+
+  it('does not throw an error if each tree is in the correct format', () => {
+    const transformer: Transformer = {
+      inputFormat: Format.TypeScript,
+      outputFormats: [Format.WebAssembly],
+    };
+    const trees = [
+      { format: Format.TypeScript },
+      { format: Format.TypeScript },
+    ] as SyntaxTree[];
+    expect(() => validateInputFormat(trees, transformer)).not.toThrow();
+  });
+
+  it('does not throw an error if the transformer accepts any input format', () => {
+    const transformer: Transformer = {
+      inputFormat: Format.Any,
+      outputFormats: [Format.WebAssembly],
+    };
+    const trees = [
+      { format: Format.Flow },
+      { format: Format.TypeScript },
+    ] as SyntaxTree[];
+    expect(() => validateInputFormat(trees, transformer)).not.toThrow();
   });
 });

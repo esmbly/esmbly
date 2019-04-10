@@ -44,4 +44,17 @@ describe('run', () => {
     const output = await esmbly.run(mockConfig);
     expect(output).toMatchSnapshot();
   });
+
+  it('calls before and after hooks', async () => {
+    const transformer = FooTransformer();
+    const before = jest.spyOn(transformer, 'before');
+    const after = jest.spyOn(transformer, 'after');
+    const runConfig: RunConfig = {
+      ...mockConfig,
+      transformers: [transformer],
+    };
+    await esmbly.run(runConfig);
+    expect(before).toHaveBeenCalledTimes(1);
+    expect(after).toHaveBeenCalledTimes(1);
+  });
 });
