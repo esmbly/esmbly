@@ -1,7 +1,7 @@
 import esmbly from '@esmbly/core';
 import yargs from 'yargs';
 import * as utils from '@esmbly/utils';
-import { OutputFormat } from '@esmbly/types';
+import { Format } from '@esmbly/types';
 import * as run from '../../src/commands/run';
 import * as config from '../../src/config';
 import CommandRunner from '../__fixtures__/CommandRunner';
@@ -24,7 +24,7 @@ const setup = (): {
   const readFilesSpy = jest.spyOn(utils, 'readFiles');
   readFilesSpy.mockResolvedValue(MockFiles);
   const transformerFactorySpy = jest.spyOn(utils, 'transformerFactory');
-  transformerFactorySpy.mockReturnValue(new MockTransformer());
+  transformerFactorySpy.mockReturnValue(MockTransformer());
   return {
     readConfigSpy,
     readFilesSpy,
@@ -75,9 +75,6 @@ describe('Run', () => {
     // TODO: remove this workaround (issue: https://github.com/yargs/yargs/issues/1069)
     await new Promise(resolve => setTimeout(resolve, 100));
     expect(transformerFactorySpy).toHaveBeenCalledTimes(1);
-    expect(transformerFactorySpy.mock.calls[0][0]).toBeInstanceOf(
-      MockTransformer,
-    );
     tearDown();
   });
 
@@ -90,8 +87,14 @@ describe('Run', () => {
     expect(runSpy).toHaveBeenCalledTimes(1);
     expect(runSpy).toHaveBeenCalledWith({
       input: MockFiles,
-      output: [{ format: OutputFormat.WebAssembly }],
-      transformers: [expect.any(MockTransformer)],
+      output: [{ format: Format.WebAssembly }],
+      transformers: [
+        {
+          inputFormat: 'Any',
+          outputFormats: ['Flow'],
+          transform: expect.any(Function),
+        },
+      ],
     });
     runSpy.mockRestore();
     tearDown();

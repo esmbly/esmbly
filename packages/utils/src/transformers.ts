@@ -1,14 +1,6 @@
-import { OutputFormat, Transformer } from '@esmbly/types';
+import { Format, Transformer, TransformerFactory } from '@esmbly/types';
 import path from 'path';
 import fs from './fs';
-
-interface ExportedTransformer extends Transformer {
-  new (): Transformer;
-}
-
-interface TransformerModule extends NodeJS.Module {
-  default: ExportedTransformer;
-}
 
 export async function getAvailableTransformers(): Promise<string[]> {
   // TODO: Search in more places or fetch from npm
@@ -29,11 +21,9 @@ export async function getAvailableOutputFormats(
   transformers.forEach((transformer: string) => {
     try {
       const transformerPath = path.resolve(__dirname, '../../', transformer);
-      const transformerModule = requirer(transformerPath) as TransformerModule;
-      const transformerFormats = transformerModule.default.outputFormats;
-      transformerFormats.forEach((format: OutputFormat) =>
-        outputFormats.add(format),
-      );
+      const transformerModule = requirer(transformerPath) as TransformerFactory;
+      const transformerFormats = transformerModule().outputFormats;
+      transformerFormats.forEach((format: Format) => outputFormats.add(format));
     } catch {
       // Do nothing if a transformer can't be required or doesn't specify any output formats
     }
@@ -51,9 +41,8 @@ export function transformerFactory(
       name = `transformer-${name}`;
     }
     const transformerPath = path.resolve(__dirname, '../../', name);
-    const transformerModule = requirer(transformerPath) as TransformerModule;
-    const TransformerClass = transformerModule.default;
-    return new TransformerClass();
+    const transformerModule = requirer(transformerPath) as TransformerFactory;
+    return transformerModule();
   }
   return transformer;
 }

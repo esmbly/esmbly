@@ -1,25 +1,38 @@
-import { OutputFormat, SyntaxTree } from '@esmbly/types';
+import { File, Format, Output, SyntaxTree, Transformer } from '@esmbly/types';
 import traverse, { NodePath } from '@babel/traverse'; // eslint-disable-line
 import { FunctionDeclaration } from '@babel/types'; // eslint-disable-line
-import { Transformer } from '../../src';
 
-class FooTransformer extends Transformer {
-  public static outputFormats: OutputFormat[] = [OutputFormat.Flow];
-
-  public async transform(trees: SyntaxTree[]): Promise<void> {
-    trees.forEach((tree: SyntaxTree) => {
-      traverse(tree.tree, {
-        FunctionDeclaration: (path: NodePath<FunctionDeclaration>): void => {
-          if (!path.node.id) {
-            return;
+export default (): Transformer => {
+  return {
+    after: () => {},
+    before: () => {},
+    createFiles(trees: SyntaxTree[], output: Output[]): File[] {
+      return ([] as File[]).concat(
+        ...output.map((out: Output) => {
+          if (!this.outputFormats.includes(out.format)) {
+            return [];
           }
-          if (path.node.id.name === 'foo') {
-            path.node.id.name = 'bar';
-          }
-        },
+          return trees.map((tree: SyntaxTree) => tree.toFile(out));
+        }),
+      );
+    },
+    inputFormat: Format.Any,
+    outputFormats: [Format.Flow],
+    transform(trees: SyntaxTree[]): void {
+      trees.forEach((tree: SyntaxTree) => {
+        traverse(tree.tree, {
+          FunctionDeclaration: ({
+            node,
+          }: NodePath<FunctionDeclaration>): void => {
+            if (!node.id) {
+              return;
+            }
+            if (node.id.name === 'foo') {
+              node.id.name = 'bar';
+            }
+          },
+        });
       });
-    });
-  }
-}
-
-export default FooTransformer;
+    },
+  };
+};

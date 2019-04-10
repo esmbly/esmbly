@@ -1,7 +1,7 @@
 import esmbly from '@esmbly/core';
 import fs from 'fs';
 import path from 'path';
-import { FileType, OutputFormat, RunConfig } from '@esmbly/types';
+import { FileType, Format, RunConfig } from '@esmbly/types';
 import printer from '@esmbly/printer';
 import V8Transformer from '../src';
 
@@ -28,8 +28,8 @@ const setup = (testCommand: string, debug: boolean = false): RunConfig => {
         type: FileType.JavaScript,
       },
     ],
-    output: [{ format: OutputFormat.TypeScript }],
-    transformers: [new V8Transformer({ debug, testCommand })],
+    output: [{ format: Format.TypeScript }],
+    transformers: [V8Transformer({ debug, testCommand })],
   };
 };
 

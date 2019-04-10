@@ -19,6 +19,7 @@
     "build-watch": "tsc -w"
   },
   "dependencies": {
+    "@babel/parser": "^7.4.3",
     "@babel/types": "^7.3.4"
   }
 }

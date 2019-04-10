@@ -1,6 +1,6 @@
 import { FileType } from '../src';
 
-describe('OutputFormat', () => {
+describe('FileType', () => {
   it('exposes the correct enum', () => {
     expect(FileType).toMatchSnapshot();
   });

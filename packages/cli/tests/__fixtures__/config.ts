@@ -4,7 +4,7 @@ import MockTransformer from './FooTransformer';
 const config: Config = {
   input: ['**/*.js'],
   output: ['wasm'],
-  transformers: [new MockTransformer()],
+  transformers: [MockTransformer()],
 };
 
 export default [config];

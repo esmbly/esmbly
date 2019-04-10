@@ -33,7 +33,10 @@
     "@typescript-eslint/no-explicit-any": "error",
     "lines-between-class-members": ["error", "always", {
       "exceptAfterSingleLine": true
-    }]
+    }],
+    "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"],
+    "no-await-in-loop": "off",
+    "no-unused-expressions": ["error", { "allowShortCircuit": true }]
   },
   "globals": {}
 }

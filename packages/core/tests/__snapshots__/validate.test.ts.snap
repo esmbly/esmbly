@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`validateConfig throws an error if config object is missing 1`] = `
+"Please provide a valid configuration object.
+    {
+      input: File[];
+      transformers: Transformer[];
+      output: Output[];
+    }
+  "
+`;
+
+exports[`validateConfig throws an error if no files are provided 1`] = `"Please specify at least one file to transform."`;
+
+exports[`validateConfig throws an error if no output formats are provided 1`] = `"Please specify at least one output format."`;
+
+exports[`validateConfig throws an error if no transformers are provided 1`] = `"Please specify at least one transformer."`;
+
+exports[`validateInputFormat throws an error if any tree is in the wrong format 1`] = `"Transformer: undefined does not support input format Flow"`;
