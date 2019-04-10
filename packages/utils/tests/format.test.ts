@@ -1,4 +1,4 @@
-import { Format } from '@esmbly/types';
+import { Format, Output } from '@esmbly/types';
 import { outputFactory, toOutputFormat } from '../src';
 
 describe('outputFactory', () => {
@@ -9,8 +9,7 @@ describe('outputFactory', () => {
   });
 
   it('returns an output object when called with an output object', () => {
-    const output = { dir: '/some/path', format: 'ts' };
-    // @ts-ignore-line
+    const output: Output = { dir: '/some/path', format: Format.TypeScript };
     expect(outputFactory(output)).toEqual({
       dir: '/some/path',
       format: Format.TypeScript,

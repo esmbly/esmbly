@@ -32,7 +32,7 @@ export async function readConfig(
   requirer: (requirePath: string) => unknown = require,
 ): Promise<Config[]> {
   const configPath = customPath || (await getDefaultConfigPath());
-  const config = requirer(configPath) as Config | Config[] | ConfigFn // eslint-disable-line
+  const config = requirer(configPath) as Config | Config[] | ConfigFn;
   const toArray = (maybeArrayConfig: Config | Config[]): Config[] => {
     if (Array.isArray(maybeArrayConfig)) {
       return maybeArrayConfig;
