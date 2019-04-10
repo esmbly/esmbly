@@ -40,8 +40,12 @@ export class Profiler {
               throw coverageReportError;
             }
             const result = {
-              coverageReport: coverageReport.result,
-              typeProfile: typeProfile.result,
+              coverageReport: coverageReport.result.filter(
+                entry => !entry.url.includes('node_modules'),
+              ),
+              typeProfile: typeProfile.result.filter(
+                entry => !entry.url.includes('node_modules'),
+              ),
             };
             fs.writeFileSync(this.tmpPath, JSON.stringify(result, null, 2));
             this.session.disconnect();

@@ -6,7 +6,7 @@ import printer from '@esmbly/printer';
 import V8Transformer from '../src';
 
 jest.setTimeout(10000);
-jest.mock('@esmbly/printer');
+// jest.mock('@esmbly/printer');
 
 const file = path.join(__dirname, '__fixtures__/prototype/index.js');
 const content = fs.readFileSync(file, 'utf8');
@@ -69,9 +69,29 @@ describe('transformer-v8: prototype', () => {
   });
 
   it('runs with node asserts', async () => {
-    // TODO: Add support for node asserts
+    // TODO: Add support for node asserts (require('assert'))
     const testPath = `${testDir}/assert.test.js`;
     const testCommand = `node ${testPath}`;
+    const runConfig = setup(testCommand);
+    await expect(esmbly.run(runConfig)).rejects.toThrow(
+      `Could not collect a type profile for: ${file}`,
+    );
+  });
+
+  it('runs with ava', async () => {
+    // TODO: Add support for ava
+    const testPath = `${testDir}/ava.test.js`;
+    const testCommand = `${nodeModules}/ava ${testPath}`;
+    const runConfig = setup(testCommand);
+    await expect(esmbly.run(runConfig)).rejects.toThrow(
+      `Could not collect a type profile for: ${file}`,
+    );
+  });
+
+  it('runs with tap', async () => {
+    // TODO: Add support for tap
+    const testPath = `${testDir}/tap.test.js`;
+    const testCommand = `${nodeModules}/tap ${testPath}`;
     const runConfig = setup(testCommand);
     await expect(esmbly.run(runConfig)).rejects.toThrow(
       `Could not collect a type profile for: ${file}`,
