@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`validate throws an error if config object is missing 1`] = `
+exports[`validateConfig throws an error if config object is missing 1`] = `
 "Please provide a valid configuration object.
     {
       input: File[];
@@ -10,8 +10,8 @@ exports[`validate throws an error if config object is missing 1`] = `
   "
 `;
 
-exports[`validate throws an error if no files are provided 1`] = `"Please specify at least one file to transform."`;
+exports[`validateConfig throws an error if no files are provided 1`] = `"Please specify at least one file to transform."`;
 
-exports[`validate throws an error if no output formats are provided 1`] = `"Please specify at least one output format."`;
+exports[`validateConfig throws an error if no output formats are provided 1`] = `"Please specify at least one output format."`;
 
-exports[`validate throws an error if no transformers are provided 1`] = `"Please specify at least one transformer."`;
+exports[`validateConfig throws an error if no transformers are provided 1`] = `"Please specify at least one transformer."`;

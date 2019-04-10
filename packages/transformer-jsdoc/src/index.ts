@@ -36,11 +36,6 @@ export default ({
     outputFormats: [Format.TypeScript],
     transform(trees: SyntaxTree[]): void {
       trees.forEach((tree: SyntaxTree) => {
-        if (this.inputFormat !== tree.format) {
-          throw new Error(
-            `Transformer: JSDoc does not support format ${tree.format}`,
-          );
-        }
         traverse(tree);
         tree.setFormat(Format.TypeScript);
         if (stripComments) {

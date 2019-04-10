@@ -1,16 +1,16 @@
-import validate from '../src/validate';
+import { validateConfig } from '../src/validate';
 import mockConfig from './__fixtures__/config';
 
-describe('validate', () => {
+describe('validateConfig', () => {
   it('throws an error if config object is missing', () => {
     expect(() => {
-      validate();
+      validateConfig();
     }).toThrowErrorMatchingSnapshot();
   });
 
   it('throws an error if no files are provided', () => {
     expect(() => {
-      validate({
+      validateConfig({
         ...mockConfig,
         input: [],
       });
@@ -19,7 +19,7 @@ describe('validate', () => {
 
   it('throws an error if no transformers are provided', () => {
     expect(() => {
-      validate({
+      validateConfig({
         ...mockConfig,
         transformers: [],
       });
@@ -28,7 +28,7 @@ describe('validate', () => {
 
   it('throws an error if no output formats are provided', () => {
     expect(() => {
-      validate({
+      validateConfig({
         ...mockConfig,
         output: [],
       });
@@ -37,7 +37,7 @@ describe('validate', () => {
 
   it('does not throw an error when passed a correct config object', () => {
     expect(() => {
-      validate(mockConfig);
+      validateConfig(mockConfig);
     }).not.toThrow();
   });
 });

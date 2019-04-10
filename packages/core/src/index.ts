@@ -1,9 +1,9 @@
 import { File, RunConfig } from '@esmbly/types';
 import parse from './parse';
-import validate from './validate';
+import { validateConfig, validateInputFormat } from './validate';
 
 async function run(config: RunConfig): Promise<File[]> {
-  validate(config);
+  validateConfig(config);
 
   let files: File[] = [];
   const trees = parse(config.input, config.transformers[0]);
@@ -12,6 +12,8 @@ async function run(config: RunConfig): Promise<File[]> {
     if (transformer.before) {
       await transformer.before();
     }
+
+    validateInputFormat(trees, transformer);
 
     if (transformer.transform) {
       await transformer.transform(trees);

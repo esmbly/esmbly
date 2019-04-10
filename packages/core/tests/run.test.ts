@@ -7,7 +7,7 @@ import * as parser from '../src/parse';
 
 describe('run', () => {
   it('validates the provided config', async () => {
-    const validateSpy = jest.spyOn(validate, 'default');
+    const validateSpy = jest.spyOn(validate, 'validateConfig');
     await esmbly.run(mockConfig);
     expect(validateSpy).toHaveBeenCalledTimes(1);
     expect(validateSpy).toHaveBeenCalledWith(mockConfig);
