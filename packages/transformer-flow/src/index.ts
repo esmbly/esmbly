@@ -1,22 +1,35 @@
-import { Format, SyntaxTree, Transformer } from '@esmbly/types';
-import printer from '@esmbly/printer';
+import { File, Format, Output, SyntaxTree, Transformer } from '@esmbly/types';
 import traverse from './traverse';
 
 export interface FlowTransformerOptions {
-  example: number;
+  removeFlowFlags?: boolean;
 }
 
-// TODO: Remove this once implemented
-// @ts-ignore
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default (options: FlowTransformerOptions): Transformer => {
+export default ({
+  removeFlowFlags = true,
+}: FlowTransformerOptions): Transformer => {
   return {
+    createFiles(trees: SyntaxTree[], output: Output[]): File[] {
+      return ([] as File[]).concat(
+        ...output.map((out: Output) => {
+          if (!this.outputFormats.includes(out.format)) {
+            return [];
+          }
+          return trees.map((tree: SyntaxTree) => tree.toFile(out));
+        }),
+      );
+    },
     inputFormat: Format.Flow,
     outputFormats: [Format.TypeScript],
     parserPlugins: ['flow', 'flowComments'],
     transform(trees: SyntaxTree[]): void {
-      printer.print('..flow transformer\n');
-      trees.forEach(traverse);
+      trees.forEach((tree: SyntaxTree) => {
+        traverse(tree);
+        tree.setFormat(Format.TypeScript);
+        if (removeFlowFlags) {
+          // remove all @flow comments
+        }
+      });
     },
   };
 };
