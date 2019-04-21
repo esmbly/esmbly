@@ -1,18 +1,17 @@
-import {
-  ObjectTypeProperty,
-  tsPropertySignature,
-  tsTypeAnnotation,
-} from '@babel/types';
-import { NodePath } from '@babel/traverse';
-import { toTs } from '../utils/convert';
+import t from '@babel/types';
+import { Node, NodePath, Visitor } from '@babel/traverse';
+import { Warning } from '../types';
+import toTs from '../utils/toTs';
 
-export default function(path: NodePath<ObjectTypeProperty>): void {
-  const type = toTs(path.node.value);
-  if (!type) {
-    return;
-  }
-  const property = tsPropertySignature(path.node.key, tsTypeAnnotation(type));
-  property.optional = path.node.optional;
-  property.readonly = path.node.variance && path.node.variance.kind === 'plus';
-  path.replaceWith(property);
-}
+export default (warnings: Warning[]): Visitor<Node> => ({
+  ObjectTypeProperty(path: NodePath<t.ObjectTypeProperty>) {
+    if (path.node.variance && path.node.variance.kind === 'plus') {
+      warnings.push({
+        info: `Contravariance can't be expressed in TypeScript`,
+        issueUrl: 'https://github.com/Microsoft/TypeScript/issues/1394',
+        node: path.node,
+      });
+    }
+    path.replaceWith(toTs(path.node));
+  },
+});

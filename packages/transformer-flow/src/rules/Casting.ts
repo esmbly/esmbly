@@ -1,8 +1,9 @@
 import t from '@babel/types';
 import { Node, NodePath, Visitor } from '@babel/traverse';
+import toTs from '../utils/toTs';
 
 export default (): Visitor<Node> => ({
-  MixedTypeAnnotation(path: NodePath<t.MixedTypeAnnotation>) {
-    path.replaceWith(t.genericTypeAnnotation(t.identifier('unknown')));
+  TypeCastExpression(path: NodePath<t.TypeCastExpression>) {
+    path.replaceWith(toTs(path.node));
   },
 });

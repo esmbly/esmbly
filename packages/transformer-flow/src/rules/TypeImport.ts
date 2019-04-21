@@ -1,6 +1,12 @@
-import { ImportDeclaration } from '@babel/types';
-import { NodePath } from '@babel/traverse';
+import t from '@babel/types';
+import { Node, NodePath, Visitor } from '@babel/traverse';
 
-export default function(path: NodePath<ImportDeclaration>): void {
-  path.node.importKind = null;
-}
+export default (): Visitor<Node> => ({
+  ImportDeclaration(path: NodePath<t.ImportDeclaration>) {
+    if (path.node.importKind === 'type') {
+      path.replaceWith(
+        t.importDeclaration(path.node.specifiers, path.node.source),
+      );
+    }
+  },
+});

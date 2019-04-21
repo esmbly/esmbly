@@ -1,13 +1,17 @@
-import { OpaqueType, typeAlias } from '@babel/types';
-import { NodePath } from '@babel/traverse';
+import t from '@babel/types';
+import { Node, NodePath, Visitor } from '@babel/traverse';
+import { Warning } from '../types';
 
-export default function(path: NodePath<OpaqueType>): void {
-  const type = typeAlias(
-    path.node.id,
-    path.node.typeParameters,
-    path.node.impltype,
-  );
-  // @ts-ignore
-  type.comments = path.node.comments;
-  path.replaceWith(type);
-}
+export default (warnings: Warning[]): Visitor<Node> => ({
+  OpaqueType(path: NodePath<t.OpaqueType>) {
+    warnings.push({
+      info: `Opaque types can't be expressed in TypeScript`,
+      issueUrl: 'https://github.com/Microsoft/TypeScript/issues/202',
+      node: path.node,
+    });
+
+    path.replaceWith(
+      t.typeAlias(path.node.id, path.node.typeParameters, path.node.impltype),
+    );
+  },
+});

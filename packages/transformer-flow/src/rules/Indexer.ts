@@ -1,10 +1,19 @@
-import { ObjectTypeIndexer, identifier, objectTypeIndexer } from '@babel/types';
-import { NodePath } from '@babel/traverse';
+import t from '@babel/types';
+import { Node, NodePath, Visitor } from '@babel/traverse';
+import generateFreeIdentifier from '../utils/generateId';
 
-export default function(path: NodePath<ObjectTypeIndexer>): void {
-  if (path.node.id === null) {
+export default (): Visitor<Node> => ({
+  ObjectTypeIndexer(path: NodePath<t.ObjectTypeIndexer>) {
+    if (path.node.id !== null) {
+      return;
+    }
+
     path.replaceWith(
-      objectTypeIndexer(identifier('key'), path.node.key, path.node.value),
+      t.objectTypeIndexer(
+        t.identifier(generateFreeIdentifier([])),
+        path.node.key,
+        path.node.value,
+      ),
     );
-  }
-}
+  },
+});

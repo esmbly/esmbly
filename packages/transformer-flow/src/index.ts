@@ -1,8 +1,11 @@
 import { File, Format, Output, SyntaxTree, Transformer } from '@esmbly/types';
-import traverse from './traverse';
+import traverse from '@babel/traverse';
+import { Rule, Warning } from './types';
+import getRules from './rules';
 
 export interface FlowTransformerOptions {
   removeFlowFlags?: boolean;
+  customRules?: Rule[];
 }
 
 export default ({
@@ -21,10 +24,17 @@ export default ({
     },
     inputFormat: Format.Flow,
     outputFormats: [Format.TypeScript],
-    parserPlugins: ['flow', 'flowComments'],
+    parserPlugins: [
+      'classProperties',
+      'flow',
+      'flowComments',
+      'objectRestSpread',
+    ],
     transform(trees: SyntaxTree[]): void {
+      const warnings: Warning[] = [];
+      const rules = getRules();
       trees.forEach((tree: SyntaxTree) => {
-        traverse(tree);
+        rules.forEach((rule: Rule) => traverse(tree.tree, rule(warnings)));
         tree.setFormat(Format.TypeScript);
         if (removeFlowFlags) {
           // remove all @flow comments
