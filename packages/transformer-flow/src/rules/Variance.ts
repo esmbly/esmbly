@@ -1,4 +1,4 @@
-import t from '@babel/types';
+import * as t from '@babel/types';
 import { Node, NodePath, Visitor } from '@babel/traverse';
 import { Warning } from '../types';
 import toTs from '../utils/toTs';

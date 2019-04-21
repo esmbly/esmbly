@@ -1,4 +1,4 @@
-import t from '@babel/types';
+import * as t from '@babel/types';
 
 export default function getId(node: t.FlowType): t.Identifier {
   switch (node.type) {

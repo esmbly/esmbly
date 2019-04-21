@@ -1,4 +1,4 @@
-import t from '@babel/types';
+import * as t from '@babel/types';
 import toTs from './toTs';
 import toTsType from './toTsType';
 import generateFreeIdentifier from './generateId';
