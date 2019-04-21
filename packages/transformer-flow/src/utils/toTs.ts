@@ -5,6 +5,7 @@ import hasBound from './hasBound';
 /* eslint-disable */
 
 // TODO: Add overloads
+// @ts-ignore
 export default function toTs(node: t.Flow | t.TSType): t.TSType {
   switch (node.type) {
     // TS types
@@ -121,6 +122,6 @@ export default function toTs(node: t.Flow | t.TSType): t.TSType {
     case 'QualifiedTypeIdentifier':
       throw 'wut';
     default:
-      throw 'what';
+      break;
   }
 }

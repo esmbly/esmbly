@@ -1,6 +1,7 @@
-import t from '@babel/types';
+import * as t from '@babel/types';
 import { NodePath } from '@babel/traverse';
 import $Exact from '../../src/rules/$Exact';
+import { Warning } from '../../src/types';
 
 const createMockPath = (
   identifierName: string,
@@ -17,7 +18,7 @@ const createMockPath = (
 describe('$Exact', () => {
   it('correctly replaces the path', () => {
     const path = createMockPath('$Exact', ['paramA']);
-    const warnings = [];
+    const warnings: Warning[] = [];
     // @ts-ignore
     $Exact(warnings).GenericTypeAnnotation(path);
     expect(path.replaceWith).toHaveBeenCalledWith('paramA');
@@ -25,7 +26,7 @@ describe('$Exact', () => {
 
   it('warns about that $Exact types', () => {
     const path = createMockPath('$Exact', ['paramA']);
-    const warnings = [];
+    const warnings: Warning[] = [];
     // @ts-ignore
     $Exact(warnings).GenericTypeAnnotation(path);
     expect(warnings).toMatchSnapshot();
@@ -33,8 +34,9 @@ describe('$Exact', () => {
 
   it('does not replace paths without an id', () => {
     const path = createMockPath('$Exact', ['paramA']);
+    // @ts-ignore
     path.node.id = null;
-    const warnings = [];
+    const warnings: Warning[] = [];
     // @ts-ignore
     $Exact(warnings).GenericTypeAnnotation(path);
     expect(warnings).toEqual([]);
@@ -43,7 +45,7 @@ describe('$Exact', () => {
 
   it('does not replace paths without the identifier name $Exact', () => {
     const path = createMockPath('SomeName', ['paramA']);
-    const warnings = [];
+    const warnings: Warning[] = [];
     // @ts-ignore
     $Exact(warnings).GenericTypeAnnotation(path);
     expect(warnings).toEqual([]);
@@ -53,7 +55,7 @@ describe('$Exact', () => {
   it('does not replace paths without typeParameters', () => {
     const path = createMockPath('$Exact', ['paramA']);
     path.node.typeParameters = null;
-    const warnings = [];
+    const warnings: Warning[] = [];
     // @ts-ignore
     $Exact(warnings).GenericTypeAnnotation(path);
     expect(warnings).toEqual([]);
