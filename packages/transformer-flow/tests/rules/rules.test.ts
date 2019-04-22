@@ -8,8 +8,8 @@ import FlowTransformer from '../../src';
 const readFile = util.promisify(fs.readFile);
 
 const rules = fs
-  .readdirSync(__dirname, { withFileTypes: true })
-  .filter(dirEnt => dirEnt.isDirectory());
+  .readdirSync(__dirname)
+  .filter(p => fs.statSync(path.join(__dirname, p)).isDirectory());
 
 const run = async (content: string): Promise<string> => {
   const [results] = await esmbly.run({
@@ -28,13 +28,13 @@ const run = async (content: string): Promise<string> => {
 };
 
 for (const rule of rules) {
-  test(rule.name, async () => {
+  test(rule, async () => {
     const input = await readFile(
-      path.join(__dirname, rule.name, 'input.txt'),
+      path.join(__dirname, rule, 'input.txt'),
       'utf8',
     );
     const expected = await readFile(
-      path.join(__dirname, rule.name, 'output.txt'),
+      path.join(__dirname, rule, 'output.txt'),
       'utf8',
     );
     const actual = await run(input);
