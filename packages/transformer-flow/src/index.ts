@@ -2,6 +2,7 @@ import { File, Format, Output, SyntaxTree, Transformer } from '@esmbly/types';
 import traverse from '@babel/traverse';
 import { Rule, Warning } from './types';
 import getRules from './rules';
+import stripFlowAnnotation from './utils/stripFlowAnnotation';
 
 export interface FlowTransformerOptions {
   removeFlowFlags?: boolean;
@@ -24,12 +25,7 @@ export default ({
     },
     inputFormat: Format.Flow,
     outputFormats: [Format.TypeScript],
-    parserPlugins: [
-      'classProperties',
-      'flow',
-      'flowComments',
-      'objectRestSpread',
-    ],
+    parserPlugins: ['classProperties', 'flow', 'objectRestSpread'],
     transform(trees: SyntaxTree[]): void {
       const warnings: Warning[] = [];
       const rules = getRules();
@@ -37,7 +33,7 @@ export default ({
         rules.forEach((rule: Rule) => traverse(tree.tree, rule(warnings)));
         tree.setFormat(Format.TypeScript);
         if (removeFlowFlags) {
-          // remove all @flow comments
+          stripFlowAnnotation(tree.tree);
         }
       });
     },

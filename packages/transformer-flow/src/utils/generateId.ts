@@ -7,5 +7,6 @@ export default function generateId(usedIdentifiers: string[]): string {
   if (!identifier) {
     throw new Error('Could not generate a free identifier');
   }
+  usedIdentifiers.push(identifier);
   return identifier;
 }

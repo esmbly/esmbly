@@ -1,6 +1,8 @@
 import * as t from '@babel/types';
 import toTsType from './toTsType';
 import hasBound from './hasBound';
+import toTsPropertySignature from './toTsPropertySignature';
+import toTsAsExpression from './toTsAsExpression';
 
 /* eslint-disable */
 
@@ -74,18 +76,11 @@ export default function toTs(node: t.Flow | t.TSType): t.TSType {
 
     case 'ObjectTypeProperty':
       // @ts-ignore
-      return t.tsPropertySignature(
-        node.key,
-        t.tsTypeAnnotation(toTs(node.value)),
-        undefined,
-        undefined,
-        node.optional,
-        node.variance && node.variance.kind === 'minus',
-      );
+      return toTsPropertySignature(node);
 
     case 'TypeCastExpression':
       // @ts-ignore
-      return t.tsAsExpression(node.expression, toTs(node.typeAnnotation));
+      return toTsAsExpression(node)
 
     case 'TypeParameterDeclaration':
       // @ts-ignore

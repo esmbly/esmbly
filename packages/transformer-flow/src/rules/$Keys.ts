@@ -21,6 +21,8 @@ export default (): Visitor<Node> => ({
       return;
     }
 
-    path.replaceWith(t.tsTypeOperator(t.tsTypeReference(param.id)));
+    const replacement = t.tsTypeOperator(t.tsTypeReference(param.id));
+    replacement.operator = 'keyof';
+    path.replaceWith(replacement);
   },
 });

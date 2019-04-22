@@ -30,7 +30,7 @@ function testMixedParameter(value: mixed) {
   /* ... */
 }
 
-// Void: void -> void
+// Void: void -> undefined
 function testVoidReturn(): void {
   /* ... */
 }
@@ -51,7 +51,7 @@ function testReadOnlyArray(a: $ReadOnlyArray<number>) {
   /* ... */
 }
 
-// Opaque types: opaque type ID = string -> type ID = string;
+// Opaque types: opaque type ID = string -> type ID = string
 opaque type ID = string;
 
 // Interface property variance:

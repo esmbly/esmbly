@@ -4,7 +4,6 @@
  * with Flow annotations to TypeScript using the Flow transformer.
  */
 
-// @flow
 /* eslint-disable */
 
 // Optional: b?: string -> b?: string
@@ -13,9 +12,7 @@ function testOptionalParameter(a: string, b?: string) {
 }
 
 // Maybe: ?string -> string | null | undefined
-type TestMaybe = {
-  name: string | null | undefined
-}
+type TestMaybe = { name: string | null | undefined }
 
 // Null: value: null -> value: null
 function testNullParameter(value: null) {
@@ -30,8 +27,8 @@ function testMixedParameter(value: unknown) {
   /* ... */
 }
 
-// Void: void -> void
-function testVoidReturn(): void {
+// Void: void -> undefined
+function testVoidReturn(): undefined {
   /* ... */
 }
 
@@ -43,7 +40,7 @@ type TestExact = { name: string };
 
 // Indexer shorthand	[string]: number -> [key: string]: number
 type TestIndexerShorthand = {
-  [key: string]: number
+  [a: string]: number
 }
 
 // ReadOnlyArray: a: $ReadOnlyArray<number> -> ReadonlyArray<number>
@@ -51,7 +48,6 @@ function testReadOnlyArray(a: ReadonlyArray<number>) {
   /* ... */
 }
 
-// Opaque types: opaque type ID = string -> type ID = string;
 type ID = string;
 
 // Interface property variance:

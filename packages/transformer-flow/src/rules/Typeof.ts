@@ -2,7 +2,7 @@ import * as t from '@babel/types';
 import { Node, NodePath, Visitor } from '@babel/traverse';
 
 export default (): Visitor<Node> => ({
-  VoidTypeAnnotation(path: NodePath<t.VoidTypeAnnotation>) {
-    path.replaceWith(t.genericTypeAnnotation(t.identifier('undefined')));
+  TypeofTypeAnnotation(path: NodePath<t.TypeofTypeAnnotation>) {
+    path.replaceWith(path.node.argument);
   },
 });
