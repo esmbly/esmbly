@@ -24,6 +24,7 @@ export default ({
       );
     },
     inputFormat: Format.Flow,
+    name: 'Flow',
     outputFormats: [Format.TypeScript],
     parserPlugins: ['classProperties', 'flow', 'objectRestSpread'],
     transform(trees: SyntaxTree[]): void {

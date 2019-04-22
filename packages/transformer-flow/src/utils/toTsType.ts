@@ -2,7 +2,6 @@ import * as t from '@babel/types';
 import getId from './getId';
 import toTsFunction from './toTsFunction';
 
-// @ts-ignore
 export default function toTsType(node: t.Flow): t.TSType {
   switch (node.type) {
     case 'AnyTypeAnnotation':
@@ -72,6 +71,8 @@ export default function toTsType(node: t.Flow): t.TSType {
     case 'VoidTypeAnnotation':
       return t.tsVoidKeyword();
     default:
-      break;
+      throw new Error(
+        `Could not convert node of type: ${node.type} to TypeScript`,
+      );
   }
 }

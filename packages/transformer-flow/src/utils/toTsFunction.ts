@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import toTs from './toTs';
 import toTsType from './toTsType';
-import generateFreeIdentifier from './generateId';
+import generateId from './generateId';
 
 export default function functionToTsType(
   node: t.FunctionTypeAnnotation,
@@ -16,8 +16,10 @@ export default function functionToTsType(
           return _;
         }
 
-        const constraint = _.bound ? toTs(_.bound) : undefined;
-        const defaultValue = _.default ? toTs(_.default) : undefined;
+        const constraint = _.bound ? (toTs(_.bound) as t.TSType) : undefined;
+        const defaultValue = _.default
+          ? (toTs(_.default) as t.TSType)
+          : undefined;
         const param = t.tsTypeParameter(constraint, defaultValue);
         param.name = _.name;
         return param;
@@ -39,7 +41,7 @@ export default function functionToTsType(
 
       // Generate param name? (Required in TS, optional in Flow)
       if (name == null) {
-        name = generateFreeIdentifier(paramNames);
+        name = generateId(paramNames);
         paramNames.push(name);
       }
 

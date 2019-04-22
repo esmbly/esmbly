@@ -6,7 +6,7 @@ export default function toTsPropertySignature(
 ): t.TSPropertySignature {
   const signature = t.tsPropertySignature(
     node.key,
-    t.tsTypeAnnotation(toTs(node.value)),
+    t.tsTypeAnnotation(toTs(node.value) as t.TSType),
   );
   signature.optional = node.optional;
   signature.readonly = node.variance && node.variance.kind === 'plus';
