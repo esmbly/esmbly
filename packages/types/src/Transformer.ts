@@ -4,10 +4,13 @@ import { File, Format, Output, SyntaxTree } from '.';
 
 export interface Transformer {
   name?: string;
+  format: {
+    input: Format;
+    output: Format;
+    files: Format[];
+  };
   parser?: { parse: (source: string) => ParsedFile };
   parserPlugins?: ParserPlugin[];
-  outputFormats: Format[];
-  inputFormat: Format;
   before?: () => void | Promise<void>;
   transform?: (trees: SyntaxTree[]) => void | Promise<void>;
   createFiles?: (

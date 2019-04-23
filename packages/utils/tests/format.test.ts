@@ -24,7 +24,15 @@ describe('outputFactory', () => {
 });
 
 describe('toOutputFormat', () => {
-  it('converts a string to OutputFormat.Asm', () => {
+  it('converts a string to Format.AssemblyScript', () => {
+    expect(toOutputFormat('as')).toEqual(Format.AssemblyScript);
+    expect(toOutputFormat('.as.js')).toEqual(Format.AssemblyScript);
+    expect(toOutputFormat('.as')).toEqual(Format.AssemblyScript);
+    expect(toOutputFormat('AssemblyScript')).toEqual(Format.AssemblyScript);
+    expect(toOutputFormat('ASSEMBLYSCRIPT')).toEqual(Format.AssemblyScript);
+  });
+
+  it('converts a string to Format.Asm', () => {
     expect(toOutputFormat('asm')).toEqual(Format.Asm);
     expect(toOutputFormat('asm.js')).toEqual(Format.Asm);
     expect(toOutputFormat('.asm')).toEqual(Format.Asm);
@@ -33,14 +41,14 @@ describe('toOutputFormat', () => {
     expect(toOutputFormat('ASM')).toEqual(Format.Asm);
   });
 
-  it('converts a string to OutputFormat.Flow', () => {
+  it('converts a string to Format.Flow', () => {
     expect(toOutputFormat('flow')).toEqual(Format.Flow);
     expect(toOutputFormat('.flow')).toEqual(Format.Flow);
     expect(toOutputFormat('Flow')).toEqual(Format.Flow);
     expect(toOutputFormat('FLOW')).toEqual(Format.Flow);
   });
 
-  it('converts a string to OutputFormat.TypeScript', () => {
+  it('converts a string to Format.TypeScript', () => {
     expect(toOutputFormat('ts')).toEqual(Format.TypeScript);
     expect(toOutputFormat('typescript')).toEqual(Format.TypeScript);
     expect(toOutputFormat('.ts')).toEqual(Format.TypeScript);
@@ -50,7 +58,7 @@ describe('toOutputFormat', () => {
     expect(toOutputFormat('TYPESCRIPT')).toEqual(Format.TypeScript);
   });
 
-  it('correctly coverts a string to OutputFormat.WebAssembly', () => {
+  it('correctly coverts a string to Format.WebAssembly', () => {
     expect(toOutputFormat('wasm')).toEqual(Format.WebAssembly);
     expect(toOutputFormat('webassembly')).toEqual(Format.WebAssembly);
     expect(toOutputFormat('.wasm')).toEqual(Format.WebAssembly);
@@ -60,7 +68,7 @@ describe('toOutputFormat', () => {
     expect(toOutputFormat('WEBASSEMBLY')).toEqual(Format.WebAssembly);
   });
 
-  it('correctly coverts a string to OutputFormat.Wat', () => {
+  it('correctly coverts a string to Format.Wat', () => {
     expect(toOutputFormat('wat')).toEqual(Format.Wat);
     expect(toOutputFormat('.wat')).toEqual(Format.Wat);
     expect(toOutputFormat('Wat')).toEqual(Format.Wat);

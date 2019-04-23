@@ -20,7 +20,7 @@ export default function parse(
         },
       });
       return {
-        format: transformer.inputFormat,
+        format: transformer.format.input,
         represents: file,
         setFormat(format: Format): void {
           this.format = format;

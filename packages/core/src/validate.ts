@@ -21,10 +21,10 @@ export function validateInputFormat(
   transformer: Transformer,
 ): void {
   trees.forEach((tree: SyntaxTree) => {
-    if (transformer.inputFormat === Format.Any) {
+    if (transformer.format.input === Format.Any) {
       return;
     }
-    if (tree.format !== transformer.inputFormat) {
+    if (tree.format !== transformer.format.input) {
       const { name } = transformer;
       throw new Error(
         `Transformer: ${name} does not support input format ${tree.format}`,

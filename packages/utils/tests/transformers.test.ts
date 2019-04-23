@@ -24,7 +24,7 @@ describe('getAvailableOutputFormats', () => {
   it('resolves to an array of available output formats', async () => {
     const requirer = jest.fn();
     requirer.mockReturnValue(() => ({
-      outputFormats: ['TypeScript', 'WebAssembly'],
+      format: { files: ['TypeScript', 'WebAssembly'] },
       transform: jest.fn(),
     }));
     const formats = await getAvailableOutputFormats(

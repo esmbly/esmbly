@@ -14,14 +14,17 @@ export default (options: WasmTransformerOptions = {}): Transformer => {
       }
       return compile(trees, output, options);
     },
-    inputFormat: Format.TypeScript,
+    format: {
+      files: [
+        Format.WebAssembly,
+        Format.Wat,
+        Format.Asm,
+        Format.AssemblyScript,
+      ],
+      input: Format.TypeScript,
+      output: Format.AssemblyScript,
+    },
     name: 'WebAssembly',
-    outputFormats: [
-      Format.WebAssembly,
-      Format.Wat,
-      Format.Asm,
-      Format.AssemblyScript,
-    ],
     parserPlugins: ['typescript'],
     transform(trees: SyntaxTree[]): void {
       const warnings: Warning[] = [];

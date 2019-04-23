@@ -2,6 +2,11 @@ import { Format, Output } from '@esmbly/types';
 
 export function toOutputFormat(format: string): Format {
   switch (format.toLowerCase()) {
+    case 'assemblyscript':
+    case 'as':
+    case '.as':
+    case '.as.js':
+      return Format.AssemblyScript;
     case 'asm':
     case 'asm.js':
     case '.asm':

@@ -46,8 +46,11 @@ describe('validateConfig', () => {
 describe('validateInputFormat', () => {
   it('throws an error if any tree is in the wrong format', () => {
     const transformer: Transformer = {
-      inputFormat: Format.TypeScript,
-      outputFormats: [Format.WebAssembly],
+      format: {
+        files: [Format.WebAssembly],
+        input: Format.TypeScript,
+        output: Format.WebAssembly,
+      },
     };
     const trees = [
       { format: Format.TypeScript },
@@ -60,8 +63,11 @@ describe('validateInputFormat', () => {
 
   it('does not throw an error if each tree is in the correct format', () => {
     const transformer: Transformer = {
-      inputFormat: Format.TypeScript,
-      outputFormats: [Format.WebAssembly],
+      format: {
+        files: [Format.WebAssembly],
+        input: Format.TypeScript,
+        output: Format.WebAssembly,
+      },
     };
     const trees = [
       { format: Format.TypeScript },
@@ -72,8 +78,11 @@ describe('validateInputFormat', () => {
 
   it('does not throw an error if the transformer accepts any input format', () => {
     const transformer: Transformer = {
-      inputFormat: Format.Any,
-      outputFormats: [Format.WebAssembly],
+      format: {
+        files: [Format.WebAssembly],
+        input: Format.Any,
+        output: Format.WebAssembly,
+      },
     };
     const trees = [
       { format: Format.Flow },

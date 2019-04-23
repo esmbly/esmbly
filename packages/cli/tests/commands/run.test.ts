@@ -90,8 +90,11 @@ describe('Run', () => {
       output: [{ format: Format.WebAssembly }],
       transformers: [
         {
-          inputFormat: 'Any',
-          outputFormats: ['Flow'],
+          format: {
+            files: [Format.Flow],
+            input: Format.Any,
+            output: Format.Flow,
+          },
           transform: expect.any(Function),
         },
       ],

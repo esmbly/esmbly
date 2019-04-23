@@ -28,16 +28,19 @@ export default ({
     createFiles(trees: SyntaxTree[], output: Output[]): File[] {
       return ([] as File[]).concat(
         ...output.map((out: Output) => {
-          if (!this.outputFormats.includes(out.format)) {
+          if (!this.format.files.includes(out.format)) {
             return [];
           }
           return trees.map((tree: SyntaxTree) => tree.toFile(out));
         }),
       );
     },
-    inputFormat: Format.Any,
+    format: {
+      files: [Format.TypeScript],
+      input: Format.Any,
+      output: Format.TypeScript,
+    },
     name: 'V8',
-    outputFormats: [Format.TypeScript],
     async transform(trees: SyntaxTree[]): Promise<void> {
       const tmpDir = await createTmpDir('transformer-v8-');
       const tmpName = 'temp.json';
