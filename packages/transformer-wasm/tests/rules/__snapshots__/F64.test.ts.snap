@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rule: F64 transforms number -> f64 1`] = `
+"
+  function add(a: f64, b: f64): f64 {
+    return a + b;
+  }
+"
+`;

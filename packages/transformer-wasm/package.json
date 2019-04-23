@@ -19,8 +19,11 @@
     "build-watch": "tsc -w"
   },
   "dependencies": {
+    "@babel/traverse": "^7.4.3",
+    "@babel/types": "^7.4.0",
     "@esmbly/printer": "^0.0.1",
-    "@esmbly/types": "^0.0.1"
+    "@esmbly/types": "^0.0.1",
+    "assemblyscript": "git://github.com/AssemblyScript/assemblyscript.git"
   },
   "devDependencies": {
     "@esmbly/core": "^0.0.1"

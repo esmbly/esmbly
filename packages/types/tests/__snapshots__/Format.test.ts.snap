@@ -4,6 +4,7 @@ exports[`Format exposes the correct enum 1`] = `
 Object {
   "Any": "Any",
   "Asm": "Asm",
+  "AssemblyScript": "AssemblyScript",
   "Flow": "Flow",
   "JSDoc": "JSDoc",
   "TypeScript": "TypeScript",

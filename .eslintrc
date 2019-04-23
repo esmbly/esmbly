@@ -38,5 +38,7 @@
     "no-await-in-loop": "off",
     "no-unused-expressions": ["error", { "allowShortCircuit": true }]
   },
-  "globals": {}
+  "globals": {
+    "WebAssembly": true
+  }
 }
