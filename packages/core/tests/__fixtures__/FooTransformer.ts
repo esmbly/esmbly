@@ -9,15 +9,19 @@ export default (): Transformer => {
     createFiles(trees: SyntaxTree[], output: Output[]): File[] {
       return ([] as File[]).concat(
         ...output.map((out: Output) => {
-          if (!this.outputFormats.includes(out.format)) {
+          if (!this.format.files.includes(out.format)) {
             return [];
           }
           return trees.map((tree: SyntaxTree) => tree.toFile(out));
         }),
       );
     },
-    inputFormat: Format.Any,
-    outputFormats: [Format.Flow],
+    format: {
+      files: [Format.Flow],
+      input: Format.Any,
+      output: Format.Flow,
+    },
+    parserPlugins: ['flow', 'flowComments'],
     transform(trees: SyntaxTree[]): void {
       trees.forEach((tree: SyntaxTree) => {
         traverse(tree.tree, {

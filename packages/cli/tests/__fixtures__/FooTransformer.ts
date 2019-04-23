@@ -4,8 +4,11 @@ import { FunctionDeclaration } from '@babel/types'; // eslint-disable-line
 
 export default (): Transformer => {
   return {
-    inputFormat: Format.Any,
-    outputFormats: [Format.Flow],
+    format: {
+      files: [Format.Flow],
+      input: Format.Any,
+      output: Format.Flow,
+    },
     transform(trees: SyntaxTree[]): void {
       trees.forEach((tree: SyntaxTree) => {
         traverse(tree.tree, {

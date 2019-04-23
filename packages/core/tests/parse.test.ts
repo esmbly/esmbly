@@ -8,8 +8,11 @@ import tsfile from './__fixtures__/tsfile';
 describe('parse', () => {
   it('correctly parses a JavaScript file', () => {
     const JSTransformer: Transformer = {
-      inputFormat: Format.Any,
-      outputFormats: [Format.TypeScript],
+      format: {
+        files: [],
+        input: Format.Any,
+        output: Format.TypeScript,
+      },
       parserPlugins: [],
     };
     const [ast] = parse([jsfile], JSTransformer);
@@ -23,8 +26,11 @@ describe('parse', () => {
 
   it('correctly parses a Flow file', () => {
     const FlowTransformer: Transformer = {
-      inputFormat: Format.Flow,
-      outputFormats: [Format.TypeScript],
+      format: {
+        files: [Format.TypeScript],
+        input: Format.Flow,
+        output: Format.TypeScript,
+      },
       parserPlugins: ['flow', 'flowComments'],
     };
     const [ast] = parse([flowfile], FlowTransformer);
@@ -38,8 +44,11 @@ describe('parse', () => {
 
   it('correctly parses a TypeScript file', () => {
     const TsTransformer: Transformer = {
-      inputFormat: Format.TypeScript,
-      outputFormats: [Format.Flow],
+      format: {
+        files: [Format.Flow],
+        input: Format.TypeScript,
+        output: Format.Flow,
+      },
       parserPlugins: ['typescript'],
     };
     const [ast] = parse([tsfile], TsTransformer);
@@ -53,8 +62,11 @@ describe('parse', () => {
 
   it('correctly uses a custom parser', () => {
     const ScriptTransformer = {
-      inputFormat: Format.TypeScript,
-      outputFormats: [Format.Flow],
+      format: {
+        files: [Format.Flow],
+        input: Format.TypeScript,
+        output: Format.Flow,
+      },
       parser: {
         parse(source: string) {
           return babelParser.parse(source, {
@@ -77,8 +89,11 @@ describe('parse', () => {
 
   it('adds utilities for handling format', () => {
     const FlowTransformer: Transformer = {
-      inputFormat: Format.Flow,
-      outputFormats: [Format.TypeScript],
+      format: {
+        files: [Format.TypeScript],
+        input: Format.Flow,
+        output: Format.TypeScript,
+      },
       parserPlugins: ['flow', 'flowComments'],
     };
     const [ast] = parse([flowfile], FlowTransformer);
@@ -89,8 +104,11 @@ describe('parse', () => {
 
   it('adds utilities for converting the ast back into a file', () => {
     const FlowTransformer: Transformer = {
-      inputFormat: Format.Flow,
-      outputFormats: [Format.TypeScript],
+      format: {
+        files: [Format.TypeScript],
+        input: Format.Flow,
+        output: Format.TypeScript,
+      },
       parserPlugins: ['flow', 'flowComments'],
     };
     const [ast] = parse([flowfile], FlowTransformer);

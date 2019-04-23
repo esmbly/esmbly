@@ -13,10 +13,13 @@ Array [
 	],
 	transformers: [
 		{
-			inputFormat: 'Any',
-			outputFormats: [
-				'Flow'
-			],
+			format: {
+				files: [
+					'Flow'
+				],
+				input: 'Any',
+				output: 'Flow'
+			},
 			transform: transform(trees) {
             trees.forEach((tree) => {
                 traverse_1.default(tree.tree, {

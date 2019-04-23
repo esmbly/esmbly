@@ -16,16 +16,19 @@ export default ({
     createFiles(trees: SyntaxTree[], output: Output[]): File[] {
       return ([] as File[]).concat(
         ...output.map((out: Output) => {
-          if (!this.outputFormats.includes(out.format)) {
+          if (!this.format.files.includes(out.format)) {
             return [];
           }
           return trees.map((tree: SyntaxTree) => tree.toFile(out));
         }),
       );
     },
-    inputFormat: Format.Flow,
+    format: {
+      files: [Format.TypeScript],
+      input: Format.Flow,
+      output: Format.TypeScript,
+    },
     name: 'Flow',
-    outputFormats: [Format.TypeScript],
     parserPlugins: ['classProperties', 'flow', 'objectRestSpread'],
     transform(trees: SyntaxTree[]): void {
       const warnings: Warning[] = [];

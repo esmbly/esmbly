@@ -22,7 +22,7 @@ export async function getAvailableOutputFormats(
     try {
       const transformerPath = path.resolve(__dirname, '../../', transformer);
       const transformerModule = requirer(transformerPath) as TransformerFactory;
-      const transformerFormats = transformerModule().outputFormats;
+      const transformerFormats = transformerModule().format.files;
       transformerFormats.forEach((format: Format) => outputFormats.add(format));
     } catch {
       // Do nothing if a transformer can't be required or doesn't specify any output formats
