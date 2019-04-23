@@ -1,0 +1,3 @@
+function Mixed(x: unknown): string {
+  return `default string ${x}`;
+}
