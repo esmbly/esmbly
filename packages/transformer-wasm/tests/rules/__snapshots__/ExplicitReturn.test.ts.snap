@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rule: ExplicitReturn throws an error that warns about non explicit return for arrow functions 1`] = `"Found incompatible syntax"`;
+
+exports[`rule: ExplicitReturn throws an error that warns about non explicit return for class methods 1`] = `"Found incompatible syntax"`;
+
+exports[`rule: ExplicitReturn throws an error that warns about non explicit return for function declarations 1`] = `"Found incompatible syntax"`;
+
+exports[`rule: ExplicitReturn throws an error that warns about non explicit return for function expressions 1`] = `"Found incompatible syntax"`;
+
+exports[`rule: ExplicitReturn throws an error that warns about non explicit return for object methods 1`] = `"Found incompatible syntax"`;
+
+exports[`rule: ExplicitReturn throws an error that warns about non explicit return for ts function declaration 1`] = `"Found incompatible syntax"`;
+
+exports[`rule: ExplicitReturn throws an error that warns about non explicit return for ts method declaration 1`] = `"Found incompatible syntax"`;

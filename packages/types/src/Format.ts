@@ -6,4 +6,5 @@ export enum Format {
   Asm = 'Asm',
   JSDoc = 'JSDoc',
   Any = 'Any',
+  AssemblyScript = 'AssemblyScript',
 }
