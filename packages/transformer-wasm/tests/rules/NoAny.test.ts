@@ -1,5 +1,5 @@
 import { Format } from '@esmbly/types';
-import testRunner from '../__fixtures__/testRunner';
+import testRunner from '../helpers/testRunner';
 
 const program = `
   function noAny(a: any): any {

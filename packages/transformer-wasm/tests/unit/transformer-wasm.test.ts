@@ -1,7 +1,7 @@
 import { Format } from '@esmbly/types';
-import WasmTransformerFactory from '../src';
+import WasmTransformerFactory from '../../src';
 
-describe('transformer-wasm', () => {
+describe('unit: transformer-wasm', () => {
   it('specifies the correct name', async () => {
     const transformer = WasmTransformerFactory({});
     expect(transformer.name).toEqual('WebAssembly');

@@ -1,4 +1,4 @@
-import { Rule } from '../types';
+import { Rule } from '@esmbly/types';
 import ExplicitReturn from './ExplicitReturn';
 import F64 from './F64';
 import NoAny from './NoAny';

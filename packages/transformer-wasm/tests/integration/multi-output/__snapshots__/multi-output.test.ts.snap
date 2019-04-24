@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`integration: multi-output handles multiple output formats 1`] = `
+"(module
+ (type $FUNCSIG$ddd (func (param f64 f64) (result f64)))
+ (type $FUNCSIG$v (func))
+ (memory $0 0)
+ (table $0 1 funcref)
+ (elem (i32.const 0) $null)
+ (global $~lib/memory/HEAP_BASE i32 (i32.const 8))
+ (export \\"memory\\" (memory $0))
+ (export \\"table\\" (table $0))
+ (export \\"add\\" (func $testfile/add))
+ (func $testfile/add (; 0 ;) (type $FUNCSIG$ddd) (param $0 f64) (param $1 f64) (result f64)
+  local.get $0
+  local.get $1
+  f64.add
+ )
+ (func $null (; 1 ;) (type $FUNCSIG$v)
+ )
+)
+"
+`;
+
+exports[`integration: multi-output handles multiple output formats 2`] = `
+"
+  export function add(a: f64, b: f64): f64 {
+    return a + b;
+  }
+"
+`;

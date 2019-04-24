@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`transformer-wasm: add transforms the program to AssemblyScript 1`] = `
+exports[`integration: add transforms the input program to AssemblyScript 1`] = `
 "
   export function add(a: f64, b: f64): f64 {
     return a + b;
@@ -8,7 +8,7 @@ exports[`transformer-wasm: add transforms the program to AssemblyScript 1`] = `
 "
 `;
 
-exports[`transformer-wasm: add transforms the program to Wat 1`] = `
+exports[`integration: add transforms the input program to Wat 1`] = `
 "(module
  (type $FUNCSIG$ddd (func (param f64 f64) (result f64)))
  (type $FUNCSIG$v (func))
@@ -30,7 +30,7 @@ exports[`transformer-wasm: add transforms the program to Wat 1`] = `
 "
 `;
 
-exports[`transformer-wasm: add transforms the program to asm.js 1`] = `
+exports[`integration: add transforms the input program to asm.js 1`] = `
 "function asmFunc(global, env, buffer) {
  \\"almost asm\\";
  var HEAP8 = new global.Int8Array(buffer);

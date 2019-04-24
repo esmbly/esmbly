@@ -1,7 +1,6 @@
 import esmbly from '@esmbly/core';
 import { File, FileType, Format, Output } from '@esmbly/types';
-import WasmTransformer from '../../src';
-import { WasmTransformerOptions } from '../../src/types';
+import WasmTransformer, { WasmTransformerOptions } from '../../src';
 
 export default async (
   content: string,

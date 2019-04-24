@@ -1,34 +1,28 @@
-import { File, FileType, Output, SyntaxTree } from '@esmbly/types';
+import { File, Output, SyntaxTree } from '@esmbly/types';
 import printer from '@esmbly/printer';
 // @ts-ignore
 import asc from 'assemblyscript/dist/asc';
-import { WasmTransformerOptions } from './types';
-import getFlags from './flags';
+import { WasmTransformerOptions } from '..';
+import getFileType from './getFileType';
+import getFlags from './getFlags';
+import getCompileTargets from './getCompileTargets';
 
-function getType(filename: string): FileType {
-  switch (filename) {
-    case 'out.wasm':
-      return FileType.WebAssembly;
-    case 'out.wat':
-      return FileType.Wat;
-    case 'out.asm.js':
-      return FileType.Asm;
-    default:
-      throw new Error('Unknown filetype');
-  }
-}
-
-export default function compile(
+export default (
   trees: SyntaxTree[],
   output: Output[],
   options: WasmTransformerOptions,
-): Promise<File[]> {
+): Promise<File[]> => {
   return new Promise(resolve => {
     const outputFiles: File[] = [];
     const files = trees.map(tree => tree.represents);
     const fileNames = files.map(file => file.name + file.type);
-    const formats = [...new Set(output.map(out => out.format))];
-    const flags = getFlags(formats, options);
+    const targets = getCompileTargets(output);
+    const flags = getFlags(targets, options);
+
+    if (targets.length === 0) {
+      resolve(outputFiles);
+      return;
+    }
 
     asc.main(
       [...fileNames, ...flags],
@@ -41,7 +35,7 @@ export default function compile(
         stderr: printer.error,
         stdout: printer.print,
         writeFile: (name: string, content: string | Buffer) => {
-          const type = getType(name);
+          const type = getFileType(name);
           outputFiles.push({
             content,
             dir: '',
@@ -53,4 +47,4 @@ export default function compile(
       () => resolve(outputFiles),
     );
   });
-}
+};

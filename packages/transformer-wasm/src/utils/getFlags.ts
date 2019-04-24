@@ -1,14 +1,14 @@
 import { Format } from '@esmbly/types';
-import { WasmTransformerOptions } from './types';
+import { WasmTransformerOptions } from '..';
 
-export default function getFlags(
-  formats: Format[],
+export default (
+  targets: Format[],
   options: WasmTransformerOptions,
-): string[] {
+): string[] => {
   const flags: string[] = [];
 
-  for (const format of formats) {
-    switch (format) {
+  for (const target of targets) {
+    switch (target) {
       case Format.WebAssembly:
         flags.push('-b', 'out.wasm');
         break;
@@ -40,4 +40,4 @@ export default function getFlags(
   }
 
   return flags;
-}
+};
