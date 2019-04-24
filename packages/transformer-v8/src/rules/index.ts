@@ -1,10 +1,12 @@
 import { Rule } from '@esmbly/types';
-import Fn from './Function';
+import FunctionDeclaration from './FunctionDeclaration';
+import NamedFunctionExpression from './NamedFunctionExpression';
 
 export default () => {
   const rules = new Map<string, Rule>();
 
-  rules.set('Function', Fn);
+  rules.set('FunctionDeclaration', FunctionDeclaration);
+  rules.set('NamedFunctionExpression', NamedFunctionExpression);
 
   return rules;
 };

@@ -11,7 +11,4 @@ export default (
   FunctionDeclaration(path: NodePath<t.FunctionDeclaration>) {
     toTsFunction(path.node, typeProfile, coverageReport, warnings);
   },
-  FunctionExpression(path: NodePath<t.FunctionExpression>) {
-    toTsFunction(path.node, typeProfile, coverageReport, warnings);
-  },
 });
