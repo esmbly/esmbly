@@ -1,7 +1,7 @@
 import inspector from 'inspector';
 import fs from 'fs';
 
-export class Profiler {
+export default class Profiler {
   private session: inspector.Session;
 
   private tmpPath: string;
