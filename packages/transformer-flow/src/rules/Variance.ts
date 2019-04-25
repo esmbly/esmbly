@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { Node, NodePath, Visitor } from '@babel/traverse';
-import { Warning } from '../types';
+import { Warning } from '@esmbly/types';
 import toTs from '../utils/toTs';
 
 export default (warnings: Warning[]): Visitor<Node> => ({

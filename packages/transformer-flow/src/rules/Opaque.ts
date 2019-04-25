@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { Node, NodePath, Visitor } from '@babel/traverse';
-import { Warning } from '../types';
+import { Warning } from '@esmbly/types';
 
 export default (warnings: Warning[]): Visitor<Node> => ({
   OpaqueType(path: NodePath<t.OpaqueType>) {

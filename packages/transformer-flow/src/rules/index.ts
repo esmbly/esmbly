@@ -1,4 +1,4 @@
-import { Rule } from '../types';
+import { Rule } from '@esmbly/types';
 import $Exact from './$Exact';
 import $Keys from './$Keys';
 import $ReadOnly from './$ReadOnly';

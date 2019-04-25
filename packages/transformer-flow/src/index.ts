@@ -1,27 +1,15 @@
 import { File, Format, Output, SyntaxTree, Transformer } from '@esmbly/types';
-import traverse from '@babel/traverse';
-import { Rule, Warning } from './types';
-import getRules from './rules';
-import stripFlowAnnotation from './utils/stripFlowAnnotation';
+import transform from './transform';
+import createFiles from './createFiles';
 
 export interface FlowTransformerOptions {
   removeFlowFlags?: boolean;
-  customRules?: Rule[];
 }
 
-export default ({
-  removeFlowFlags = true,
-}: FlowTransformerOptions): Transformer => {
+export default (options: FlowTransformerOptions): Transformer => {
   return {
     createFiles(trees: SyntaxTree[], output: Output[]): File[] {
-      return ([] as File[]).concat(
-        ...output.map((out: Output) => {
-          if (!this.format.files.includes(out.format)) {
-            return [];
-          }
-          return trees.map((tree: SyntaxTree) => tree.toFile(out));
-        }),
-      );
+      return createFiles(trees, output, this.format.files);
     },
     format: {
       files: [Format.TypeScript],
@@ -31,15 +19,7 @@ export default ({
     name: 'Flow',
     parserPlugins: ['classProperties', 'flow', 'objectRestSpread'],
     transform(trees: SyntaxTree[]): void {
-      const warnings: Warning[] = [];
-      const rules = getRules();
-      trees.forEach((tree: SyntaxTree) => {
-        rules.forEach((rule: Rule) => traverse(tree.tree, rule(warnings)));
-        tree.setFormat(Format.TypeScript);
-        if (removeFlowFlags) {
-          stripFlowAnnotation(tree.tree);
-        }
-      });
+      transform(trees, options);
     },
   };
 };

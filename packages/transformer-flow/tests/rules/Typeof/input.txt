@@ -1,4 +1,0 @@
-/* @flow */
-
-type A = typeof undefined;
-const b = typeof number;

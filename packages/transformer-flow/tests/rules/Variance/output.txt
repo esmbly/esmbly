@@ -1,4 +1,0 @@
-interface Variance {
-  readonly a: string,
-  b: number,
-}
