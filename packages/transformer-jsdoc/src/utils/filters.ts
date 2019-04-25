@@ -1,3 +1,4 @@
+import { Tag } from 'doctrine';
 import { Block, Comment, Node } from '@babel/types';
 
 export function isLeadingComment(node: Node, comment: Comment): boolean {
@@ -11,4 +12,18 @@ export function isLeadingComment(node: Node, comment: Comment): boolean {
     return commentEnd === bodyStart - 1;
   }
   return false;
+}
+
+export function isVariable(tag: Tag): boolean {
+  return tag.title === 'type';
+}
+
+export function isReturn(tag: Tag): boolean {
+  return tag.title === 'returns' || tag.title === 'return';
+}
+
+export function isParam(tag: Tag): boolean {
+  return (
+    tag.title === 'param' || tag.title === 'arg' || tag.title === 'argument'
+  );
 }

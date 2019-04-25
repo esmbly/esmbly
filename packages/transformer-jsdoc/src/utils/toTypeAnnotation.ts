@@ -1,28 +1,23 @@
-import {
-  TSTypeAnnotation,
-  tsArrayType,
-  tsTypeAnnotation,
-  tsUnionType,
-} from '@babel/types';
+import * as t from '@babel/types';
 import { Tag } from 'doctrine';
-import { toKeyword } from '.';
+import toKeyword from './toKeyword';
 
-export function toTypeAnnotation(tag?: Tag): TSTypeAnnotation {
+export default (tag?: Tag): t.TSTypeAnnotation => {
   if (!tag) {
-    return tsTypeAnnotation(toKeyword('any'));
+    return t.tsTypeAnnotation(toKeyword('any'));
   }
 
   const { type } = tag;
 
   if (!type) {
-    return tsTypeAnnotation(toKeyword('any'));
+    return t.tsTypeAnnotation(toKeyword('any'));
   }
 
   // @ts-ignore
   if (type.elements) {
     // @ts-ignore
     const keywords = type.elements.map(t => toKeyword(t.name || t.type));
-    return tsTypeAnnotation(tsUnionType(keywords));
+    return t.tsTypeAnnotation(t.tsUnionType(keywords));
   }
 
   if (
@@ -35,14 +30,14 @@ export function toTypeAnnotation(tag?: Tag): TSTypeAnnotation {
   ) {
     // @ts-ignore
     const arrayTypes = type.applications.map(a =>
-      tsArrayType(toKeyword(a.name)),
+      t.tsArrayType(toKeyword(a.name)),
     );
     if (arrayTypes.length > 1) {
-      return tsTypeAnnotation(tsUnionType(arrayTypes));
+      return t.tsTypeAnnotation(t.tsUnionType(arrayTypes));
     }
-    return tsTypeAnnotation(arrayTypes[0] || toKeyword('any'));
+    return t.tsTypeAnnotation(arrayTypes[0] || toKeyword('any'));
   }
 
   // @ts-ignore
-  return tsTypeAnnotation(toKeyword(type.name || type.type));
-}
+  return t.tsTypeAnnotation(toKeyword(type.name || type.type));
+};

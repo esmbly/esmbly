@@ -1,9 +1,9 @@
 import { SyntaxTree } from '@esmbly/types';
 import { Comment } from '@babel/types';
 import traverse from '@babel/traverse';
-import { isLeadingComment } from '.';
+import { isLeadingComment } from './filters';
 
-export function stripAllComments(ast: SyntaxTree): void {
+export default (ast: SyntaxTree): void => {
   traverse(ast.tree, {
     enter({ node }) {
       if ('comments' in node) {
@@ -16,4 +16,4 @@ export function stripAllComments(ast: SyntaxTree): void {
       }
     },
   });
-}
+};

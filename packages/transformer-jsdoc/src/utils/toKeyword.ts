@@ -1,31 +1,21 @@
-import {
-  TSType,
-  identifier,
-  tsAnyKeyword,
-  tsBooleanKeyword,
-  tsNullKeyword,
-  tsNumberKeyword,
-  tsStringKeyword,
-  tsTypeReference,
-  tsVoidKeyword,
-} from '@babel/types';
+import * as t from '@babel/types';
 
-export function toKeyword(str: string): TSType {
+export default (str: string): t.TSType => {
   switch (str) {
     case 'string':
-      return tsStringKeyword();
+      return t.tsStringKeyword();
     case 'number':
-      return tsNumberKeyword();
+      return t.tsNumberKeyword();
     case 'boolean':
-      return tsBooleanKeyword();
+      return t.tsBooleanKeyword();
     case 'null':
     case 'NullLiteral':
-      return tsNullKeyword();
+      return t.tsNullKeyword();
     case 'undefined':
-      return tsVoidKeyword();
+      return t.tsVoidKeyword();
     case 'AllLiteral':
-      return tsAnyKeyword();
+      return t.tsAnyKeyword();
     default:
-      return tsTypeReference(identifier(str));
+      return t.tsTypeReference(t.identifier(str));
   }
-}
+};

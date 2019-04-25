@@ -4,13 +4,13 @@ import path from 'path';
 import { File, FileType, Format } from '@esmbly/types';
 import JSDocTransformer, { JSDocTransformerOptions } from '../../src';
 
-export default async function run(
-  testDir: string,
+export default async (
+  root: string,
   options: JSDocTransformerOptions = {},
-): Promise<{ expected: string; results: File }> {
-  const expectedPath = path.join(__dirname, `${testDir}/output.ts`);
+): Promise<{ expected: string; results: File }> => {
+  const expectedPath = path.join(root, `output.ts`);
   const expected = fs.readFileSync(expectedPath, 'utf8');
-  const filePath = path.join(__dirname, `${testDir}/input.js`);
+  const filePath = path.join(root, `input.js`);
   const content = fs.readFileSync(filePath, 'utf8');
   const { name, dir } = path.parse(filePath);
   const [results] = await esmbly.run({
@@ -26,4 +26,4 @@ export default async function run(
     transformers: [JSDocTransformer(options)],
   });
   return { expected, results };
-}
+};

@@ -1,11 +1,8 @@
 import { NodePath } from '@babel/traverse';
 import { Comment, Node } from '@babel/types';
-import { isLeadingComment } from './isLeadingComment';
+import { isLeadingComment } from './filters';
 
-export function getLeadingComments(
-  node: Node,
-  parentPath: NodePath,
-): Comment[] {
+const getLeadingComments = (node: Node, parentPath: NodePath): Comment[] => {
   // If the node itself has leading comments
   if (node.leadingComments) {
     return [...node.leadingComments];
@@ -24,4 +21,6 @@ export function getLeadingComments(
   }
 
   return [];
-}
+};
+
+export default getLeadingComments;
