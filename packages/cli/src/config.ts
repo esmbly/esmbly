@@ -10,7 +10,7 @@ import {
 } from '@esmbly/utils';
 import { promptForConfig } from './prompt';
 
-export const DEFAULT_FILE = '.esmblyrc.js';
+export const DEFAULT_FILE = 'esmbly.config.js';
 
 export async function getTemplateConfig(): Promise<string> {
   const templatePath = path.resolve(__dirname, `../defaults/${DEFAULT_FILE}`);

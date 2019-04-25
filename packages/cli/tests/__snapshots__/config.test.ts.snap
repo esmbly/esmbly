@@ -3,7 +3,7 @@
 exports[`createConfig creates a new config file 1`] = `
 Array [
   Array [
-    "root-path/.esmblyrc.js",
+    "root-path/esmbly.config.js",
     "module.exports = {
 	input: [
 		'**/*.js'
@@ -48,7 +48,7 @@ Array [
 exports[`createConfig creates a new config file with default values when passing the default option 1`] = `
 Array [
   Array [
-    "root-path/.esmblyrc.js",
+    "root-path/esmbly.config.js",
     "module.exports = {
   files: [],
   transformers: [],
@@ -62,6 +62,6 @@ Array [
 ]
 `;
 
-exports[`createConfig throws an error if there already is a config file 1`] = `"Config root-path/.esmblyrc.js already exists. Remove that file first."`;
+exports[`createConfig throws an error if there already is a config file 1`] = `"Config root-path/esmbly.config.js already exists. Remove that file first."`;
 
 exports[`getTemplateConfig resolves to the correct template config 1`] = `Promise {}`;

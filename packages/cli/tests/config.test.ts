@@ -45,7 +45,7 @@ describe('createConfig', () => {
     const config = await createConfig({ default: false, force: false });
     expect(promptSpy).toHaveBeenCalledTimes(1);
     expect(writeFileSpy.mock.calls).toMatchSnapshot();
-    expect(config).toEqual({ fileName: '.esmblyrc.js', root: 'root-path' });
+    expect(config).toEqual({ fileName: 'esmbly.config.js', root: 'root-path' });
     tearDown();
   });
 
@@ -70,7 +70,7 @@ describe('createConfig', () => {
     const { promptSpy, tearDown } = setup(true);
     const config = await createConfig({ default: false, force: true });
     expect(promptSpy).toHaveBeenCalled();
-    expect(config).toEqual({ fileName: '.esmblyrc.js', root: 'root-path' });
+    expect(config).toEqual({ fileName: 'esmbly.config.js', root: 'root-path' });
     tearDown();
   });
 });
@@ -79,7 +79,7 @@ describe('getDefaultConfigPath', () => {
   it('returns the correct default config path', () => {
     const getRootSpy = jest.spyOn(utils, 'getRoot');
     getRootSpy.mockReturnValue('root-path');
-    expect(getDefaultConfigPath()).toEqual('root-path/.esmblyrc.js');
+    expect(getDefaultConfigPath()).toEqual('root-path/esmbly.config.js');
   });
 });
 
