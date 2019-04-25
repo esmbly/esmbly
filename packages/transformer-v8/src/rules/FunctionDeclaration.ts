@@ -9,6 +9,16 @@ export default (
   coverageReport: CoverageReport,
 ): Visitor<Node> => ({
   FunctionDeclaration(path: NodePath<t.FunctionDeclaration>) {
-    toTsFunction(path.node, typeProfile, coverageReport, warnings);
+    const { name } = path.node.id || { name: null };
+
+    if (!name) {
+      warnings.push({
+        info: 'Could not collect type information for function.',
+        node: path.node,
+      });
+      return;
+    }
+
+    toTsFunction(path.node, name, typeProfile, coverageReport, warnings);
   },
 });

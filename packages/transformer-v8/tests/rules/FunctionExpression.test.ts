@@ -5,9 +5,9 @@ import setup from '../helpers/setup';
 jest.setTimeout(10000);
 jest.mock('@esmbly/printer');
 
-const testDir = path.join(__dirname, '__fixtures__/NamedFunctionExpression');
+const testDir = path.join(__dirname, '__fixtures__/FunctionExpression');
 
-describe('rule: NamedFunctionExpression', () => {
+describe('rule: FunctionExpression', () => {
   it('correctly transforms a function expression to TypeScript', async () => {
     const testCommand = `jest ${testDir} --config ${testDir}/jest.config.js`;
     const { runConfig, expected } = setup(testDir, testCommand);

@@ -1,4 +1,4 @@
-const add = require('.');
+const { add } = require('.');
 
 describe('add', () => {
   it('returns the sum of two numbers', () => {

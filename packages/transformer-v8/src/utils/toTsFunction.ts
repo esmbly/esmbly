@@ -9,20 +9,15 @@ import {
 import toTsTypeAnnotation from './toTsTypeAnnotation';
 
 export default function(
-  node: t.FunctionDeclaration | t.FunctionExpression,
+  node:
+    | t.FunctionDeclaration
+    | t.FunctionExpression
+    | t.ArrowFunctionExpression,
+  name: string,
   typeProfile: TypeProfile,
   coverageReport: CoverageReport,
   warnings: Warning[],
 ): void {
-  if (!t.isIdentifier(node.id)) {
-    warnings.push({
-      info: 'Could not collect type information for function.',
-      node,
-    });
-    return;
-  }
-
-  const { name } = node.id;
   const coverage = coverageReport.functions.find(
     (fn: FunctionCoverage) => fn.functionName === name,
   );
