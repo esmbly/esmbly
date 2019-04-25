@@ -3,9 +3,7 @@ import toTs from './toTs';
 import toTsType from './toTsType';
 import generateId from './generateId';
 
-export default function functionToTsType(
-  node: t.FunctionTypeAnnotation,
-): t.TSFunctionType {
+export default (node: t.FunctionTypeAnnotation): t.TSFunctionType => {
   let typeParams;
 
   if (node.typeParameters) {
@@ -61,4 +59,4 @@ export default function functionToTsType(
   }
 
   return f;
-}
+};

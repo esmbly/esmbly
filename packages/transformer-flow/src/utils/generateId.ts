@@ -1,6 +1,6 @@
 const candidates = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
-export default function generateId(usedIdentifiers: string[]): string {
+export default (usedIdentifiers: string[]): string => {
   const identifier = candidates.find(
     (candidate: string) => usedIdentifiers.indexOf(candidate) < 0,
   );
@@ -9,4 +9,4 @@ export default function generateId(usedIdentifiers: string[]): string {
   }
   usedIdentifiers.push(identifier);
   return identifier;
-}
+};

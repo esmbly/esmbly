@@ -3,9 +3,9 @@ import toTsType from './toTsType';
 import toTsPropertySignature from './toTsPropertySignature';
 import toTsAsExpression from './toTsAsExpression';
 
-export default function toTs(
+export default (
   node: t.Flow | t.TSType | t.Node,
-): t.TSType | t.TSTypeElement | t.Expression {
+): t.TSType | t.TSTypeElement | t.Expression => {
   if (t.isTSType(node)) {
     return node;
   }
@@ -45,4 +45,4 @@ export default function toTs(
         `Could not convert node of type: ${node.type} to TypeScript`,
       );
   }
-}
+};
