@@ -1,14 +1,7 @@
-type Callback = (error: Error | null | undefined) => void;
-type Encoding = string | undefined;
-type WriteFn = (
-  chunk: string,
-  encoding?: Encoding,
-  callback?: Callback,
-) => boolean;
+import { Callback, Encoding, WriteFn } from './types';
 
 class Printer {
   private stdout: NodeJS.WriteStream | null;
-
   private stderr: NodeJS.WriteStream | null;
 
   public constructor() {
