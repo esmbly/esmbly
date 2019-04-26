@@ -13,12 +13,13 @@ import { exec } from 'child_process';
 import { createTmpDir, readFile } from '@esmbly/utils';
 import { promisify } from 'util';
 import printer from '@esmbly/printer';
-import { V8TransformerOptions } from '..';
+// import { V8TransformerOptions } from '..';
 import getRules from './rules';
 
 export default async (
   trees: SyntaxTree[],
-  { testCommand, debug = false }: V8TransformerOptions,
+  testCommand: string,
+  debug?: boolean,
 ) => {
   const tmpDir = await createTmpDir('transformer-v8-');
   const tmpName = 'temp.json';

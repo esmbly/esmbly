@@ -19,7 +19,7 @@ export default (options: V8TransformerOptions): Transformer => {
     },
     name: 'V8',
     transform(trees: SyntaxTree[]): Promise<void> {
-      return transform(trees, options);
+      return transform(trees, options.testCommand, options.debug);
     },
   };
 };

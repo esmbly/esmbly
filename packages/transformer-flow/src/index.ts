@@ -6,7 +6,7 @@ export interface FlowTransformerOptions {
   removeFlowFlags?: boolean;
 }
 
-export default (options: FlowTransformerOptions): Transformer => {
+export default (options: FlowTransformerOptions = {}): Transformer => {
   return {
     createFiles(trees: SyntaxTree[], output: Output[]): File[] {
       return createFiles(trees, output, this.format.files);

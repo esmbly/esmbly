@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`E2E: add-jsdoc-to-wasm outputs a TypeScript file 1`] = `
+"/**
+ * Add two numbers
+ * @param {number} a 
+ * @param {number} b
+ * @returns {number} 
+ */
+function add(a: number, b: number): number {
+  return a + b;
+}
+
+module.exports.add = add;
+"
+`;

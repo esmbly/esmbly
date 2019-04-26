@@ -6,7 +6,7 @@ export interface JSDocTransformerOptions {
   stripComments?: boolean;
 }
 
-export default (options: JSDocTransformerOptions): Transformer => {
+export default (options: JSDocTransformerOptions = {}): Transformer => {
   return {
     createFiles(trees: SyntaxTree[], output: Output[]): File[] {
       return createFiles(trees, output, this.format.files);

@@ -16,5 +16,5 @@ lerna-debug.log
 npm-debug.log
 npm-debug.log*
 yarn-error.log
+tsconfig.tsbuildinfo
 
-esmbly.config.js

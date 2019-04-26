@@ -18,19 +18,22 @@
     "jest": "^24.1.0",
     "lerna": "^3.13.1",
     "prettier": "^1.16.4",
+    "rimraf": "^2.6.3",
     "ts-jest": "^24.0.0",
     "typescript": "^3.3.3333"
   },
   "scripts": {
     "postinstall": "lerna bootstrap",
     "build": "lerna run build",
-    "build-clean": "rm -rf ./packages/*/dist",
-    "clean-all": "rm -rf ./node_modules && rm -rf ./packages/*/node_modules && yarn build-clean",
+    "build-clean": "rimraf ./packages/*/dist",
+    "clean-examples": "rimraf ./examples/*/dist",
+    "clean-all": "rimraf ./node_modules && rimraf ./packages/*/node_modules && yarn build-clean",
     "dev": "lerna run build-watch --parallel",
     "test": "jest",
     "test:all": "yarn lint && yarn test",
-    "test:ci": "yarn coverage && yarn coveralls",
+    "test:ci": "yarn coverage && yarn coveralls && yarn test:e2e",
     "test:node8": "yarn test --testPathIgnorePatterns ./packages/transformer-v8/**/*.ts ",
+    "test:e2e": "./scripts/test-e2e.sh",
     "lint": "eslint packages --ext ts --max-warnings 0",
     "coverage": "jest --coverage",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
@@ -41,7 +44,7 @@
       "!<rootDir>/packages/**/src/dist/**/*.ts"
     ],
     "testMatch": [
-      "**/tests/**/**/**.test.(ts)",
+      "**/**.test.(ts)",
       "!**/__fixtures__/**"
     ],
     "coverageDirectory": "<rootDir>/coverage",

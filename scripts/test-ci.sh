@@ -4,7 +4,9 @@ node_version=$(node -v);
 
 if  [ ${node_version:1:1} = 8 ];
   then
-    exec yarn test:node8
+    yarn test:node8
   else
-    exec yarn test:ci
+    yarn coverage
+    yarn coveralls
+    yarn test:e2e
 fi

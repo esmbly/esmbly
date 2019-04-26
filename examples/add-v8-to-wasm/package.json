@@ -1,0 +1,17 @@
+{
+  "name": "add-v8-to-wasm-example",
+  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "@esmbly/cli": "^0.0.1",
+    "@esmbly/transformer-v8": "^0.0.1",
+    "@esmbly/transformer-wasm": "^0.0.1"
+  },
+  "devDependencies": {
+    "jest": "^24.1.0"
+  }
+}

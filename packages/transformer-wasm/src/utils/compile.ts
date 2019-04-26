@@ -1,4 +1,4 @@
-import { File, Output, SyntaxTree } from '@esmbly/types';
+import { File, Format, Output, SyntaxTree } from '@esmbly/types';
 import printer from '@esmbly/printer';
 // @ts-ignore
 import asc from 'assemblyscript/dist/asc';
@@ -6,6 +6,19 @@ import { WasmTransformerOptions } from '..';
 import getFileType from './getFileType';
 import getFlags from './getFlags';
 import getCompileTargets from './getCompileTargets';
+
+function getFormat(filename: string): Format {
+  switch (filename) {
+    case 'out.wasm':
+      return Format.WebAssembly;
+    case 'out.wat':
+      return Format.Wat;
+    case 'out.asm.js':
+      return Format.Asm;
+    default:
+      throw new Error('Unknown filetype');
+  }
+}
 
 export default (
   trees: SyntaxTree[],
@@ -15,7 +28,8 @@ export default (
   return new Promise(resolve => {
     const outputFiles: File[] = [];
     const files = trees.map(tree => tree.represents);
-    const fileNames = files.map(file => file.name + file.type);
+    // TODO: The file represented by the tree should be converted to TS before this
+    const fileNames = files.map(file => `${file.name}.ts`);
     const targets = getCompileTargets(output);
     const flags = getFlags(targets, options);
 
@@ -29,18 +43,26 @@ export default (
       {
         listFiles: () => files,
         readFile: (filename: string) => {
-          const file = files.find(f => f.name + f.type === filename);
+          // TODO: The file represented by the tree should be converted to TS before this
+          const file = files.find(f => `${f.name}.ts` === filename);
           return file ? file.content : null;
         },
         stderr: printer.error,
         stdout: printer.print,
         writeFile: (name: string, content: string | Buffer) => {
           const type = getFileType(name);
-          outputFiles.push({
-            content,
-            dir: '',
-            name,
-            type,
+          const format = getFormat(name);
+          output.forEach((out: Output) => {
+            if (out.format === format) {
+              outputFiles.push({
+                content,
+                dir: out.dir || '',
+                filename: out.filename,
+                // TODO: Default the name to input file(s) name?
+                name: 'out',
+                type,
+              });
+            }
           });
         },
       },

@@ -9,3 +9,5 @@ export * from './Format';
 export * from './Transformer';
 export * from './TypeProfile';
 export * from './CoverageReport';
+export * from './Warning';
+export * from './Rule';
