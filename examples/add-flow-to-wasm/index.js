@@ -8,8 +8,8 @@ const createInstance = async () => {
   if (instance) {
     return instance;
   }
-  const sourcePath = path.join(__dirname, 'dist', 'out.wasm');
-  const source = await readFile(sourcePath, 'utf8');
+  const sourcePath = path.join(__dirname, 'dist', 'add.wasm');
+  const source = await readFile(sourcePath);
   instance = await WebAssembly.instantiate(source, {});
   return instance;
 }
