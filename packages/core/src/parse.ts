@@ -1,7 +1,7 @@
 import * as parser from '@babel/parser';
 import { File, Format, Output, SyntaxTree, Transformer } from '@esmbly/types';
-import { fileTypeForOutputFormat } from '@esmbly/utils';
 import recast from 'recast';
+import { fileTypeForOutputFormat } from './fileTypeForOutputFormat';
 
 export default function parse(
   files: File[],
