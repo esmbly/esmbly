@@ -27,7 +27,10 @@ export default (
 ): Promise<File[]> => {
   return new Promise(resolve => {
     const outputFiles: File[] = [];
-    const files = trees.map(tree => tree.represents);
+    const files = trees.map(tree => ({
+      ...tree.represents,
+      content: tree.toCode(),
+    }));
     // TODO: The file represented by the tree should be converted to TS before this
     const fileNames = files.map(file => `${file.name}.ts`);
     const targets = getCompileTargets(output);

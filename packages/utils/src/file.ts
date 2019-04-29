@@ -91,7 +91,7 @@ export async function readFiles(patterns: string[]): Promise<File[]> {
       const { name, ext, dir } = path.parse(file);
       return {
         content: content.toString(),
-        dir,
+        dir: path.resolve(dir),
         name,
         type: toFileType(ext),
       };

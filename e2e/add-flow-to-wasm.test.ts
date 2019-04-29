@@ -12,9 +12,13 @@ const dist = path.join(example, 'dist');
 
 describe('E2E: add-flow-to-wasm', () => {
   beforeAll(async () => {
-    await exec(`yarn run esmbly run`, {
+    const { stderr } = await exec(`yarn run esmbly run`, {
       cwd: example,
     });
+    if (stderr) {
+      // eslint-disable-next-line no-console
+      console.log(stderr);
+    }
   });
 
   it('outputs a WebAssembly binary', async () => {
