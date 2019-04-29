@@ -30,7 +30,7 @@
     "clean-all": "rimraf ./node_modules && rimraf ./packages/*/node_modules && yarn build-clean",
     "dev": "lerna run build-watch --parallel",
     "test": "jest",
-    "test:node8": "yarn test --testPathIgnorePatterns ./packages/transformer-v8/**/*.ts ",
+    "test:node8": "yarn test --testPathIgnorePatterns ./packages/transformer-v8/** ",
     "test:e2e": "./scripts/test-e2e.sh",
     "lint": "eslint packages --ext ts --max-warnings 0",
     "coverage": "jest --coverage",
