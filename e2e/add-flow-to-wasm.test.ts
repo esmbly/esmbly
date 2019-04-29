@@ -1,24 +1,16 @@
 import fs from 'fs';
 import util from 'util';
 import path from 'path';
-import cp from 'child_process';
+import { testRunner } from './helpers/testRunner';
 
-jest.setTimeout(10000);
-
-const exec = util.promisify(cp.exec);
 const readFile = util.promisify(fs.readFile);
 const example = path.resolve(path.join('examples', 'add-flow-to-wasm'));
 const dist = path.join(example, 'dist');
 
 describe('E2E: add-flow-to-wasm', () => {
   beforeAll(async () => {
-    const { stderr } = await exec(`yarn run esmbly run`, {
-      cwd: example,
-    });
-    if (stderr) {
-      // eslint-disable-next-line no-console
-      console.log(stderr);
-    }
+    jest.setTimeout(10000);
+    await testRunner(example);
   });
 
   it('outputs a WebAssembly binary', async () => {
