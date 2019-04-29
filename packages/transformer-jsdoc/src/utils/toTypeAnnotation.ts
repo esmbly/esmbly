@@ -16,7 +16,9 @@ export default (tag?: Tag): t.TSTypeAnnotation => {
   // @ts-ignore
   if (type.elements) {
     // @ts-ignore
-    const keywords = type.elements.map(t => toKeyword(t.name || t.type));
+    const keywords = type.elements.map(element =>
+      toKeyword(element.name || element.type),
+    );
     return t.tsTypeAnnotation(t.tsUnionType(keywords));
   }
 
