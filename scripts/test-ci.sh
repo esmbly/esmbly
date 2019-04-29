@@ -8,5 +8,5 @@ if  [ ${node_version:1:1} = 8 ];
   else
     yarn coverage
     yarn coveralls
-    yarn test:e2e
+    scripts/test-e2e.sh
 fi
