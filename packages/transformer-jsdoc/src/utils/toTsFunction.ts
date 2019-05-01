@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { NodePath } from '@babel/traverse';
 import getLeadingComments from './getLeadingComments';
-import getTypes from './getTypes';
+import parseComments from './parseComments';
 import toTypeAnnotation from './toTypeAnnotation';
 
 export default (
@@ -12,7 +12,7 @@ export default (
   parentPath: NodePath<t.Node>,
 ): void => {
   const leadingComments = getLeadingComments(node, parentPath);
-  const { returnType, paramTypes } = getTypes(leadingComments);
+  const { returnType, paramTypes } = parseComments(leadingComments);
 
   // If there aren't any leading JSDoc comments
   if (leadingComments.length < 1) {

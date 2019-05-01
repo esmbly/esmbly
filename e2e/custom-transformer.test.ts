@@ -13,7 +13,7 @@ describe('E2E: custom-transformer', () => {
   });
 
   it('outputs a TypeScript file where the foo function has been renamed to bar', async () => {
-    const result = await readFile(path.join(dist, 'bar.ts'));
+    const result = await readFile(path.join(dist, 'bar.ts'), 'utf8');
     expect(result).toMatchSnapshot();
   });
 });

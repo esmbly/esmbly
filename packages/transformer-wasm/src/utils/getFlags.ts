@@ -39,5 +39,14 @@ export default (
     flags.push('-c');
   }
 
+  if (options.importMemory) {
+    flags.push('--importMemory');
+  }
+
+  if (options.use) {
+    flags.push(`--use`);
+    flags.push(options.use.join(' '));
+  }
+
   return flags;
 };

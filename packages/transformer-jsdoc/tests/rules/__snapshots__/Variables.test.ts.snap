@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rule: Variables transforms a variable declaration to TypeScript (const) 1`] = `
+"
+      /**
+       * @type {number}
+       * @const
+       */
+      const c: number = 2;
+    "
+`;
+
+exports[`rule: Variables transforms a variable declaration to TypeScript (exported) 1`] = `
+"
+      /**
+       * @type {number}
+       * @const
+       */
+      export const c: number = 2;
+    "
+`;
+
+exports[`rule: Variables transforms a variable declaration to TypeScript (let) 1`] = `
+"
+      /**
+       * @type {number}
+       */
+      let b: number = 1;
+    "
+`;
+
+exports[`rule: Variables transforms a variable declaration to TypeScript (var) 1`] = `
+"
+      /**
+       * @type {number}
+       */
+      var a: number = 1;
+    "
+`;

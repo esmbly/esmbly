@@ -25,13 +25,14 @@
   "scripts": {
     "postinstall": "lerna bootstrap",
     "build": "lerna run build",
+    "build-e2e": "yarn run lerna bootstrap && yarn clean-examples && yarn build",
     "build-clean": "rimraf ./packages/*/dist",
     "clean-examples": "rimraf ./examples/*/dist",
     "clean-all": "rimraf ./node_modules && rimraf ./packages/*/node_modules && yarn build-clean",
     "dev": "lerna run build-watch --parallel",
     "test": "jest",
-    "test:node8": "yarn test --testPathIgnorePatterns ./packages/transformer-v8/** ",
-    "test:e2e": "./scripts/test-e2e.sh",
+    "test-node8": "yarn test --testPathIgnorePatterns ./packages/transformer-v8/** ",
+    "test-e2e": "yarn test e2e --config=e2e/jest.config.js",
     "lint": "eslint packages --ext ts --max-warnings 0",
     "coverage": "jest --coverage",
     "coveralls": "cat ./coverage/lcov.info | coveralls"

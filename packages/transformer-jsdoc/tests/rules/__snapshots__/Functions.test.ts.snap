@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rule: Functions transforms a default exported function to TypeScript 1`] = `
+"
+      /**
+       * @param {number} n
+       * @returns {number}
+       */
+      export default function square(n: number): number {
+        return n * n; 
+      }
+    "
+`;
+
+exports[`rule: Functions transforms a function declaration to TypeScript 1`] = `
+"
+      /**
+       * @param {number} n
+       * @returns {number}
+       */
+      function square(n: number): number {
+        return n * n; 
+      }
+    "
+`;
+
+exports[`rule: Functions transforms a function expression to TypeScript 1`] = `
+"
+      /**
+       * @param {number} n
+       * @returns {number}
+       */
+      var square = function(n: number): number {
+        return n * n; 
+      }
+    "
+`;
+
+exports[`rule: Functions transforms an arrow function to TypeScript 1`] = `
+"
+      /**
+       * @param {number} n
+       * @returns {number}
+       */
+      const square = (n: number): number => n * n; 
+    "
+`;
+
+exports[`rule: Functions transforms an exported function to TypeScript 1`] = `
+"
+      /**
+       * @param {number} n
+       * @returns {number}
+       */
+      export function square(n: number): number {
+        return n * n; 
+      }
+    "
+`;

@@ -7,6 +7,8 @@ export interface WasmTransformerOptions {
   optimizeLevel?: number;
   shrinkLevel?: number;
   validate?: boolean;
+  importMemory?: boolean;
+  use?: string[];
   // TODO: ADD more options
 }
 

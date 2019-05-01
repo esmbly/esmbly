@@ -27,3 +27,15 @@ export function isParam(tag: Tag): boolean {
     tag.title === 'param' || tag.title === 'arg' || tag.title === 'argument'
   );
 }
+
+export function isExternal(tag: Tag): boolean {
+  return tag.title === 'external';
+}
+
+export function isConstant(tag: Tag): boolean {
+  return tag.title === 'const' || tag.title === 'constant';
+}
+
+export function isTypeArgument(tag: Tag): boolean {
+  return tag.title === 'typeArgument';
+}

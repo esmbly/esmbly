@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rule: CallExpression adds a type argument to the call expression 1`] = `
+"
+      /**
+       * @type {i32}
+       * @typeArgument
+       */
+      someFn<i32>(1)
+    "
+`;
