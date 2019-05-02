@@ -39,7 +39,7 @@ export default (
     flags.push('-c');
   }
 
-  if (options.importMemory) {
+  if (options.memory && options.memory.import) {
     flags.push('--importMemory');
   }
 

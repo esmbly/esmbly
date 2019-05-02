@@ -1,29 +1,29 @@
-const JSDocTransformer = require('@esmbly/transformer-jsdoc').default;
+const FlowTransformer = require('@esmbly/transformer-flow').default;
 const WasmTransformer = require('@esmbly/transformer-wasm').default;
 
 module.exports = {
   input: ['./src/**/*.js'],
   transformers: [
-    JSDocTransformer({}),
-    WasmTransformer({ memory: { import: true }, use: ['Math=JSMath'] }),
+    FlowTransformer({}),
+    WasmTransformer({ memory: { export: true, allocator: 'allocator/tlsf' } })
   ],
   output: [
     {
       dir: 'dist',
       format: '.ts',
-      flatten: true,
+      flatten: true
     },
     {
       dir: 'dist',
       format: '.wasm',
-      filename: 'out.wasm',
-      flatten: true,
+      filename: 'pad.wasm',
+      flatten: true
     },
     {
       dir: 'dist',
       format: '.as',
       filename: '[name].as.ts',
-      flatten: true,
+      flatten: true
     },
   ],
 };
