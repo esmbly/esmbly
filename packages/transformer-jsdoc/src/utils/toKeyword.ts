@@ -33,10 +33,13 @@ function handleNameExpression(tag: type.NameExpression): t.TSType {
     case 'Array':
     case 'array':
       return t.tsArrayType(t.tsAnyKeyword());
+    case 'String':
     case 'string':
       return t.tsStringKeyword();
+    case 'Number':
     case 'number':
       return t.tsNumberKeyword();
+    case 'Boolean':
     case 'boolean':
       return t.tsBooleanKeyword();
     case 'null':

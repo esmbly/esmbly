@@ -11,7 +11,7 @@ const getLeadingComments = (node: Node, parentPath: NodePath): Comment[] => {
   // If the parent node has leading comments
   if (parentPath.node && parentPath.node.leadingComments) {
     return parentPath.node.leadingComments.filter((comment: Comment) =>
-      isLeadingComment(node, comment),
+      isLeadingComment(node, comment, parentPath),
     );
   }
 
