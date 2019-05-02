@@ -1,6 +1,6 @@
 {
   "name": "game-of-life-example",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "esmbly run && http-server . -o -c-1"

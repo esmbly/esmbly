@@ -32,7 +32,7 @@
     "dev": "lerna run build-watch --parallel",
     "test": "jest",
     "test-node8": "yarn test --testPathIgnorePatterns ./packages/transformer-v8/** ",
-    "test-e2e": "yarn test e2e --config=e2e/jest.config.js",
+    "test-e2e": "yarn test e2e --config=e2e/jest.config.js --runInBand",
     "lint": "eslint packages --ext ts --max-warnings 0",
     "coverage": "jest --coverage",
     "coveralls": "cat ./coverage/lcov.info | coveralls"

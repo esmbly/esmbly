@@ -9,6 +9,7 @@ const dist = path.join(example, 'dist');
 
 describe('E2E: custom-transformer', () => {
   beforeAll(async () => {
+    jest.setTimeout(10000);
     await testRunner(example);
   });
 

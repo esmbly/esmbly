@@ -1,33 +1,26 @@
 import doctrine, { Tag } from 'doctrine';
 import { Comment } from '@esmbly/types/node_modules/@babel/types';
-import {
-  isConstant,
-  isExternal,
-  isParam,
-  isReturn,
-  isTypeArgument,
-  isVariable,
-} from './filters';
+import * as filters from './filters';
 
-export default (
-  leadingComments: Comment[],
-): {
+interface ParseResult {
   variableType?: Tag;
   returnType?: Tag;
   paramTypes: Tag[];
   isExternal: boolean;
   isConstant: boolean;
   isTypeArgument: boolean;
-} => {
+}
+
+export default (leadingComments: Comment[]): ParseResult => {
   const comments = leadingComments.map(c => c.value).join();
-  const { tags } = doctrine.parse(comments, { unwrap: true });
+  const { tags } = doctrine.parse(comments, { sloppy: true, unwrap: true });
 
   return {
-    isConstant: tags.find(isConstant) !== undefined,
-    isExternal: tags.find(isExternal) !== undefined,
-    isTypeArgument: tags.find(isTypeArgument) !== undefined,
-    paramTypes: tags.filter(isParam),
-    returnType: tags.find(isReturn),
-    variableType: tags.find(isVariable),
+    isConstant: tags.find(filters.isConstant) !== undefined,
+    isExternal: tags.find(filters.isExternal) !== undefined,
+    isTypeArgument: tags.find(filters.isTypeArgument) !== undefined,
+    paramTypes: tags.filter(filters.isParam),
+    returnType: tags.find(filters.isReturn),
+    variableType: tags.find(filters.isVariable),
   };
 };
