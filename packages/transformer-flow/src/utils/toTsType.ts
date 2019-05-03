@@ -1,6 +1,7 @@
 import * as t from '@babel/types';
 import getId from './getId';
 import toTsFunction from './toTsFunction';
+import toTsTypeLiteral from './toTsTypeLiteral';
 
 export default function toTsType(node: t.Flow): t.TSType {
   switch (node.type) {
@@ -43,29 +44,7 @@ export default function toTsType(node: t.Flow): t.TSType {
     case 'TypeofTypeAnnotation':
       return t.tsTypeQuery(getId(node.argument));
     case 'ObjectTypeAnnotation':
-      return t.tsTypeLiteral([
-        ...node.properties.map(
-          (property: t.ObjectTypeProperty | t.ObjectTypeSpreadProperty) => {
-            if (t.isObjectTypeSpreadProperty(property)) {
-              return property;
-            }
-            const s = t.tsPropertySignature(
-              property.key,
-              t.tsTypeAnnotation(toTsType(property.value)),
-            );
-            s.optional = property.optional;
-            // TODO: Improve this?
-            // @ts-ignore
-            // eslint-disable-next-line
-            return s as any;
-            // TODO: anonymous indexers
-            // TODO: named indexers
-            // TODO: call properties
-            // TODO: variance
-          },
-        ),
-        // ...node.indexers.map(_ => tSIndexSignature())
-      ]);
+      return toTsTypeLiteral(node);
     case 'UnionTypeAnnotation':
       return t.tsUnionType(node.types.map(toTsType));
     case 'VoidTypeAnnotation':
