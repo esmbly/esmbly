@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --mode development",
-    "build": "webpack --mode production"
+    "build-example": "webpack --mode production"
   },
   "dependencies": {
     "@esmbly/core": "^0.0.1",
