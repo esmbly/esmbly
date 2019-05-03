@@ -1,5 +1,4 @@
 import { File, Format, Output, SyntaxTree } from '@esmbly/types';
-import printer from '@esmbly/printer';
 // @ts-ignore
 import asc from 'assemblyscript/dist/asc';
 import { WasmTransformerOptions } from '..';
@@ -25,7 +24,7 @@ export default (
   output: Output[],
   options: WasmTransformerOptions,
 ): Promise<File[]> => {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     const outputFiles: File[] = [];
     const files = trees.map(tree => ({
       ...tree.represents,
@@ -41,17 +40,20 @@ export default (
       return;
     }
 
+    const stdout: string[] = [];
+    const stderr: string[] = [];
+
     asc.main(
       [...fileNames, ...flags],
       {
-        listFiles: () => files,
+        listFiles: () => [],
         readFile: (filename: string) => {
           // TODO: The file represented by the tree should be converted to TS before this
           const file = files.find(f => `${f.name}.ts` === filename);
           return file ? file.content : null;
         },
-        stderr: printer.error,
-        stdout: printer.print,
+        stderr: asc.createMemoryStream(chunk => stderr.push(chunk)),
+        stdout: asc.createMemoryStream(chunk => stdout.push(chunk)),
         writeFile: (name: string, content: string | Buffer) => {
           const type = getFileType(name);
           const format = getFormat(name);
@@ -69,7 +71,15 @@ export default (
           });
         },
       },
-      () => resolve(outputFiles),
+      err => {
+        if (err) {
+          err.stdout = stdout.join('\n');
+          err.stderr = stderr.join('\n');
+          err.message = err.stderr;
+          return reject(err);
+        }
+        return resolve(outputFiles);
+      },
     );
   });
 };
