@@ -22,5 +22,8 @@
     "@babel/parser": "^7.4.3",
     "@babel/traverse": "^7.4.3",
     "@babel/types": "^7.3.4"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
