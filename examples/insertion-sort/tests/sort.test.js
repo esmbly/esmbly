@@ -7,4 +7,3 @@ describe('Insertion sort', () => {
     expect(sort(arr)).toEqual(expected);
   });
 });
-

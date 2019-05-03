@@ -1,6 +1,6 @@
 /**
- * @param {Int32Array} arr 
- * @param {i32} i 
+ * @param {Int32Array} arr
+ * @param {i32} i
  * @param {i32} j
  * @returns {void}
  */

@@ -1,20 +1,10 @@
 const fs = require('fs');
-const util = require('util');
 const path = require('path');
-const readFile = util.promisify(fs.readFile);
+const { loader } = require('@esmbly/transformer-wasm');
+const sourcePath = path.join(__dirname, 'dist', 'add.wasm');
+const source = fs.readFileSync(sourcePath);
+const instance = loader.instantiateBuffer(source, {});
 
-let instance;
-const createInstance = async () => {
-  if (instance) {
-    return instance;
-  }
-  const sourcePath = path.join(__dirname, 'dist', 'add.wasm');
-  const source = await readFile(sourcePath);
-  instance = await WebAssembly.instantiate(source, {});
-  return instance;
-}
-
-module.exports = async (a, b) => {
-  const { instance } = await createInstance();
-  return instance.exports.add(2, 3);
-}
+module.exports = (a, b) => {
+  return instance.add(a, b);
+};

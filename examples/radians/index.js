@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { loader } = require('@esmbly/transformer-wasm')
+const { loader } = require('@esmbly/transformer-wasm');
 
 const sourcePath = path.join(__dirname, 'dist', 'radians.wasm');
 const source = fs.readFileSync(sourcePath);

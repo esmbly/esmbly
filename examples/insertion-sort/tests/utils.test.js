@@ -8,4 +8,3 @@ describe('swap', () => {
     expect(arr).toEqual(expected);
   });
 });
-

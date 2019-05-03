@@ -7,7 +7,7 @@ module.exports = {
     {
       dir: 'dist',
       format: '.ts',
-      flatten: true
+      flatten: true,
     },
   ],
 };

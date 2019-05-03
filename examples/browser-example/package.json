@@ -1,6 +1,5 @@
 {
   "name": "browser-example",
-  "main": "index.js",
   "version": "0.0.0",
   "private": true,
   "scripts": {

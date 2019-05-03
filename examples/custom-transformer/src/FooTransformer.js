@@ -4,7 +4,7 @@ class FooTransformer {
   constructor(options) {
     this.options = options;
     this.name = 'Foo';
-    this.parserPlugins = ['typescript']
+    this.parserPlugins = ['typescript'];
     this.format = {
       files: ['TypeScript'],
       input: 'TypeScript',

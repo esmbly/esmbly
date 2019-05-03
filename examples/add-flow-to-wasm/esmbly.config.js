@@ -8,19 +8,25 @@ module.exports = {
     {
       dir: 'dist',
       format: '.ts',
-      flatten: true
+      flatten: true,
+    },
+    {
+      dir: 'dist',
+      format: '.wat',
+      filename: 'add.wat',
+      flatten: true,
     },
     {
       dir: 'dist',
       format: '.wasm',
       filename: 'add.wasm',
-      flatten: true
+      flatten: true,
     },
     {
       dir: 'dist',
       format: '.as',
       filename: '[name].as.ts',
-      flatten: true
+      flatten: true,
     },
   ],
 };

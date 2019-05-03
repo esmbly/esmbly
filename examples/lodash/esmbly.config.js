@@ -35,7 +35,7 @@ module.exports = [
     input: ['./src/clamp.namedexport.js'],
     transformers: [
       JSDocTransformer({}),
-      WasmTransformer({})
+      WasmTransformer({}),
     ],
     output: [
       {
