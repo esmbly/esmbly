@@ -35,7 +35,8 @@
     "test-e2e": "yarn test e2e --config=e2e/jest.config.js --runInBand",
     "lint": "eslint packages --ext ts --max-warnings 0",
     "coverage": "jest --coverage",
-    "coveralls": "cat ./coverage/lcov.info | coveralls"
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "publish": "yarn build-clean && yarn build && lerna publish"
   },
   "jest": {
     "collectCoverageFrom": [
