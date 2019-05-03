@@ -46,7 +46,7 @@ export default async (
   } catch (err) {
     const message = `Test command: ${testCommand} failed with error code ${
       err.code
-    } \n\n ${err.stderr || err.stdout}`;
+    } \n\n ${err.stderr} \n ${err.stdout}`;
     // Unwrap spawned child processes
     unwrap();
     throw new Error(message);
