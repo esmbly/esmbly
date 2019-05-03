@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`integration: compile-errors prints an error message 1`] = `
+[Error: ERROR AS200: Conversion from type 'i32' to '~lib/string/String' requires an explicit cast.
+
+     return arr[0];
+            ~~~~~~
+ in testfile.ts(3,11)
+
+]
+`;

@@ -13,12 +13,10 @@ export default (trees: SyntaxTree[], options: WasmTransformerOptions) => {
     // @ts-ignore
     rules.forEach((rule: Rule) => traverse(tree.tree, rule(warnings)));
     tree.setFormat(Format.AssemblyScript);
-    console.log(tree.toCode());
   });
 
   if (warnings.length > 0) {
     // TODO: Better error message based on the warnings
-    console.log(warnings);
     throw new Error(`Found incompatible syntax`);
   }
 

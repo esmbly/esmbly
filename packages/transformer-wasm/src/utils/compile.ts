@@ -5,6 +5,7 @@ import { WasmTransformerOptions } from '..';
 import getFileType from './getFileType';
 import getFlags from './getFlags';
 import getCompileTargets from './getCompileTargets';
+import { CompileError } from './CompileError';
 
 function getFormat(filename: string): Format {
   switch (filename) {
@@ -52,8 +53,8 @@ export default (
           const file = files.find(f => `${f.name}.ts` === filename);
           return file ? file.content : null;
         },
-        stderr: asc.createMemoryStream(chunk => stderr.push(chunk)),
-        stdout: asc.createMemoryStream(chunk => stdout.push(chunk)),
+        stderr: asc.createMemoryStream((chunk: string) => stderr.push(chunk)),
+        stdout: asc.createMemoryStream((chunk: string) => stdout.push(chunk)),
         writeFile: (name: string, content: string | Buffer) => {
           const type = getFileType(name);
           const format = getFormat(name);
@@ -71,12 +72,9 @@ export default (
           });
         },
       },
-      err => {
+      (err: Error) => {
         if (err) {
-          err.stdout = stdout.join('\n');
-          err.stderr = stderr.join('\n');
-          err.message = err.stderr;
-          return reject(err);
+          return reject(new CompileError(stdout, stderr));
         }
         return resolve(outputFiles);
       },
