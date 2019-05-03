@@ -3,28 +3,26 @@
 exports[`E2E: add-jsdoc-to-wasm outputs a AssemblyScript file 1`] = `
 "/**
  * Add two numbers
- * @param {number} a 
+ * @param {number} a
  * @param {number} b
- * @returns {number} 
+ * @returns {number}
  */
 export function add(a: f64, b: f64): f64 {
   return a + b;
 }
-
 "
 `;
 
 exports[`E2E: add-jsdoc-to-wasm outputs a TypeScript file 1`] = `
 "/**
  * Add two numbers
- * @param {number} a 
+ * @param {number} a
  * @param {number} b
- * @returns {number} 
+ * @returns {number}
  */
 export function add(a: number, b: number): number {
   return a + b;
 }
-
 "
 `;
 
