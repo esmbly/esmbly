@@ -1,9 +1,9 @@
 import { File, Format, Output, SyntaxTree, Transformer } from '@esmbly/types';
+import assemblyscriptLoader from 'assemblyscript/lib/loader';
 import createFiles from './createFiles';
 import transform from './transform';
 
-// eslint-disable-next-line
-export const loader = require('assemblyscript/lib/loader');
+export const loader = assemblyscriptLoader;
 
 export interface WasmTransformerOptions {
   optimize?: string;

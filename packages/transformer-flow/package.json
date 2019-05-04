@@ -7,6 +7,7 @@
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "browser": "dist/index.bundle.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/esmbly/esmbly.git"
@@ -16,6 +17,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "build-browser": "webpack --mode production",
     "build-watch": "tsc -w"
   },
   "dependencies": {

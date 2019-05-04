@@ -1,3 +1,4 @@
 **/node_modules/**
 **/dist/**
 examples
+webpack.config.js

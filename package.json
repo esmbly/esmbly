@@ -20,15 +20,18 @@
     "prettier": "^1.16.4",
     "rimraf": "^2.6.3",
     "ts-jest": "^24.0.0",
-    "typescript": "^3.3.3333"
+    "typescript": "^3.3.3333",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.1"
   },
   "scripts": {
     "postinstall": "lerna bootstrap",
     "build": "lerna run build",
+    "build-browser": "lerna run build-browser",
     "build-e2e": "yarn run lerna bootstrap && yarn clean-examples && yarn build",
     "build-clean": "rimraf ./packages/*/dist",
     "clean-examples": "rimraf ./examples/*/dist",
-    "clean-all": "rimraf ./node_modules && rimraf ./packages/*/node_modules && yarn build-clean",
+    "clean-all": "rimraf ./packages/*/node_modules && yarn build-clean && rimraf ./node_modules",
     "dev": "lerna run build-watch --parallel",
     "test": "jest",
     "test-node8": "yarn test --testPathIgnorePatterns ./packages/transformer-v8/** ",
@@ -36,7 +39,7 @@
     "lint": "eslint packages --ext ts --max-warnings 0",
     "coverage": "jest --coverage",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "publish": "yarn build-clean && yarn build && lerna publish"
+    "publish": "yarn build-clean && yarn build && yarn build-browser && lerna publish"
   },
   "jest": {
     "collectCoverageFrom": [
