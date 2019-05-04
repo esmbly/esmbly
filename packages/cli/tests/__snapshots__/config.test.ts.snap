@@ -20,10 +20,10 @@ Array [
 				input: 'Any',
 				output: 'Flow'
 			},
-			transform: transform(trees) {
-            trees.forEach((tree) => {
+			transform: function (trees) {
+            trees.forEach(function (tree) {
                 traverse_1.default(tree.tree, {
-                    FunctionDeclaration: (path) => {
+                    FunctionDeclaration: function (path) {
                         if (!path.node.id) {
                             return;
                         }
