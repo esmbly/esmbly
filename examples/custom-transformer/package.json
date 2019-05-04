@@ -1,10 +1,10 @@
 {
   "name": "custom-transformer",
   "main": "index.js",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "private": true,
   "dependencies": {
-    "@esmbly/cli": "^0.0.1",
-    "@babel/traverse": "^7.3.4"
+    "@babel/traverse": "^7.3.4",
+    "@esmbly/cli": "^0.0.2"
   }
 }

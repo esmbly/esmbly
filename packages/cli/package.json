@@ -1,6 +1,6 @@
 {
   "name": "@esmbly/cli",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "TBD",
   "author": "Olle Lauri Boström <ollebostr@gmail.com> (https://github.com/ollelauribostrom)",
   "homepage": "https://github.com/esmbly/esmbly",
@@ -22,10 +22,10 @@
     "build-watch": "tsc -w"
   },
   "dependencies": {
-    "@esmbly/core": "^0.0.1",
-    "@esmbly/printer": "^0.0.1",
-    "@esmbly/types": "^0.0.1",
-    "@esmbly/utils": "^0.0.1",
+    "@esmbly/core": "^0.0.2",
+    "@esmbly/printer": "^0.0.2",
+    "@esmbly/types": "^0.0.2",
+    "@esmbly/utils": "^0.0.2",
     "@types/inquirer": "^0.0.44",
     "@types/stringify-object": "^3.2.0",
     "@types/yargs": "^12.0.9",

@@ -1,10 +1,10 @@
 {
   "name": "lodash-example",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "private": true,
   "dependencies": {
-    "@esmbly/cli": "^0.0.1",
-    "@esmbly/transformer-jsdoc": "^0.0.1",
-    "@esmbly/transformer-wasm": "^0.0.1"
+    "@esmbly/cli": "^0.0.2",
+    "@esmbly/transformer-jsdoc": "^0.0.2",
+    "@esmbly/transformer-wasm": "^0.0.2"
   }
 }
