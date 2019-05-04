@@ -1,9 +1,9 @@
 {
   "name": "ms-example",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "dependencies": {
-    "@esmbly/cli": "^0.0.2",
-    "@esmbly/transformer-jsdoc": "^0.0.2"
+    "@esmbly/cli": "^0.0.3",
+    "@esmbly/transformer-jsdoc": "^0.0.3"
   }
 }

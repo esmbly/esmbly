@@ -1,6 +1,6 @@
 {
   "name": "@esmbly/core",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "TBD",
   "author": "Olle Lauri Boström <ollebostr@gmail.com> (https://github.com/ollelauribostrom)",
   "homepage": "https://github.com/esmbly/esmbly",
@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@babel/parser": "^7.4.3",
-    "@esmbly/types": "^0.0.2",
+    "@esmbly/types": "^0.0.3",
     "recast": "^0.17.3"
   },
   "devDependencies": {

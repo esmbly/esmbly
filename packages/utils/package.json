@@ -1,6 +1,6 @@
 {
   "name": "@esmbly/utils",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "TBD",
   "author": "Olle Lauri Boström <ollebostr@gmail.com> (https://github.com/ollelauribostrom)",
   "homepage": "https://github.com/esmbly/esmbly",
@@ -19,7 +19,7 @@
     "build-watch": "tsc -w"
   },
   "dependencies": {
-    "@esmbly/types": "^0.0.2",
+    "@esmbly/types": "^0.0.3",
     "globby": "^9.1.0"
   },
   "publishConfig": {
