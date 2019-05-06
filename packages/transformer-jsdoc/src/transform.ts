@@ -1,4 +1,4 @@
-import { Format, Rule, SyntaxTree } from '@esmbly/types';
+import { Format, Rule, SyntaxTree, Warning } from '@esmbly/types';
 import traverse from '@babel/traverse';
 import { JSDocTransformerOptions } from '.';
 import stripAllComments from './utils/stripAllComments';
@@ -9,10 +9,10 @@ export default (
   { stripComments = false }: JSDocTransformerOptions,
 ) => {
   const rules = getRules();
+  const warnings: Warning[] = [];
 
   trees.forEach((tree: SyntaxTree) => {
-    // @ts-ignore
-    rules.forEach((rule: Rule) => traverse(tree.tree, rule()));
+    rules.forEach((rule: Rule) => traverse(tree.tree, rule(warnings)));
     tree.setFormat(Format.TypeScript);
     if (stripComments) {
       stripAllComments(tree);

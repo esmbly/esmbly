@@ -10,7 +10,6 @@ export default (trees: SyntaxTree[], options: WasmTransformerOptions) => {
   const rules = getRules();
 
   trees.forEach((tree: SyntaxTree) => {
-    // @ts-ignore
     rules.forEach((rule: Rule) => traverse(tree.tree, rule(warnings)));
     tree.setFormat(Format.AssemblyScript);
   });

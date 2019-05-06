@@ -1,11 +1,10 @@
 import { Node, Visitor } from '@babel/traverse';
-import { CoverageReport, TypeProfile, Warning } from '.';
+import { CoverageReport } from './CoverageReport';
+import { TypeProfile } from './TypeProfile';
+import { Warning } from './Warning';
 
-type RuleA = () => Visitor<Node>;
-type RuleB = (warnings: Warning[]) => Visitor<Node>;
-type RuleC = (
+export type Rule = (
   warnings: Warning[],
-  typeProfile: TypeProfile,
-  coverageReport: CoverageReport,
+  typeProfile?: TypeProfile,
+  coverageReport?: CoverageReport,
 ) => Visitor<Node>;
-export type Rule = RuleA | RuleB | RuleC;
