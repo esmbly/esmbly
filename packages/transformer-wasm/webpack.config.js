@@ -8,9 +8,7 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
   },
-  node: {
-    fs: 'empty',
-  },
+  externals: [ "binaryen" ],
   output: {
     filename: 'index.bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -20,10 +18,5 @@ module.exports = {
   },
   performance: {
     hints : false
-  },
-  optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
   },
 };
