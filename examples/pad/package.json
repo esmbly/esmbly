@@ -1,16 +1,16 @@
 {
   "name": "pad-example",
   "main": "index.js",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "scripts": {
     "pretest": "esmbly run",
     "test": "jest"
   },
   "dependencies": {
-    "@esmbly/cli": "^0.0.3",
-    "@esmbly/transformer-flow": "^0.0.3",
-    "@esmbly/transformer-wasm": "^0.0.3"
+    "@esmbly/cli": "^0.0.4",
+    "@esmbly/transformer-flow": "^0.0.4",
+    "@esmbly/transformer-wasm": "^0.0.4"
   },
   "devDependencies": {
     "jest": "^24.1.0"

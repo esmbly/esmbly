@@ -1,14 +1,14 @@
 {
   "name": "game-of-life-example",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "scripts": {
     "start": "esmbly run && http-server . -o -c-1"
   },
   "dependencies": {
-    "@esmbly/cli": "^0.0.3",
-    "@esmbly/transformer-jsdoc": "^0.0.3",
-    "@esmbly/transformer-wasm": "^0.0.3"
+    "@esmbly/cli": "^0.0.4",
+    "@esmbly/transformer-jsdoc": "^0.0.4",
+    "@esmbly/transformer-wasm": "^0.0.4"
   },
   "devDependencies": {
     "http-server": "^0.11.1"
