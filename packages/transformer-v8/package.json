@@ -16,7 +16,7 @@
     "url": "https://github.com/esmbly/esmbly/issues"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p ./tsconfig.json",
     "build-watch": "tsc -w"
   },
   "dependencies": {
