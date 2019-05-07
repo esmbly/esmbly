@@ -9,6 +9,6 @@ describe('mkdirp', () => {
     fs.mkdir = jest.fn();
     await mkdirp(dir);
     expect(fs.mkdir).toHaveBeenCalledTimes(1);
-    expect(fs.mkdir).toHaveBeenCalledWith(dir, { recursive: true });
+    expect(fs.mkdir).toHaveBeenCalledWith(dir);
   });
 });
