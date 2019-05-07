@@ -2,11 +2,14 @@ import * as t from '@babel/types';
 import { Format, Rule, SyntaxTree, Warning } from '@esmbly/types';
 import traverse, { NodePath } from '@babel/traverse';
 import { templates } from '@esmbly/printer';
-import getRules from './rules';
+import { getRules } from './rules';
 import { WasmTransformerOptions } from '.';
 import { exportMemory, importAllocator } from './utils/memory';
 
-export default (trees: SyntaxTree[], options: WasmTransformerOptions) => {
+export function transform(
+  trees: SyntaxTree[],
+  options: WasmTransformerOptions,
+): void {
   const warnings: Warning[] = [];
   const rules = getRules();
 
@@ -33,4 +36,4 @@ export default (trees: SyntaxTree[], options: WasmTransformerOptions) => {
       });
     });
   }
-};
+}

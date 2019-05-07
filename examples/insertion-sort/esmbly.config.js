@@ -1,12 +1,14 @@
 const path = require('path');
-const JSDocTransformer = require('@esmbly/transformer-jsdoc').default;
-const WasmTransformer = require('@esmbly/transformer-wasm').default;
+const JSDoc = require('@esmbly/transformer-jsdoc');
+const Wasm = require('@esmbly/transformer-wasm');
 
 module.exports = {
   input: ['./src/**/*.js'],
   transformers: [
-    JSDocTransformer({}),
-    WasmTransformer({ memory: { export: true, allocator: 'allocator/tlsf' } }),
+    JSDoc.createTransformer({}),
+    Wasm.createTransformer({
+      memory: { export: true, allocator: 'allocator/tlsf' }
+    }),
   ],
   output: [
     {

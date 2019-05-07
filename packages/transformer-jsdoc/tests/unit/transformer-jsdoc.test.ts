@@ -1,24 +1,24 @@
 import { Format } from '@esmbly/types';
-import JSDocTransformerFactory from '../../src';
+import { createTransformer } from '../../src';
 
 describe('unit: transformer-jsdoc', () => {
   it('specifies the correct name', async () => {
-    const transformer = JSDocTransformerFactory({});
+    const transformer = createTransformer({});
     expect(transformer.name).toEqual('JSDoc');
   });
 
   it('specifies the correct input format', () => {
-    const transformer = JSDocTransformerFactory({});
+    const transformer = createTransformer({});
     expect(transformer.format.input).toEqual(Format.JSDoc);
   });
 
   it('specifies the correct output format', () => {
-    const transformer = JSDocTransformerFactory({});
+    const transformer = createTransformer({});
     expect(transformer.format.output).toEqual(Format.TypeScript);
   });
 
   it('specifies the correct file formats', () => {
-    const transformer = JSDocTransformerFactory({});
+    const transformer = createTransformer({});
     expect(transformer.format.files).toEqual([Format.TypeScript]);
   });
 });

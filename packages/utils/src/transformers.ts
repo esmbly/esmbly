@@ -1,4 +1,4 @@
-import { Format, Transformer, TransformerFactory } from '@esmbly/types';
+import { Format, Transformer, TransformerModule } from '@esmbly/types';
 import path from 'path';
 import fs from './fs';
 
@@ -21,8 +21,9 @@ export async function getAvailableOutputFormats(
   transformers.forEach((transformer: string) => {
     try {
       const transformerPath = path.resolve(__dirname, '../../', transformer);
-      const transformerModule = requirer(transformerPath) as TransformerFactory;
-      const transformerFormats = transformerModule().format.files;
+      const transformerModule = requirer(transformerPath) as TransformerModule;
+      const transformerFormats = transformerModule.createTransformer().format
+        .files;
       transformerFormats.forEach((format: Format) => outputFormats.add(format));
     } catch {
       // Do nothing if a transformer can't be required or doesn't specify any output formats
@@ -37,12 +38,15 @@ export function transformerFactory(
 ): Transformer {
   if (typeof transformer === 'string') {
     let name = transformer;
+
     if (!name.includes('transformer-')) {
       name = `transformer-${name}`;
     }
+
     const transformerPath = path.resolve(__dirname, '../../', name);
-    const transformerModule = requirer(transformerPath) as TransformerFactory;
-    return transformerModule();
+    const transformerModule = requirer(transformerPath) as TransformerModule;
+    return transformerModule.createTransformer();
   }
+
   return transformer;
 }

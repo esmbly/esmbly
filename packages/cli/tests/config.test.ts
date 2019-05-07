@@ -6,40 +6,40 @@ import {
   getTemplateConfig,
   readConfig,
 } from '../src/config';
-import MockConfig from './__fixtures__/config';
+import * as MockConfig from './__fixtures__/config';
+
+function setup(
+  shouldExist: boolean,
+): {
+  existsSpy: jest.SpyInstance;
+  getRootSpy: jest.SpyInstance;
+  promptSpy: jest.SpyInstance;
+  writeFileSpy: jest.SpyInstance;
+  tearDown: () => void;
+} {
+  const getRootSpy = jest.spyOn(utils, 'getRoot');
+  const promptSpy = jest.spyOn(prompt, 'promptForConfig');
+  const writeFileSpy = jest.spyOn(utils, 'writeFile');
+  const existsSpy = jest.spyOn(utils, 'exists');
+  getRootSpy.mockReturnValue('root-path');
+  promptSpy.mockResolvedValue(MockConfig.config[0]);
+  writeFileSpy.mockResolvedValue();
+  existsSpy.mockResolvedValue(shouldExist);
+  return {
+    existsSpy,
+    getRootSpy,
+    promptSpy,
+    tearDown: (): void => {
+      existsSpy.mockRestore();
+      getRootSpy.mockRestore();
+      promptSpy.mockRestore();
+      writeFileSpy.mockRestore();
+    },
+    writeFileSpy,
+  };
+}
 
 describe('createConfig', () => {
-  const setup = (
-    shouldExist: boolean,
-  ): {
-    existsSpy: jest.SpyInstance;
-    getRootSpy: jest.SpyInstance;
-    promptSpy: jest.SpyInstance;
-    writeFileSpy: jest.SpyInstance;
-    tearDown: () => void;
-  } => {
-    const getRootSpy = jest.spyOn(utils, 'getRoot');
-    const promptSpy = jest.spyOn(prompt, 'promptForConfig');
-    const writeFileSpy = jest.spyOn(utils, 'writeFile');
-    const existsSpy = jest.spyOn(utils, 'exists');
-    getRootSpy.mockReturnValue('root-path');
-    promptSpy.mockResolvedValue(MockConfig[0]);
-    writeFileSpy.mockResolvedValue();
-    existsSpy.mockResolvedValue(shouldExist);
-    return {
-      existsSpy,
-      getRootSpy,
-      promptSpy,
-      tearDown: (): void => {
-        existsSpy.mockRestore();
-        getRootSpy.mockRestore();
-        promptSpy.mockRestore();
-        writeFileSpy.mockRestore();
-      },
-      writeFileSpy,
-    };
-  };
-
   it('creates a new config file', async () => {
     const { promptSpy, writeFileSpy, tearDown } = setup(false);
     const config = await createConfig({ default: false, force: false });
@@ -92,43 +92,43 @@ describe('getTemplateConfig', () => {
 describe('readConfig', () => {
   it('requires the config file from the default path', async () => {
     const requirer = jest.fn();
-    requirer.mockReturnValue(MockConfig);
+    requirer.mockReturnValue(MockConfig.config);
     const config = await readConfig(undefined, requirer);
-    expect(config).toEqual(MockConfig);
+    expect(config).toEqual(MockConfig.config);
   });
 
   it('requires the config file from a custom path', async () => {
     const requirer = jest.fn();
-    requirer.mockReturnValue(MockConfig);
+    requirer.mockReturnValue(MockConfig.config);
     await readConfig('custom-path', requirer);
     expect(requirer).toHaveBeenCalledWith('custom-path');
   });
 
   it('requires config files that exports an object', async () => {
     const requirer = jest.fn();
-    requirer.mockReturnValue(MockConfig[0]);
+    requirer.mockReturnValue(MockConfig.config[0]);
     const config = await readConfig(undefined, requirer);
-    expect(config).toEqual(MockConfig);
+    expect(config).toEqual(MockConfig.config);
   });
 
   it('requires config files that exports an array', async () => {
     const requirer = jest.fn();
-    requirer.mockReturnValue(MockConfig);
+    requirer.mockReturnValue(MockConfig.config);
     const config = await readConfig(undefined, requirer);
-    expect(config).toEqual(MockConfig);
+    expect(config).toEqual(MockConfig.config);
   });
 
   it('requires config files that exports a function that returns an object', async () => {
     const requirer = jest.fn();
-    requirer.mockReturnValue(() => MockConfig[0]);
+    requirer.mockReturnValue(() => MockConfig.config[0]);
     const config = await readConfig(undefined, requirer);
-    expect(config).toEqual(MockConfig);
+    expect(config).toEqual(MockConfig.config);
   });
 
   it('requires config files that exports a function that returns an array', async () => {
     const requirer = jest.fn();
-    requirer.mockReturnValue(() => MockConfig);
+    requirer.mockReturnValue(() => MockConfig.config);
     const config = await readConfig(undefined, requirer);
-    expect(config).toEqual(MockConfig);
+    expect(config).toEqual(MockConfig.config);
   });
 });

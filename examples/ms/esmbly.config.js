@@ -1,11 +1,11 @@
 const path = require('path');
-const JSDocTransformer = require('@esmbly/transformer-jsdoc').default;
+const JSDoc = require('@esmbly/transformer-jsdoc');
 
 module.exports = [
   {
     input: ['./src/**/*.js'],
     transformers: [
-      JSDocTransformer({}),
+      JSDoc.createTransformer({}),
     ],
     output: [
       {

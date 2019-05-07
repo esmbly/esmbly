@@ -1,10 +1,10 @@
-import esmbly from '@esmbly/core';
+import * as esmbly from '@esmbly/core';
 import { File, FileType, Format } from '@esmbly/types';
-import JSDocTransformer, { JSDocTransformerOptions } from '../../src';
+import * as JSDocTransformer from '../../src';
 
-export default async function run(
+export async function testRunner(
   content: string,
-  options: JSDocTransformerOptions = {},
+  options: JSDocTransformer.JSDocTransformerOptions = {},
 ): Promise<File[]> {
   return esmbly.run({
     input: [
@@ -16,6 +16,6 @@ export default async function run(
       },
     ],
     output: [{ format: Format.TypeScript }],
-    transformers: [JSDocTransformer(options)],
+    transformers: [JSDocTransformer.createTransformer(options)],
   });
 }

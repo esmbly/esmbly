@@ -1,14 +1,15 @@
 import * as t from '@babel/types';
-import toTsType from './toTsType';
-import toTsPropertySignature from './toTsPropertySignature';
-import toTsAsExpression from './toTsAsExpression';
+import { toTsType } from './toTsType';
+import { toTsPropertySignature } from './toTsPropertySignature';
+import { toTsAsExpression } from './toTsAsExpression';
 
-export default (
+export function toTs(
   node: t.Flow | t.TSType | t.Node,
-): t.TSType | t.TSTypeElement | t.Expression => {
+): t.TSType | t.TSTypeElement | t.Expression {
   if (t.isTSType(node)) {
     return node;
   }
+
   switch (node.type) {
     case 'AnyTypeAnnotation':
     case 'ArrayTypeAnnotation':
@@ -45,4 +46,4 @@ export default (
         `Could not convert node of type: ${node.type} to TypeScript`,
       );
   }
-};
+}

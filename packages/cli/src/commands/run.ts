@@ -1,5 +1,5 @@
 import { Arguments, Argv } from 'yargs';
-import esmbly from '@esmbly/core';
+import * as esmbly from '@esmbly/core';
 import { Config, File, Transformer } from '@esmbly/types';
 import {
   outputFactory,
@@ -8,7 +8,7 @@ import {
   writeFiles,
 } from '@esmbly/utils';
 import stringify from 'stringify-object';
-import printer from '@esmbly/printer';
+import { printer } from '@esmbly/printer';
 import { readConfig } from '../config';
 
 export interface RunOptions {
@@ -24,7 +24,7 @@ export const command = 'run';
 export const describe = 'Run esmbly';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const builder = (yargs: Argv): Argv<any> => {
+export function builder(yargs: Argv): Argv<any> {
   return yargs
     .version(false)
     .option('config', {
@@ -61,9 +61,9 @@ export const builder = (yargs: Argv): Argv<any> => {
       type: 'boolean',
     })
     .help();
-};
+}
 
-export const handler = async (argv: Arguments & RunOptions): Promise<void> => {
+export async function handler(argv: Arguments & RunOptions): Promise<void> {
   try {
     if (argv.silent) {
       printer.setErrorStream(null);
@@ -84,9 +84,11 @@ export const handler = async (argv: Arguments & RunOptions): Promise<void> => {
           (transformer: string | Transformer) =>
             transformerFactory(transformer),
         );
+
         if (input.length < 1) {
           throw new Error(`Found 0 files matching pattern: ${c.input}`);
         }
+
         const output = (argv.output || c.output).map(outputFactory);
         return esmbly.run({ input, output, transformers });
       }),
@@ -100,4 +102,4 @@ export const handler = async (argv: Arguments & RunOptions): Promise<void> => {
   } catch (err) {
     printer.error(`${err.message}\n` || err);
   }
-};
+}

@@ -1,7 +1,9 @@
 import * as t from '@babel/types';
-import toTs from './toTs';
+import { toTs } from './toTs';
 
-export default (node: t.ObjectTypeProperty): t.TSPropertySignature => {
+export function toTsPropertySignature(
+  node: t.ObjectTypeProperty,
+): t.TSPropertySignature {
   const signature = t.tsPropertySignature(
     node.key,
     t.tsTypeAnnotation(toTs(node.value) as t.TSType),
@@ -9,4 +11,4 @@ export default (node: t.ObjectTypeProperty): t.TSPropertySignature => {
   signature.optional = node.optional;
   signature.readonly = node.variance && node.variance.kind === 'plus';
   return signature;
-};
+}

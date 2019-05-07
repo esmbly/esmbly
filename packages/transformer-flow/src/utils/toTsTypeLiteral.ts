@@ -1,12 +1,13 @@
 import * as t from '@babel/types';
-import toTsType from './toTsType';
+import { toTsType } from './toTsType';
 
-export default (node: t.ObjectTypeAnnotation): t.TSTypeLiteral => {
+export function toTsTypeLiteral(node: t.ObjectTypeAnnotation): t.TSTypeLiteral {
   const properties = node.properties.map(
     (property: t.ObjectTypeProperty | t.ObjectTypeSpreadProperty) => {
       if (t.isObjectTypeSpreadProperty(property)) {
         return property;
       }
+
       const s = t.tsPropertySignature(
         property.key,
         t.tsTypeAnnotation(toTsType(property.value)),
@@ -35,4 +36,4 @@ export default (node: t.ObjectTypeAnnotation): t.TSTypeLiteral => {
     ...(properties as t.TSTypeElement[]),
     ...indexSignatures,
   ]);
-};
+}

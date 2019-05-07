@@ -1,7 +1,7 @@
 import inspector from 'inspector';
 import fs from 'fs';
 
-export default class Profiler {
+export class Profiler {
   private session: inspector.Session;
 
   private tmpPath: string;
@@ -33,12 +33,14 @@ export default class Profiler {
         if (typeProfileError) {
           throw typeProfileError;
         }
+
         this.session.post(
           'Profiler.getBestEffortCoverage',
           (coverageReportError, coverageReport) => {
             if (coverageReportError) {
               throw coverageReportError;
             }
+
             const result = {
               coverageReport: coverageReport.result.filter(
                 entry => !entry.url.includes('node_modules'),

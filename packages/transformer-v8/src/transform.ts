@@ -12,15 +12,14 @@ import path from 'path';
 import { exec } from 'child_process';
 import { createTmpDir, readFile } from '@esmbly/utils';
 import { promisify } from 'util';
-import printer from '@esmbly/printer';
-// import { V8TransformerOptions } from '..';
-import getRules from './rules';
+import { printer } from '@esmbly/printer';
+import { getRules } from './rules';
 
-export default async (
+export async function transform(
   trees: SyntaxTree[],
   testCommand: string,
   debug?: boolean,
-) => {
+): Promise<void> {
   const tmpDir = await createTmpDir('transformer-v8-');
   const tmpName = 'temp.json';
   const tmpPath = path.join(tmpDir, tmpName);
@@ -93,4 +92,4 @@ export default async (
   if (warnings.length > 0) {
     printer.printWarnings(warnings);
   }
-};
+}

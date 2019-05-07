@@ -1,7 +1,7 @@
 import { SyntaxTree } from '@esmbly/types';
-import files from './files';
+import { files } from './files';
 
-export default [
+export const trees = [
   {
     represents: files[0],
     toCode: () => `//${files[0].content}`,

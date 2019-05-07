@@ -23,10 +23,12 @@ describe('getAvailableTransformers', () => {
 describe('getAvailableOutputFormats', () => {
   it('resolves to an array of available output formats', async () => {
     const requirer = jest.fn();
-    requirer.mockReturnValue(() => ({
-      format: { files: ['TypeScript', 'WebAssembly'] },
-      transform: jest.fn(),
-    }));
+    requirer.mockReturnValue({
+      createTransformer: () => ({
+        format: { files: ['TypeScript', 'WebAssembly'] },
+        transform: jest.fn(),
+      }),
+    });
     const formats = await getAvailableOutputFormats(
       ['transformer-flow', 'transformer-wasm'],
       requirer,
@@ -50,7 +52,7 @@ describe('transformerFactory', () => {
   it('returns a transformer instance if called with a string', async () => {
     const mockInstance = {};
     const requirer = jest.fn();
-    requirer.mockReturnValue(() => mockInstance);
+    requirer.mockReturnValue({ createTransformer: () => mockInstance });
     const transformer = await transformerFactory('transformer-wasm', requirer);
     expect(transformer).toEqual(mockInstance);
     expect(requirer).toHaveBeenCalledTimes(1);
@@ -70,7 +72,7 @@ describe('transformerFactory', () => {
   it('automatically prepends the transformer- prefix if not present', async () => {
     const mockInstance = {};
     const requirer = jest.fn();
-    requirer.mockReturnValue(() => mockInstance);
+    requirer.mockReturnValue({ createTransformer: () => mockInstance });
     await transformerFactory('wasm', requirer);
     expect(requirer).toHaveBeenCalledTimes(1);
     expect(requirer).toHaveBeenCalledWith(

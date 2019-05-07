@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 
-export default (str: string): t.TSType => {
+export function toTsKeyword(str: string): t.TSType {
   switch (str) {
     case 'string':
       return t.tsStringKeyword();
@@ -15,4 +15,4 @@ export default (str: string): t.TSType => {
     default:
       return t.tsAnyKeyword();
   }
-};
+}

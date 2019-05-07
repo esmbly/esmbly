@@ -2,7 +2,9 @@ const FooTransformer = require('./src/FooTransformer');
 
 module.exports = {
   input: ['./example/**/*.ts'],
-  transformers: [new FooTransformer()],
+  transformers: [
+    new FooTransformer()
+  ],
   output: [
     {
       dir: 'dist',

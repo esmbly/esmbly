@@ -1,8 +1,8 @@
 import * as t from '@babel/types';
 import { Tag } from 'doctrine';
-import toKeyword from './toKeyword';
+import { toKeyword } from './toKeyword';
 
-export default (tag?: Tag): t.TSTypeAnnotation => {
+export function toTypeAnnotation(tag?: Tag): t.TSTypeAnnotation {
   if (!tag) {
     return t.tsTypeAnnotation(t.tsAnyKeyword());
   }
@@ -14,4 +14,4 @@ export default (tag?: Tag): t.TSTypeAnnotation => {
   }
 
   return t.tsTypeAnnotation(toKeyword(type));
-};
+}

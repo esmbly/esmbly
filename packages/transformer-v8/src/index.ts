@@ -1,13 +1,13 @@
 import { File, Format, Output, SyntaxTree, Transformer } from '@esmbly/types';
-import createFiles from './createFiles';
-import transform from './transform';
+import { createFiles } from './createFiles';
+import { transform } from './transform';
 
 export interface V8TransformerOptions {
   testCommand: string;
   debug?: boolean;
 }
 
-export default (options: V8TransformerOptions): Transformer => {
+export function createTransformer(options: V8TransformerOptions): Transformer {
   return {
     createFiles(trees: SyntaxTree[], output: Output[]): File[] {
       return createFiles(trees, output, this.format.files);
@@ -22,4 +22,4 @@ export default (options: V8TransformerOptions): Transformer => {
       return transform(trees, options.testCommand, options.debug);
     },
   };
-};
+}

@@ -27,23 +27,27 @@ type ConfigFnA = () => Config;
 type ConfigFnB = () => Config[];
 type ConfigFn = ConfigFnA | ConfigFnB;
 
+function toArrayConfig(maybeArrayConfig: Config | Config[]): Config[] {
+  if (Array.isArray(maybeArrayConfig)) {
+    return maybeArrayConfig;
+  }
+
+  return [maybeArrayConfig];
+}
+
 export async function readConfig(
   customPath?: string,
   requirer: (requirePath: string) => unknown = require,
 ): Promise<Config[]> {
   const configPath = customPath || (await getDefaultConfigPath());
   const config = requirer(configPath) as Config | Config[] | ConfigFn;
-  const toArray = (maybeArrayConfig: Config | Config[]): Config[] => {
-    if (Array.isArray(maybeArrayConfig)) {
-      return maybeArrayConfig;
-    }
-    return [maybeArrayConfig];
-  };
+
   if (typeof config === 'function') {
     const configFnResult = await config();
-    return toArray(configFnResult);
+    return toArrayConfig(configFnResult);
   }
-  return toArray(config);
+
+  return toArrayConfig(config);
 }
 
 export async function createConfig(
@@ -54,6 +58,7 @@ export async function createConfig(
 }> {
   const root = getRoot();
   const defaultConfigPath = getDefaultConfigPath();
+
   if ((await exists(defaultConfigPath)) && !options.force) {
     const relativeConfigPath = getRelativePathTo(defaultConfigPath);
     throw new Error(
@@ -67,5 +72,6 @@ export async function createConfig(
     const content = `module.exports = ${stringify(config)}\n`;
     await writeFile(defaultConfigPath, content, { overwrite: options.force });
   }
+
   return { fileName: DEFAULT_FILE, root };
 }

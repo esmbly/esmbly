@@ -25,6 +25,7 @@ export async function exists(file: string): Promise<boolean> {
     if (err.code === 'ENOENT') {
       return false;
     }
+
     throw err;
   }
 }
@@ -38,6 +39,7 @@ export async function writeFile(
     const relativePath = getRelativePathTo(file);
     throw new Error(`${relativePath} already exists`);
   }
+
   delete options.overwrite;
   return fs.writeFile(file, data, options);
 }

@@ -1,6 +1,6 @@
 import { Format, Output } from '@esmbly/types';
 
-export default (output: Output[]): Format[] => {
+export function getCompileTargets(output: Output[]): Format[] {
   const targets: Format[] = [];
 
   output.forEach(out => {
@@ -16,4 +16,4 @@ export default (output: Output[]): Format[] => {
   });
 
   return [...new Set(targets)];
-};
+}

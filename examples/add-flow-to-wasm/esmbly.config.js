@@ -1,9 +1,12 @@
-const FlowTransformer = require('@esmbly/transformer-flow').default;
-const WasmTransformer = require('@esmbly/transformer-wasm').default;
+const Flow = require('@esmbly/transformer-flow');
+const Wasm = require('@esmbly/transformer-wasm');
 
 module.exports = {
   input: ['./src/**/*.js'],
-  transformers: [FlowTransformer({}), WasmTransformer({})],
+  transformers: [
+    Flow.createTransformer({}),
+    Wasm.createTransformer({})
+  ],
   output: [
     {
       dir: 'dist',

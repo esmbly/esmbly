@@ -1,5 +1,5 @@
 import path from 'path';
-import testRunner from '../../helpers/fileTestRunner';
+import { testRunner } from '../../helpers/fileTestRunner';
 
 describe('integration: prototype', () => {
   it('transforms the prototype example to TypeScript', async () => {

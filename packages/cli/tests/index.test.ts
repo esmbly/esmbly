@@ -1,31 +1,31 @@
 import yargs from 'yargs';
 import { runCLI } from '..';
 
-describe('CLI', () => {
-  const setup = (): {
-    scriptNameSpy: jest.SpyInstance;
-    commandSpy: jest.SpyInstance;
-    helpSpy: jest.SpyInstance;
-    tearDown: () => void;
-  } => {
-    const scriptNameSpy = jest.spyOn(yargs, 'scriptName');
-    const commandSpy = jest.spyOn(yargs, 'command');
-    const helpSpy = jest.spyOn(yargs, 'help');
-    scriptNameSpy.mockReturnThis();
-    commandSpy.mockReturnThis();
-    helpSpy.mockReturnThis();
-    return {
-      commandSpy,
-      helpSpy,
-      scriptNameSpy,
-      tearDown: (): void => {
-        scriptNameSpy.mockRestore();
-        commandSpy.mockRestore();
-        helpSpy.mockRestore();
-      },
-    };
+function setup(): {
+  scriptNameSpy: jest.SpyInstance;
+  commandSpy: jest.SpyInstance;
+  helpSpy: jest.SpyInstance;
+  tearDown: () => void;
+} {
+  const scriptNameSpy = jest.spyOn(yargs, 'scriptName');
+  const commandSpy = jest.spyOn(yargs, 'command');
+  const helpSpy = jest.spyOn(yargs, 'help');
+  scriptNameSpy.mockReturnThis();
+  commandSpy.mockReturnThis();
+  helpSpy.mockReturnThis();
+  return {
+    commandSpy,
+    helpSpy,
+    scriptNameSpy,
+    tearDown: (): void => {
+      scriptNameSpy.mockRestore();
+      commandSpy.mockRestore();
+      helpSpy.mockRestore();
+    },
   };
+}
 
+describe('CLI', () => {
   it('sets the script name', () => {
     const { scriptNameSpy, tearDown } = setup();
     runCLI();

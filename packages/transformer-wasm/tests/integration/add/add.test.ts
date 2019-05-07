@@ -1,5 +1,5 @@
 import { Format } from '@esmbly/types';
-import testRunner from '../../helpers/testRunner';
+import { testRunner } from '../../helpers/testRunner';
 
 jest.mock('@esmbly/printer');
 

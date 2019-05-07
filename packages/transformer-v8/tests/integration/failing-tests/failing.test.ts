@@ -1,6 +1,6 @@
 import path from 'path';
-import esmbly from '@esmbly/core';
-import setup from '../../helpers/setup';
+import * as esmbly from '@esmbly/core';
+import { setup } from '../../helpers/setup';
 
 jest.setTimeout(10000);
 jest.mock('@esmbly/printer');

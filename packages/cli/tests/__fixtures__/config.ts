@@ -1,10 +1,10 @@
 import { Config } from '@esmbly/types';
-import MockTransformer from './FooTransformer';
+import * as FooTransformer from './FooTransformer';
 
-const config: Config = {
-  input: ['**/*.js'],
-  output: ['wasm'],
-  transformers: [MockTransformer()],
-};
-
-export default [config];
+export const config: Config[] = [
+  {
+    input: ['**/*.js'],
+    output: ['wasm'],
+    transformers: [FooTransformer.createTransformer()],
+  },
+];

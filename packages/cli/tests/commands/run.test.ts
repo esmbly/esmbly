@@ -1,30 +1,30 @@
-import esmbly from '@esmbly/core';
+import * as esmbly from '@esmbly/core';
 import yargs from 'yargs';
 import * as utils from '@esmbly/utils';
 import { Format } from '@esmbly/types';
 import * as run from '../../src/commands/run';
 import * as config from '../../src/config';
-import CommandRunner from '../__fixtures__/CommandRunner';
-import MockTransformer from '../__fixtures__/FooTransformer';
-import MockFiles from '../__fixtures__/files';
-import MockConfig from '../__fixtures__/config';
+import { CommandRunner } from '../__fixtures__/CommandRunner';
+import * as FooTransformer from '../__fixtures__/FooTransformer';
+import * as MockFiles from '../__fixtures__/files';
+import * as MockConfig from '../__fixtures__/config';
 
 jest.mock('@esmbly/printer');
 
 const command = new CommandRunner(run);
 
-const setup = (): {
+function setup(): {
   readConfigSpy: jest.SpyInstance;
   readFilesSpy: jest.SpyInstance;
   transformerFactorySpy: jest.SpyInstance;
   tearDown: () => void;
-} => {
+} {
   const readConfigSpy = jest.spyOn(config, 'readConfig');
-  readConfigSpy.mockResolvedValue(MockConfig);
+  readConfigSpy.mockResolvedValue(MockConfig.config);
   const readFilesSpy = jest.spyOn(utils, 'readFiles');
-  readFilesSpy.mockResolvedValue(MockFiles);
+  readFilesSpy.mockResolvedValue(MockFiles.files);
   const transformerFactorySpy = jest.spyOn(utils, 'transformerFactory');
-  transformerFactorySpy.mockReturnValue(MockTransformer());
+  transformerFactorySpy.mockReturnValue(FooTransformer.createTransformer());
   return {
     readConfigSpy,
     readFilesSpy,
@@ -35,7 +35,7 @@ const setup = (): {
     },
     transformerFactorySpy,
   };
-};
+}
 
 describe('Run', () => {
   it('exposes the correct command', () => {
@@ -86,7 +86,7 @@ describe('Run', () => {
     await new Promise(resolve => setTimeout(resolve, 100));
     expect(runSpy).toHaveBeenCalledTimes(1);
     expect(runSpy).toHaveBeenCalledWith({
-      input: MockFiles,
+      input: MockFiles.files,
       output: [{ format: Format.WebAssembly }],
       transformers: [
         {

@@ -1,13 +1,13 @@
-import esmbly from '@esmbly/core';
+import * as esmbly from '@esmbly/core';
 import fs from 'fs';
 import path from 'path';
 import { File, FileType, Format } from '@esmbly/types';
-import JSDocTransformer, { JSDocTransformerOptions } from '../../src';
+import * as JSDocTransformer from '../../src';
 
-export default async (
+export async function testRunner(
   root: string,
-  options: JSDocTransformerOptions = {},
-): Promise<{ expected: string; results: File }> => {
+  options: JSDocTransformer.JSDocTransformerOptions = {},
+): Promise<{ expected: string; results: File }> {
   const expectedPath = path.join(root, `output.ts`);
   const expected = fs.readFileSync(expectedPath, 'utf8');
   const filePath = path.join(root, `input.js`);
@@ -23,7 +23,7 @@ export default async (
       },
     ],
     output: [{ format: Format.TypeScript }],
-    transformers: [JSDocTransformer(options)],
+    transformers: [JSDocTransformer.createTransformer(options)],
   });
   return { expected, results };
-};
+}

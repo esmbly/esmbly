@@ -1,6 +1,6 @@
 import sw from 'spawn-wrap';
 import onExit from 'signal-exit';
-import Profiler from './Profiler';
+import { Profiler } from './Profiler';
 
 const profiler = new Profiler(process.env.TMP_PATH || '');
 

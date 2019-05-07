@@ -1,5 +1,5 @@
 import doctrine, { Tag } from 'doctrine';
-import { Comment } from '@esmbly/types/node_modules/@babel/types';
+import { Comment } from '@babel/types';
 import * as filters from './filters';
 
 interface ParseResult {
@@ -11,7 +11,7 @@ interface ParseResult {
   isTypeArgument: boolean;
 }
 
-export default (leadingComments: Comment[]): ParseResult => {
+export function parseComments(leadingComments: Comment[]): ParseResult {
   const comments = leadingComments.map(c => c.value).join();
   const { tags } = doctrine.parse(comments, { sloppy: true, unwrap: true });
 
@@ -23,4 +23,4 @@ export default (leadingComments: Comment[]): ParseResult => {
     returnType: tags.find(filters.isReturn),
     variableType: tags.find(filters.isVariable),
   };
-};
+}

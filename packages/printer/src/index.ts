@@ -16,6 +16,7 @@ class Printer {
     if (this.stdout) {
       return this.stdout.isTTY === true;
     }
+
     return false;
   }
 
@@ -27,6 +28,7 @@ class Printer {
     if (this.stderr) {
       return this.stderr.write(chunk, encoding, callback);
     }
+
     return false;
   }
 
@@ -38,6 +40,7 @@ class Printer {
     if (this.stdout) {
       return this.stdout.write(chunk, encoding, callback);
     }
+
     return false;
   }
 
@@ -76,5 +79,5 @@ class Printer {
   }
 }
 
-export default new Printer();
+export const printer = new Printer();
 export { templates };

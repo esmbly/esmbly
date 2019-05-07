@@ -1,9 +1,9 @@
 import * as t from '@babel/types';
-import toTs from './toTs';
-import toTsType from './toTsType';
-import generateId from './generateId';
+import { toTs } from './toTs';
+import { toTsType } from './toTsType';
+import { generateId } from './generateId';
 
-export default (node: t.FunctionTypeAnnotation): t.TSFunctionType => {
+export function toTsFunction(node: t.FunctionTypeAnnotation): t.TSFunctionType {
   let typeParams;
 
   if (node.typeParameters) {
@@ -59,4 +59,4 @@ export default (node: t.FunctionTypeAnnotation): t.TSFunctionType => {
   }
 
   return f;
-};
+}
