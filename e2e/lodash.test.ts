@@ -9,12 +9,12 @@ const example = path.resolve(path.join('examples', 'lodash'));
 const dist = path.join(example, 'dist');
 const internals = path.join(dist, 'internal');
 
-const getFiles = async (dir: string): Promise<string[]> => {
+async function getFiles(dir: string): Promise<string[]> {
   const dirEntries = await readDir(dir);
   return dirEntries.filter((entry: string) =>
     fs.lstatSync(path.join(dir, entry)).isFile(),
   );
-};
+}
 
 describe('E2E: lodash', () => {
   beforeAll(async () => {
@@ -25,6 +25,7 @@ describe('E2E: lodash', () => {
   it('transforms all lodash methods to TypeScript', async () => {
     const files = await getFiles(dist);
     expect(files).toHaveLength(252);
+
     for (const file of files) {
       const content = await readFile(path.join(dist, file), 'utf8');
       expect(content).toMatchSnapshot(file);
@@ -34,6 +35,7 @@ describe('E2E: lodash', () => {
   it('transforms all lodash internals to TypeScript', async () => {
     const files = await getFiles(internals);
     expect(files).toHaveLength(143);
+
     for (const file of files) {
       const content = await readFile(path.join(internals, file), 'utf8');
       expect(content).toMatchSnapshot(`internal/${file}`);
