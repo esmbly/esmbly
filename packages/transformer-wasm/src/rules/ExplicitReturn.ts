@@ -5,47 +5,78 @@ import { Warning } from '@esmbly/types';
 const info =
   'AssemblyScript require functions to have a return type annotation.';
 
+const issueUrl =
+  'https://github.com/AssemblyScript/assemblyscript/wiki/Limitations';
+
 export default (warnings: Warning[]): Visitor<Node> => ({
   // @ts-ignore
-  ArrowFunctionExpression({ node }: NodePath<t.ArrowFunctionExpression>) {
-    if (!node.returnType) {
-      warnings.push({ info, node });
+  ArrowFunctionExpression(path: NodePath<t.ArrowFunctionExpression>) {
+    if (!path.node.returnType) {
+      warnings.push({
+        info,
+        issueUrl,
+        loc: path.node.loc,
+      });
     }
   },
   // @ts-ignore
-  ClassMethod({ node }: NodePath<t.ClassMethod>) {
-    if (!node.returnType) {
-      warnings.push({ info, node });
+  ClassMethod(path: NodePath<t.ClassMethod>) {
+    if (!path.node.returnType) {
+      warnings.push({
+        info,
+        issueUrl,
+        loc: path.node.loc,
+      });
     }
   },
   // @ts-ignore
-  FunctionDeclaration({ node }: NodePath<t.FunctionDeclaration>) {
-    if (!node.returnType) {
-      warnings.push({ info, node });
+  FunctionDeclaration(path: NodePath<t.FunctionDeclaration>) {
+    if (!path.node.returnType) {
+      warnings.push({
+        info,
+        issueUrl,
+        loc: path.node.loc,
+      });
     }
   },
   // @ts-ignore
-  FunctionExpression({ node }: NodePath<t.FunctionExpression>) {
-    if (!node.returnType) {
-      warnings.push({ info, node });
+  FunctionExpression(path: NodePath<t.FunctionExpression>) {
+    if (!path.node.returnType) {
+      warnings.push({
+        info,
+        issueUrl,
+        loc: path.node.loc,
+      });
     }
   },
   // @ts-ignore
-  ObjectMethod({ node }: NodePath<t.ObjectMethod>) {
-    if (!node.returnType) {
-      warnings.push({ info, node });
+  ObjectMethod(path: NodePath<t.ObjectMethod>) {
+    if (!path.node.returnType) {
+      warnings.push({
+        info,
+        issueUrl,
+        loc: path.node.loc,
+      });
     }
   },
   // @ts-ignore
-  TSDeclareFunction({ node }: NodePath<t.TSDeclareFunction>) {
-    if (!node.returnType) {
-      warnings.push({ info, node });
+  TSDeclareFunction(path: NodePath<t.TSDeclareFunction>) {
+    if (!path.node.returnType) {
+      warnings.push({
+        info,
+        issueUrl,
+        loc: path.node.loc,
+      });
     }
   },
   // @ts-ignore
-  TSDeclareMethod({ node }: NodePath<t.TSDeclareMethod>) {
-    if (!node.returnType) {
-      warnings.push({ info, node });
+  TSDeclareMethod(path: NodePath<t.TSDeclareMethod>) {
+    if (!path.node.returnType) {
+      warnings.push({
+        info,
+        issueUrl,
+        loc: path.node.loc,
+      });
     }
   },
 });

@@ -13,12 +13,6 @@ export default (
     const parentId = parent.declarations[0].id as t.Identifier;
     const functionName = parentId.name;
 
-    toTsFunction(
-      path.node,
-      functionName,
-      typeProfile,
-      coverageReport,
-      warnings,
-    );
+    toTsFunction(path, functionName, typeProfile, coverageReport, warnings);
   },
 });

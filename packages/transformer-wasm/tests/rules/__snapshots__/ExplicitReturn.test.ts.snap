@@ -1,15 +1,85 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`rule: ExplicitReturn throws an error that warns about non explicit return for arrow functions 1`] = `"Found incompatible syntax"`;
+exports[`rule: ExplicitReturn throws an error that warns about non explicit return for arrow functions 1`] = `
+"
+  warning AssemblyScript require functions to have a return type annotation.
 
-exports[`rule: ExplicitReturn throws an error that warns about non explicit return for class methods 1`] = `"Found incompatible syntax"`;
+    const square = (n: number) => n * n;
+  
+  at: testfile.ts:1:15
+  issue: https://github.com/AssemblyScript/assemblyscript/wiki/Limitations
 
-exports[`rule: ExplicitReturn throws an error that warns about non explicit return for function declarations 1`] = `"Found incompatible syntax"`;
+"
+`;
 
-exports[`rule: ExplicitReturn throws an error that warns about non explicit return for function expressions 1`] = `"Found incompatible syntax"`;
+exports[`rule: ExplicitReturn throws an error that warns about non explicit return for class methods 1`] = `
+"
+  warning AssemblyScript require functions to have a return type annotation.
 
-exports[`rule: ExplicitReturn throws an error that warns about non explicit return for object methods 1`] = `"Found incompatible syntax"`;
+    square(n: number) {
+  
+  at: testfile.ts:3:8
+  issue: https://github.com/AssemblyScript/assemblyscript/wiki/Limitations
 
-exports[`rule: ExplicitReturn throws an error that warns about non explicit return for ts function declaration 1`] = `"Found incompatible syntax"`;
+"
+`;
 
-exports[`rule: ExplicitReturn throws an error that warns about non explicit return for ts method declaration 1`] = `"Found incompatible syntax"`;
+exports[`rule: ExplicitReturn throws an error that warns about non explicit return for function declarations 1`] = `
+"
+  warning AssemblyScript require functions to have a return type annotation.
+
+    function square(n: number) {
+  
+  at: testfile.ts:2:6
+  issue: https://github.com/AssemblyScript/assemblyscript/wiki/Limitations
+
+"
+`;
+
+exports[`rule: ExplicitReturn throws an error that warns about non explicit return for function expressions 1`] = `
+"
+  warning AssemblyScript require functions to have a return type annotation.
+
+    const square = function(n: number) {
+  
+  at: testfile.ts:2:21
+  issue: https://github.com/AssemblyScript/assemblyscript/wiki/Limitations
+
+"
+`;
+
+exports[`rule: ExplicitReturn throws an error that warns about non explicit return for object methods 1`] = `
+"
+  warning AssemblyScript require functions to have a return type annotation.
+
+    square(n: number) {
+  
+  at: testfile.ts:3:8
+  issue: https://github.com/AssemblyScript/assemblyscript/wiki/Limitations
+
+"
+`;
+
+exports[`rule: ExplicitReturn throws an error that warns about non explicit return for ts function declaration 1`] = `
+"
+  warning AssemblyScript require functions to have a return type annotation.
+
+    declare function square(n: number);
+  
+  at: testfile.ts:1:0
+  issue: https://github.com/AssemblyScript/assemblyscript/wiki/Limitations
+
+"
+`;
+
+exports[`rule: ExplicitReturn throws an error that warns about non explicit return for ts method declaration 1`] = `
+"
+  warning AssemblyScript require functions to have a return type annotation.
+
+    public square(n: number);
+  
+  at: testfile.ts:3:8
+  issue: https://github.com/AssemblyScript/assemblyscript/wiki/Limitations
+
+"
+`;

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`templates provides a correct template for warnings 1`] = `
+"
+  yellow<warning> dim<info about the warning>
+
+    dim<function add(a>red<: any):>dim<string {}>
+  
+  dim<at:> cyan<src/add.js:1:14>
+  dim<issue:> cyan<some url>
+
+"
+`;

@@ -5,9 +5,9 @@ import { Warning } from '@esmbly/types';
 export default (warnings: Warning[]): Visitor<Node> => ({
   OpaqueType(path: NodePath<t.OpaqueType>) {
     warnings.push({
-      info: `Opaque types can't be expressed in TypeScript`,
+      info: `Opaque types can't be expressed in TypeScript.`,
       issueUrl: 'https://github.com/Microsoft/TypeScript/issues/202',
-      node: path.node,
+      loc: path.node.loc,
     });
 
     path.replaceWith(

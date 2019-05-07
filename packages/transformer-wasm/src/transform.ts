@@ -1,6 +1,7 @@
 import * as t from '@babel/types';
 import { Format, Rule, SyntaxTree, Warning } from '@esmbly/types';
 import traverse, { NodePath } from '@babel/traverse';
+import { templates } from '@esmbly/printer';
 import getRules from './rules';
 import { WasmTransformerOptions } from '.';
 import { exportMemory, importAllocator } from './utils/memory';
@@ -10,14 +11,14 @@ export default (trees: SyntaxTree[], options: WasmTransformerOptions) => {
   const rules = getRules();
 
   trees.forEach((tree: SyntaxTree) => {
-    // @ts-ignore
-    rules.forEach((rule: Rule) => traverse(tree.tree, rule(warnings)));
+    const treeWarnings: Warning[] = [];
+    rules.forEach((rule: Rule) => traverse(tree.tree, rule(treeWarnings)));
+    treeWarnings.forEach(w => warnings.push({ ...w, file: tree.represents }));
     tree.setFormat(Format.AssemblyScript);
   });
 
   if (warnings.length > 0) {
-    // TODO: Better error message based on the warnings
-    throw new Error(`Found incompatible syntax`);
+    throw new Error(warnings.map(w => templates.warning(w)).join('\n'));
   }
 
   if (options.memory && options.memory.export) {

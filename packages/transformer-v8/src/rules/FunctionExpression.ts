@@ -18,12 +18,6 @@ export default (
       functionName = parentId.name;
     }
 
-    toTsFunction(
-      path.node,
-      functionName,
-      typeProfile,
-      coverageReport,
-      warnings,
-    );
+    toTsFunction(path, functionName, typeProfile, coverageReport, warnings);
   },
 });

@@ -1,5 +1,7 @@
 import testRunner from '../helpers/testRunner';
 
+jest.mock('@esmbly/printer');
+
 const input = `
   /* @flow */
 

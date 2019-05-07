@@ -19,7 +19,9 @@
     "build-watch": "tsc -w"
   },
   "dependencies": {
-    "@esmbly/types": "^0.0.4"
+    "@babel/types": "^7.4.4",
+    "@esmbly/types": "^0.0.4",
+    "chalk": "^2.4.2"
   },
   "publishConfig": {
     "access": "public"
