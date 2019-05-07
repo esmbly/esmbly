@@ -1,6 +1,8 @@
 import { Format } from '@esmbly/types';
 import testRunner from '../../helpers/testRunner';
 
+jest.mock('@esmbly/printer');
+
 const program = `
   export function first(arr: Int32Array): string {
     return arr[0];

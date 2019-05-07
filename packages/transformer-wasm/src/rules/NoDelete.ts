@@ -4,12 +4,18 @@ import { Warning } from '@esmbly/types';
 
 const info = 'AssemblyScript does not support the delete operator';
 
+const issueUrl =
+  'https://github.com/AssemblyScript/assemblyscript/wiki/Limitations';
+
 export default (warnings: Warning[]): Visitor<Node> => ({
   // @ts-ignore
-  UnaryExpression({ node }: NodePath<t.UnaryExpression>) {
-    if (node.operator === 'delete') {
-      // @ts-ignore
-      warnings.push({ info, node });
+  UnaryExpression(path: NodePath<t.UnaryExpression>) {
+    if (path.node.operator === 'delete') {
+      warnings.push({
+        info,
+        issueUrl,
+        loc: path.node.loc,
+      });
     }
   },
 });

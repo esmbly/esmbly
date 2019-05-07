@@ -61,24 +61,36 @@ export default async (
   trees.forEach((tree: SyntaxTree) => {
     const { dir, name, type } = tree.represents;
     const filePath = path.join(dir, `${name}${type}`);
+
     const typeProfileForTree = typeProfile.find((profile: TypeProfile) => {
       return profile.url === `file://${filePath}`;
     });
+
     if (!typeProfileForTree) {
       const message = `Could not collect a type profile for: ${filePath}`;
       throw new Error(message);
     }
+
     const coverageReportForTree = coverageReport.find(
       (report: CoverageReport) => {
         return report.scriptId === typeProfileForTree.scriptId;
       },
     );
+
+    const treeWarnings: Warning[] = [];
+
     rules.forEach((rule: Rule) =>
       traverse(
         tree.tree,
-        rule(warnings, typeProfileForTree, coverageReportForTree),
+        rule(treeWarnings, typeProfileForTree, coverageReportForTree),
       ),
     );
+
+    treeWarnings.forEach(w => warnings.push({ ...w, file: tree.represents }));
     tree.setFormat(Format.TypeScript);
   });
+
+  if (warnings.length > 0) {
+    printer.printWarnings(warnings);
+  }
 };

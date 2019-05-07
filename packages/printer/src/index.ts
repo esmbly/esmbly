@@ -1,4 +1,6 @@
+import { Warning } from '@esmbly/types';
 import { Callback, Encoding, WriteFn } from './types';
+import * as templates from './templates';
 
 class Printer {
   private stdout: NodeJS.WriteStream | null;
@@ -38,6 +40,14 @@ class Printer {
     return false;
   }
 
+  public printWarnings(warnings: Warning[]): void {
+    if (this.stdout) {
+      warnings.forEach((warning: Warning) => {
+        this.print(templates.warning(warning));
+      });
+    }
+  }
+
   public clearLine(...args: WriteFn[]): void {
     if (this.isTTY) {
       args.forEach(fn => fn.call(this, '\x1b[999D\x1b[K'));
@@ -58,3 +68,4 @@ class Printer {
 }
 
 export default new Printer();
+export { templates };

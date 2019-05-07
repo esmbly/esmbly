@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`templates provides a correct template for warnings 1`] = `
+"
+  [33mwarning[39m [2minfo about the warning[22m
+
+    [2mfunction add(a[22m[31m: any):[39m[2mstring {}[22m
+  
+  [2mat:[22m [36msrc/add.js:1:14[39m
+  [2missue:[22m [36msome url[39m
+
+"
+`;

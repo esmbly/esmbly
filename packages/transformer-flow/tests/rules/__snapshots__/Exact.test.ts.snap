@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rule: Exact produces a correctly formated warning 1`] = `
+"
+  [33mwarning[39m [2mExact types can't be expressed in TypeScript.[22m
+
+    [2mtype Exact = [22m[31m{| a: number, b: string |}[39m
+  
+  [2mat:[22m [36minput.js:4:15[39m
+  [2missue:[22m [36mhttps://github.com/Microsoft/TypeScript/issues/12936[39m
+
+"
+`;

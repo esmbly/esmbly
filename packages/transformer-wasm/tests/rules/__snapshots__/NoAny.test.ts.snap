@@ -1,3 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`rule: NoAny throws an error that warns about the use of any 1`] = `"Found incompatible syntax"`;
+exports[`rule: NoAny throws an error that warns about the use of any 1`] = `
+"
+  [33mwarning[39m [2mAssemblyScript does not support using any[22m
+
+    [2mfunction noAny(a: [22m[31many)[39m[2m any {[22m
+  
+  [2mat:[22m [36mtestfile.ts:2:20[39m
+  [2missue:[22m [36mhttps://github.com/AssemblyScript/assemblyscript/wiki/Limitations[39m
+
+
+
+  [33mwarning[39m [2mAssemblyScript does not support using any[22m
+
+    [2mfunction noAny(a: any): [22m[31many [39m
+  
+  [2mat:[22m [36mtestfile.ts:2:26[39m
+  [2missue:[22m [36mhttps://github.com/AssemblyScript/assemblyscript/wiki/Limitations[39m
+
+"
+`;

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rule: Opaque produces a correctly formated warning 1`] = `
+"
+  [33mwarning[39m [2mOpaque types can't be expressed in TypeScript.[22m
+
+    [31mopaque type Opaque = number;[39m
+  
+  [2mat:[22m [36minput.js:4:2[39m
+  [2missue:[22m [36mhttps://github.com/Microsoft/TypeScript/issues/202[39m
+
+"
+`;

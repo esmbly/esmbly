@@ -14,11 +14,11 @@ export default (
     if (!name) {
       warnings.push({
         info: 'Could not collect type information for function.',
-        node: path.node,
+        loc: path.node.loc,
       });
       return;
     }
 
-    toTsFunction(path.node, name, typeProfile, coverageReport, warnings);
+    toTsFunction(path, name, typeProfile, coverageReport, warnings);
   },
 });

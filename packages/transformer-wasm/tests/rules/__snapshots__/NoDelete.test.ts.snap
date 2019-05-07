@@ -1,3 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`rule: NoDelete throws an error that warns about the use of delete 1`] = `"Found incompatible syntax"`;
+exports[`rule: NoDelete throws an error that warns about the use of delete 1`] = `
+"
+  [33mwarning[39m [2mAssemblyScript does not support the delete operator[22m
+
+    [31mdelete a[1];[39m
+  
+  [2mat:[22m [36mtestfile.ts:4:6[39m
+  [2missue:[22m [36mhttps://github.com/AssemblyScript/assemblyscript/wiki/Limitations[39m
+
+"
+`;
