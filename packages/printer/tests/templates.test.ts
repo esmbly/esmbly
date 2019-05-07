@@ -1,6 +1,13 @@
 import { FileType } from '@esmbly/types';
 import * as templates from '../src/templates';
 
+jest.mock('chalk', () => ({
+  cyan: (str: string) => `cyan<${str}>`,
+  dim: (str: string) => `dim<${str}>`,
+  red: (str: string) => `red<${str}>`,
+  yellow: (str: string) => `yellow<${str}>`,
+}));
+
 describe('templates', () => {
   it('provides a correct template for warnings', () => {
     expect(

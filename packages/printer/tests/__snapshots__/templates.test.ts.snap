@@ -2,12 +2,12 @@
 
 exports[`templates provides a correct template for warnings 1`] = `
 "
-  [33mwarning[39m [2minfo about the warning[22m
+  yellow<warning> dim<info about the warning>
 
-    [2mfunction add(a[22m[31m: any):[39m[2mstring {}[22m
+    dim<function add(a>red<: any):>dim<string {}>
   
-  [2mat:[22m [36msrc/add.js:1:14[39m
-  [2missue:[22m [36msome url[39m
+  dim<at:> cyan<src/add.js:1:14>
+  dim<issue:> cyan<some url>
 
 "
 `;
