@@ -3,9 +3,7 @@ import { exec } from 'child_process';
 
 function isDeprecationWarning(stderr: string): boolean {
   return (
-    stderr.includes(
-      'DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.".length is not a function > "(node:7449) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.',
-    ) && stderr.length === 190
+    stderr.includes('DeprecationWarning: Buffer()') && stderr.length === 190
   );
 }
 
