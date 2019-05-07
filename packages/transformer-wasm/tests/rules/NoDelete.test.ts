@@ -13,8 +13,15 @@ const program = `
 `;
 
 describe('rule: NoDelete', () => {
-  beforeAll(() => printer.setOutStream(new Writable({ write: () => {} })));
-  afterAll(() => printer.setOutStream(process.stdout));
+  beforeAll(() => {
+    printer.setOutStream(new Writable({ write: () => {} }));
+    printer.forceDisableColors();
+  });
+
+  afterAll(() => {
+    printer.setOutStream(process.stdout);
+    printer.forceEnableColors();
+  });
 
   it('throws an error that warns about the use of delete', async () => {
     const output = [{ format: Format.AssemblyScript }];

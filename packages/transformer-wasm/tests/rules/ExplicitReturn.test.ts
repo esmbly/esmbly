@@ -4,8 +4,15 @@ import { Format } from '@esmbly/types';
 import testRunner from '../helpers/testRunner';
 
 describe('rule: ExplicitReturn', () => {
-  beforeAll(() => printer.setOutStream(new Writable({ write: () => {} })));
-  afterAll(() => printer.setOutStream(process.stdout));
+  beforeAll(() => {
+    printer.setOutStream(new Writable({ write: () => {} }));
+    printer.forceDisableColors();
+  });
+
+  afterAll(() => {
+    printer.setOutStream(process.stdout);
+    printer.forceEnableColors();
+  });
 
   it('throws an error that warns about non explicit return for arrow functions', async () => {
     const output = [{ format: Format.AssemblyScript }];

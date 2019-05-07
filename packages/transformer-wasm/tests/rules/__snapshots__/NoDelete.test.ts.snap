@@ -2,12 +2,12 @@
 
 exports[`rule: NoDelete throws an error that warns about the use of delete 1`] = `
 "
-  [33mwarning[39m [2mAssemblyScript does not support the delete operator[22m
+  warning AssemblyScript does not support the delete operator
 
-    [31mdelete a[1];[39m
+    delete a[1];
   
-  [2mat:[22m [36mtestfile.ts:4:6[39m
-  [2missue:[22m [36mhttps://github.com/AssemblyScript/assemblyscript/wiki/Limitations[39m
+  at: testfile.ts:4:6
+  issue: https://github.com/AssemblyScript/assemblyscript/wiki/Limitations
 
 "
 `;

@@ -10,8 +10,15 @@ const program = `
 `;
 
 describe('rule: F64', () => {
-  beforeAll(() => printer.setOutStream(new Writable({ write: () => {} })));
-  afterAll(() => printer.setOutStream(process.stdout));
+  beforeAll(() => {
+    printer.setOutStream(new Writable({ write: () => {} }));
+    printer.forceDisableColors();
+  });
+
+  afterAll(() => {
+    printer.setOutStream(process.stdout);
+    printer.forceEnableColors();
+  });
 
   it('transforms number -> f64', async () => {
     const output = [{ format: Format.AssemblyScript }];

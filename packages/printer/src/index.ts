@@ -1,4 +1,5 @@
 import { Warning } from '@esmbly/types';
+import chalk from 'chalk';
 import { Callback, Encoding, WriteFn } from './types';
 import * as templates from './templates';
 
@@ -46,6 +47,14 @@ class Printer {
         this.print(templates.warning(warning));
       });
     }
+  }
+
+  public forceEnableColors(): void {
+    chalk.enabled = true;
+  }
+
+  public forceDisableColors(): void {
+    chalk.enabled = false;
   }
 
   public clearLine(...args: WriteFn[]): void {

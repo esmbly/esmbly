@@ -8,8 +8,15 @@ const program = `
 `;
 
 describe('rule: NoUndefined', () => {
-  beforeAll(() => printer.setOutStream(new Writable({ write: () => {} })));
-  afterAll(() => printer.setOutStream(process.stdout));
+  beforeAll(() => {
+    printer.setOutStream(new Writable({ write: () => {} }));
+    printer.forceDisableColors();
+  });
+
+  afterAll(() => {
+    printer.setOutStream(process.stdout);
+    printer.forceEnableColors();
+  });
 
   it('throws an error that warns about the use of undefined', async () => {
     const output = [{ format: Format.AssemblyScript }];
