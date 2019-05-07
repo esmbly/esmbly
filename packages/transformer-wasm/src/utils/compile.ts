@@ -27,12 +27,12 @@ export function compile(
 ): Promise<File[]> {
   return new Promise((resolve, reject) => {
     const outputFiles: File[] = [];
-    const files = trees.map(tree => ({
-      ...tree.represents,
-      content: tree.toCode(),
+    const files = trees.map(({ represents, toCode }) => ({
+      ...represents,
+      content: toCode(),
+      path: `${represents.name}${represents.type}`,
     }));
-    // TODO: The file represented by the tree should be converted to TS before this
-    const fileNames = files.map(file => `${file.name}.ts`);
+    const filePaths = files.map(file => file.path);
     const targets = getCompileTargets(output);
     const flags = getFlags(targets, options);
 
@@ -45,12 +45,11 @@ export function compile(
     const stderr: string[] = [];
 
     asc.main(
-      [...fileNames, ...flags],
+      [...filePaths, ...flags],
       {
         listFiles: () => [],
         readFile: (filename: string) => {
-          // TODO: The file represented by the tree should be converted to TS before this
-          const file = files.find(f => `${f.name}.ts` === filename);
+          const file = files.find(f => f.path === filename);
           return file ? file.content : null;
         },
         stderr: asc.createMemoryStream((chunk: string) => stderr.push(chunk)),
@@ -62,10 +61,9 @@ export function compile(
             if (out.format === format) {
               outputFiles.push({
                 content,
-                dir: out.dir || '',
-                filename: out.filename,
-                // TODO: Default the name to input file(s) name?
-                name: 'out',
+                dir: files.length === 1 ? files[0].dir : '',
+                name: files.length === 1 ? files[0].name : 'out',
+                outputOptions: out,
                 type,
               });
             }

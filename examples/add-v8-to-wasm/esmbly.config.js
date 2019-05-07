@@ -15,27 +15,20 @@ module.exports = {
   ],
   output: [
     {
-      dir: 'dist',
       format: '.ts',
-      flatten: true,
+      outFile: path.join(__dirname, 'dist', 'add.ts'),
     },
     {
-      dir: 'dist',
       format: '.wat',
-      filename: 'add.wat',
-      flatten: true,
+      outFile: path.join(__dirname, 'dist', 'add.wat'),
     },
     {
-      dir: 'dist',
       format: '.wasm',
-      filename: 'add.wasm',
-      flatten: true,
+      outFile: path.join(__dirname, 'dist', 'add.wasm'),
     },
     {
-      dir: 'dist',
       format: '.as',
-      filename: '[name].as.ts',
-      flatten: true,
-    },
+      outFile: path.join(__dirname, 'dist', 'add.as.ts'),
+    }
   ],
 };

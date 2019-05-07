@@ -7,15 +7,13 @@ module.exports = {
   transformers: [
     JSDoc.createTransformer({}),
     Wasm.createTransformer({
-      memory: { export: true, allocator: 'allocator/tlsf' }
+      memory: { export: true, allocator: 'allocator/tlsf' },
     }),
   ],
   output: [
     {
-      dir: 'dist',
       format: '.wasm',
-      filename: 'sort.wasm',
-      flatten: true,
+      outFile: path.join(__dirname, 'dist', 'sort.wasm'),
     },
   ],
 };

@@ -1,3 +1,4 @@
+const path = require('path');
 const Flow = require('@esmbly/transformer-flow');
 const Wasm = require('@esmbly/transformer-wasm');
 
@@ -6,26 +7,21 @@ module.exports = {
   transformers: [
     Flow.createTransformer({}),
     Wasm.createTransformer({
-      memory: { export: true, allocator: 'allocator/tlsf' }
+      memory: { export: true, allocator: 'allocator/tlsf' },
     }),
   ],
   output: [
     {
-      dir: 'dist',
       format: '.ts',
-      flatten: true,
+      outFile: path.join(__dirname, 'dist', 'pad.ts'),
     },
     {
-      dir: 'dist',
       format: '.wasm',
-      filename: 'pad.wasm',
-      flatten: true,
+      outFile: path.join(__dirname, 'dist', 'pad.wasm'),
     },
     {
-      dir: 'dist',
       format: '.as',
-      filename: '[name].as.ts',
-      flatten: true,
+      outFile: path.join(__dirname, 'dist', 'pad.as.ts'),
     },
   ],
 };

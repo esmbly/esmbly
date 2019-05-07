@@ -3,13 +3,13 @@ const Flow = require('@esmbly/transformer-flow');
 module.exports = {
   input: ['./src/**/*.js'],
   transformers: [
-    Flow.createTransformer({})
+    Flow.createTransformer({}),
   ],
   output: [
     {
-      dir: 'dist',
       format: '.ts',
-      flatten: true,
+      outDir: 'dist',
+      rootDir: 'src',
     },
   ],
 };

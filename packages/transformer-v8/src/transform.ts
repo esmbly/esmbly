@@ -59,7 +59,7 @@ export async function transform(
 
   trees.forEach((tree: SyntaxTree) => {
     const { dir, name, type } = tree.represents;
-    const filePath = path.join(dir, `${name}${type}`);
+    const filePath = path.resolve(path.join(dir, `${name}${type}`));
 
     const typeProfileForTree = typeProfile.find((profile: TypeProfile) => {
       return profile.url === `file://${filePath}`;

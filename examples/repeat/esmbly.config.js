@@ -12,15 +12,13 @@ module.exports = {
       testCommand: `jest ${testPath} --config=${configPath}`,
     }),
     Wasm.createTransformer({
-      memory: { export: true, allocator: 'allocator/tlsf' }
+      memory: { export: true, allocator: 'allocator/tlsf' },
     }),
   ],
   output: [
     {
-      dir: 'dist',
       format: '.wasm',
-      filename: 'repeat.wasm',
-      flatten: true,
+      outFile: path.join(__dirname, 'dist', 'repeat.wasm'),
     },
   ],
 };

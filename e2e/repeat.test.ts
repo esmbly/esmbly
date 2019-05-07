@@ -1,7 +1,7 @@
 import path from 'path';
 import { testRunner } from './helpers/testRunner';
 
-describe('E2E: pad', () => {
+describe('E2E: repeat', () => {
   let repeat: (str: string, times: number) => string;
 
   beforeAll(async () => {

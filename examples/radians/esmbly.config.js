@@ -15,10 +15,8 @@ module.exports = {
   ],
   output: [
     {
-      dir: 'dist',
       format: '.wasm',
-      filename: 'radians.wasm',
-      flatten: true,
+      outFile: path.join(__dirname, 'dist', 'radians.wasm'),
     },
   ],
 };
