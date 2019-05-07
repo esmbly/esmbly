@@ -10,6 +10,14 @@ function isDeprecationWarning(stderr: string): boolean {
 
 export async function testRunner(cwd: string): Promise<void> {
   const { stderr } = await util.promisify(exec)(`yarn run esmbly run`, { cwd });
+  console.log(
+    `IS DEPRECATION WARNING (trimmed): ${isDeprecationWarning(stderr.trim())}`,
+  );
+  console.log(
+    `IS DEPRECATION WARNING (not trimmed): ${isDeprecationWarning(stderr)}`,
+  );
+  console.log(`STDERR: ${stderr}`);
+  console.log(`STDERR.length: ${stderr.length}`);
 
   if (
     stderr &&
