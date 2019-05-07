@@ -7,7 +7,7 @@ function notFlowAnnotation(comment: t.Comment): boolean {
   return value !== '@flow' && value !== '@flow strict';
 }
 
-export default (ast: t.File): void => {
+export function stripFlowAnnotation(ast: t.File): void {
   const body = ast.program.body[0] as StatementWithComments;
 
   if (body.leadingComments) {
@@ -17,4 +17,4 @@ export default (ast: t.File): void => {
   if (body.comments) {
     body.comments = body.comments.filter(notFlowAnnotation);
   }
-};
+}

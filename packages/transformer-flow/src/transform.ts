@@ -1,14 +1,14 @@
 import { Format, Rule, SyntaxTree, Warning } from '@esmbly/types';
 import traverse from '@babel/traverse';
-import printer from '@esmbly/printer';
-import getRules from './rules';
-import stripFlowAnnotation from './utils/stripFlowAnnotation';
+import { printer } from '@esmbly/printer';
+import { getRules } from './rules';
+import { stripFlowAnnotation } from './utils/stripFlowAnnotation';
 import { FlowTransformerOptions } from '.';
 
-export default (
+export function transform(
   trees: SyntaxTree[],
   { removeFlowFlags = true }: FlowTransformerOptions,
-) => {
+): void {
   const warnings: Warning[] = [];
   const rules = getRules();
 
@@ -26,4 +26,4 @@ export default (
   if (warnings.length > 0) {
     printer.printWarnings(warnings);
   }
-};
+}

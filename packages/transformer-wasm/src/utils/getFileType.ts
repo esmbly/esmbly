@@ -1,6 +1,6 @@
 import { FileType } from '@esmbly/types';
 
-export default (filename: string): FileType => {
+export function getFileType(filename: string): FileType {
   switch (filename) {
     case 'out.wasm':
       return FileType.WebAssembly;
@@ -11,4 +11,4 @@ export default (filename: string): FileType => {
     default:
       throw new Error('Unknown filetype');
   }
-};
+}

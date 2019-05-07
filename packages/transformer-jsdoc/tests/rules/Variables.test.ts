@@ -1,4 +1,4 @@
-import testRunner from '../helpers/stringTestRunner';
+import { testRunner } from '../helpers/stringTestRunner';
 
 describe('rule: Variables', () => {
   it('transforms a variable declaration to TypeScript (var)', async () => {

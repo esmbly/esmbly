@@ -1,6 +1,6 @@
 const path = require('path');
-const JSDocTransformer = require('@esmbly/transformer-jsdoc').default;
-const WasmTransformer = require('@esmbly/transformer-wasm').default;
+const JSDoc = require('@esmbly/transformer-jsdoc');
+const Wasm = require('@esmbly/transformer-wasm');
 
 // TODO: Merge this into one config once output formats has been improved
 // TODO: Transform some additional methods to WebAssembly as well
@@ -8,7 +8,7 @@ module.exports = [
   {
     input: ['./src/**/*.js', '!./src/internal/**/*.js'],
     transformers: [
-      JSDocTransformer({}),
+      JSDoc.createTransformer({}),
     ],
     output: [
       {
@@ -21,7 +21,7 @@ module.exports = [
   {
     input: ['./src/internal/**/*.js'],
     transformers: [
-      JSDocTransformer({}),
+      JSDoc.createTransformer({}),
     ],
     output: [
       {
@@ -34,8 +34,8 @@ module.exports = [
   {
     input: ['./src/clamp.namedexport.js'],
     transformers: [
-      JSDocTransformer({}),
-      WasmTransformer({}),
+      JSDoc.createTransformer({}),
+      Wasm.createTransformer({}),
     ],
     output: [
       {

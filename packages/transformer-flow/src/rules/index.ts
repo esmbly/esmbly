@@ -1,20 +1,20 @@
 import { Rule } from '@esmbly/types';
-import $Exact from './$Exact';
-import $Keys from './$Keys';
-import $ReadOnly from './$ReadOnly';
-import $ReadOnlyArray from './$ReadOnlyArray';
-import Casting from './Casting';
-import Exact from './Exact';
-import Indexer from './Indexer';
-import Maybe from './Maybe';
-import Mixed from './Mixed';
-import Opaque from './Opaque';
-import TypeImport from './TypeImport';
-import Typeof from './Typeof';
-import Undefined from './Undefined';
-import Variance from './Variance';
+import { $Exact } from './$Exact';
+import { $Keys } from './$Keys';
+import { $ReadOnly } from './$ReadOnly';
+import { $ReadOnlyArray } from './$ReadOnlyArray';
+import { Casting } from './Casting';
+import { Exact } from './Exact';
+import { Indexer } from './Indexer';
+import { Maybe } from './Maybe';
+import { Mixed } from './Mixed';
+import { Opaque } from './Opaque';
+import { TypeImport } from './TypeImport';
+import { Typeof } from './Typeof';
+import { Undefined } from './Undefined';
+import { Variance } from './Variance';
 
-export default () => {
+export function getRules(): Map<string, Rule> {
   const rules = new Map<string, Rule>();
 
   rules.set('$Exact', $Exact);
@@ -34,4 +34,4 @@ export default () => {
   rules.set('Variance', Variance);
 
   return rules;
-};
+}

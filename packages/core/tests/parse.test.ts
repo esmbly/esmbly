@@ -1,9 +1,7 @@
 import * as babelParser from '@babel/parser';
 import { FileType, Format, Transformer } from '@esmbly/types';
-import parse from '../src/parse';
-import jsfile from './__fixtures__/jsfile';
-import flowfile from './__fixtures__/flowfile';
-import tsfile from './__fixtures__/tsfile';
+import { parse } from '../src/parse';
+import { flowfile, jsfile, tsfile } from './__fixtures__/files';
 
 describe('parse', () => {
   it('correctly parses a JavaScript file', () => {

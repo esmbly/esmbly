@@ -38,7 +38,14 @@
     "no-await-in-loop": "off",
     "no-unused-expressions": ["error", { "allowShortCircuit": true }],
     "no-useless-constructor": "off",
-    "@typescript-eslint/no-useless-constructor": "error"
+    "@typescript-eslint/no-useless-constructor": "error",
+    "import/no-default-export": "error",
+    "func-style": ["error", "declaration"],
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "block-like", "next": "*" },
+      { "blankLine": "always", "prev": "*", "next": "block-like" }
+    ]
   },
   "globals": {
     "WebAssembly": true

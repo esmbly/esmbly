@@ -3,10 +3,7 @@ import { File, Format, Output, SyntaxTree, Transformer } from '@esmbly/types';
 import recast from 'recast';
 import { fileTypeForOutputFormat } from './fileTypeForOutputFormat';
 
-export default function parse(
-  files: File[],
-  transformer: Transformer,
-): SyntaxTree[] {
+export function parse(files: File[], transformer: Transformer): SyntaxTree[] {
   return files.map(
     (file: File): SyntaxTree => {
       try {

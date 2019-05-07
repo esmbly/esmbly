@@ -25,6 +25,7 @@ function countBlankLines(
 
   for (let i = commentEnd; i < bodyStart; i += 1) {
     const { line } = lines.infos[i];
+
     if (line.trim() === '') {
       blankLines += 1;
     }
@@ -40,14 +41,17 @@ export function isLeadingComment(
 ): boolean {
   if ('body' in node) {
     const body = node.body as Block;
+
     if (!body.loc) {
       return false;
     }
+
     const commentEnd = comment.loc.end.line;
     const bodyStart = body.loc.start.line;
     const blankLines = countBlankLines(commentEnd, bodyStart, parent);
     return commentEnd === bodyStart - blankLines - 1;
   }
+
   return false;
 }
 

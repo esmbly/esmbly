@@ -1,4 +1,4 @@
-export const MissingConfig = (): string => {
+export function MissingConfig(): string {
   return `Please provide a valid configuration object.
     {
       input: File[];
@@ -6,16 +6,16 @@ export const MissingConfig = (): string => {
       output: Output[];
     }
   `;
-};
+}
 
-export const NoInput = (): string => {
+export function NoInput(): string {
   return 'Please specify at least one file to transform.';
-};
+}
 
-export const NoTransformers = (): string => {
+export function NoTransformers(): string {
   return 'Please specify at least one transformer.';
-};
+}
 
-export const NoOutput = (): string => {
+export function NoOutput(): string {
   return 'Please specify at least one output format.';
-};
+}

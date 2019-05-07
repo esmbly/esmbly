@@ -1,9 +1,12 @@
-const JSDocTransformer = require('@esmbly/transformer-jsdoc').default;
-const WasmTransformer = require('@esmbly/transformer-wasm').default;
+const JSDoc = require('@esmbly/transformer-jsdoc');
+const Wasm = require('@esmbly/transformer-wasm');
 
 module.exports = {
   input: ['./src/**/*.js'],
-  transformers: [JSDocTransformer({}), WasmTransformer({})],
+  transformers: [
+    JSDoc.createTransformer({}),
+    Wasm.createTransformer({})
+  ],
   output: [
     {
       dir: 'dist',

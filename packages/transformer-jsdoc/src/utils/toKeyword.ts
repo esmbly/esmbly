@@ -6,6 +6,7 @@ import { Type, type } from 'doctrine';
 
 function handleTypeApplication(tag: type.TypeApplication): t.TSType {
   const { name } = tag.expression as type.NameExpression;
+
   if (name === 'Array') {
     if (
       tag.applications[0].type === 'UnionType' &&
@@ -18,12 +19,16 @@ function handleTypeApplication(tag: type.TypeApplication): t.TSType {
         ),
       );
     }
+
     const arrayTypes = tag.applications.map(toKeyword);
+
     if (arrayTypes.length > 1) {
       return t.tsArrayType(t.tsUnionType(arrayTypes));
     }
+
     return t.tsArrayType(arrayTypes[0] || t.tsAnyKeyword());
   }
+
   // TODO: Handle other type of type applications?
   return t.tsAnyKeyword();
 }
@@ -63,16 +68,19 @@ function handleRestType(tag: type.RestType): t.TSType {
       ),
     );
   }
+
   return t.tsArrayType(toKeyword(tag.expression));
 }
 
-export default function toKeyword(tag?: Type): t.TSType {
+export function toKeyword(tag?: Type): t.TSType {
   if (!tag) {
     return t.tsAnyKeyword();
   }
+
   if (!tag.type) {
     return t.tsAnyKeyword();
   }
+
   switch (tag.type.toString()) {
     case 'AllLiteral':
       return t.tsAnyKeyword();

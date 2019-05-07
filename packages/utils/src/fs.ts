@@ -1,6 +1,7 @@
 import fs from 'fs';
 import util from 'util';
 
+// eslint-disable-next-line import/no-default-export
 export default {
   mkdir: util.promisify(fs.mkdir),
   mkdtemp: util.promisify(fs.mkdtemp),

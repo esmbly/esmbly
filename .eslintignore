@@ -2,3 +2,4 @@
 **/dist/**
 examples
 webpack.config.js
+__fixtures__

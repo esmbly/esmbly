@@ -1,9 +1,9 @@
 import * as t from '@babel/types';
-import getId from './getId';
-import toTsFunction from './toTsFunction';
-import toTsTypeLiteral from './toTsTypeLiteral';
+import { getId } from './getId';
+import { toTsFunction } from './toTsFunction';
+import { toTsTypeLiteral } from './toTsTypeLiteral';
 
-export default function toTsType(node: t.Flow): t.TSType {
+export function toTsType(node: t.Flow): t.TSType {
   switch (node.type) {
     case 'AnyTypeAnnotation':
       return t.tsAnyKeyword();

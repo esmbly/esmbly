@@ -1,14 +1,14 @@
 import { Format, Rule, SyntaxTree, Warning } from '@esmbly/types';
 import traverse from '@babel/traverse';
-import printer from '@esmbly/printer';
+import { printer } from '@esmbly/printer';
 import { JSDocTransformerOptions } from '.';
-import stripAllComments from './utils/stripAllComments';
-import getRules from './rules';
+import { stripAllComments } from './utils/stripAllComments';
+import { getRules } from './rules';
 
-export default (
+export function transform(
   trees: SyntaxTree[],
   { stripComments = false }: JSDocTransformerOptions,
-) => {
+): void {
   const rules = getRules();
   const warnings: Warning[] = [];
 
@@ -26,4 +26,4 @@ export default (
   if (warnings.length > 0) {
     printer.printWarnings(warnings);
   }
-};
+}

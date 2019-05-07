@@ -1,16 +1,16 @@
 import * as t from '@babel/types';
 import { NodePath } from '@babel/traverse';
-import getLeadingComments from './getLeadingComments';
-import parseComments from './parseComments';
-import toTypeAnnotation from './toTypeAnnotation';
+import { getLeadingComments } from './getLeadingComments';
+import { parseComments } from './parseComments';
+import { toTypeAnnotation } from './toTypeAnnotation';
 
-export default (
+export function toTsFunction(
   node:
     | t.FunctionDeclaration
     | t.FunctionExpression
     | t.ArrowFunctionExpression,
   parentPath: NodePath<t.Node>,
-): void => {
+): void {
   const leadingComments = getLeadingComments(node, parentPath);
   const { returnType, paramTypes } = parseComments(leadingComments);
 
@@ -30,4 +30,4 @@ export default (
       },
     );
   }
-};
+}

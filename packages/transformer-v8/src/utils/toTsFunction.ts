@@ -7,9 +7,9 @@ import {
   Warning,
 } from '@esmbly/types';
 import { NodePath } from '@babel/traverse';
-import toTsTypeAnnotation from './toTsTypeAnnotation';
+import { toTsTypeAnnotation } from './toTsTypeAnnotation';
 
-export default function(
+export function toTsFunction(
   path: NodePath<
     t.FunctionDeclaration | t.FunctionExpression | t.ArrowFunctionExpression
   >,

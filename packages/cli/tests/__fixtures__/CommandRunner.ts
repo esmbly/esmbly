@@ -1,6 +1,6 @@
 import yargs from 'yargs';
 
-export default class CommandRunner {
+export class CommandRunner {
   private parser: yargs.Argv;
 
   public constructor(commandModule: unknown) {

@@ -1,11 +1,13 @@
-const FlowTransformer = require('@esmbly/transformer-flow').default;
-const WasmTransformer = require('@esmbly/transformer-wasm').default;
+const Flow = require('@esmbly/transformer-flow');
+const Wasm = require('@esmbly/transformer-wasm');
 
 module.exports = {
   input: ['./src/**/*.js'],
   transformers: [
-    FlowTransformer({}),
-    WasmTransformer({ memory: { export: true, allocator: 'allocator/tlsf' } }),
+    Flow.createTransformer({}),
+    Wasm.createTransformer({
+      memory: { export: true, allocator: 'allocator/tlsf' }
+    }),
   ],
   output: [
     {

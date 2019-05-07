@@ -1,8 +1,8 @@
 import { File, RunConfig } from '@esmbly/types';
-import parse from './parse';
+import { parse } from './parse';
 import { validateConfig, validateInputFormat } from './validate';
 
-async function run(config: RunConfig): Promise<File[]> {
+export async function run(config: RunConfig): Promise<File[]> {
   validateConfig(config);
 
   let files: File[] = [];
@@ -33,7 +33,3 @@ async function run(config: RunConfig): Promise<File[]> {
 
   return files;
 }
-
-export default {
-  run,
-};

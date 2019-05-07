@@ -37,12 +37,15 @@ export function transformerFactory(
 ): Transformer {
   if (typeof transformer === 'string') {
     let name = transformer;
+
     if (!name.includes('transformer-')) {
       name = `transformer-${name}`;
     }
+
     const transformerPath = path.resolve(__dirname, '../../', name);
     const transformerModule = requirer(transformerPath) as TransformerFactory;
     return transformerModule();
   }
+
   return transformer;
 }

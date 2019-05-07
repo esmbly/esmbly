@@ -1,5 +1,5 @@
 import { Writable } from 'stream';
-import printer from '../src';
+import { printer } from '../src';
 
 describe('printer', () => {
   beforeEach(() => {
@@ -59,9 +59,11 @@ describe('printer', () => {
   describe('setErrorStream', () => {
     it('sets the error stream', () => {
       let data = '';
-      const write = (chunk: string): void => {
+
+      function write(chunk: string): void {
         data += chunk.toString();
-      };
+      }
+
       const stream = new Writable({ write });
       const spy = jest.spyOn(process.stderr, 'write');
       printer.setErrorStream(stream);
@@ -84,9 +86,11 @@ describe('printer', () => {
   describe('setLogStream', () => {
     it('sets the log stream', () => {
       let data = '';
-      const write = (chunk: string): void => {
+
+      function write(chunk: string): void {
         data += chunk.toString();
-      };
+      }
+
       const stream = new Writable({ write });
       const spy = jest.spyOn(process.stdout, 'write');
       printer.setOutStream(stream);

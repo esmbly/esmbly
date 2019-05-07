@@ -16,8 +16,9 @@ jest.mock('../src/fs');
 jest.mock('globby');
 
 describe('exists', () => {
-  const setup = (shouldExist: boolean, code?: string): void | Error => {
+  function setup(shouldExist: boolean, code?: string): void | Error {
     fs.stat = jest.fn();
+
     if (shouldExist) {
       (fs.stat as jest.Mock).mockResolvedValue(true);
     } else {
@@ -26,7 +27,7 @@ describe('exists', () => {
       fs.stat = jest.fn();
       (fs.stat as jest.Mock).mockRejectedValue(error);
     }
-  };
+  }
 
   it('resolves to true if the file exist', async () => {
     setup(true);
@@ -71,10 +72,10 @@ describe('fileTypeForOutputFormat', () => {
 });
 
 describe('readFile', () => {
-  const setup = (): void => {
+  function setup(): void {
     fs.readFile = jest.fn();
     (fs.readFile as jest.Mock).mockResolvedValue('content');
-  };
+  }
 
   it('reads the provided filePath', async () => {
     setup();
@@ -138,10 +139,11 @@ describe('toFileType', () => {
 });
 
 describe('writeFile', () => {
-  const setup = (shouldExist: boolean): void => {
+  function setup(shouldExist: boolean): void {
     fs.writeFile = jest.fn();
     (fs.writeFile as jest.Mock).mockResolvedValue({});
     fs.stat = jest.fn();
+
     if (shouldExist) {
       (fs.stat as jest.Mock).mockResolvedValue(true);
     } else {
@@ -149,7 +151,7 @@ describe('writeFile', () => {
       error.code = 'ENOENT';
       (fs.stat as jest.Mock).mockRejectedValue(error);
     }
-  };
+  }
 
   it('writes the provided data to the provided filePath', async () => {
     setup(false);

@@ -1,11 +1,9 @@
 import { Format, RunConfig } from '@esmbly/types';
-import files from './files';
-import FooTransformer from './FooTransformer';
+import { files } from './files';
+import * as FooTransformer from './FooTransformer';
 
-const config: RunConfig = {
+export const config: RunConfig = {
   input: [...files],
   output: [{ format: Format.Flow }],
-  transformers: [FooTransformer()],
+  transformers: [FooTransformer.createTransformer()],
 };
-
-export default config;

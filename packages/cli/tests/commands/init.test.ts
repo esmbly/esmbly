@@ -1,22 +1,22 @@
 import yargs from 'yargs';
 import * as init from '../../src/commands/init';
 import * as config from '../../src/config';
-import CommandRunner from '../__fixtures__/CommandRunner';
+import { CommandRunner } from '../__fixtures__/CommandRunner';
 
 jest.mock('@esmbly/printer');
 
 const command = new CommandRunner(init);
 
-describe('Init', () => {
-  const setup = (): { createConfigSpy: jest.SpyInstance } => {
-    const createConfigSpy = jest.spyOn(config, 'createConfig');
-    createConfigSpy.mockResolvedValue({
-      fileName: 'file',
-      root: 'root',
-    });
-    return { createConfigSpy };
-  };
+function setup(): { createConfigSpy: jest.SpyInstance } {
+  const createConfigSpy = jest.spyOn(config, 'createConfig');
+  createConfigSpy.mockResolvedValue({
+    fileName: 'file',
+    root: 'root',
+  });
+  return { createConfigSpy };
+}
 
+describe('Init', () => {
   it('exposes the correct command', () => {
     expect(init.command).toEqual('init');
   });

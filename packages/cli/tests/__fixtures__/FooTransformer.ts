@@ -2,7 +2,7 @@ import { Format, SyntaxTree, Transformer } from '@esmbly/types';
 import traverse, { NodePath } from '@babel/traverse'; // eslint-disable-line
 import { FunctionDeclaration } from '@babel/types'; // eslint-disable-line
 
-export default (): Transformer => {
+export function createTransformer(): Transformer {
   return {
     format: {
       files: [Format.Flow],
@@ -24,4 +24,4 @@ export default (): Transformer => {
       });
     },
   };
-};
+}

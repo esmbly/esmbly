@@ -1,4 +1,4 @@
-import testRunner from '../helpers/stringTestRunner';
+import { testRunner } from '../helpers/stringTestRunner';
 
 describe('rule: Functions', () => {
   it('transforms an arrow function to TypeScript', async () => {

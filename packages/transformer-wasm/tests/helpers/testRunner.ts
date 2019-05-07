@@ -1,12 +1,12 @@
-import esmbly from '@esmbly/core';
+import * as esmbly from '@esmbly/core';
 import { File, FileType, Format, Output } from '@esmbly/types';
-import WasmTransformer, { WasmTransformerOptions } from '../../src';
+import * as WasmTransformer from '../../src';
 
-export default async (
+export async function testRunner(
   content: string,
   output: Output[] = [{ format: Format.WebAssembly }],
-  options: WasmTransformerOptions = {},
-): Promise<File[]> => {
+  options: WasmTransformer.WasmTransformerOptions = {},
+): Promise<File[]> {
   return esmbly.run({
     input: [
       {
@@ -17,6 +17,6 @@ export default async (
       },
     ],
     output,
-    transformers: [WasmTransformer(options)],
+    transformers: [WasmTransformer.createTransformer(options)],
   });
-};
+}

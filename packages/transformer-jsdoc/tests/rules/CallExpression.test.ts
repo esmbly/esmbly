@@ -1,4 +1,4 @@
-import testRunner from '../helpers/stringTestRunner';
+import { testRunner } from '../helpers/stringTestRunner';
 
 describe('rule: CallExpression', () => {
   it('adds a type argument to the call expression', async () => {

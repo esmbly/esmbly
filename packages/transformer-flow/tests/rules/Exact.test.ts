@@ -1,4 +1,4 @@
-import testRunner from '../helpers/testRunner';
+import { testRunner } from '../helpers/testRunner';
 
 jest.mock('@esmbly/printer');
 

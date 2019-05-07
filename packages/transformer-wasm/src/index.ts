@@ -1,7 +1,7 @@
 import { File, Format, Output, SyntaxTree, Transformer } from '@esmbly/types';
 import assemblyscriptLoader from 'assemblyscript/lib/loader';
-import createFiles from './createFiles';
-import transform from './transform';
+import { createFiles } from './createFiles';
+import { transform } from './transform';
 
 export const loader = assemblyscriptLoader;
 
@@ -19,7 +19,9 @@ export interface WasmTransformerOptions {
   // TODO: ADD more options
 }
 
-export default (options: WasmTransformerOptions = {}): Transformer => {
+export function createTransformer(
+  options: WasmTransformerOptions = {},
+): Transformer {
   return {
     createFiles(trees: SyntaxTree[], output: Output[]): Promise<File[]> {
       return createFiles(trees, output, options);
@@ -40,4 +42,4 @@ export default (options: WasmTransformerOptions = {}): Transformer => {
       return transform(trees, options);
     },
   };
-};
+}

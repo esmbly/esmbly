@@ -1,8 +1,10 @@
 import * as t from '@babel/types';
 import { TypeObject, TypeProfileEntry } from '@esmbly/types';
-import toTsKeyword from './toTsKeyword';
+import { toTsKeyword } from './toTsKeyword';
 
-export default (entry: TypeProfileEntry): t.TSTypeAnnotation => {
+export function toTsTypeAnnotation(
+  entry: TypeProfileEntry,
+): t.TSTypeAnnotation {
   const types = entry.types.map((type: TypeObject) => {
     return toTsKeyword(type.name);
   });
@@ -12,4 +14,4 @@ export default (entry: TypeProfileEntry): t.TSTypeAnnotation => {
   }
 
   return t.tsTypeAnnotation(t.tsUnionType(types));
-};
+}

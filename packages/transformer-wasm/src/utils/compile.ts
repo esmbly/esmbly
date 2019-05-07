@@ -2,9 +2,9 @@ import { File, Format, Output, SyntaxTree } from '@esmbly/types';
 // @ts-ignore
 import asc from 'assemblyscript/dist/asc';
 import { WasmTransformerOptions } from '..';
-import getFileType from './getFileType';
-import getFlags from './getFlags';
-import getCompileTargets from './getCompileTargets';
+import { getFileType } from './getFileType';
+import { getFlags } from './getFlags';
+import { getCompileTargets } from './getCompileTargets';
 import { CompileError } from './CompileError';
 
 function getFormat(filename: string): Format {
@@ -20,11 +20,11 @@ function getFormat(filename: string): Format {
   }
 }
 
-export default (
+export function compile(
   trees: SyntaxTree[],
   output: Output[],
   options: WasmTransformerOptions,
-): Promise<File[]> => {
+): Promise<File[]> {
   return new Promise((resolve, reject) => {
     const outputFiles: File[] = [];
     const files = trees.map(tree => ({
@@ -76,8 +76,9 @@ export default (
         if (err) {
           return reject(new CompileError(stdout, stderr));
         }
+
         return resolve(outputFiles);
       },
     );
   });
-};
+}

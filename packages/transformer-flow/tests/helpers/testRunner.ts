@@ -1,11 +1,11 @@
-import esmbly from '@esmbly/core';
+import * as esmbly from '@esmbly/core';
 import { File, FileType, Format } from '@esmbly/types';
-import FlowTransformer, { FlowTransformerOptions } from '../../src';
+import * as FlowTransformer from '../../src';
 
-export default (
+export function testRunner(
   content: string,
-  options: FlowTransformerOptions = {},
-): Promise<File[]> => {
+  options: FlowTransformer.FlowTransformerOptions = {},
+): Promise<File[]> {
   return esmbly.run({
     input: [
       {
@@ -16,6 +16,6 @@ export default (
       },
     ],
     output: [{ format: Format.TypeScript }],
-    transformers: [FlowTransformer(options)],
+    transformers: [FlowTransformer.createTransformer(options)],
   });
-};
+}

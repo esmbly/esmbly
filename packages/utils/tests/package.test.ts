@@ -1,10 +1,10 @@
 import { getRelativePathTo, getRoot } from '../src';
 
-const setup = (path: string): { path: string; spy: jest.SpyInstance } => {
+function setup(path: string): { path: string; spy: jest.SpyInstance } {
   const spy = jest.spyOn(process, 'cwd');
   spy.mockReturnValue(path);
   return { path, spy };
-};
+}
 
 describe('getRoot', () => {
   it('returns the root path', () => {

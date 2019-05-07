@@ -1,6 +1,6 @@
-const { default: esmbly } = require('@esmbly/core');
-const { default: FlowTransformer } = require('@esmbly/transformer-flow');
-const { default: WasmTransformer } = require('@esmbly/transformer-wasm');
+const esmbly = require('@esmbly/core');
+const Flow = require('@esmbly/transformer-flow');
+const Wasm = require('@esmbly/transformer-wasm');
 
 const compile = content => {
   return esmbly.run({
@@ -13,7 +13,10 @@ const compile = content => {
       },
     ],
     output: [{ format: 'WebAssembly' }],
-    transformers: [FlowTransformer({}), WasmTransformer({})],
+    transformers: [
+      Flow.createTransformer({}),
+      Wasm.createTransformer({})
+    ],
   });
 };
 

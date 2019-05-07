@@ -1,10 +1,10 @@
 import { Format } from '@esmbly/types';
 import { WasmTransformerOptions } from '..';
 
-export default (
+export function getFlags(
   targets: Format[],
   options: WasmTransformerOptions,
-): string[] => {
+): string[] {
   const flags: string[] = [];
 
   for (const target of targets) {
@@ -49,4 +49,4 @@ export default (
   }
 
   return flags;
-};
+}

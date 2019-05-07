@@ -1,6 +1,6 @@
 import { FileType } from '@esmbly/types';
 
-export default [
+export const files = [
   {
     content: 'function foo() { return 1; }',
     dir: '/',

@@ -1,7 +1,7 @@
 import { Writable } from 'stream';
-import printer from '@esmbly/printer';
+import { printer } from '@esmbly/printer';
 import { Format } from '@esmbly/types';
-import testRunner from '../helpers/testRunner';
+import { testRunner } from '../helpers/testRunner';
 
 describe('rule: ExplicitReturn', () => {
   beforeAll(() => {

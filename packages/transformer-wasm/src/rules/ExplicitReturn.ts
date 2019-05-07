@@ -8,75 +8,77 @@ const info =
 const issueUrl =
   'https://github.com/AssemblyScript/assemblyscript/wiki/Limitations';
 
-export default (warnings: Warning[]): Visitor<Node> => ({
-  // @ts-ignore
-  ArrowFunctionExpression(path: NodePath<t.ArrowFunctionExpression>) {
-    if (!path.node.returnType) {
-      warnings.push({
-        info,
-        issueUrl,
-        loc: path.node.loc,
-      });
-    }
-  },
-  // @ts-ignore
-  ClassMethod(path: NodePath<t.ClassMethod>) {
-    if (!path.node.returnType) {
-      warnings.push({
-        info,
-        issueUrl,
-        loc: path.node.loc,
-      });
-    }
-  },
-  // @ts-ignore
-  FunctionDeclaration(path: NodePath<t.FunctionDeclaration>) {
-    if (!path.node.returnType) {
-      warnings.push({
-        info,
-        issueUrl,
-        loc: path.node.loc,
-      });
-    }
-  },
-  // @ts-ignore
-  FunctionExpression(path: NodePath<t.FunctionExpression>) {
-    if (!path.node.returnType) {
-      warnings.push({
-        info,
-        issueUrl,
-        loc: path.node.loc,
-      });
-    }
-  },
-  // @ts-ignore
-  ObjectMethod(path: NodePath<t.ObjectMethod>) {
-    if (!path.node.returnType) {
-      warnings.push({
-        info,
-        issueUrl,
-        loc: path.node.loc,
-      });
-    }
-  },
-  // @ts-ignore
-  TSDeclareFunction(path: NodePath<t.TSDeclareFunction>) {
-    if (!path.node.returnType) {
-      warnings.push({
-        info,
-        issueUrl,
-        loc: path.node.loc,
-      });
-    }
-  },
-  // @ts-ignore
-  TSDeclareMethod(path: NodePath<t.TSDeclareMethod>) {
-    if (!path.node.returnType) {
-      warnings.push({
-        info,
-        issueUrl,
-        loc: path.node.loc,
-      });
-    }
-  },
-});
+export function ExplicitReturn(warnings: Warning[]): Visitor<Node> {
+  return {
+    // @ts-ignore
+    ArrowFunctionExpression(path: NodePath<t.ArrowFunctionExpression>) {
+      if (!path.node.returnType) {
+        warnings.push({
+          info,
+          issueUrl,
+          loc: path.node.loc,
+        });
+      }
+    },
+    // @ts-ignore
+    ClassMethod(path: NodePath<t.ClassMethod>) {
+      if (!path.node.returnType) {
+        warnings.push({
+          info,
+          issueUrl,
+          loc: path.node.loc,
+        });
+      }
+    },
+    // @ts-ignore
+    FunctionDeclaration(path: NodePath<t.FunctionDeclaration>) {
+      if (!path.node.returnType) {
+        warnings.push({
+          info,
+          issueUrl,
+          loc: path.node.loc,
+        });
+      }
+    },
+    // @ts-ignore
+    FunctionExpression(path: NodePath<t.FunctionExpression>) {
+      if (!path.node.returnType) {
+        warnings.push({
+          info,
+          issueUrl,
+          loc: path.node.loc,
+        });
+      }
+    },
+    // @ts-ignore
+    ObjectMethod(path: NodePath<t.ObjectMethod>) {
+      if (!path.node.returnType) {
+        warnings.push({
+          info,
+          issueUrl,
+          loc: path.node.loc,
+        });
+      }
+    },
+    // @ts-ignore
+    TSDeclareFunction(path: NodePath<t.TSDeclareFunction>) {
+      if (!path.node.returnType) {
+        warnings.push({
+          info,
+          issueUrl,
+          loc: path.node.loc,
+        });
+      }
+    },
+    // @ts-ignore
+    TSDeclareMethod(path: NodePath<t.TSDeclareMethod>) {
+      if (!path.node.returnType) {
+        warnings.push({
+          info,
+          issueUrl,
+          loc: path.node.loc,
+        });
+      }
+    },
+  };
+}

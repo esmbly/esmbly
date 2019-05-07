@@ -1,11 +1,11 @@
 import * as t from '@babel/types';
-import parseComments from './parseComments';
-import toTypeAnnotation from '../utils/toTypeAnnotation';
+import { parseComments } from './parseComments';
+import { toTypeAnnotation } from '../utils/toTypeAnnotation';
 
-export default (
+export function toTsVariable(
   node: t.VariableDeclaration,
   leadingComments: t.Comment[],
-): void => {
+): void {
   const { isExternal, isConstant, variableType } = parseComments(
     leadingComments,
   );
@@ -32,4 +32,4 @@ export default (
       variableType,
     );
   });
-};
+}

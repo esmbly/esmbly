@@ -1,5 +1,5 @@
 import { Format } from '@esmbly/types';
-import testRunner from '../../helpers/testRunner';
+import { testRunner } from '../../helpers/testRunner';
 
 jest.mock('@esmbly/printer');
 
@@ -12,6 +12,7 @@ const program = `
 describe('integration: compile-errors', () => {
   it('prints an error message', async () => {
     expect.assertions(1);
+
     try {
       const output = [{ format: Format.WebAssembly }];
       await testRunner(program, output);
