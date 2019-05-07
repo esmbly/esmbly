@@ -19,7 +19,7 @@ describe('integration: prototype', () => {
 
   it('runs with jest', async () => {
     const testPath = `${testDir}/jest.test.js`;
-    const testCommand = `jest ${testPath} --config ${testDir}/jest.config.js --no-cache`;
+    const testCommand = `jest ${testPath} --config ${testDir}/jest.config.js --runInBand`;
     const { expected, runConfig } = setup(testDir, testCommand);
     const [results] = await esmbly.run(runConfig);
     expect(results.content).toEqual(expected);

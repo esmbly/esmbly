@@ -9,7 +9,7 @@ const testDir = path.join(__dirname, '__fixtures__');
 
 describe('integration: failing-tests', () => {
   it('handles failing tests', async () => {
-    const testCommand = `jest ${testDir} --config ${testDir}/jest.config.js`;
+    const testCommand = `jest ${testDir} --config ${testDir}/jest.config.js --runInBand`;
     const { runConfig } = setup(testDir, testCommand);
     await expect(esmbly.run(runConfig)).rejects.toThrow(
       expect.objectContaining({
