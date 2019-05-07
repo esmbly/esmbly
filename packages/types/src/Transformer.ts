@@ -23,5 +23,5 @@ export interface Transformer {
 export type TransformerFactory = () => Transformer;
 
 export interface TransformerModule {
-  createTransformer: TransformerFactory
+  createTransformer: TransformerFactory;
 }
