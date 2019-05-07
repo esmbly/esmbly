@@ -203,8 +203,8 @@ describe('writeFiles', () => {
     (fs.writeFile as jest.Mock).mockResolvedValue(true);
     await writeFiles(files);
     expect(fs.mkdir).toHaveBeenCalledTimes(2);
-    expect(fs.mkdir).toHaveBeenCalledWith('dist', { recursive: true });
-    expect(fs.mkdir).toHaveBeenCalledWith('dist/b', { recursive: true });
+    expect(fs.mkdir).toHaveBeenCalledWith('dist');
+    expect(fs.mkdir).toHaveBeenCalledWith('dist/b');
     expect(fs.writeFile).toHaveBeenCalledTimes(2);
     expect((fs.writeFile as jest.Mock).mock.calls).toEqual([
       [path.join('dist', `fileA.js`), files[0].content, {}],

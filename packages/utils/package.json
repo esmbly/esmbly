@@ -20,7 +20,9 @@
   },
   "dependencies": {
     "@esmbly/types": "^0.0.4",
-    "globby": "^9.1.0"
+    "@types/mkdirp": "^0.5.2",
+    "globby": "^9.1.0",
+    "mkdirp": "^0.5.1"
   },
   "publishConfig": {
     "access": "public"

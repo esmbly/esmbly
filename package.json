@@ -33,25 +33,12 @@
     "clean-examples": "rimraf ./examples/*/dist",
     "clean-all": "rimraf ./packages/*/node_modules && yarn build-clean && rimraf ./node_modules",
     "dev": "lerna run build-watch --parallel",
-    "test": "jest",
-    "test-node8": "yarn test --testPathIgnorePatterns ./packages/transformer-v8/** ",
-    "test-e2e": "yarn test e2e --config=e2e/jest.config.js --runInBand",
+    "test": "jest --config=jest.config.js",
+    "test-node8": "jest --config=jest.node8.config.js --runInBand",
+    "test-e2e": "jest e2e --config=jest.e2e.config.js --runInBand",
     "lint": "eslint packages --ext ts --max-warnings 0",
     "coverage": "jest --coverage",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "publish": "yarn build-clean && yarn build && yarn build-browser && lerna publish"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "<rootDir>/packages/**/src/**/*.ts",
-      "!<rootDir>/packages/**/src/dist/**/*.ts"
-    ],
-    "testMatch": [
-      "<rootDir>/packages/**/**.test.(ts)",
-      "!**/__fixtures__/**"
-    ],
-    "coverageDirectory": "<rootDir>/coverage",
-    "preset": "ts-jest",
-    "testEnvironment": "node"
   }
 }
