@@ -16,10 +16,10 @@ describe('outputFactory', () => {
     });
   });
 
-  it('throws an error when there is no matching output type', () => {
-    expect(() => outputFactory('coffee')).toThrow(
-      'Output format: coffee is not supported',
-    );
+  it('defaults to returning the provided string when there is no matching output type', () => {
+    expect(outputFactory('coffee')).toEqual({
+      format: 'coffee',
+    });
   });
 });
 
@@ -75,9 +75,7 @@ describe('toOutputFormat', () => {
     expect(toOutputFormat('WAT')).toEqual(Format.Wat);
   });
 
-  it('throws an error when no matching output format is found', () => {
-    expect(() => toOutputFormat('coffee')).toThrow(
-      'Output format: coffee is not supported',
-    );
+  it('defaults to returning the provided string', () => {
+    expect(toOutputFormat('coffee')).toEqual('coffee');
   });
 });
