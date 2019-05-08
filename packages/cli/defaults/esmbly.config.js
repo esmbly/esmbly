@@ -1,5 +1,5 @@
 module.exports = {
-  files: [],
+  input: [],
+  output: [],
   transformers: [],
-  output: []
-}
+};

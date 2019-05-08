@@ -29,7 +29,9 @@
     "@types/inquirer": "^0.0.44",
     "@types/stringify-object": "^3.2.0",
     "@types/yargs": "^12.0.9",
+    "chalk": "^2.4.2",
     "inquirer": "^6.2.2",
+    "ora": "^3.4.0",
     "stringify-object": "^3.3.0",
     "yargs": "^13.2.2"
   },

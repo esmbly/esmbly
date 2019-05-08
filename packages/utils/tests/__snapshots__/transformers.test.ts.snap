@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getAvailableOutputFormats resolves to an array of available output formats 1`] = `
+Array [
+  "TypeScript",
+  "WebAssembly",
+  "Wat",
+  "Asm",
+  "AssemblyScript",
+]
+`;
+
+exports[`getAvailableTransformers resolves to an array of available transformers 1`] = `
+Array [
+  Object {
+    "const": "Flow",
+    "from": "Flow",
+    "name": "transformer-flow",
+    "pkg": "@esmbly/transformer-flow",
+    "to": Array [
+      "TypeScript",
+    ],
+  },
+  Object {
+    "const": "JSDoc",
+    "from": "JSDoc",
+    "name": "transformer-jsdoc",
+    "pkg": "@esmbly/transformer-jsdoc",
+    "to": Array [
+      "TypeScript",
+    ],
+  },
+  Object {
+    "const": "V8",
+    "from": "V8",
+    "name": "transformer-v8",
+    "pkg": "@esmbly/transformer-v8",
+    "to": Array [
+      "TypeScript",
+    ],
+  },
+  Object {
+    "const": "Wasm",
+    "from": "TypeScript",
+    "name": "transformer-wasm",
+    "pkg": "@esmbly/transformer-wasm",
+    "to": Array [
+      "WebAssembly",
+      "Wat",
+      "Asm",
+      "AssemblyScript",
+    ],
+  },
+]
+`;

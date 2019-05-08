@@ -9,7 +9,7 @@ import {
 } from '@esmbly/utils';
 import stringify from 'stringify-object';
 import { printer } from '@esmbly/printer';
-import { readConfig } from '../config';
+import { readConfig } from '../utils/config';
 
 export interface RunOptions {
   config: string;
