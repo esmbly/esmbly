@@ -1,7 +1,6 @@
 const esmbly = require('@esmbly/core');
 const Flow = require('@esmbly/transformer-flow');
 const Wasm = require('@esmbly/transformer-wasm');
-console.log(esmbly, Flow, Wasm)
 
 const compile = content => {
   return esmbly.run({
@@ -29,5 +28,5 @@ const program = `
 
 compile(program)
   .then(([{ content }]) => WebAssembly.instantiate(content, {}))
-  .then(({ instance }) => console.log(instance.exports.add(2, 3)))
+  .then(({ instance }) => console.log('2 + 3 = ' + instance.exports.add(2, 3)))
   .catch(err => console.log(err));
