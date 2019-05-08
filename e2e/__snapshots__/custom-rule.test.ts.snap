@@ -6,7 +6,7 @@ exports[`E2E: custom-rule produces a warning from the custom rule 1`] = `
 
     export function add(a: number, b: number) {
   
-  at: ./src/add.ts
+  at: ./src/add.ts:3:0
   
 
 "
