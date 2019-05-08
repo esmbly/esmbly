@@ -22,18 +22,16 @@ export function parse(files: File[], transformer: Transformer): SyntaxTree[] {
           represents: file,
           setFormat(format: Format): void {
             this.format = format;
+            this.represents.type = fileTypeForOutputFormat(format);
           },
           toCode(): string {
             return recast.print(tree).code;
           },
           toFile(output: Output, content?: string | Buffer): File {
-            const { flatten, dir, format, filename } = output;
             return {
               ...this.represents,
               content: content || this.toCode(),
-              dir: flatten && dir ? dir : this.represents.dir,
-              filename,
-              type: fileTypeForOutputFormat(format),
+              outputOptions: output,
             };
           },
           tree,

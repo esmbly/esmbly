@@ -5481,7 +5481,7 @@ export function clamp(number: f64, lower: f64, upper: f64): f64 {
 "
 `;
 
-exports[`E2E: lodash transforms all lodash methods to TypeScript: clamp.namedexport.ts 1`] = `
+exports[`E2E: lodash transforms all lodash methods to TypeScript: clamp.namedexport 1`] = `
 "/**
  * Clamps \`number\` within the inclusive \`lower\` and \`upper\` bounds.
  *

@@ -9,12 +9,9 @@ module.exports = [
     ],
     output: [
       {
-        dir: 'dist',
         format: '.ts',
-        flatten: true,
+        outFile: path.join(__dirname, 'dist', 'index.ts')
       },
     ],
   },
 ];
-
-

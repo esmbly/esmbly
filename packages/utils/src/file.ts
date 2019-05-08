@@ -1,4 +1,4 @@
-import { File, FileType, Format } from '@esmbly/types';
+import { File, FileType, Format, Output } from '@esmbly/types';
 import glob from 'globby';
 import path from 'path';
 import os from 'os';
@@ -93,7 +93,7 @@ export async function readFiles(patterns: string[]): Promise<File[]> {
       const { name, ext, dir } = path.parse(file);
       return {
         content: content.toString(),
-        dir: path.resolve(dir),
+        dir,
         name,
         type: toFileType(ext),
       };
@@ -101,14 +101,40 @@ export async function readFiles(patterns: string[]): Promise<File[]> {
   );
 }
 
-export async function writeFiles(files: File[]): Promise<void> {
+export function resolveDir(dir: string, output?: Output): string {
+  if (output && output.outDir && output.rootDir) {
+    return path.join(output.outDir, path.relative(output.rootDir, dir));
+  }
+
+  if (output && output.outDir) {
+    return path.join(output.outDir, dir);
+  }
+
+  return dir;
+}
+
+export function resolveName(name: string, output?: Output): string {
+  if (output && output.outFile) {
+    return output.outFile.replace('[name]', name);
+  }
+
+  return name;
+}
+
+export async function writeFiles(
+  files: File[],
+  resolver = path.resolve,
+): Promise<void> {
   await Promise.all(
     files.map(async (file: File) => {
-      const name = file.filename
-        ? file.filename.replace('[name]', file.name)
-        : `${file.name}${file.type}`;
-      const outputPath = path.join(file.dir, name);
-      await mkdirp(file.dir);
+      const resolvedName = resolveName(file.name, file.outputOptions);
+      const resolvedDir = resolveDir(file.dir, file.outputOptions);
+      const { name, ext, dir } = path.parse(resolvedName);
+      const extension = ext !== '' ? ext : file.type;
+      const outFile = `${name}${extension}`;
+      const outDir = dir !== '' ? dir : resolvedDir;
+      const outputPath = resolver(path.join(outDir, outFile));
+      await mkdirp(outDir);
       return writeFile(outputPath, file.content, { overwrite: true });
     }),
   );

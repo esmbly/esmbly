@@ -1,16 +1,15 @@
+const path = require('path');
 const FooTransformer = require('./src/FooTransformer');
 
 module.exports = {
   input: ['./example/**/*.ts'],
   transformers: [
-    new FooTransformer()
+    new FooTransformer(),
   ],
   output: [
     {
-      dir: 'dist',
-      format: 'TypeScript',
-      filename: 'bar.ts',
-      flatten: true,
+      format: '.ts',
+      outFile: path.join(__dirname, 'dist', 'bar.ts'),
     },
   ],
 };

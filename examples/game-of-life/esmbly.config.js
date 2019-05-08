@@ -1,3 +1,4 @@
+const path = require('path');
 const JSDoc = require('@esmbly/transformer-jsdoc');
 const Wasm = require('@esmbly/transformer-wasm');
 
@@ -7,26 +8,22 @@ module.exports = {
     JSDoc.createTransformer({}),
     Wasm.createTransformer({
       memory: { import: true },
-      use: ['Math=JSMath']
+      use: ['Math=JSMath'],
     }),
   ],
   output: [
     {
-      dir: 'dist',
       format: '.ts',
-      flatten: true,
+      outDir: 'dist',
+      rootDir: 'src',
     },
     {
-      dir: 'dist',
       format: '.wasm',
-      filename: 'out.wasm',
-      flatten: true,
+      outFile: path.join(__dirname, 'dist', 'out.wasm'),
     },
     {
-      dir: 'dist',
       format: '.as',
-      filename: '[name].as.ts',
-      flatten: true,
+      outFile: path.join(__dirname, 'dist', '[name].as.ts'),
     },
   ],
 };

@@ -1,6 +1,7 @@
 const esmbly = require('@esmbly/core');
 const Flow = require('@esmbly/transformer-flow');
 const Wasm = require('@esmbly/transformer-wasm');
+console.log(esmbly, Flow, Wasm)
 
 const compile = content => {
   return esmbly.run({
