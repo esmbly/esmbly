@@ -7,6 +7,9 @@ export function parse(files: File[], transformer: Transformer): SyntaxTree[] {
   return files.map(
     (file: File): SyntaxTree => {
       try {
+        // Parse the file into an AST
+        // If present, use the custom parser passed by the transformer
+        // Fallback to using recast with the plugins passed by the transformer
         const tree = recast.parse(file.content.toString(), {
           parser: transformer.parser || {
             parse(source: string) {
@@ -17,6 +20,7 @@ export function parse(files: File[], transformer: Transformer): SyntaxTree[] {
             },
           },
         });
+
         return {
           format: transformer.format.input,
           represents: file,
@@ -27,10 +31,10 @@ export function parse(files: File[], transformer: Transformer): SyntaxTree[] {
           toCode(): string {
             return recast.print(tree).code;
           },
-          toFile(output: Output, content?: string | Buffer): File {
+          toFile(output: Output): File {
             return {
               ...this.represents,
-              content: content || this.toCode(),
+              content: this.toCode(),
               outputOptions: output,
             };
           },
