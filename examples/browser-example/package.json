@@ -1,15 +1,15 @@
 {
   "name": "browser-example",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": true,
   "scripts": {
     "start": "webpack-dev-server --mode development",
     "build-example": "webpack --mode production"
   },
   "dependencies": {
-    "@esmbly/core": "^0.0.4",
-    "@esmbly/transformer-flow": "^0.0.4",
-    "@esmbly/transformer-wasm": "^0.0.4"
+    "@esmbly/core": "^0.0.5",
+    "@esmbly/transformer-flow": "^0.0.5",
+    "@esmbly/transformer-wasm": "^0.0.5"
   },
   "devDependencies": {
     "html-webpack-plugin": "^3.1.0",

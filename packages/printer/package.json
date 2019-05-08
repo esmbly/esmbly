@@ -1,6 +1,6 @@
 {
   "name": "@esmbly/printer",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "TBD",
   "author": "Olle Lauri Boström <ollebostr@gmail.com> (https://github.com/ollelauribostrom)",
   "homepage": "https://github.com/esmbly/esmbly",
@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@babel/types": "^7.4.4",
-    "@esmbly/types": "^0.0.4",
+    "@esmbly/types": "^0.0.5",
     "chalk": "^2.4.2"
   },
   "publishConfig": {

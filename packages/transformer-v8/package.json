@@ -1,6 +1,6 @@
 {
   "name": "@esmbly/transformer-v8",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "TBD",
   "author": "Olle Lauri Boström <ollebostr@gmail.com> (https://github.com/ollelauribostrom)",
   "homepage": "https://github.com/esmbly/esmbly",
@@ -22,14 +22,14 @@
   "dependencies": {
     "@babel/traverse": "^7.3.4",
     "@babel/types": "^7.3.4",
-    "@esmbly/printer": "^0.0.4",
-    "@esmbly/types": "^0.0.4",
-    "@esmbly/utils": "^0.0.4",
+    "@esmbly/printer": "^0.0.5",
+    "@esmbly/types": "^0.0.5",
+    "@esmbly/utils": "^0.0.5",
     "signal-exit": "^3.0.2",
     "spawn-wrap": "^1.4.2"
   },
   "devDependencies": {
-    "@esmbly/core": "^0.0.4",
+    "@esmbly/core": "^0.0.5",
     "ava": "^1.4.1",
     "jasmine": "^3.3.1",
     "mocha": "^6.0.2",
