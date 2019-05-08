@@ -1,8 +1,15 @@
-import { File, Format, Output, SyntaxTree, Transformer } from '@esmbly/types';
+import {
+  File,
+  Format,
+  Output,
+  SyntaxTree,
+  Transformer,
+  TransformerOptions,
+} from '@esmbly/types';
 import { createFiles } from './createFiles';
 import { transform } from './transform';
 
-export interface JSDocTransformerOptions {
+export interface JSDocTransformerOptions extends TransformerOptions {
   stripComments?: boolean;
 }
 

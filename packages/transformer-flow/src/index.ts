@@ -1,8 +1,15 @@
-import { File, Format, Output, SyntaxTree, Transformer } from '@esmbly/types';
+import {
+  File,
+  Format,
+  Output,
+  SyntaxTree,
+  Transformer,
+  TransformerOptions,
+} from '@esmbly/types';
 import { transform } from './transform';
 import { createFiles } from './createFiles';
 
-export interface FlowTransformerOptions {
+export interface FlowTransformerOptions extends TransformerOptions {
   removeFlowFlags?: boolean;
 }
 

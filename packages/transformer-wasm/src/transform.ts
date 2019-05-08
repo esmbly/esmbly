@@ -11,7 +11,7 @@ export function transform(
   options: WasmTransformerOptions,
 ): void {
   const warnings: Warning[] = [];
-  const rules = getRules();
+  const rules = getRules(options.customRules);
 
   trees.forEach((tree: SyntaxTree) => {
     const treeWarnings: Warning[] = [];

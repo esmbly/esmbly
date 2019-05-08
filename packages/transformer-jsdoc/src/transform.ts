@@ -7,9 +7,9 @@ import { getRules } from './rules';
 
 export function transform(
   trees: SyntaxTree[],
-  { stripComments = false }: JSDocTransformerOptions,
+  options: JSDocTransformerOptions,
 ): void {
-  const rules = getRules();
+  const rules = getRules(options.customRules);
   const warnings: Warning[] = [];
 
   trees.forEach((tree: SyntaxTree) => {
@@ -18,7 +18,7 @@ export function transform(
     treeWarnings.forEach(w => warnings.push({ ...w, file: tree.represents }));
     tree.setFormat(Format.TypeScript);
 
-    if (stripComments) {
+    if (options.stripComments) {
       stripAllComments(tree);
     }
   });

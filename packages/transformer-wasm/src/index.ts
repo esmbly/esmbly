@@ -1,11 +1,18 @@
-import { File, Format, Output, SyntaxTree, Transformer } from '@esmbly/types';
+import {
+  File,
+  Format,
+  Output,
+  SyntaxTree,
+  Transformer,
+  TransformerOptions,
+} from '@esmbly/types';
 import assemblyscriptLoader from 'assemblyscript/lib/loader';
 import { createFiles } from './createFiles';
 import { transform } from './transform';
 
 export const loader = assemblyscriptLoader;
 
-export interface WasmTransformerOptions {
+export interface WasmTransformerOptions extends TransformerOptions {
   optimize?: string;
   optimizeLevel?: number;
   shrinkLevel?: number;

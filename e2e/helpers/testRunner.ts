@@ -7,10 +7,14 @@ function isDeprecationWarning(stderr: string): boolean {
   );
 }
 
-export async function testRunner(cwd: string): Promise<void> {
-  const { stderr } = await util.promisify(exec)(`yarn run esmbly run`, { cwd });
+export async function testRunner(cwd: string): Promise<string> {
+  const { stdout, stderr } = await util.promisify(exec)(`yarn run esmbly run`, {
+    cwd,
+  });
 
   if (stderr && stderr.trim().length > 0 && !isDeprecationWarning(stderr)) {
     throw new Error(stderr);
   }
+
+  return stdout;
 }
