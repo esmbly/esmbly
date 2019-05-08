@@ -14,7 +14,9 @@ export function fileTypeForOutputFormat(format: Format): FileType {
       return FileType.WebAssembly;
     case Format.AssemblyScript:
       return FileType.TypeScript;
+    case Format.JSDoc:
+      return FileType.JavaScript;
     default:
-      throw new Error(`Output format: ${format} is not supported`);
+      return (format as unknown) as FileType;
   }
 }

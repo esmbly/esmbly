@@ -6,9 +6,9 @@ class FooTransformer {
     this.name = 'Foo';
     this.parserPlugins = ['typescript'];
     this.format = {
-      files: ['TypeScript'],
+      files: ['.bar.ts'],
       input: 'TypeScript',
-      output: 'TypeScript',
+      output: '.bar.ts',
     };
   }
 
@@ -24,6 +24,7 @@ class FooTransformer {
           }
         },
       });
+      tree.setFormat(this.format.output);
     });
   }
 

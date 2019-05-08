@@ -27,7 +27,7 @@ export function toOutputFormat(format: string): Format {
     case '.wat':
       return Format.Wat;
     default:
-      throw new Error(`Output format: ${format} is not supported`);
+      return format as Format;
   }
 }
 

@@ -8,8 +8,9 @@ module.exports = {
   ],
   output: [
     {
-      format: '.ts',
-      outFile: path.join(__dirname, 'dist', 'bar.ts'),
+      format: '.bar.ts',
+      outDir: 'dist',
+      rootDir: 'example'
     },
   ],
 };
