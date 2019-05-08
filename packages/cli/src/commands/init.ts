@@ -1,7 +1,7 @@
 import { Arguments, Argv } from 'yargs';
 import { InitOptions } from '@esmbly/types';
-import { printer } from '@esmbly/printer';
-import { createConfig } from '../config';
+import ora from 'ora';
+import { createConfig } from '../utils/config';
 
 export const command = 'init';
 
@@ -27,8 +27,8 @@ export function builder(yargs: Argv): Argv<any> {
 export async function handler(argv: Arguments & InitOptions): Promise<void> {
   try {
     const { fileName, root } = await createConfig(argv);
-    printer.print(`${fileName} created in ${root}\n`);
+    ora(`${fileName} created in ${root}\n`).succeed();
   } catch (err) {
-    printer.error(`${err.message}\n` || err);
+    ora(`${err.message}` || err).fail();
   }
 }

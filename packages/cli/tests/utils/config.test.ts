@@ -1,12 +1,12 @@
 import * as utils from '@esmbly/utils';
-import * as prompt from '../src/prompt';
+import * as prompt from '../../src/utils/prompt';
 import {
   createConfig,
   getDefaultConfigPath,
   getTemplateConfig,
   readConfig,
-} from '../src/config';
-import * as MockConfig from './__fixtures__/config';
+} from '../../src/utils/config';
+import * as MockConfig from '../__fixtures__/config';
 
 function setup(
   shouldExist: boolean,
@@ -22,7 +22,12 @@ function setup(
   const writeFileSpy = jest.spyOn(utils, 'writeFile');
   const existsSpy = jest.spyOn(utils, 'exists');
   getRootSpy.mockReturnValue('root-path');
-  promptSpy.mockResolvedValue(MockConfig.config[0]);
+  promptSpy.mockResolvedValue({
+    install: false,
+    module: 'config-module-source',
+    pkgManager: 'npm',
+    transformers: [],
+  });
   writeFileSpy.mockResolvedValue();
   existsSpy.mockResolvedValue(shouldExist);
   return {

@@ -1,33 +1,53 @@
 import { Format, Transformer, TransformerModule } from '@esmbly/types';
 import path from 'path';
-import fs from './fs';
 
-export async function getAvailableTransformers(): Promise<string[]> {
-  // TODO: Search in more places or fetch from npm
-  const searchPaths = [path.resolve(__dirname, '../../')];
-  const searchResults = await Promise.all(
-    searchPaths.map((searchPath: string) => fs.readdir(searchPath)),
-  );
-  const packages = ([] as string[]).concat(...searchResults);
-  return packages.filter((pkg: string) => pkg.includes('transformer-'));
+export interface TransformerInfo {
+  const: string;
+  from: Format;
+  name: string;
+  pkg: string;
+  to: Format[];
 }
 
-export async function getAvailableOutputFormats(
-  transformers: string[],
-  requirer: (requirePath: string) => unknown = require,
-): Promise<string[]> {
-  // TODO: Search in more places
+export function getAvailableTransformers(): TransformerInfo[] {
+  return [
+    {
+      const: 'Flow',
+      from: Format.Flow,
+      name: 'transformer-flow',
+      pkg: '@esmbly/transformer-flow',
+      to: [Format.TypeScript],
+    },
+    {
+      const: 'JSDoc',
+      from: Format.JSDoc,
+      name: 'transformer-jsdoc',
+      pkg: '@esmbly/transformer-jsdoc',
+      to: [Format.TypeScript],
+    },
+    {
+      const: 'V8',
+      from: 'V8' as Format,
+      name: 'transformer-v8',
+      pkg: '@esmbly/transformer-v8',
+      to: [Format.TypeScript],
+    },
+    {
+      const: 'Wasm',
+      from: Format.TypeScript,
+      name: 'transformer-wasm',
+      pkg: '@esmbly/transformer-wasm',
+      to: [Format.WebAssembly, Format.Wat, Format.Asm, Format.AssemblyScript],
+    },
+  ];
+}
+
+export function getAvailableOutputFormats(
+  transformers: TransformerInfo[],
+): string[] {
   const outputFormats: Set<string> = new Set();
-  transformers.forEach((transformer: string) => {
-    try {
-      const transformerPath = path.resolve(__dirname, '../../', transformer);
-      const transformerModule = requirer(transformerPath) as TransformerModule;
-      const transformerFormats = transformerModule.createTransformer().format
-        .files;
-      transformerFormats.forEach((format: Format) => outputFormats.add(format));
-    } catch {
-      // Do nothing if a transformer can't be required or doesn't specify any output formats
-    }
+  transformers.forEach((transformer: TransformerInfo) => {
+    transformer.to.forEach((format: Format) => outputFormats.add(format));
   });
   return [...outputFormats];
 }
@@ -43,6 +63,8 @@ export function transformerFactory(
       name = `transformer-${name}`;
     }
 
+    // A bit of a guessing game..
+    // TODO: Find a better way of doing this
     const transformerPath = path.resolve(__dirname, '../../', name);
     const transformerModule = requirer(transformerPath) as TransformerModule;
     return transformerModule.createTransformer();

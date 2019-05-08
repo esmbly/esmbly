@@ -4,47 +4,19 @@ import {
   getAvailableTransformers,
   transformerFactory,
 } from '../src';
-import fs from '../src/fs';
 
 jest.mock('../src/fs');
 
 describe('getAvailableTransformers', () => {
   it('resolves to an array of available transformers', async () => {
-    (fs.readdir as jest.Mock).mockResolvedValue([
-      'package-a',
-      'package-b',
-      'transformer-c',
-    ]);
-    const transformers = await getAvailableTransformers();
-    expect(transformers).toEqual(['transformer-c']);
+    expect(getAvailableTransformers()).toMatchSnapshot();
   });
 });
 
 describe('getAvailableOutputFormats', () => {
   it('resolves to an array of available output formats', async () => {
-    const requirer = jest.fn();
-    requirer.mockReturnValue({
-      createTransformer: () => ({
-        format: { files: ['TypeScript', 'WebAssembly'] },
-        transform: jest.fn(),
-      }),
-    });
-    const formats = await getAvailableOutputFormats(
-      ['transformer-flow', 'transformer-wasm'],
-      requirer,
-    );
-    expect(requirer).toHaveBeenCalledTimes(2);
-    expect(formats).toEqual(['TypeScript', 'WebAssembly']);
-  });
-
-  it('silently deals with errors', async () => {
-    const requirer = jest.fn();
-    const formats = await getAvailableOutputFormats(
-      ['transformer-flow', 'transformer-wasm'],
-      requirer,
-    );
-    expect(requirer).toHaveBeenCalledTimes(2);
-    expect(formats).toEqual([]);
+    const transformers = getAvailableTransformers();
+    expect(getAvailableOutputFormats(transformers)).toMatchSnapshot();
   });
 });
 

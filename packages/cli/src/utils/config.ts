@@ -1,5 +1,4 @@
 import path from 'path';
-import stringify from 'stringify-object';
 import { Config, InitOptions } from '@esmbly/types';
 import {
   exists,
@@ -9,11 +8,15 @@ import {
   writeFile,
 } from '@esmbly/utils';
 import { promptForConfig } from './prompt';
+import { installCLI, installTransformers } from './install';
 
 export const DEFAULT_FILE = 'esmbly.config.js';
 
 export async function getTemplateConfig(): Promise<string> {
-  const templatePath = path.resolve(__dirname, `../defaults/${DEFAULT_FILE}`);
+  const templatePath = path.resolve(
+    __dirname,
+    `../../defaults/${DEFAULT_FILE}`,
+  );
   const template = await readFile(templatePath);
   return template.toString();
 }
@@ -69,8 +72,15 @@ export async function createConfig(
     await writeFile(defaultConfigPath, template, { overwrite: options.force });
   } else {
     const config = await promptForConfig();
-    const content = `module.exports = ${stringify(config)}\n`;
-    await writeFile(defaultConfigPath, content, { overwrite: options.force });
+
+    if (config.install) {
+      await installTransformers(config.transformers, config.pkgManager);
+      await installCLI(config.pkgManager);
+    }
+
+    await writeFile(defaultConfigPath, config.module, {
+      overwrite: options.force,
+    });
   }
 
   return { fileName: DEFAULT_FILE, root };

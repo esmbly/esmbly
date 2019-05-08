@@ -1,0 +1,155 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`promptForConfig asks the correct questions 1`] = `
+Array [
+  Array [
+    Array [
+      Object {
+        "message": "Which files do you want to transform?",
+        "name": "input",
+        "suffix": "[2m e.g ./**/*.js[22m",
+        "type": "input",
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "choices": Array [
+          Object {
+            "name": "transformer-flow	[2mFlow -> TypeScript[22m",
+            "short": "transformer-flow",
+            "value": "transformer-flow",
+          },
+          Object {
+            "name": "transformer-jsdoc	[2mJSDoc -> TypeScript[22m",
+            "short": "transformer-jsdoc",
+            "value": "transformer-jsdoc",
+          },
+          Object {
+            "name": "transformer-v8	[2mV8 -> TypeScript[22m",
+            "short": "transformer-v8",
+            "value": "transformer-v8",
+          },
+          Object {
+            "name": "transformer-wasm	[2mTypeScript -> WebAssembly | Wat | Asm | AssemblyScript[22m",
+            "short": "transformer-wasm",
+            "value": "transformer-wasm",
+          },
+        ],
+        "default": Array [],
+        "message": "Which transformers do you want to use?",
+        "name": "selectedTransformers",
+        "type": "checkbox",
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "choices": Array [
+          "TypeScript",
+          "WebAssembly",
+          "Wat",
+          "Asm",
+          "AssemblyScript",
+        ],
+        "message": "Which formats to you want to output?",
+        "name": "output",
+        "type": "checkbox",
+        "when": true,
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "message": "To which directory do you want to output files?",
+        "name": "outDir",
+        "suffix": "[2m e.g ./dist[22m",
+        "type": "input",
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "default": true,
+        "message": "Do you want to install the selected transformers and the CLI?",
+        "name": "install",
+        "type": "confirm",
+        "when": true,
+      },
+    ],
+  ],
+  Array [
+    Array [
+      Object {
+        "choices": Array [
+          "npm",
+          "yarn",
+        ],
+        "message": "Which package manager do you want to use for installation?",
+        "name": "pkgManager",
+        "type": "list",
+        "when": true,
+      },
+    ],
+  ],
+]
+`;
+
+exports[`promptForConfig asks the correct questions 2`] = `
+Object {
+  "install": true,
+  "module": "const Flow = require('@esmbly/transformer-flow')
+const Wasm = require('@esmbly/transformer-wasm')
+
+module.exports = {
+	input: [
+		'./src/index.js'
+	],
+	transformers: [
+    Flow.createTransformer(),
+    Wasm.createTransformer(),
+  ],
+	output: [
+		{
+			format: 'TypeScript',
+			outDir: 'dist'
+		},
+		{
+			format: 'WebAssembly',
+			outDir: 'dist'
+		}
+	]
+}
+",
+  "pkgManager": "npm",
+  "transformers": Array [
+    Object {
+      "const": "Flow",
+      "from": "Flow",
+      "name": "transformer-flow",
+      "pkg": "@esmbly/transformer-flow",
+      "to": Array [
+        "TypeScript",
+      ],
+    },
+    Object {
+      "const": "Wasm",
+      "from": "TypeScript",
+      "name": "transformer-wasm",
+      "pkg": "@esmbly/transformer-wasm",
+      "to": Array [
+        "WebAssembly",
+        "Wat",
+        "Asm",
+        "AssemblyScript",
+      ],
+    },
+  ],
+}
+`;
+
+exports[`promptForConfig throws an error on invalid transformer combinations 1`] = `[Error: Transformations in the order transformer-flow -> transformer-jsdoc is not possible]`;

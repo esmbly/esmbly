@@ -1,9 +1,14 @@
 import yargs from 'yargs';
 import * as init from '../../src/commands/init';
-import * as config from '../../src/config';
+import * as config from '../../src/utils/config';
 import { CommandRunner } from '../__fixtures__/CommandRunner';
 
-jest.mock('@esmbly/printer');
+jest.mock('ora', () => {
+  const start = jest.fn();
+  const fail = jest.fn();
+  const oraMock = { fail, start };
+  return jest.fn(() => oraMock);
+});
 
 const command = new CommandRunner(init);
 

@@ -3,7 +3,7 @@ import yargs from 'yargs';
 import * as utils from '@esmbly/utils';
 import { Format } from '@esmbly/types';
 import * as run from '../../src/commands/run';
-import * as config from '../../src/config';
+import * as config from '../../src/utils/config';
 import { CommandRunner } from '../__fixtures__/CommandRunner';
 import * as FooTransformer from '../__fixtures__/FooTransformer';
 import * as MockFiles from '../__fixtures__/files';
