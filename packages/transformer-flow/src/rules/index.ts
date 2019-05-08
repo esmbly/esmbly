@@ -1,4 +1,4 @@
-import { Rule } from '@esmbly/types';
+import { CustomRules, Rule } from '@esmbly/types';
 import { $Exact } from './$Exact';
 import { $Keys } from './$Keys';
 import { $ReadOnly } from './$ReadOnly';
@@ -14,7 +14,7 @@ import { Typeof } from './Typeof';
 import { Undefined } from './Undefined';
 import { Variance } from './Variance';
 
-export function getRules(): Map<string, Rule> {
+export function getRules(customRules?: CustomRules): Map<string, Rule> {
   const rules = new Map<string, Rule>();
 
   rules.set('$Exact', $Exact);
@@ -32,6 +32,12 @@ export function getRules(): Map<string, Rule> {
   rules.set('Typeof', Typeof);
   rules.set('Undefined', Undefined);
   rules.set('Variance', Variance);
+
+  if (customRules) {
+    Object.entries(customRules).forEach(([name, rule]) => {
+      rules.set(name, rule);
+    });
+  }
 
   return rules;
 }

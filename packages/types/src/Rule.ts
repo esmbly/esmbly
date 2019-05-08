@@ -8,3 +8,7 @@ export type Rule = (
   typeProfile?: TypeProfile,
   coverageReport?: CoverageReport,
 ) => Visitor<Node>;
+
+export interface CustomRules {
+  [name: string]: Rule;
+}

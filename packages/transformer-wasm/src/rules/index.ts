@@ -1,11 +1,11 @@
-import { Rule } from '@esmbly/types';
+import { CustomRules, Rule } from '@esmbly/types';
 import { ExplicitReturn } from './ExplicitReturn';
 import { F64 } from './F64';
 import { NoAny } from './NoAny';
 import { NoDelete } from './NoDelete';
 import { NoUndefined } from './NoUndefined';
 
-export function getRules(): Map<string, Rule> {
+export function getRules(customRules?: CustomRules): Map<string, Rule> {
   const rules = new Map<string, Rule>();
 
   rules.set('ExplicitReturn', ExplicitReturn);
@@ -13,6 +13,12 @@ export function getRules(): Map<string, Rule> {
   rules.set('NoAny', NoAny);
   rules.set('NoDelete', NoDelete);
   rules.set('NoUndefined', NoUndefined);
+
+  if (customRules) {
+    Object.entries(customRules).forEach(([name, rule]) => {
+      rules.set(name, rule);
+    });
+  }
 
   return rules;
 }

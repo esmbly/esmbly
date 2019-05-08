@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`E2E: custom-rule produces a warning from the custom rule 1`] = `
+"
+  warning Found function without return type, using number as default
+
+    export function add(a: number, b: number) {
+  
+  at: ./src/add.ts:3:0
+  
+
+"
+`;
+
+exports[`E2E: custom-rule uses the custom rule to produce a TypeScript file 1`] = `
+"export function add(a: number, b: number): number {
+  return a + b;
+}
+"
+`;

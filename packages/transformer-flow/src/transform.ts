@@ -7,10 +7,10 @@ import { FlowTransformerOptions } from '.';
 
 export function transform(
   trees: SyntaxTree[],
-  { removeFlowFlags = true }: FlowTransformerOptions,
+  { removeFlowFlags = true, customRules }: FlowTransformerOptions,
 ): void {
   const warnings: Warning[] = [];
-  const rules = getRules();
+  const rules = getRules(customRules);
 
   trees.forEach((tree: SyntaxTree) => {
     const treeWarnings: Warning[] = [];

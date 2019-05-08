@@ -1,8 +1,15 @@
-import { File, Format, Output, SyntaxTree, Transformer } from '@esmbly/types';
+import {
+  File,
+  Format,
+  Output,
+  SyntaxTree,
+  Transformer,
+  TransformerOptions,
+} from '@esmbly/types';
 import { createFiles } from './createFiles';
 import { transform } from './transform';
 
-export interface V8TransformerOptions {
+export interface V8TransformerOptions extends TransformerOptions {
   testCommand: string;
   debug?: boolean;
 }
@@ -19,7 +26,7 @@ export function createTransformer(options: V8TransformerOptions): Transformer {
     },
     name: 'V8',
     transform(trees: SyntaxTree[]): Promise<void> {
-      return transform(trees, options.testCommand, options.debug);
+      return transform(trees, options);
     },
   };
 }

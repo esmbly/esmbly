@@ -1,6 +1,7 @@
 import { ParserPlugin } from '@babel/parser';
 import { File as ParsedFile } from '@babel/types';
 import { File, Format, Output, SyntaxTree } from '.';
+import { Rule } from './Rule';
 
 export interface Transformer {
   name?: string;
@@ -24,4 +25,10 @@ export type TransformerFactory = () => Transformer;
 
 export interface TransformerModule {
   createTransformer: TransformerFactory;
+}
+
+export interface TransformerOptions {
+  customRules?: {
+    [name: string]: Rule;
+  };
 }

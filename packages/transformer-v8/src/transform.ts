@@ -14,11 +14,11 @@ import { createTmpDir, readFile } from '@esmbly/utils';
 import { promisify } from 'util';
 import { printer } from '@esmbly/printer';
 import { getRules } from './rules';
+import { V8TransformerOptions } from '.';
 
 export async function transform(
   trees: SyntaxTree[],
-  testCommand: string,
-  debug?: boolean,
+  options: V8TransformerOptions,
 ): Promise<void> {
   const tmpDir = await createTmpDir('transformer-v8-');
   const tmpName = 'temp.json';
@@ -31,11 +31,11 @@ export async function transform(
 
   try {
     // Run the test command
-    const { stdout, stderr } = await promisify(exec)(testCommand);
+    const { stdout, stderr } = await promisify(exec)(options.testCommand);
 
     // Log output when in debug mode
-    if (debug) {
-      printer.print(`command: ${testCommand}\n\n`);
+    if (options.debug) {
+      printer.print(`command: ${options.testCommand}\n\n`);
       printer.print(`stdout: ${stdout}\n\n`);
       printer.print(`stderr: ${stderr}\n`);
     }
@@ -43,9 +43,9 @@ export async function transform(
     // Unwrap spawned child processes
     unwrap();
   } catch (err) {
-    const message = `Test command: ${testCommand} failed with error code ${
-      err.code
-    } \n\n ${err.stderr} \n ${err.stdout}`;
+    const message = `Test command: ${
+      options.testCommand
+    } failed with error code ${err.code} \n\n ${err.stderr} \n ${err.stdout}`;
     // Unwrap spawned child processes
     unwrap();
     throw new Error(message);
@@ -55,7 +55,7 @@ export async function transform(
   const data = await readFile(tmpPath);
   const { typeProfile, coverageReport } = JSON.parse(data.toString());
   const warnings: Warning[] = [];
-  const rules = getRules();
+  const rules = getRules(options.customRules);
 
   trees.forEach((tree: SyntaxTree) => {
     const { dir, name, type } = tree.represents;

@@ -7,9 +7,10 @@ function location(file?: File, loc?: SourceLocation | null): string {
     return '';
   }
 
-  const line = loc ? loc.start.line : '?';
-  const column = loc ? loc.start.column : '?';
-  const path = `${file.dir}/${file.name}${file.type}:${line}:${column}`.replace(
+  const line = loc ? loc.start.line : null;
+  const column = loc ? loc.start.column : null;
+  const position = line !== null && column !== null ? `:${line}:${column}` : '';
+  const path = `${file.dir}/${file.name}${file.type}${position}`.replace(
     /^\/+/g,
     '',
   );
