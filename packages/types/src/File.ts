@@ -6,5 +6,5 @@ export interface File {
   content: string | Buffer;
   dir: string;
   type: FileType;
-  outputOptions?: Output
+  outputOptions?: Output;
 }
