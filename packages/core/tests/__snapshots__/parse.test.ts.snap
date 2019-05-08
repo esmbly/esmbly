@@ -14,8 +14,10 @@ function padLeft(str: string, maxLength: number): string {
 }
 ",
   "dir": "/src",
-  "filename": undefined,
   "name": "leftPad",
+  "outputOptions": Object {
+    "format": "TypeScript",
+  },
   "type": ".ts",
 }
 `;

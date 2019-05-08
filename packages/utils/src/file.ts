@@ -101,27 +101,30 @@ export async function readFiles(patterns: string[]): Promise<File[]> {
   );
 }
 
-export function resolveDir(dir: string, output: Output): string {
-  if (output.outDir && output.rootDir) {
+export function resolveDir(dir: string, output?: Output): string {
+  if (output && output.outDir && output.rootDir) {
     return path.join(output.outDir, path.relative(output.rootDir, dir));
   }
 
-  if (output.outDir) {
+  if (output && output.outDir) {
     return path.join(output.outDir, dir);
   }
 
   return dir;
 }
 
-export function resolveName(name: string, output: Output): string {
-  if (output.outFile) {
+export function resolveName(name: string, output?: Output): string {
+  if (output && output.outFile) {
     return output.outFile.replace('[name]', name);
   }
 
   return name;
 }
 
-export async function writeFiles(files: File[]): Promise<void> {
+export async function writeFiles(
+  files: File[],
+  resolver = path.resolve,
+): Promise<void> {
   await Promise.all(
     files.map(async (file: File) => {
       const resolvedName = resolveName(file.name, file.outputOptions);
@@ -130,7 +133,7 @@ export async function writeFiles(files: File[]): Promise<void> {
       const extension = ext !== '' ? ext : file.type;
       const outFile = `${name}${extension}`;
       const outDir = dir !== '' ? dir : resolvedDir;
-      const outputPath = path.resolve(path.join(outDir, outFile));
+      const outputPath = resolver(path.join(outDir, outFile));
       await mkdirp(outDir);
       return writeFile(outputPath, file.content, { overwrite: true });
     }),

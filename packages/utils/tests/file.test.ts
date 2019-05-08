@@ -201,7 +201,7 @@ describe('writeFiles', () => {
     (fs.mkdir as jest.Mock).mockResolvedValue(true);
     fs.writeFile = jest.fn();
     (fs.writeFile as jest.Mock).mockResolvedValue(true);
-    await writeFiles(files);
+    await writeFiles(files, (p: string) => p);
     expect(fs.mkdir).toHaveBeenCalledTimes(2);
     expect(fs.mkdir).toHaveBeenCalledWith('dist');
     expect(fs.mkdir).toHaveBeenCalledWith('dist/b');
