@@ -9,10 +9,10 @@ describe('outputFactory', () => {
   });
 
   it('returns an output object when called with an output object', () => {
-    const output: Output = { dir: '/some/path', format: Format.TypeScript };
+    const output: Output = { format: Format.TypeScript, outDir: '/some/path' };
     expect(outputFactory(output)).toEqual({
-      dir: '/some/path',
       format: Format.TypeScript,
+      outDir: '/some/path',
     });
   });
 
