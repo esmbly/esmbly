@@ -100,6 +100,6 @@ export async function handler(argv: Arguments & RunOptions): Promise<void> {
       await writeFiles(([] as File[]).concat(...results));
     }
   } catch (err) {
-    printer.error(`${err.message}\n` || err);
+    printer.error(`${err.message}\n\n${err.stack}`);
   }
 }
