@@ -11,7 +11,7 @@ module.exports = {
     V8.createTransformer({
       testCommand: `jest ${testPath} --config=${configPath}`,
     }),
-    Wasm.createTransformer({}),
+    Wasm.createTransformer(),
   ],
   output: [
     {

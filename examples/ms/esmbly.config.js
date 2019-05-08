@@ -5,7 +5,7 @@ module.exports = [
   {
     input: ['./src/**/*.js'],
     transformers: [
-      JSDoc.createTransformer({}),
+      JSDoc.createTransformer(),
     ],
     output: [
       {

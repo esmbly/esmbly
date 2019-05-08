@@ -19,7 +19,7 @@ module.exports = {
   input: ['./src/**/*.js'],
   transformers: [
     Flow.createTransformer({ customRules: { DefaultReturnTypeToNumber }}),
-    Wasm.createTransformer({}),
+    Wasm.createTransformer(),
   ],
   output: [
     {

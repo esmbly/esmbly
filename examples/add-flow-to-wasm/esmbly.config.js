@@ -5,8 +5,8 @@ const Wasm = require('@esmbly/transformer-wasm');
 module.exports = {
   input: ['./src/**/*.js'],
   transformers: [
-    Flow.createTransformer({}),
-    Wasm.createTransformer({}),
+    Flow.createTransformer(),
+    Wasm.createTransformer(),
   ],
   output: [
     {

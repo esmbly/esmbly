@@ -14,8 +14,8 @@ const compile = content => {
     ],
     output: [{ format: 'WebAssembly' }],
     transformers: [
-      Flow.createTransformer({}),
-      Wasm.createTransformer({})
+      Flow.createTransformer(),
+      Wasm.createTransformer()
     ],
   });
 };

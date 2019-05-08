@@ -5,7 +5,7 @@ const Wasm = require('@esmbly/transformer-wasm');
 module.exports = {
   input: ['./src/**/*.js'],
   transformers: [
-    JSDoc.createTransformer({}),
+    JSDoc.createTransformer(),
     Wasm.createTransformer({
       memory: { export: true, allocator: 'allocator/tlsf' },
     }),
