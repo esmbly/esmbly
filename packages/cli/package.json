@@ -1,7 +1,7 @@
 {
   "name": "@esmbly/cli",
   "version": "0.0.5",
-  "description": "TBD",
+  "description": "Command-line interface (CLI) for Esmbly, a composable transpiler infrastructure for working with statically typed JavaScript and WebAssembly",
   "author": "Olle Lauri Boström <ollebostr@gmail.com> (https://github.com/ollelauribostrom)",
   "homepage": "https://github.com/esmbly/esmbly",
   "license": "MIT",
@@ -10,6 +10,13 @@
     "esmbly": "bin/esmbly.js"
   },
   "types": "dist/index.d.ts",
+  "keywords": [
+    "esmbly",
+    "webassembly",
+    "static types",
+    "transformer",
+    "transpiler"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/esmbly/esmbly.git"

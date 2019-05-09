@@ -68,4 +68,19 @@ describe('rule: Functions', () => {
     const [{ content }] = await testRunner(program);
     expect(content).toMatchSnapshot();
   });
+
+  it('adds the declare keyword and removes the implementation from functions tagged with @declare', async () => {
+    const program = `
+      /**
+       * @param {number} n
+       * @returns {number}
+       * @declare
+       */
+      function square(n) {
+        return n * n; 
+      }
+    `;
+    const [{ content }] = await testRunner(program);
+    expect(content).toMatchSnapshot();
+  });
 });

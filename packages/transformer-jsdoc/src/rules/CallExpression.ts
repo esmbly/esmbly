@@ -13,27 +13,30 @@ export function CallExpression(): Visitor<Node> {
         return;
       }
 
-      const { variableType, isTypeArgument } = parseComments(leadingComments);
+      const { typeArgument } = parseComments(leadingComments);
 
-      if (!variableType || !isTypeArgument) {
+      if (!typeArgument) {
         return;
       }
 
-      if (!variableType.type) {
+      if (!typeArgument.description) {
         return;
       }
 
+      // Parse the provided type, ex: {number}
       // @ts-ignore
-      if (!variableType.type.name) {
+      const type = typeArgument.description
+        .match(/{(.*)}/)
+        .pop()
+        .trim();
+
+      if (!type || type === '') {
         return;
       }
 
       // TODO: Try adding the type parameter to path.node.typeParameter instead?
       // @ts-ignore
-      path.node.callee.name = `${path.node.callee.name}<${
-        // @ts-ignore
-        variableType.type.name
-      }>`;
+      path.node.callee.name = `${path.node.callee.name}<${type}>`;
     },
   };
 }

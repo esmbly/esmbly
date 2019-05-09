@@ -1,7 +1,7 @@
 {
   "name": "@esmbly/printer",
   "version": "0.0.5",
-  "description": "TBD",
+  "description": "Logging utilities for Esmbly, a composable transpiler infrastructure for working with statically typed JavaScript and WebAssembly",
   "author": "Olle Lauri Boström <ollebostr@gmail.com> (https://github.com/ollelauribostrom)",
   "homepage": "https://github.com/esmbly/esmbly",
   "license": "MIT",

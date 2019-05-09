@@ -1,39 +1,105 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`rule: Variables transforms a variable declaration to TypeScript (const) 1`] = `
+exports[`rule: Variables @const is a alias for @constant 1`] = `
 "
-      /**
-       * @type {number}
-       * @const
-       */
-      const c: number = 2;
-    "
+        /**
+         * @const {number}
+         */
+        const a: number = 1;
+      "
 `;
 
-exports[`rule: Variables transforms a variable declaration to TypeScript (exported) 1`] = `
+exports[`rule: Variables @constant transforms a variable declaration to TypeScript (const) 1`] = `
 "
-      /**
-       * @type {number}
-       * @const
-       */
-      export const c: number = 2;
-    "
+        /**
+         * @constant {number}
+         */
+        const c: number = 2;
+      "
 `;
 
-exports[`rule: Variables transforms a variable declaration to TypeScript (let) 1`] = `
+exports[`rule: Variables @constant transforms a variable declaration to TypeScript (let) 1`] = `
 "
-      /**
-       * @type {number}
-       */
-      let b: number = 1;
-    "
+        /**
+         * @constant {number}
+         */
+        const b: number = 1;
+      "
 `;
 
-exports[`rule: Variables transforms a variable declaration to TypeScript (var) 1`] = `
+exports[`rule: Variables @constant transforms a variable declaration to TypeScript (var) 1`] = `
 "
-      /**
-       * @type {number}
-       */
-      var a: number = 1;
-    "
+        /**
+         * @constant {number}
+         */
+        const a: number = 1;
+      "
+`;
+
+exports[`rule: Variables @declare adds the declare keyword (const) 1`] = `
+"
+        /**
+         * @type {number}
+         * @declare
+         */
+        declare const a: number = 1;
+      "
+`;
+
+exports[`rule: Variables @declare adds the declare keyword (let) 1`] = `
+"
+        /**
+         * @type {number}
+         * @declare
+         */
+        declare let a: number;
+      "
+`;
+
+exports[`rule: Variables @declare adds the declare keyword (var) 1`] = `
+"
+        /**
+         * @type {number}
+         * @declare
+         */
+        declare var a: number;
+      "
+`;
+
+exports[`rule: Variables @type transforms a variable declaration to TypeScript (const) 1`] = `
+"
+        /**
+         * @type {number}
+         * @const
+         */
+        const c: number = 2;
+      "
+`;
+
+exports[`rule: Variables @type transforms a variable declaration to TypeScript (exported const) 1`] = `
+"
+        /**
+         * @type {number}
+         * @const
+         */
+        export const c: number = 2;
+      "
+`;
+
+exports[`rule: Variables @type transforms a variable declaration to TypeScript (let) 1`] = `
+"
+        /**
+         * @type {number}
+         */
+        let b: number = 1;
+      "
+`;
+
+exports[`rule: Variables @type transforms a variable declaration to TypeScript (var) 1`] = `
+"
+        /**
+         * @type {number}
+         */
+        var a: number = 1;
+      "
 `;

@@ -1,6 +1,27 @@
-# lodash-example
+# Example: Lodash
+**Uses**: `@esmbly/transformer-jsdoc`, `@esmbly-transformer-wasm`
 
-### Status
+## Summary
+This example shows how the entire [lodash](https://github.com/lodash/lodash) library can be transformed to TypeScript based on JSDoc comments. It also transforms the clamp method (a customized version using a named export instead of a default) to WebAssembly using `@esmbly-transformer-wasm`.
+
+```sh
+# Input (JavaScript with JSDoc comments)
+src/*.js
+src/internal/*.js
+
+# Output (TypeScript, WebAssembly)
+dist/*.ts
+dist/internal/*.ts
+clamp.wasm
+```
+
+## Transforming the example
+```sh
+yarn run esmbly run
+```
+
+## Status
+The lodash methods listed below has not yet been transformed correctly.
 
 #### Missing annotation (default parameter)
 - take.js

@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`rule: Functions adds the declare keyword and removes the implementation from functions tagged with @declare 1`] = `
+"
+      declare function square(n: number): number
+    "
+`;
+
 exports[`rule: Functions transforms a default exported function to TypeScript 1`] = `
 "
       /**

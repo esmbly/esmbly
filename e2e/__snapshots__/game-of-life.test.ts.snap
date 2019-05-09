@@ -29,8 +29,7 @@ var s: i32;
  */
 function get(x: u32, y: u32): u32 {
   /**
-   * @type {u32}
-   * @typeArgument
+   * @typeArgument {u32}
    */
   return load<u32>((y * w + x) << 2);
 }
@@ -44,8 +43,7 @@ function get(x: u32, y: u32): u32 {
  */
 function set(x: u32, y: u32, v: u32): void {
   /**
-   * @type {u32}
-   * @typeArgument
+   * @typeArgument {u32}
    */
   store<u32>((s + y * w + x) << 2, v);
 }
@@ -60,7 +58,7 @@ function set(x: u32, y: u32, v: u32): void {
 function rot(x: u32, y: u32, v: u32): void {
   /**
    * @type {i32}
-   * @typeArgument
+   * @typeArgument {i32}
    */
   var a: i32 = max<i32>((v >>> 24) - BIT_ROT, 0);
   set(x, y, (a << 24) | (v & 0x00ffffff));
@@ -150,23 +148,20 @@ exports[`E2E: game-of-life outputs AssemblyScript files 2`] = `
 // buffer, composed of 8-bit components, expects on the JS side.
 
 /**
- * @type {u32}
- * @external
- * @const
+ * @const {u32}
+ * @declare
  */
 export declare const BGR_ALIVE: u32;
 
 /**
- * @type {u32}
- * @external
- * @const
+ * @const {u32}
+ * @declare
  */
 export declare const BGR_DEAD: u32;
 
 /**
- * @type {u32}
- * @external
- * @const
+ * @const {u32}
+ * @declare
  */
 export declare const BIT_ROT: u32;
 "
@@ -201,8 +196,7 @@ var s: i32;
  */
 function get(x: u32, y: u32): u32 {
   /**
-   * @type {u32}
-   * @typeArgument
+   * @typeArgument {u32}
    */
   return load<u32>((y * w + x) << 2);
 }
@@ -216,8 +210,7 @@ function get(x: u32, y: u32): u32 {
  */
 function set(x: u32, y: u32, v: u32): void {
   /**
-   * @type {u32}
-   * @typeArgument
+   * @typeArgument {u32}
    */
   store<u32>((s + y * w + x) << 2, v);
 }
@@ -232,7 +225,7 @@ function set(x: u32, y: u32, v: u32): void {
 function rot(x: u32, y: u32, v: u32): void {
   /**
    * @type {i32}
-   * @typeArgument
+   * @typeArgument {i32}
    */
   var a: i32 = max<i32>((v >>> 24) - BIT_ROT, 0);
   set(x, y, (a << 24) | (v & 0x00ffffff));
@@ -322,23 +315,20 @@ exports[`E2E: game-of-life outputs TypeScript files 2`] = `
 // buffer, composed of 8-bit components, expects on the JS side.
 
 /**
- * @type {u32}
- * @external
- * @const
+ * @const {u32}
+ * @declare
  */
 export declare const BGR_ALIVE: u32;
 
 /**
- * @type {u32}
- * @external
- * @const
+ * @const {u32}
+ * @declare
  */
 export declare const BGR_DEAD: u32;
 
 /**
- * @type {u32}
- * @external
- * @const
+ * @const {u32}
+ * @declare
  */
 export declare const BIT_ROT: u32;
 "

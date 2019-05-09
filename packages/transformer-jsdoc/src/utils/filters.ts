@@ -69,8 +69,8 @@ export function isParam(tag: Tag): boolean {
   );
 }
 
-export function isExternal(tag: Tag): boolean {
-  return tag.title === 'external';
+export function isDeclare(tag: Tag): boolean {
+  return tag.title === 'declare';
 }
 
 export function isConstant(tag: Tag): boolean {

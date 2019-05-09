@@ -21,7 +21,7 @@ export interface RunOptions {
 
 export const command = 'run';
 
-export const describe = 'Run esmbly';
+export const describe = 'Run Esmbly';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function builder(yargs: Argv): Argv<any> {

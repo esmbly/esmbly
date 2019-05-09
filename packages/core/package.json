@@ -1,13 +1,20 @@
 {
   "name": "@esmbly/core",
   "version": "0.0.5",
-  "description": "TBD",
+  "description": "A composable transpiler infrastructure for working with statically typed JavaScript and WebAssembly",
   "author": "Olle Lauri Boström <ollebostr@gmail.com> (https://github.com/ollelauribostrom)",
   "homepage": "https://github.com/esmbly/esmbly",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "browser": "dist/index.bundle.js",
+  "keywords": [
+    "esmbly",
+    "webassembly",
+    "static types",
+    "transformer",
+    "transpiler"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/esmbly/esmbly.git"

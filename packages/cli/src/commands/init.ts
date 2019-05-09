@@ -5,7 +5,7 @@ import { createConfig } from '../utils/config';
 
 export const command = 'init';
 
-export const describe = 'Create an esmbly configuration file';
+export const describe = 'Create an Esmbly configuration file';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function builder(yargs: Argv): Argv<any> {
