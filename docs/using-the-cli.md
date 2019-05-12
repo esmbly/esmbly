@@ -76,7 +76,7 @@ module.exports = [
 ```
 
 ### Exporting a function
-It is also possible to export a function which is useful if you need to perform some async task before returning the configuration.
+It is also possible to export a function, which is useful if you need to perform some async task before returning the configuration.
 ```js
 // esmbly.config.js
 // Exporting a function

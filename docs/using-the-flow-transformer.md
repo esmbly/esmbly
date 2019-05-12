@@ -33,7 +33,7 @@ Create the following files:
 - The example program: `src/greeting.js`
 ```sh
 mkdir src
-touch src/add.js
+touch src/greeting.js
 touch esmbly.config.js
 ```
 

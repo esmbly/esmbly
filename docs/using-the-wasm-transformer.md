@@ -49,7 +49,7 @@ touch esmbly.config.js
 ```
 
 ### 5. Add the configuration
-Add the following to your newly created `esmbly.config.js`.
+Add the following to your newly created `esmbly.config.js`. Note that adding TypeScript (`'.ts'`) as an output option is not necessary if you only want to output Wat or WebAssembly. 
 ```js
 const path = require('path');
 const JSDoc = require('@esmbly/transformer-jsdoc');
@@ -108,6 +108,33 @@ npx esmbly run
 ![](/.github/assets/run-wasm.gif)
 
 ## Using the WebAssembly binary
+To use the generated WebAssembly binary, we have to instantiate it.
+
+Create a new file in the root of your project called index.js
+```sh
+touch index.js
+```
+
+Add the following piece of code to `index.js`
+
+```js
+const fs = require('fs');
+const path = require('path');
+
+const filePath = path.join(__dirname, 'dist', 'add.wasm');
+const fileContent = fs.readFileSync(filePath);
+
+(async () => {
+  const { instance } = await WebAssembly.instantiate(fileContent, {});
+  console.log(instance.exports.add(1, 2));
+})()
+```
+
+Run the file
+```sh
+node index.js 
+```
+
 ![](/.github/assets/use-wasm.gif)
 
 ## Working with strings

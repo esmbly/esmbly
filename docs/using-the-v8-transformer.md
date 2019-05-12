@@ -101,6 +101,7 @@ describe('add', () => {
   });
 });
 ```
+[Skip to Running Esmbly](#running-esmbly)
 
 ## Using `jasmine` as the test runner
 ### 1. Install jasmine
@@ -116,7 +117,7 @@ npm install jasmine --save
 Open `esmbly.config.js` and set the `testCommand` option to `'jasmine'` when creating the transformer instance.
 ```js
 transformers: [
-  V8.createTransformer({ testCommand: 'jasmine' }),
+  V8.createTransformer({ testCommand: 'jasmine tests/add.test.js' }),
 ],
 ```
 
@@ -137,6 +138,8 @@ describe('add', () => {
 });
 ```
 
+[Skip to Running Esmbly](#running-esmbly)
+
 ## Using `tape` as the test runner
 ### 1. Install tape
 ```sh
@@ -151,7 +154,7 @@ npm install tape --save
 Open `esmbly.config.js` and set the `testCommand` option to `'tape'` when creating the transformer instance.
 ```js
 transformers: [
-  V8.createTransformer({ testCommand: 'tape' }),
+  V8.createTransformer({ testCommand: 'tape tests/add.test.js' }),
 ],
 ```
 

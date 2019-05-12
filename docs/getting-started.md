@@ -20,7 +20,8 @@ npx @esmbly/cli init
 
 ![](/.github/assets/getting-started-part-1.gif)
 
-Optionally, you could install Esmbly yourself using npm or yarn and then use the init command to create a configuration file (or create one manually).
+### Manual installation
+Optionally, you could install `@esmbly/cli` yourself then use the init command to create a configuration file (or create one manually). Make sure to install the transformers you want to use as well.
 ```sh
 # Using Yarn:
 yarn add @esmbly/cli --dev
@@ -51,5 +52,5 @@ npx esmbly run
 ![](/.github/assets/getting-started-part-2.gif)
 
 ## Further reading
-- Check out [Using the CLI](/docs/using-the-cli) for further details about how to configure Embly.
-- Look at the documentation for your selected transformers for details about how to use it.
+- Check out [Using the CLI](/docs/using-the-cli.md) for further details about how to configure Embly.
+- Look at the documentation for your selected transformers for details about how to use them.
