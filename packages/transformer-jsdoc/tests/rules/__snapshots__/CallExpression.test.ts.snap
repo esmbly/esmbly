@@ -3,9 +3,9 @@
 exports[`rule: CallExpression adds a type argument to the call expression 1`] = `
 "
       /**
-       * @type {i32}
-       * @typeArgument
+       * @type {number[]}
+       * @typeArgument {number}
        */
-      someFn<i32>(1)
+      const arr: number[] = toArray<number>(1, 2, 3);
     "
 `;

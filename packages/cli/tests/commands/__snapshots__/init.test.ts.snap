@@ -3,7 +3,7 @@
 exports[`Init exposes the correct help information 1`] = `
 "esmbly init
 
-Create an esmbly configuration file
+Create an Esmbly configuration file
 
 Options:
   --default  Use default configuration                [boolean] [default: false]

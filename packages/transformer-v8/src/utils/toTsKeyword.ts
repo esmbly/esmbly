@@ -12,7 +12,11 @@ export function toTsKeyword(str: string): t.TSType {
       return t.tsNullKeyword();
     case 'undefined':
       return t.tsVoidKeyword();
+    case 'Array':
+      return t.tsArrayType(t.tsAnyKeyword());
+    case 'Object':
+      return t.tsObjectKeyword();
     default:
-      return t.tsAnyKeyword();
+      return t.tsTypeReference(t.identifier(str));
   }
 }

@@ -6,7 +6,7 @@ export function toTsVariable(
   node: t.VariableDeclaration,
   leadingComments: t.Comment[],
 ): void {
-  const { isExternal, isConstant, variableType } = parseComments(
+  const { declare, constantType, variableType } = parseComments(
     leadingComments,
   );
 
@@ -15,21 +15,21 @@ export function toTsVariable(
     return;
   }
 
-  if (!variableType) {
+  if (!variableType && !constantType) {
     return;
   }
 
-  if (isExternal) {
+  if (declare) {
     node.declare = true;
   }
 
-  if (isConstant) {
+  if (constantType) {
     node.kind = 'const';
   }
 
   node.declarations.forEach((declaration: t.VariableDeclarator) => {
     (declaration.id as t.Identifier).typeAnnotation = toTypeAnnotation(
-      variableType,
+      variableType || constantType,
     );
   });
 }

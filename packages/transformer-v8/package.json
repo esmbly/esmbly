@@ -1,13 +1,24 @@
 {
   "name": "@esmbly/transformer-v8",
   "version": "0.0.5",
-  "description": "TBD",
+  "description": "An Esmbly transformer that transforms plain JavaScript files to TypeScript by using a V8 type profile that is collected while running a test suite",
   "author": "Olle Lauri Boström <ollebostr@gmail.com> (https://github.com/ollelauribostrom)",
   "homepage": "https://github.com/esmbly/esmbly",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "browser": "dist/index.bundle.js",
+  "keywords": [
+    "esmbly",
+    "v8",
+    "type profile",
+    "jest",
+    "tape",
+    "jasmine",
+    "typescript",
+    "transform",
+    "transformer"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/esmbly/esmbly.git"

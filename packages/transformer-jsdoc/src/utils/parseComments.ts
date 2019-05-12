@@ -6,9 +6,9 @@ interface ParseResult {
   variableType?: Tag;
   returnType?: Tag;
   paramTypes: Tag[];
-  isExternal: boolean;
-  isConstant: boolean;
-  isTypeArgument: boolean;
+  declare?: Tag;
+  constantType?: Tag;
+  typeArgument?: Tag;
 }
 
 export function parseComments(leadingComments: Comment[]): ParseResult {
@@ -16,11 +16,11 @@ export function parseComments(leadingComments: Comment[]): ParseResult {
   const { tags } = doctrine.parse(comments, { sloppy: true, unwrap: true });
 
   return {
-    isConstant: tags.find(filters.isConstant) !== undefined,
-    isExternal: tags.find(filters.isExternal) !== undefined,
-    isTypeArgument: tags.find(filters.isTypeArgument) !== undefined,
+    constantType: tags.find(filters.isConstant),
+    declare: tags.find(filters.isDeclare),
     paramTypes: tags.filter(filters.isParam),
     returnType: tags.find(filters.isReturn),
+    typeArgument: tags.find(filters.isTypeArgument),
     variableType: tags.find(filters.isVariable),
   };
 }

@@ -3,7 +3,7 @@
 exports[`Run exposes the correct help information 1`] = `
 "esmbly run
 
-Run esmbly
+Run Esmbly
 
 Options:
   --config, -c        Configuration file path                           [string]

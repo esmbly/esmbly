@@ -26,8 +26,7 @@ var s;
  */
 function get(x, y) {
   /**
-   * @type {u32}
-   * @typeArgument
+   * @typeArgument {u32}
    */
   return load((y * w + x) << 2);
 }
@@ -41,8 +40,7 @@ function get(x, y) {
  */
 function set(x, y, v) {
   /**
-   * @type {u32}
-   * @typeArgument
+   * @typeArgument {u32}
    */
   store((s + y * w + x) << 2, v);
 }
@@ -57,7 +55,7 @@ function set(x, y, v) {
 function rot(x, y, v) {
   /**
    * @type {i32}
-   * @typeArgument
+   * @typeArgument {i32}
    */
   var a = max((v >>> 24) - BIT_ROT, 0);
   set(x, y, (a << 24) | (v & 0x00ffffff));

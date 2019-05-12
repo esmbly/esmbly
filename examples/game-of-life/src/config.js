@@ -3,22 +3,19 @@
 // buffer, composed of 8-bit components, expects on the JS side.
 
 /**
- * @type {u32}
- * @external
- * @const
+ * @const {u32}
+ * @declare
  */
 export var BGR_ALIVE;
 
 /**
- * @type {u32}
- * @external
- * @const
+ * @const {u32}
+ * @declare
  */
 export var BGR_DEAD;
 
 /**
- * @type {u32}
- * @external
- * @const
+ * @const {u32}
+ * @declare
  */
 export var BIT_ROT;

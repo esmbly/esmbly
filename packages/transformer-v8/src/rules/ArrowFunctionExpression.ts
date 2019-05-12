@@ -10,11 +10,13 @@ export function ArrowFunctionExpression(
 ): Visitor<Node> {
   return {
     ArrowFunctionExpression(path: NodePath<t.ArrowFunctionExpression>) {
-      const parent = path.getStatementParent().node as t.VariableDeclaration;
-      const parentId = parent.declarations[0].id as t.Identifier;
-      const functionName = parentId.name;
+      const parent = path.getStatementParent().node;
 
-      toTsFunction(path, functionName, typeProfile, coverageReport, warnings);
+      if (t.isVariableDeclaration(parent)) {
+        const parentId = parent.declarations[0].id as t.Identifier;
+        const functionName = parentId.name;
+        toTsFunction(path, functionName, typeProfile, coverageReport, warnings);
+      }
     },
   };
 }

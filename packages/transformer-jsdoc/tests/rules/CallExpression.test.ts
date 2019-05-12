@@ -4,10 +4,10 @@ describe('rule: CallExpression', () => {
   it('adds a type argument to the call expression', async () => {
     const program = `
       /**
-       * @type {i32}
-       * @typeArgument
+       * @type {number[]}
+       * @typeArgument {number}
        */
-      someFn(1)
+      const arr = toArray(1, 2, 3);
     `;
     const [{ content }] = await testRunner(program);
     expect(content).toMatchSnapshot();

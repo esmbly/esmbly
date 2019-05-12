@@ -43,7 +43,7 @@ describe('Run', () => {
   });
 
   it('exposes the correct description', () => {
-    expect(run.describe).toEqual('Run esmbly');
+    expect(run.describe).toEqual('Run Esmbly');
   });
 
   it('exposes the correct help information', async () => {

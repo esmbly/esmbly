@@ -4,5 +4,9 @@ exports[`E2E: custom-transformer outputs a TypeScript file where the foo functio
 "export function bar(): string {
   return 'bar';
 }
+
+export function fuu(): string {
+  return 'fuu';
+}
 "
 `;

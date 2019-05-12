@@ -12,7 +12,7 @@ export function toTsFunction(
   parentPath: NodePath<t.Node>,
 ): void {
   const leadingComments = getLeadingComments(node, parentPath);
-  const { returnType, paramTypes } = parseComments(leadingComments);
+  const { declare, returnType, paramTypes } = parseComments(leadingComments);
 
   // If there aren't any leading JSDoc comments
   if (leadingComments.length < 1) {
@@ -29,5 +29,16 @@ export function toTsFunction(
         param.typeAnnotation = toTypeAnnotation(paramTypes[i]);
       },
     );
+  }
+
+  if (declare && !t.isArrowFunctionExpression(node)) {
+    const declaration = t.tsDeclareFunction(
+      node.id,
+      node.typeParameters as t.TSTypeParameterDeclaration,
+      node.params,
+      node.returnType as t.TSTypeAnnotation,
+    );
+    declaration.declare = true;
+    parentPath.replaceWith(declaration);
   }
 }

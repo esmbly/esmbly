@@ -15,8 +15,8 @@
                 <use id="Rectangle" fill="#F1DC41" xlink:href="#path-1"></use>
                 <circle id="Oval" fill="#FFFFFF" mask="url(#mask-2)" cx="249" cy="-3" r="68"></circle>
             </g>
-            <text id="esmbly" font-family="HelveticaNeue-Bold, Helvetica Neue" font-size="90" font-weight="bold" letter-spacing="0.141025618" fill="#1E1E1E">
-                <tspan x="163" y="447">esmbly</tspan>
+            <text id="Esmbly" font-family="HelveticaNeue-Bold, Helvetica Neue" font-size="90" font-weight="bold" letter-spacing="0.141025618" fill="#1E1E1E">
+                <tspan x="156" y="447">Esmbly</tspan>
             </text>
         </g>
     </g>

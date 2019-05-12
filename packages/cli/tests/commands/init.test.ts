@@ -27,7 +27,7 @@ describe('Init', () => {
   });
 
   it('exposes the correct description', () => {
-    expect(init.describe).toEqual('Create an esmbly configuration file');
+    expect(init.describe).toEqual('Create an Esmbly configuration file');
   });
 
   it('exposes the correct help information', async () => {
