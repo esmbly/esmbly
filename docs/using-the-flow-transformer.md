@@ -72,7 +72,7 @@ export function greeting(name: ?string): string {
 ```
 
 ## Running Esmbly
-Run Esmbly to output TypeScript to the `dist` directory.
+Run Esmbly to output TypeScript files to the `dist` directory.
 ```sh
 # Using Yarn:
 yarn run esmbly run

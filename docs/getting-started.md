@@ -1,5 +1,5 @@
 # Getting started
-Lets get up an running with Esmbly, it'll only take a few minutes.
+This is a step-by-step guide on how to get started with **Esmbly**.
 
 ## 1. Prerequisites
 Esmbly is all about statically typed **JavaScript** so before you get started, make sure you have Node.js and npm installed.

@@ -68,7 +68,7 @@ The `createTransformer()` method accepts an optional configuration object (see t
 | **validate** (optional)      |  Validates the module using Binaryen. Exits if invalid. | `boolean` | `-validate` |   
 | **use** (optional)           |  Aliases a global object under another name, e.g., to switch the default 'Math' implementation used: ['Math=JSMath']. | `string[]` | `--use` | 
 | **memory** (optional)        |  See [Memory options below](#memory-options) | `Object` |   |
-| **customRules** (optional)     |  An object containing any custom rules which should be applied (existing [rules](https://github.com/esmbly/esmbly/tree/documentation/packages/transformer-wasm/src/rules) can be overridden). Check out the [custom-rule](/custom-rule) example for further details.                            | [`CustomRules`](https://github.com/esmbly/esmbly/blob/6cb0bb6777814ecb03f3cd1ad7b65bcfb438b1c2/packages/types/src/Rule.ts#L12) | |
+| **customRules** (optional)     |  An object containing any custom rules which should be applied (existing [rules](https://github.com/esmbly/esmbly/tree/documentation/packages/transformer-wasm/src/rules) can be overridden). Check out the [custom-rule](/custom-rule) example for further details.                            | [`CustomRules`](https://github.com/esmbly/esmbly/blob/master/packages/types/src/Rule.ts) | |
 
 ## Memory options
 For further details about memory layout and management, have a look at the [AssemblyScript Wiki](https://github.com/AssemblyScript/assemblyscript/wiki/Memory-Layout-&-Management).

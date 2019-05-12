@@ -2,13 +2,13 @@
 
 ## Commands
 **`esmbly run`**: Run Esmbly   
-**`esmbly init`**: Creates a new Esmbly configuration file and (optionally) installs the specified transformers.
+**`esmbly init`**: Create a new Esmbly configuration file and (optionally) install the specified transformers.
 
 ## Running Esmbly
 ![](/.github/assets/run-wasm.gif)
 
 ## Config file
-An Esmbly config file is a JavaScript module which exports a configuration. By default, the configuration file will be assumed to be called `esmbly.config.js` located in the root of the project.
+An Esmbly config file is a JavaScript module which exports a configuration. By default, the configuration file will be assumed to be called `esmbly.config.js`, located in the root of your project.
 
 ## Config file types
 
@@ -36,7 +36,7 @@ module.exports = {
 ```
 
 ### Exporting multiple configuration objects
-If you want to transform different files in different ways, you can provide multiple configuration objects by exporting an array.
+If you want to transform your files in more than one way, you can provide multiple configuration objects by exporting an array. The example configuration below transforms all files in the `src` directory to TypeScript, as well as one specific file called `clamp.namedexport.js` to WebAssembly.
 ```js
 // esmbly.config.js
 // Exporting an array 

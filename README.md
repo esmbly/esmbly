@@ -29,13 +29,10 @@
 - Explore different ways of collecting, transforming and utilizing type information in the JavaScript ecosystem.
 - Lower the barrier for JavaScript developers that want to start experimenting and prototyping with WebAssembly by taking advantage of already existing type information in a code base.
 
-## Getting started
-Read the [Getting started](/docs/getting-started.md) guide for instructions on how to get started using **Esmbly**.
-
 ## Use cases
 - Transform a code base from Flow to TypeScript
-- **Turn your tests into types** - generate TypeScript based on type information collected during test runs using the V8 profiler.
-- **Migrate from JSDoc to TypeScript** - generate TypeScript based on your JSDoc comments.
+- Turn your tests into types - generate TypeScript based on type information collected during test runs using the V8 profiler.
+- Migrate from JSDoc to TypeScript - generate TypeScript based on your JSDoc comments.
 - Use type information (Flow, TypeScript, JSDoc, V8) to output WebAssembly, Wat, Asm.js and AssemblyScript.
 
 ## Transformers
@@ -48,6 +45,9 @@ Esmbly is designed to be composable, meaning that you can chain multiple transfo
 - [**@esmbly/transformer-jsdoc**](/packages/transformer-jsdoc): `JSDoc -> TypeScript`
 - [**@esmbly/transformer-v8**](/packages/transformer-v8): `JavaScript + tests -> TypeScript`
 - [**@esmbly/transformer-wasm**](/packages/transformer-wasm): `TypeScript -> WebAssembly, Wat, Asm.js, AssemblyScript`
+
+## Getting started
+Read the [Getting started](/docs/getting-started.md) guide for instructions on how to get started using **Esmbly**.
 
 ## Try
 Try it out in the Esmbly version of [WebAssembly Studio](https://esmbly.github.io/WebAssemblyStudio)!
