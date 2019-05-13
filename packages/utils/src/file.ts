@@ -132,7 +132,12 @@ export async function writeFiles(
       const resolvedName = resolveName(file.name, file.outputOptions);
       const resolvedDir = resolveDir(file.dir, file.outputOptions);
       const { name, ext, dir } = path.parse(resolvedName);
-      const extension = ext !== '' ? ext : file.type;
+      let extension = ext !== '' ? ext : file.type;
+
+      if (file.type === FileType.TSDefinition) {
+        extension = '.d.ts';
+      }
+
       const outFile = `${name}${extension}`;
       const outDir = dir !== '' ? dir : resolvedDir;
       const outputPath = resolver(path.join(outDir, outFile));

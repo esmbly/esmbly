@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`E2E: definitions outputs TypeScript definition files 1`] = `
+"/**
+ * Perform operations on a number
+ * @param {number} n
+ * @returns {object}
+ */
+export declare const operateOn: (n: number) => object;
+"
+`;
+
+exports[`E2E: definitions outputs TypeScript definition files 2`] = `
+"/**
+ * Add two numbers
+ * @param {number} a
+ * @param {number} b
+ * @returns {number}
+ */
+export declare function add(a: number, b: number): number;
+"
+`;
+
+exports[`E2E: definitions outputs TypeScript definition files 3`] = `
+"/**
+ * Multiply two numbers
+ * @param {number} a
+ * @param {number} b
+ * @returns {number}
+ */
+export declare function add(a: number, b: number): number;
+"
+`;

@@ -1,0 +1,19 @@
+{
+  "name": "definitions-example",
+  "main": "lib/index.js",
+  "types": "types/index.js",
+  "version": "0.0.5",
+  "private": true,
+  "scripts": {
+    "test": "jest",
+    "build-types": "esmbly run"
+  },
+  "dependencies": {
+    "@esmbly/cli": "^0.0.5",
+    "@esmbly/transformer-jsdoc": "^0.0.5",
+    "@esmbly/transformer-definitions": "^0.0.5"
+  },
+  "devDependencies": {
+    "jest": "^24.1.0"
+  }
+}

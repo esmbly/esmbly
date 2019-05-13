@@ -19,6 +19,9 @@ export function toOutputFormat(format: string): Format {
     case 'typescript':
     case '.ts':
       return Format.TypeScript;
+    case '.d.ts':
+    case 'TSDefinition':
+      return Format.TSDefinition;
     case 'wasm':
     case 'webassembly':
     case '.wasm':

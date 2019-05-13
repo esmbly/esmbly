@@ -79,8 +79,8 @@ export class CompilerHost {
         containingFile,
         this.options,
         {
-          fileExists: this.fileExists,
-          readFile: this.readFile,
+          fileExists: (fileName: string) => this.fileExists(fileName),
+          readFile: (fileName: string) => this.readFile(fileName),
         },
       );
 
