@@ -16,6 +16,8 @@ export function fileTypeForOutputFormat(format: Format): FileType {
       return FileType.TypeScript;
     case Format.JSDoc:
       return FileType.JavaScript;
+    case Format.TSDefinition:
+      return FileType.TSDefinition;
     default:
       return (format as unknown) as FileType;
   }

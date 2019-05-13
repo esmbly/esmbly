@@ -1,0 +1,34 @@
+{
+  "name": "@esmbly/transformer-definitions",
+  "version": "0.0.5",
+  "description": "TBD",
+  "author": "Olle Lauri Boström <ollebostr@gmail.com> (https://github.com/ollelauribostrom)",
+  "homepage": "https://github.com/esmbly/esmbly",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/esmbly/esmbly.git"
+  },
+  "bugs": {
+    "url": "https://github.com/esmbly/esmbly/issues"
+  },
+  "scripts": {
+    "build": "tsc",
+    "build-watch": "tsc -w"
+  },
+  "dependencies": {
+    "@esmbly/types": "^0.0.5",
+    "typescript": "^3.4.5"
+  },
+  "devDependencies": {
+    "@esmbly/core": "^0.0.5"
+  },
+  "peerDependencies": {
+    "@esmbly/core": "^0.0.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

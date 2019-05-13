@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`integration: add generates a TypeScript definition file 1`] = `
+"export declare function add(a: number, b: number): number;
+"
+`;

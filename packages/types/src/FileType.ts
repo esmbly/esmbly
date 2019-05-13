@@ -4,4 +4,5 @@ export enum FileType {
   WebAssembly = '.wasm',
   Wat = '.wat',
   Asm = '.asm.js',
+  TSDefinition = '.d.ts'
 }

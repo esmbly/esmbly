@@ -80,6 +80,8 @@ export function fileTypeForOutputFormat(format: Format): FileType {
       return FileType.WebAssembly;
     case Format.AssemblyScript:
       return FileType.TypeScript;
+    case Format.TSDefinition:
+      return FileType.TSDefinition;
     default:
       throw new Error(`Output format: ${format} is not supported`);
   }

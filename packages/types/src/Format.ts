@@ -7,4 +7,5 @@ export enum Format {
   JSDoc = 'JSDoc',
   Any = 'Any',
   AssemblyScript = 'AssemblyScript',
+  TSDefinition = 'TSDefinition'
 }
