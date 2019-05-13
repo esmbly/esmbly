@@ -19,14 +19,14 @@
   <a href="https://coveralls.io/github/esmbly/esmbly?branch=master" href="Coverage Status">
     <img src="https://coveralls.io/repos/github/esmbly/esmbly/badge.svg?branch=master" />
   </a>
+  <a title="Join the chat at https://gitter.im/esmbly-community/community" href="https://gitter.im/esmbly-community/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge">
+    <img src="https://badges.gitter.im/esmbly-community/community.svg">
+  </a>
   <br>
   <br>
 </p>
 
 ## Introduction
-
-[![Join the chat at https://gitter.im/esmbly-community/community](https://badges.gitter.im/esmbly-community/community.svg)](https://gitter.im/esmbly-community/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 **Esmbly** is all about statically typed **JavaScript**. The goal is to:
 - Be a useful tool for migrating between (and working with) different type systems.
 - Explore different ways of collecting, transforming and utilizing type information in the JavaScript ecosystem.
