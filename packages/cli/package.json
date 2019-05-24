@@ -1,6 +1,6 @@
 {
   "name": "@esmbly/cli",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Command-line interface (CLI) for Esmbly, a composable transpiler infrastructure for working with statically typed JavaScript and WebAssembly",
   "author": "Olle Lauri Boström <ollebostr@gmail.com> (https://github.com/ollelauribostrom)",
   "homepage": "https://github.com/esmbly/esmbly",
@@ -29,10 +29,10 @@
     "build-watch": "tsc -w"
   },
   "dependencies": {
-    "@esmbly/core": "^0.0.5",
-    "@esmbly/printer": "^0.0.5",
-    "@esmbly/types": "^0.0.5",
-    "@esmbly/utils": "^0.0.5",
+    "@esmbly/core": "^0.0.6",
+    "@esmbly/printer": "^0.0.6",
+    "@esmbly/types": "^0.0.6",
+    "@esmbly/utils": "^0.0.6",
     "@types/inquirer": "^0.0.44",
     "@types/stringify-object": "^3.2.0",
     "@types/yargs": "^12.0.9",

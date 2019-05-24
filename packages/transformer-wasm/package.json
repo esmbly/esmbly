@@ -1,6 +1,6 @@
 {
   "name": "@esmbly/transformer-wasm",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "An Esmbly transformer that transforms TypeScript files to WebAssembly, Wat, Asm.js and AssemblyScript",
   "author": "Olle Lauri Boström <ollebostr@gmail.com> (https://github.com/ollelauribostrom)",
   "homepage": "https://github.com/esmbly/esmbly",
@@ -33,12 +33,12 @@
   "dependencies": {
     "@babel/traverse": "^7.4.3",
     "@babel/types": "^7.4.0",
-    "@esmbly/printer": "^0.0.5",
-    "@esmbly/types": "^0.0.5",
+    "@esmbly/printer": "^0.0.6",
+    "@esmbly/types": "^0.0.6",
     "assemblyscript": "git://github.com/AssemblyScript/assemblyscript.git"
   },
   "devDependencies": {
-    "@esmbly/core": "^0.0.5"
+    "@esmbly/core": "^0.0.6"
   },
   "peerDependencies": {
     "@esmbly/core": "^0.0.1"

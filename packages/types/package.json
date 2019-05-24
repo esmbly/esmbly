@@ -1,6 +1,6 @@
 {
   "name": "@esmbly/types",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Type definitions for Esmbly, a composable transpiler infrastructure for working with statically typed JavaScript and WebAssembly",
   "author": "Olle Lauri Boström <ollebostr@gmail.com> (https://github.com/ollelauribostrom)",
   "homepage": "https://github.com/esmbly/esmbly",

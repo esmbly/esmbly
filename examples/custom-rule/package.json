@@ -1,7 +1,7 @@
 {
   "name": "custom-rule",
   "main": "index.js",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": true,
   "scripts": {
     "pretest": "esmbly run",
@@ -9,9 +9,9 @@
   },
   "dependencies": {
     "@babel/types": "^7.4.0",
-    "@esmbly/cli": "^0.0.5",
-    "@esmbly/transformer-flow": "^0.0.5",
-    "@esmbly/transformer-wasm": "^0.0.5"
+    "@esmbly/cli": "^0.0.6",
+    "@esmbly/transformer-flow": "^0.0.6",
+    "@esmbly/transformer-wasm": "^0.0.6"
   },
   "devDependencies": {
     "jest": "^24.1.0"

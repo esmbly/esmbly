@@ -1,9 +1,9 @@
 {
   "name": "example-yarn-lockfile",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": true,
   "dependencies": {
-    "@esmbly/cli": "^0.0.5",
-    "@esmbly/transformer-flow": "^0.0.5"
+    "@esmbly/cli": "^0.0.6",
+    "@esmbly/transformer-flow": "^0.0.6"
   }
 }
