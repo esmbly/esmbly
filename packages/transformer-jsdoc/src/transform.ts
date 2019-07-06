@@ -19,6 +19,7 @@ export function transform(
     tree.setFormat(Format.TypeScript);
 
     if (options.stripComments) {
+      // TODO: Does this work?
       stripAllComments(tree);
     }
   });
